@@ -1,20 +1,322 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta http-equiv="refresh" content="0;url=https://cs-people.bu.edu/lapets/" />
-    <title>lapets.github.io</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="all" name="robots" />
+    <title>andrei lapets</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" />
-    <style>
-body { background-color:#FFFFFF; margin-top:20px; margin-bottom:0px; margin-right:8px; margin-left:30px; }
-#content { width:550px; min-width:460px; text-align:left; vertical-align:top; color:#173834; font-size:13px; font-family:'Source Sans Pro',Arial,Sans-serif; }
-#content a { color:#BC623A; text-decoration:none; }
-#content a:hover { color:#D52727; }
-    </style>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" 
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="al.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-90403446-1', 'auto'); ga('send', 'pageview');
+    </script>
+    <script src="lapets.bib.js"></script>
+    <script>
+      function insertAfter(obj,ref) { ref.parentNode.insertBefore(obj, ref.nextSibling); }
+      function elem(y,xs) { for (var i=0; i<xs.length; i++) if (xs[i]==y) return true; return false; }
+      function insert(y,xs) { return elem(y, xs) ? xs : xs.concat([y]); }
+      function inserts(ys,xs) { for (var i=0; i<ys.length; i++) xs = insert(ys[i], xs); return xs; }
+      function unbrace(s) { return (s != null && s.length > 1 && s[0] == '{' && s[s.length-1] == '}') ? s.substring(1, s.length-1) : s; }
+      function s(raw) { return unbrace(unbrace(raw)); }
+      function author(a) { return (a in bib.authors && 'url' in bib.authors[a]) ? '<a href="' +bib.authors[a]['url']+ '">'+bib.authors[a]['html']+'</a>' : bib.authors[a]['html']; }
+      function authors(j) { var h=[]; for (var i=0; i<j['#authors'].length; i++) h.push(author(j['#authors'][i])); return h.join(', '); }
+      function title(docs, jsons, id, json, b) {
+        var h = s(b.title) + '.';
+        if ('#url' in json) h = '<a href="' +s(json['#url'])+ '">' +h+ '</a>';
+        else if ('url' in b) h = '<a href="' +s(b.url)+ '">' +h+ '</a>';
+        else if ('#report' in json && 'url' in docs[json['#report']]) h = '<a href="' +s(docs[json['#report']].url)+ '">' +h+ '</a>';
+        else if ('#report' in json && '#url' in jsons[json['#report']]) h = '<a href="' +s(jsons[json['#report']]['#url'])+ '">' +h+ '</a>';
+        return '<span>' + h + '</span>';
+      }
+      function entry(docs, jsons, json) { // Returns null if there's nothing to show.
+        var h = null;
+        if ('@misc' in json) { for (var id in json['@misc']) {
+          var b = json['@misc'][id];
+          if ('title' in b && 'month' in b && 'year' in b)
+            h = (('howpublished' in b) ? ' ' +s(b.howpublished)+ '.' : '')+ ' ' +s(b.month)+ ' ' +s(b.year)+ '.';
+        }} else if ('@techreport' in json) { for (var id in json['@techreport']) {
+          var b = json['@techreport'][id];
+          h = ' Technical Report ' +s(b.number)+ ', ' +s(b.institution)+ ', ' +s(b.month)+ ' ' +s(b.year)+ '.';
+        }} else if ('@phdthesis' in json) { for (var id in json['@phdthesis']) {
+          var b = json['@phdthesis'][id];
+          h = ' Ph.D. Thesis. ' +s(b.school)+ '. ' +s(b.month)+ ' ' +s(b.year)+ '.';
+        }} else if ('@inproceedings' in json) { for (var id in json['@inproceedings']) {
+          var b = json['@inproceedings'][id];
+          h = ' ' +s(b.booktitle)+ '. ' +s(b.address)+ '. ' +s(b.month)+ ' ' +s(b.year)+ '.';
+        }} else if ('@article' in json) { for (var id in json['@article']) {
+          var b = json['@article'][id];
+          h = ' <i>' +s(b.journal)+ '</i>, <b>' +s(b.volume)+ '</b>(' +s(b.number)+ '):' +s(b.pages)+ ', ' + s(b.year)+ '.';
+        }}
+        return (h != null) ? (title(docs, jsons, id, json, b) + '<span>'+h+'</span>') : null;
+      }
+      function links(jsons, json) {
+        var l = [];
+        if ('#bib' in json) l = l.concat(['<a href="' +json['#bib']+ '">bib</a>']);
+        if ('#abstract' in json) l = l.concat(['<a href="' +json['#abstract']+ '">abstract</a>']);
+        if ('#slides' in json) l = l.concat(['<a href="' +json['#slides']+ '">slides</a>']);
+        if ('#report' in json && '#slides' in jsons[json['#report']]) l = l.concat(['<a href="' +jsons[json['#report']]['#slides']+ '">slides</a>']);
+        if ('#poster' in json) l = l.concat(['<a href="' +json['#poster']+ '">poster</a>']);
+        if ('#award' in json) l = l.concat(['<a href="' +json['#award']+ '">award</a>']);
+        return (l.length > 0) ? (' [' + l.join(", ") + ']') : "";
+      }
+      function bibliography() {
+        var d = document, research = d.getElementById("research_container"), topics = [], docs = {}, jsons = {}, skip = [];
+        for (var i = 0; i < bib.documents.length; i++) {
+          var json = bib.documents[i];
+          topics = inserts(json['#topics'], topics);
+          skip = ('#report' in json) ? insert(json['#report'], skip) : skip;
+          skip = ('#conference' in json) ? insert(json['#conference'], skip) : skip;
+          for (var attr in json) {
+            if (attr.charAt(0) == '@') {
+              for (var id in json[attr]) {
+                docs[id] = json[attr][id];
+                jsons[id] = json;
+                json['#id'] = id;
+                json['#bib'] = 'bib.php#' + id;
+              }
+            }
+          }
+        }
+        for (var j = 0, last = d.getElementById("bib"); j < topics.length; j++) {
+          var h4 = d.createElement("h4"); h4.appendChild(d.createTextNode(bib.topics[topics[j]])); insertAfter(h4, last);
+          var ul = d.createElement("ul");
+          for (var i = 0; i < bib.documents.length; i++) {
+            var html = entry(docs, jsons, bib.documents[i]);
+            if (html != null && elem(topics[j], bib.documents[i]['#topics']) && !(elem(bib.documents[i]['#id'], skip))) {
+              var li = d.createElement("li"); li.innerHTML = html + '<p>' + links(jsons, bib.documents[i]) + ' ' + authors(bib.documents[i]) + '</p>'; ul.appendChild(li);
+            }
+          }
+          insertAfter(ul, h4);
+          last = ul;
+        }
+      }
+    </script>
   </head>
-  <body>
-    <div id="content">
-      <h3>This page is located at <a href="https://cs-people.bu.edu/lapets/">https://cs-people.bu.edu/lapets/</a>.</h3>
-    </div>
+  <body onload="bibliography();">
+    <table id="container">
+      <tr>
+        <td id="content">
+          <h1>Andrei Lapets <span>&nbsp;[ <a href="mailto:a@lapets.io"><i class="far fa-envelope"></i></a>
+                                  <span>|</span> <a href="https://github.com/lapets"><i class="fab fa-github"></i></a>
+                                  <span>|</span> <a href="https://www.linkedin.com/in/lapets"><i class="fab fa-linkedin"></i></a>
+                                  <span>|</span> <a href="https://twitter.com/andreilapets"><i class="fab fa-twitter"></i></a>
+                                  <span>|</span> <a href="https://www.instagram.com/andreilapets/"><i class="fab fa-instagram"></i></a>
+                                  <span>|</span> <a href="https://orcid.org/0000-0003-1053-5394">ORCID</a>
+                                  ]</span></h1>
+          <div>
+            <h3>Director of Research Development &amp; Faculty Fellow
+                <span><a href="https://www.bu.edu/hic/">Hariri Institute for Computing</a> at <a href="https://www.bu.edu">Boston University</a></span>
+            </h3>
+            <p>The Hariri Institute offers seed research funding for collaborative, interdisciplinary research efforts with a computational or data-driven component. Faculty can <a href="https://www.bu.edu/hic/forms/">apply for research awards or nominate others for fellowships</a>.</p>
+
+            <fieldset>
+              <legend><a href="https://multiparty.org">Accessible and Scalable Multi-Party Computation</a></legend>
+              <p>We build <a href="https://github.com/multiparty">open-source libraries and platforms</a> that enable the development of practical web- and cloud-based applications that deliver MPC functionalities. Supported in part by NSF Grants <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1718135">#1718135</a> (PI) and <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1739000">#1739000</a> (Co-PI), <a href="https://www.iarpa.gov/index.php/research-programs/hector">IARPA HECTOR</a> (Co-PI), as well as a <a href="http://world.honda.com/news/2017/c170516eng.html/">grant</a> from the Honda Research Institutes (PI).</p>
+            </fieldset>
+
+            <fieldset>
+              <legend><a href="https://cacm.acm.org/">Communications of the ACM</a> Research Highlights</legend>
+              <p>I have served as a coordinator for the <a href="https://cacm.acm.org/">Communications of the ACM</a> Research Highlights <a href="https://m.cacm.acm.org/about-communications/editorial-board/">Editorial Board</a>. If you see a noteworthy publication in computer science with potential appeal to a broad audience, feel free to let me know.</p>
+            </fieldset>
+
+            <fieldset>
+              <legend><a href="https://sites.bu.edu/me-arc/">Mobile &amp; Electronic Health ARC</a></legend>
+              <p>This <a href="https://www.bumc.bu.edu/evanscenteribr/the-arcs/">affinity research collaborative</a> (ARC) is a network of researchers interested in using web and mobile technologies to enhance and extend health interventions.</p>
+            </fieldset>
+
+            <fieldset>
+              <legend><a href="https://www.bu.edu/digitalhealth/">Digital Health Initiative</a> (DHI)</legend>
+              <p>This initiative aims to catalyze innovative solutions for the complex problems facing the health sector. <a href="https://www.bu.edu/digitalhealth/funding/">Funding opportunities</a> are available for faculty pursuing research efforts relevant to the mission of the DHI.</p>
+            </fieldset>
+          </div>
+
+          <div>
+            <h3>Director
+                <span><a href="https://sail.bu.edu/">Software &amp; Application Innovation Lab</a> (SAIL) at <a href="https://www.bu.edu">Boston University</a></span>
+            </h3>
+            <p>The lab consists of an experienced team of professional consultants and software engineers; it is <a href="https://www.bu.edu/hic/forms/sail-request-form/">open to collaborating</a> on research efforts requiring computational, data science, or software engineering expertise (at any stage). Students interested in a software engineering internship are welcome to contact us.</p>
+            
+            <fieldset>
+              <legend>Synthetic Biology and Computation</legend>
+              <p>We are collaborating with <a href="http://cidarlab.org/">CIDAR</a> within the context of efforts such as the <a href="https://www.darpa.mil/program/synergistic-discovery-and-design">DARPA SD2 program</a> and the <a href="https://www.programmingbiology.org/">Living Computing Project</a> to develop <a href="https://github.com/hicsail/clotho">databases</a>, frameworks, <a href="https://github.com/hicsail/constellation">languages</a>, and algorithms that enable automated synthetic biology workflows.</p>
+            </fieldset>
+            
+            <fieldset>
+              <legend>Secure Multi-Party Computation Deployments</legend>
+              <p>We help organizations such as the <a href="https://www.bostonwomensworkforcecouncil.com/">Boston Women's Workforce Council</a> and the <a href="https://www.bostonchamber.com/programs-events/pacesetters">Greater Boston Chamber of Commerce</a> use secure multi-party computation for aggregate data analytics. Results from past deployments have been <a href="https://www.bostonglobe.com/business/2017/01/05/boston-gender-wage-gap-cents-dollar/8YeCGAsMGf0A2WGjTjuIBL/story.html">announced</a> and <a href="https://www.boston.gov/sites/default/files/bwwc_report_final_january_4_2017.pdf">published in reports</a>.</p>
+            </fieldset>
+          </div>
+
+          <a id="teaching"></a>
+          <div>
+            <h3>Associate Professor of the Practice
+                <span><a href="https://www.bu.edu/cs/">Department of Computer Science</a> at <a href="https://www.bu.edu">Boston University</a></span>
+            </h3>
+
+            <p>I have taught department courses on <a href="course/131-2014-spr/">logic and combinatorics</a>, <a href="course/132-2013-spr/">linear algebra</a>, <a href="course/235/">abstract algebra</a>, <a href="course/320/">programming language theory and compilers</a>, <a href="http://www.datamechanics.org">data science</a>, <a href="https://piazza.com/bu/fall2017/cs591v1/home">secure multi-party computation</a>, and <a href="http://else.bu.edu">software engineering</a>. I also oversee undergraduate Computer Science students through <a href="https://www.bu.edu/urop/">UROP</a> and directed studies, and serve as faculty adviser for students' <a href="https://www.bu.edu/khc/">Kilachand Honors College</a> keystone projects.</p>
+
+            <fieldset>
+              <legend><a href="http://www.datamechanics.org">Data Mechanics</a></legend>
+              <p>A data repository and service platform to support educational and research efforts in data science and focusing on urban applications, being built concurrently with a graduate course on the topic.</p>
+            </fieldset>
+
+            <fieldset>
+              <legend>Formal Verification, Usability, &amp; Instruction</legend>
+              <p>My research interests include the construction of formal modeling tools, <a href="http://aartifact.org">automated verifiers</a>, <a href="http://sheaf.io">content management systems</a>, and <a href="http://protoql.org">visualization libraries</a> for use in classroom instruction.</p>
+            </fieldset>
+
+            <ol>
+              <li>
+                <a href="https://www.bu.edu/academics/cas/courses/cas-cs-591/">CS 591 V1/B2 <span>Secure Multiparty Computation at Scale</span></a>
+                <p><span>(</span>
+                  <a href="https://piazza.com/bu/fall2017/cs591v1/home">Fal. 2017</a>,
+                  <a href="https://piazza.com/bu/fall2016/cs591b2/home">Fal. 2016</a>
+                <span>)</span></p>
+              </li>
+              <li>
+                <a href="https://www.bu.edu/academics/cas/courses/cas-cs-591/">CS 591 L1 <span>Embedded Languages &amp; Frameworks</span></a>
+                <p><span>(</span>
+                  Fal. 2019
+                <span>)</span></p>
+              </li>
+              <li>
+                <a href="https://www.bu.edu/academics/cas/courses/cas-cs-591/">CS 591 L1</a> <span><a href="http://datamechanics.org">Data Mechanics for Pervasive Systems &amp; Urban Applications</a></span>
+                <p><span>(</span>
+                  <a href="course/591-2018-spr/">Spr. 2018</a>,
+                  <a href="course/591-2017-fal/">Fal. 2017</a>,
+                  <a href="course/591-2017-spr/">Spr. 2017</a>,
+                  <a href="course/591-2016-fal/">Fal. 2016</a>,
+                  <a href="course/591-2016-spr/">Spr. 2016</a>
+                <span>)</span></p>
+              </li>
+              <li>
+                <a href="https://www.bu.edu/academics/cas/courses/cas-cs-506/">CS 506 <span>Computational Tools for Data Science</span></a>
+                <p><span>(</span>
+                  <a href="course/506/">Fal. 2018</a>
+                <span>)</span></p>
+              </li>
+              <li>
+                <a href="https://www.bu.edu/academics/cas/courses/cas-cs-504/">CS 504</a> <span><a href="http://datamechanics.org">Data Mechanics</a></span>
+                <p><span>(</span>
+                  <a href="course/504/">Spr. 2019</a>
+                <span>)</span></p>
+              </li>
+              <li>
+                <a href="https://www.bu.edu/academics/cas/courses/cas-cs-491/">CS 491 L1</a> <span><a href="http://else.bu.edu">Experiential Lab in Software Engineering (ELSE)</a></span>
+                <p><span>(</span>
+                  <a href="course/491/">Fal. 2017</a>
+                <span>)</span></p>
+              </li>
+              <li>
+                <a href="https://www.bu.edu/academics/cas/courses/cas-cs-320/">CS 320 <span>Concepts of Programming Languages</span></a>
+                <p><span>(</span>
+                  <a href="course/320-2015-fal/">Fal. 2015</a>,
+                  <a href="course/320-2015-spr/">Spr. 2015</a>,
+                  <a href="course/320-2014-fal/">Fal. 2014</a>,
+                  <a href="course/320-2013-fal/">Fal. 2013</a>
+                <span>)</span></p>
+              </li>
+              <li>
+                <a href="https://www.bu.edu/academics/cas/courses/cas-cs-235/">CS 235 <span>Algebraic Algorithms</span></a>
+                <p><span>(</span>
+                  <a href="course/235-2016-spr/">Spr. 2016</a>,
+                  <a href="course/235-2015-fal/">Fal. 2015</a>,
+                  <a href="course/235-2015-spr/">Spr. 2015</a>,
+                  <a href="course/235-2014-fal/">Fal. 2014</a>,
+                  <a href="course/235-2014-spr/">Spr. 2014</a>,
+                  <a href="course/235-2013-fal/">Fal. 2013</a>,
+                  <a href="course/235-2012-fal/">Fal. 2012</a>
+                <span>)</span></p>
+              </li>
+              <li>
+                <a href="https://www.bu.edu/academics/cas/courses/cas-cs-132/">CS 132 <span>Geometric Algorithms</span></a>
+                <p><span>(</span>
+                  <a href="course/132-2013-spr/">Spr. 2013</a>
+                <span>)</span></p>
+              </li>
+              <li>
+                <a href="https://www.bu.edu/academics/cas/courses/cas-cs-131/">CS 131 <span>Combinatoric Structures</span></a>
+                <p><span>(</span>
+                  <a href="course/131-2014-spr/">Spr. 2014</a>
+                <span>)</span></p>
+              </li>
+              <li>
+                <a href="https://www.bu.edu/academics/cas/courses/cas-ma-242/">MA 142 <span>Introduction to Linear Algebra</span></a>
+                <p><span>(</span>
+                  <a href="course/142-2013-spr/">Spr. 2013</a>,
+                  <a href="course/142-2012-spr/">Spr. 2012</a>
+                <span>)</span></p>
+              </li>
+              <li>
+                <a href="https://www.edx.org/course/business-analytics-data-driven-decision-bux-qd602x">QD 602x <span>Business Analytics for Data-Driven Decision Making</span></a>
+                <p><span>(</span>
+                  Sum. 2019,
+                  Spr. 2019,
+                  Fal. 2018,
+                  Spr. 2018
+                <span>)</span></p>
+              </li>
+            </ol>
+          </div>
+
+          <div>
+            <h3>Scientific &amp; Software Development Consultant</h3>
+            <p>I have experience providing scientific consulting services to <a href="https://www.raytheon.com/ourcompany/bbn/">Raytheon BBN Technologies</a> and <a href="http://www.stresearch.com/">Systems &amp; Technology Research</a>. I've worked with groups specializing in cybersecurity and quantum information processing on <a href="https://www.darpa.mil/">DARPA</a> and <a href="https://www.iarpa.gov/">IARPA</a> programs such as <a href="https://www.darpa.mil/program/automated-program-analysis-for-cybersecurity">Automated Program Analysis for Cybersecurity (APAC)</a>, <a href="https://www.darpa.mil/program/crowd-sourced-formal-verification">Crowd Sourced Formal Verification (CSFV)</a>, <a href="https://www.darpa.mil/program/cyber-assured-systems-engineering">Cyber Assured Systems Engineering (CASE)</a>, and <a href="https://www.iarpa.gov/index.php/research-programs/qcs">Quantum Computer Science (QCS)</a>.</p>
+            <p>As a commercial software engineering consultant, I have experience developing systems that employ cloud computing services to deliver content and analyze data on a large scale, implementing natural language processing algorithms, adapting frameworks to serve as commercial web applications, and designing user interfaces.</p>
+          </div>
+
+          <a id="work"></a>
+          <a id="research"></a>
+          <div id="research_container">
+            <h3>Research Publications, Reports, &amp; Other Materials</h3>
+            <p>My broader research interests lie in modeling,  assisting, and verifying formal and informal human reasoning, particularly within programming, mathematical modeling, and data analysis contexts.</p>
+            <p>I am currently interested in developing languages, tools, and platforms that help anyone building distributed systems and working with distributed and/or sensitive data to formally reason about the code they author along relevant domain-specific dimensions such as security and resource cost.</p>
+            <a id="bib"></a>
+            <h4>Other papers, surveys, notes, comments, and exercises</h4>
+            <ol>
+              <li><a href="pub/plcourse.pdf">Notes on concepts of programming languages.</a> (section notes)</li>
+              <li><a href="pub/plproblems.pdf">Problem sets for a course on functional programming.</a></li>
+              <li><a href="course/332/sections.pdf">Introductory notes on the theory of computation.</a> (section notes)</li>
+              <li><a href="pub/formalcrypt.pdf">Survey: formal proof languages and cryptography.</a></li>
+              <li><a href="pub/phddepth.pdf">Comments on selected papers.</a> (Ph.D. depth exam)</li>
+              <li><a href="pub/tdstpwp.pdf">Transformations on Simple Programs with Proofs.</a></li>
+              <li><a href="pub/refadts.pdf">Refining Algebraic Data Types.</a></li>
+              <li><a href="pub/algsemdsls.pdf">Algebraic Semantics of DSLs.</a> (A.B. thesis)</li>
+              <li><a href="pub/nexus.pdf">Notes on nexus numbers and the divisor function.</a></li>
+              <li><a href="lapets-cites.bib">Works frequently cited by me.</a> (BibTeX)</li>
+            </ol>
+            <h4>Pertinent, interesting, or amusing books and articles by others</h4>
+            <ol>
+              <li><a href="https://www.amazon.com/gp/product/0262572192/">Conceptual Spaces</a> by G&#228;rdenfors.</li>
+              <li><a href="https://en.wikipedia.org/wiki/Where_mathematics_comes_from">Where Mathematics Comes From</a> by Lakoff and N&#250;&#241;ez.</li>
+              <li><a href="https://en.wikipedia.org/wiki/Society_of_mind">Society of Mind</a> by Minsky.</li>
+              <li><a href="https://dl.acm.org/citation.cfm?id=1869536">Faith, hope, and love</a> describes a fundamental problem in contemporary software science.</li>
+              <li><a href="https://cseweb.ucsd.edu/~goguen/pps/tcs97.pdf">Algebraic Flowers</a> provides a context for some of my other opinions.</li>
+              <li>Fairly concise <a href="https://users.dimi.uniud.it/~marina.lenisa/notes.pdf">introduction to domain theory</a>.</li>
+              <li><a href="https://web.media.mit.edu/~minsky/papers/AlienIntelligence.html">Article by Minsky</a> on AI, psychology, and language.</li>
+              <li>Richard W. Hamming <a href="https://www.cs.virginia.edu/~robins/YouAndYourResearch.html">talks about scientific research</a>.</li>
+            </ol>
+          </div>
+
+          <div>
+            <h3>Education</h3>
+            <p>In 2010, I earned my Ph.D. as a student within the <a href="https://www.bu.edu/cs/">Department of Computer Science</a> at the <a href="https://www.bu.edu/cas/academics/graduate-education/">Boston University Graduate School of Arts and Sciences</a>. I was involved with the <a href="https://sites.google.com/site/ibenchbu/">iBench Initiative</a> and the <a href="http://types.bu.edu/">Church Project</a>, both as a participant and an organizer.
+            <table>
+              <tr><td>2010</td><td>Ph.D.</td><td><a href="https://www.bu.edu/cs/">Computer Science</a></td></tr>
+              <tr><td>2007</td><td>S.M.</td><td><a href="https://www.seas.harvard.edu/programs/graduate/computer-science">Computer Science</a></td></tr>
+              <tr><td>2007</td><td>A.B.</td><td><a href="https://www.seas.harvard.edu/programs/computer-science">Computer Science</a> and <a href="http://www.math.harvard.edu/">Mathematics</a></td></tr>
+            </table>
+            <p>Until 2007, I attended <a href="https://www.fas.harvard.edu/">Harvard University</a>, <a href="https://www.seas.harvard.edu/">SEAS</a> and concentrated in computer science and mathematics. During my time there, I also participated in the <a href="https://pl.seas.harvard.edu/">Programming Languages Group</a>.</p>
+          </div>
+
+          <div>
+            <h3>Miscellaneous</h3>
+            <p>I usually take a <a href="https://edificeandsky.tumblr.com/">particular kind of photograph</a>.</p>
+          </div>
+        </td>
+      </tr>
+    </table>
   </body>
-</html>
+</html> 

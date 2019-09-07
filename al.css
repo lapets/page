@@ -1,0 +1,59 @@
+html, body { width:100%; height:100%; margin:0; background-color:#FFFFFF; font-size:0.9em; font-family:'Source Sans Pro',Arial,Sans-serif; color:#173834; }
+#container { max-width:975px; margin:0 auto; padding:30px; border-spacing:0; border:none; }
+#container #content { width:100%; padding:0px; }
+#container #content a { color:#BC623A; text-decoration:none; }
+#container #content a:hover { color:#D52727; }
+#container #content h1 { display:block; margin:0px 0px 15px 0px; font-size:1.15rem; }
+#container #content h1 > span { white-space:nowrap; }
+#container #content h1 > span > a { font-weight:normal; }
+#container #content h1 > span > span { color:#CFCFCF; }
+#container #content div { display:block; margin-bottom:5px; }
+#container #content div > p { margin:3px 0px 0px 0px; }
+#container #content div > p:last-of-type { margin:3px 0px 25px 0px; }
+#container #content div > h2 { }
+#container #content div > h3 { display:block; margin:25px 0px 0px 0px; padding:0px 0px 3px 0px; border-bottom:1px solid #BC623A; font-size:1.15rem; line-height:1.1rem; }
+#container #content div > h3 > span { display:block; margin:0px; padding:3px 0px 1px 0px; font-size:1.15rem; font-weight:normal; line-height:1.1rem; }
+#container #content div > h3 > span > a { white-space:nowrap; }
+#container #content div > h4 { display:block; margin:20px 28px 0px 28px; padding-bottom:3px; border-bottom:1px solid #CCCCCC; font-size:1rem; font-weight:bold; line-height:1rem; }
+#container #content div > fieldset { width:calc(50% - 40px); min-width:275px; display:inline-block; vertical-align:top; margin:0px -15px 0px 16px; border:0px; }
+#container #content div > fieldset > legend { margin-bottom:-5px; border-bottom:1px solid #CCCCCC; font-size:1rem; font-weight:bold; line-height:1.2rem; }
+#container #content div > fieldset > p { margin:0px 0px 15px 2px; text-align:justify; }
+#container #content div > ul { display:block; margin:0px; padding:0px 35px 0px 28px; text-indent:0; }
+#container #content div > ul > li { margin-bottom:5px; padding:4px 0px 0px 0px; line-height:140%; list-style-image:url('bullet.gif'); }
+#container #content div > ul > li > span:first-of-type { font-weight:bold; color:#173834; }
+#container #content div > ul > li > span:first-of-type > a { font-weight:bold; }
+#container #content div > ul > li > span { color:#888888; }
+#container #content div > ul > li > p { margin:0px; padding-left:12px; font-size:0.85rem; line-height:0.95rem; }
+#container #content div > ol { display:block; margin:0px; padding:4px 0px 0px 28px; text-indent:0; }
+#container #content div > ol > li { padding:0px; text-align:left; line-height:140%; list-style-image:url('bullet.gif'); }
+#container #content div > ol > li > a:first-of-type > span { font-weight:bold; }
+#container #content div > ol > li > span:first-of-type { font-weight:bold; }
+#container #content div > ol > li > p { display:inline; margin-left:5px; white-space:nowrap; }
+#container #content div > table { margin-top:5px; margin-left:23px; border-spacing:0px; border-collapse:collapse; }
+#container #content div > table tr td { padding-left:5px; padding-right:5px; }
+@media all and (max-width:675px) {
+  #container #content div > fieldset { width:calc(100% - 60px); }
+  #container #content div > ol > li > p { display:block; margin:0px; padding:0px 0px 7px 0px; white-space:normal; }
+  #container #content div > ol > li > p > a { white-space:nowrap; }
+  #container #content div > ol > li > p > span { display:none; }
+}
+@media all and (max-width:450px) { 
+  html, body { font-size:0.8em; }
+  #container #content h1 { font-size:0.95rem; }
+  #container #content div > h3 { font-size:0.95rem; line-height:0.95rem; }
+  #container #content div > h3 > span { padding:3px 0px 0px 0px; font-size:0.9rem; line-height:0.9rem; }
+  #container #content div > h4 { margin:20px 0px 3px 0px; padding-bottom:1px; font-size:0.9rem; line-height:1rem; }
+  #container #content div > fieldset { width:100%; margin:0px -15px 0px -2px; padding-left:0px; }
+  #container #content div > fieldset > legend { font-size:0.9rem; line-height:1.1rem; }
+  #container #content div > fieldset > p { }
+  #container #content div > ul { margin:0px; padding:0px; }
+  #container #content div > ul > li > p { font-size:0.8rem; line-height:0.95rem; }
+  #container #content div > ol { margin:0px; padding:0px; }
+  #container #content div > * > li { left:0px; }
+  #container #content div > table { margin-top:5px; margin-left:-5px; }
+}
+#bibtex { margin:20px; border:0px; border-spacing:0; text-align:left; font-family:Courier,'Courier New',Monospace; color:#373834; }
+#bibtex div { margin-bottom;-20px; }
+#bibtex div span { position:relative; display:block; text-align:left; }
+#bibtex div span div { position:relative; max-width:600px; left:35px; text-align:left; margin:0px; padding:0px; }
+/* eof */

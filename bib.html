@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="all" name="robots" />
+    <title>andrei lapets - bibliography</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" />
+    <link rel="stylesheet" href="al.css" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-90403446-1', 'auto'); ga('send', 'pageview');
+    </script>
+    <script src="lapets.bib.js"></script>
+    <script>
+function in_array(x, xs) {
+  for (var i = 0; i < xs.length; i++)
+    if (x === xs[i])
+      return true;
+  return false;
+}
+
+function render_items() {
+  var bibtex = document.getElementById("bibtex");
+  var docs = bib.documents;
+  for (var i = 0; i < docs.length; i++) {
+    for (var kind in docs[i]) {
+      var data = docs[i][kind];
+      if (in_array(kind, ['@misc', '@techreport', '@phdthesis', '@inproceedings', '@article'])) {
+        for (var id in docs[i][kind]) { // Only one key-value in this object.
+          var fields = docs[i][kind][id];
+          var html = "\n";
+          html += '      <a id="' + id + '"></a>' + "\n";
+          html += '      ' + kind + '{' + id + ',' + "\n";
+          for (var field in docs[i][kind][id]) {
+            var value = docs[i][kind][id][field];
+            if (field === 'abstract')
+              html += ''; //'        <span>&nbsp;&nbsp;' + field + ' = {<div>' + value + '</div>&nbsp;&nbsp;},</span>' + "\n";
+            else
+              html += '        <span>&nbsp;&nbsp;' + field + ' = {' + value + '},</span>' + "\n";
+          }
+        }
+        html += '      }<br/><br/>' + "\n" + '      </div>' + "\n";
+        var div = document.createElement("div");
+        div.innerHTML = html;
+        bibtex.appendChild(div);
+      }   
+    }
+  }
+}
+    </script>
+  </head>
+  <body onload="render_items();">
+    <div id="bibtex">
+
+    </div>
+  </body>
+</html>

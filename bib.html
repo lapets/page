@@ -45,6 +45,8 @@ function render_items() {
       }   
     }
   }
+  var anchor = window.location.hash.substr(1);
+  document.getElementById(anchor).scrollIntoView();
 }
     </script>
   </head>

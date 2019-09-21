@@ -19,13 +19,13 @@ html, body { width:100%; height:100%; margin:0; background-color:#FFFFFF; font-s
 #container #content div > fieldset > legend { margin-bottom:-5px; border-bottom:1px solid #CCCCCC; font-size:1rem; font-weight:bold; line-height:1.2rem; }
 #container #content div > fieldset > p { margin:0px 0px 15px 2px; text-align:justify; }
 #container #content div > ul { display:block; margin:0px; padding:0px 35px 0px 28px; text-indent:0; }
-#container #content div > ul > li { margin-bottom:5px; padding:4px 0px 0px 0px; line-height:140%; list-style-image:url('bullet.gif'); }
+#container #content div > ul > li { margin-bottom:5px; padding:4px 0px 0px 0px; line-height:140%; list-style-image:url("data:image/gif;base64,R0lGODlhBwAHAIABAK+vr////yH5BAEAAAEALAAAAAAHAAcAAAIIjI+pwA0KYwEAOw=="); }
 #container #content div > ul > li > span:first-of-type { font-weight:bold; color:#173834; }
 #container #content div > ul > li > span:first-of-type > a { font-weight:bold; }
 #container #content div > ul > li > span { color:#888888; }
 #container #content div > ul > li > p { margin:0px; padding-left:12px; font-size:0.85rem; line-height:0.95rem; }
 #container #content div > ol { display:block; margin:0px; padding:4px 0px 0px 28px; text-indent:0; }
-#container #content div > ol > li { padding:0px; text-align:left; line-height:140%; list-style-image:url('bullet.gif'); }
+#container #content div > ol > li { padding:0px; text-align:left; line-height:140%; list-style-image:url("data:image/gif;base64,R0lGODlhBwAHAIABAK+vr////yH5BAEAAAEALAAAAAAHAAcAAAIIjI+pwA0KYwEAOw=="); }
 #container #content div > ol > li > a:first-of-type > span { font-weight:bold; }
 #container #content div > ol > li > span:first-of-type { font-weight:bold; }
 #container #content div > ol > li > p { display:inline; margin-left:5px; white-space:nowrap; }

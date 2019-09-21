@@ -310,7 +310,7 @@ var bib =
 
     {"#authors": ["lapets", "skowyra", "bestavros", "kfoury"],
      "#topics": ["usability"],
-     "#url": "https://lapets.io/pub/topi2013-integdep.pdf",
+     "#url": "https://lapets.io/pub/formal-tools.pdf",
      "@inproceedings":{"LSBK:topi2013":{
       "author": "Andrei Lapets and Rick Skowyra and Azer Bestavros and Assaf Kfoury",
       "title": "{Towards Accessible Integration and Deployment of Formal Tools and Techniques}",
@@ -614,13 +614,11 @@ var bib =
 
     {"#authors": ["lapets"],
      "#topics": ["usability"],
-     "#url": "http://cs-people.bu.edu/lapets/mifr/mifr.pdf",
-     "#slides": "http://cs-people.bu.edu/lapets/mifr/ilmv-sl.pdf",
+     "#url": "https://dl.acm.org/doi/book/10.5555/2019810",
      "@phdthesis":{"Lapets:2011BUPhDThesis":{
       "author": "Andrei Lapets",
-      "title": "{Machine involvement in formal reasoning: Improving the usability of automated formal assistance and verification systems}",
+      "title": "{Machine Involvement in Formal Reasoning: Improving the Usability of Automated Formal Assistance and Verification Systems}",
       "school": "Boston University",
-      "address": "",
       "month": "January",
       "year": "2011"
     }}},

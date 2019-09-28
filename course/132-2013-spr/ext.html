@@ -1,0 +1,606 @@
+<br/> 
+<ul>
+ <li>Assignments</li>
+  <ul>
+   <li><a href="#1"><b>Assignment #1: Using Vectors and Matrices</b></a></li>
+   <li><a href="#2"><b>Assignment #2: Matrix Properties and Operations</b></a></li>
+   <li><a href="#3"><b>Assignment #3: Vector Spaces and Polynomials</b></a></li>
+   <li><a href="#4"><b>Assignment #4: Approximations and Linear Transformations</b></a></li>
+  </ul>
+ </li>
+</ul>
+
+<!--assignment1-->
+<br/><hr/>
+<a name="1"></a>
+<a name="assignment1"></a>
+<b>Assignment #1: Using Vectors and Matrices</b> <span class="btn_assignment">(<a href="ext.php?hw=1">show only this assignment</a>)</span>
+
+       <p>In this assignment you will solve problems involving vectors and matrices.
+       <b>Please submit a single file <code>a1.*</code> containing your solutions. The file extension may be anything you choose;
+       please ask before submitting a file in an exotic or obscure file format (plain text is preferred).</b>
+
+<ol>
+  <li> Consider the line L in \R^2 that passes through the following two vectors:
+\begin{eqnarray}
+  %u & = & #[9 #; 7 #] \\
+  %v & = & #[1 #; -5 #]
+\end{eqnarray}
+    <ol style="list-style-type:lower-alpha;">
+      <li>Using set notation, define %L in terms of %u and %v.
+      </li>
+      <li>Determine whether the following vectors are on the line %L:
+\begin{eqnarray}
+  #[25 #; 31 #] & , & #[7 #; ---1 #] & , & #[---3 #; ---11 #]
+\end{eqnarray}
+      </li>
+      <li>Find all unit vectors orthogonal to %L.
+      </li>
+      <li>Define the line %L^\bot that passes through the origin and is orthogonal to %L using an equation of the form:
+\begin{eqnarray}
+  %y & = & %m \cdot %x + %b
+\end{eqnarray}
+          In other words, find %m, %b \in \R such that:
+\begin{eqnarray}
+  %L^\bot & = & { #[%x #; %y #] &nbsp; | &nbsp; %y = %m \cdot %x + %b }
+\end{eqnarray}
+      </li>
+    </ol>
+  </li>
+
+  <li> For each of the following collections of vectors, determine whether the collection is
+linearly independent. If it is, explain why; if not, show that one of the vectors is a
+linear combination of the other vectors in the collection.
+
+    <ol style="list-style-type:lower-alpha;">
+      <li> The following two vectors in \R^2:
+\begin{eqnarray}
+  #[2 #; 1 #] & , & #[3 #; 2 #]
+\end{eqnarray}
+      </li>
+      <li> The following three vectors in \R^2:
+\begin{eqnarray}
+  #[-2 #; 1 #] & , & #[1 #; 3 #] & , & #[2 #; 4 #]
+\end{eqnarray}
+      </li>
+      <li> The following three vectors in \R^4:
+\begin{eqnarray}
+  #[2 #; 0 #; 4 #; 0 #] & , & #[6 #; 0 #; 4 #; 3 #] & , & #[1 #; 7 #; 4 #; 3 #]
+\end{eqnarray}
+      </li>
+    </ol>
+  </li>
+  
+  <li> Consider the following vectors in \R^3:
+\begin{eqnarray}
+  %u & = & #[3 #; 7 #; 9 #] \\
+  %v & = & #[2 #; ---5 #; 3 #] \\
+  %w & = & #[3 #; 4 #; ---3 #]
+\end{eqnarray}
+
+    <ol style="list-style-type:lower-alpha;">
+      <li> Compute the orthogonal projection of %w onto the vector:
+\begin{eqnarray}
+  #[1/\sqrt(12) #; 1/\sqrt(12) #; 1/\sqrt(12) #]
+\end{eqnarray}
+      </li>
+      <li> Determine whether each of the following points lies on the plane perpendicular to %u:
+\begin{eqnarray}
+  #[3 #; 0 #; -1 #] & , &  #[7 #; -9 #; -5 #]   & , &  #[1 #; 1 #; -1 #]
+\end{eqnarray}
+      </li>
+      <li> <b>Extra credit:</b> Given the vector %v and %w, let %P be the plane orthogonal to %v, and let %Q be the plane orthogonal to %w.
+      Find a vector %p \in \R^3 that lies on the line in \R^3 along which %P and %Q intersect, and provide a definition of the line.
+      </li>
+    </ol>
+  </li>
+
+  <li> <p>You decide to drive the 2800 miles from New York to Los Angeles in a hybrid vehicle. 
+           A hybrid vehicle has two modes: using only the electric motor and battery, it can travel 1 mile on 3 units of battery power; 
+           using only the internal combustion engine, it can travel 1 mile on 0.1 liters of gas (about 37 mpg) while also charging the 
+           battery with 1 unit of battery power. At the end of your trip, you have 1400 fewer units of battery power than you did when 
+           you began the trip. How much gasoline did you use (in liters)?</p>
+
+           <p>You should define a system with the following dimensions:
+            <ul>
+             <li>net change in the total units of battery power;</li>
+             <li>total liters of gasoline used;</li>
+             <li>total number of miles travelled;</li>
+             <li>number of miles travelled using the electric motor and battery;</li>
+             <li>number of miles travelled using the engine.</li>
+            </ul>
+           </p>
+           
+           <p>You should define a matrix %M \in \R^{3 \times 2} to characterize this system. Then, write down an equation containing
+           that matrix (and three variables in \R), and solve it to obtain the quantity of gasoline.</p>
+\begin{eqnarray}
+  %M \cdot #[%x#; %y#] & = & #[?#; ?#; ?#]
+\end{eqnarray}
+  </li>
+
+  <li> <p>Suppose we create a very simple system for modelling how predators and prey interact in a closed environment. 
+       Our system has only two dimensions: the number of prey animals, and the number of predators. We want to model 
+       how the state of the system changes from one generation to the next.</p>
+       <p>If there are %x predators and %y prey animals in a given generation, in the next generation the following will be the case:
+        <ul>
+         <li>all predators already in the system will stay in the system;</li>
+         <li>all prey animals already in the system will stay in the system;</li>
+         <li>for every prey animal, two new prey animals are introduced into the system;</li>
+         <li>for every predator, two prey animals are removed from the system;</li>
+         <li>we ignore any other factors that might affect the state (e.g., natural death or starvation).</li>
+        </ul>
+
+       <ol style="list-style-type:lower-alpha;">
+        <li> <p>Specify explicitly a matrix %T in \R^{2 \times 2} that takes a description of the system state
+             in one generation and produces the state of the system during the next generation. <b>Note:</b> you may simply
+             enter the matrix on its own line for this part of the problem, but you must also use it in the
+             remaining three parts below.</p>
+             
+        </li>
+        <li> <p>Show that the number of predators does not change from one generation to the next.</p>
+\begin{eqnarray}
+  %T \cdot #[%x#; %y#] & = & #[%x#;%y'#]
+\end{eqnarray}
+        </li>
+        <li> <p>Determine what initial state [%x_0; %y_0] is such that there is no change in the state from one generation to another.</p>    
+
+\begin{eqnarray}
+  %T \cdot #[%x_0#; %y_0#] & = & #[%x_0#; %y_0#]
+\end{eqnarray}
+        </li>
+        <li> <p>Suppose that in the fourth generation of an instance of this system (that is, after the transformation has 
+                 been applied three times), we have 2 predators and 56 prey animals. How many predators and prey animals were 
+                 in the system in the first generation (before any transformations were applied)? Let [%x; %y] represent the
+                 state of the system in the first generation. Set up a matrix equation that involves [%x; %y] and
+                 matrix multiplication, and solve it to obtain the answer.</p>
+        </li>
+      </ol>
+  </li>
+</ol>
+<hr/><br/>
+<!--/assignment1-->
+
+<!--assignment2-->
+<br/><hr/>
+<a name="2"></a>
+<a name="assignment2"></a>
+  <b>Assignment #2: Matrix Properties and Operations</b> <span class="btn_assignment">(<a href="ext.php?hw=2">show only this assignment</a>)</span>
+
+       <p>In this assignment you will use Python to implement several of the vector and matrix operations and predicates we have introduced
+       so far.
+       <b>Please submit a single file <code>a2.py</code> containing your solutions.</b>
+
+  <b style="color:firebrick;">Your file may not import any modules or employ any external library functions
+  (unless the problem statement explicitly permits this). 
+  You will be graded on the correctness, concision, and mathematical legibility of your code.
+  The different problems and problem parts rely on each other; carefully consider whether you can use functions you define
+  in one part within subsequent parts.</b>
+
+<ol>
+  <li> In this assignment, we will represent vectors as Python tuples.
+       For example, the vector [1;2;3] would be represented in Python as <code>(1,2,3)</code>. 
+
+    <ol style="list-style-type:lower-alpha;">
+      <li> Define a Python function <code>scale(s,v)</code> that takes two arguments: a scalar <code>s</code> and a vector <code>v</code>.
+           The function should return the result of multiplying the vector by the scalar.
+           <pre class="snippet">scale(2, (3,4,5))     # Returns (6,8,10).</pre>
+      </li>
+
+      <li> Define a Python function <code>norm(v)</code> that takes a vector argument <code>v</code> and returns its norm (i.e., its length).<br/><br/>
+      </li>
+    
+      <li> Define a Python function <code>dot(v,w)</code> that takes two vectors as arguments and returns their dot product.
+           If the two vectors do not have the same number of components, the function should return <code>None</code>.
+           <br/><br/>Include a comment explaining <b>exactly</b> how many addition operations and how many multiplication operations your
+           implementation performs when the input is a pair of vectors that each have <code>n</code> components.
+           <pre class="snippet">dot((1,2), (3,4))     # Returns 11.
+dot((5,1,0), (1,1,2)) # Returns 6.
+dot((5,1,0,4), (1,2)) # Returns None.</pre>
+      </li>
+      <li> Define a Python function <code>orthogonal(v,w)</code> that takes two vectors as arguments and returns <code>True</code> only
+           if the two input vectors are orthogonal to one another; if they are not orthogonal, it returns <code>False</code>.
+           If the two vectors do not have the same number of components, the function should return <code>None</code>.<br/><br/>
+      </li>
+      <li> Define a Python function <code>proj(v,w)</code> that takes two vectors as arguments and returns a vector that
+           is the projection of <code>v</code> onto <code>w</code>.
+      </li>
+    </ol>
+  </li>
+
+  <li> In this assignment, we will represent matrices as tuples of tuples. For example, the matrix
+\begin{eqnarray}
+  #[ 1 #, 2 #; 3 #, 4 #]
+\end{eqnarray}
+would be represented as <code>((1,2),(3,4))</code>:
+
+    <ol style="list-style-type:lower-alpha;">
+      <li> Define a Python function <code>mult(A,B)</code> that takes two matrix arguments and returns the matrix that is
+           the result of multiplying <code>A</code> by <code>B</code>. If either argument is not a valid matrix, or if
+           the two matrices cannot be multiplied because the number of rows and/or columns does not match as necessary,
+           the function should return <code>None</code>.
+           <br/><br/>Include a comment explaining <b>exactly</b> how many addition operations and how many multiplication operations your
+           implementation performs when the input is a pair of matrices that each have <code>n</code> rows and columns.
+           <pre class="snippet">mult(((1,2),(3,4)), ((-5,-6),(7,8)))     # Returns ((9,10),(13,14)).</pre>
+      </li>
+
+      <li> Define a Python function <code>upper(A)</code> that takes a matrix argument and returns <code>True</code> only if
+           the matrix <code>A</code> is upper triangular; otherwise, it returns <code>False</code>.
+      </li>
+
+      <li> Define a Python function <code>transpose(A)</code> that takes a matrix argument and returns the transpose of that matrix.
+      </li>
+
+      <li> Define a Python function <code>lower(A)</code> that takes a matrix argument and returns <code>True</code> only if
+           the matrix <code>A</code> is lower triangular; otherwise, it returns <code>False</code>.
+      </li>
+
+      <li> Define a Python function <code>symmetric(A)</code> that takes a matrix argument and returns <code>True</code> only if
+           the matrix <code>A</code> is symmetric; otherwise, it returns <code>False</code>.
+      </li>
+
+      <li> Define a Python function <code>orthogonal(A)</code> that takes a matrix argument and returns <code>True</code> only if
+           the matrix <code>A</code> is orthogonal; otherwise, it returns <code>False</code>.
+           <b style="color:firebrick;">You may name this function <code>orthogonal2()</code> if all your tests are at the
+           end of your file
+           and you don't want this definition to hide the definition of <code>orthogonal()</code> from Problem #1(d) above.</b>
+      </li>
+    </ol>
+  </li>
+
+  <li> In this problem you will implement functions that can be used to generate elementary matrices corresponding to the
+       three types of elementary row operations. <b>In matrices, the first row is indexed as <code>i = 1</code> (unlike
+       tuples and lists in Python). Thus, you will need to convert the <i>row indices</i> <code>i</code> and <code>j</code>
+       into the corresponding Python tuple indices.</b>
+       <b style="color:firebrick;">Hint: begin with the identity matrix and apply the row operation to that matrix.</b>
+       <br/>
+    <ol style="list-style-type:lower-alpha;">
+      <li> Define a Python function <code>elementary_swap(r,c,i,j)</code>. This function should take four integer arguments:
+        <ul>
+          <li><code>r</code> is the number of rows</li>
+          <li><code>c</code> is the number of columns;</li>
+          <li><code>i</code> and <code>j</code> are the two rows to swap.</li>
+        </ul>
+        The function should return a single matrix that can then be used to swap row <code>i</code> with row <code>j</code>
+        by using matrix multiplication. See example below.
+        <pre class="snippet">mult(elementary_swap(3,3,1,3), ((1,2,3), (0,0,0), (7,8,9))) # Returns ((7,8,9), (0,0,0), (1,2,3)).</pre>
+      </li>
+      <li> Define a Python function <code>elementary_scale(r,c,i,s)</code>. This function should take four integer arguments:
+        <ul>
+          <li><code>r</code> and <code>c</code> are the row and column counts, respectively;</li>
+          <li><code>i</code> is the row to scale;</li>
+          <li><code>s</code> is the scalar to use.</li>
+        </ul>
+        The function should return a single matrix that can then be used to scale row <code>i</code> using the scalar <code>s</code>.
+        See example below.
+        <pre class="snippet">mult(elementary_scale(2,2,2,-1), ((1,2), (3,4))) # Returns ((1,2), (-3,-4)).</pre>
+      </li>
+      <li> Define a Python function <code>elementary_add(r,c,i,j,s)</code>. This function should take four integer arguments:
+        <ul>
+          <li><code>r</code> and <code>c</code> are the row and column counts, respectively;</li>
+          <li><code>i</code> is the row to add to row <code>j</code>;</li>
+          <li><code>s</code> is the scalar with which to scale row <code>i</code> before adding it to row <code>j</code>.</li>
+        </ul>
+        The function should return a single matrix that can then be used to add a multiple (by <code>s</code>) of row <code>i</code>
+        to row <code>j</code>. See example below.
+        <pre class="snippet">mult(elementary_add(3,3,1,2,-1), ((1,2,3), (0,0,0), (7,8,9))) # Returns ((1,2,3), (-1,-2,-3), (7,8,9)).</pre>
+      </li>
+    </ol>
+  </li>
+
+  <li> Define a Python function <code>is_rref(A)</code> that takes a matrix argument <code>A</code> and returns <code>True</code>
+       only if <code>A</code> is in reduced row echelon form; otherwise, it returns <code>False</code>.
+  </li>
+
+</ol>
+<hr/><br/>
+<!--/assignment2-->
+
+<!--assignment3-->
+
+<br/><hr/>
+<a name="3"></a>
+<a name="assignment3"></a>
+  <b>Assignment #3: Vector Spaces and Polynomials</b> <span class="btn_assignment">(<a href="ext.php?hw=3">show only this assignment</a>)</span>
+
+
+       <p>In this assignment you will use Python to implement several functions that operate on vector spaces and polynomials.
+       <b>Please submit a single file <code>a3.py</code> containing your solutions.</b>
+
+  <b style="color:firebrick;">Your file may not import any modules or employ any external library functions
+  (unless the problem statement explicitly permits this). 
+  You will be graded on the correctness, concision, and mathematical legibility of your code.
+  The different problems and problem parts rely on each other; carefully consider whether you can use functions you define
+  in one part within subsequent parts.</b>
+
+  In this assignment, we will represent vectors in \R^n and matrices in \R^{n \times n} using Python tuples and nested tuples, respectively
+  (as we did in <a href="#assignment3">Assignment #3</a>).
+  A helper function <code>solve()</code> is provided below. This function takes a <span style="color:firebrick;"><b>square</b></span> matrix <code>M</code> as its first argument and a vector
+  <code>w</code> as its second argument. If there is a solution <code>v</code> to the equation <code>M * v = w</code>, it returns the vector <code>v</code>;
+  otherwise, it returns <code>None</code>.
+  <b style="color:firebrick;">The <code>solve()</code> method has been updated. Please use the implementation below, which should handle
+  zero rows and columns correctly.</b>
+  <pre class="snippet">def solve(M, w, epsilon = 1.0/(10**10)):
+    rows, cols = len(M)+1, len(M[0])+1
+    if rows != cols: return None
+    I = [[1 if c==r else 0 for c in range(cols)] for r in range(rows)]
+    M = [([M[c][r] for c in range(cols-1)] if r < rows-1 else list(w))+[0]+I[r] for r in range(rows)]
+    def soln(M):
+        if len([1 for i in range(cols) if abs(M[-1][i]) > epsilon]) > 0: return None   
+        return tuple([-1*M[-1][cols+j] for j in range(cols-1)])
+    for r in range(rows):
+        lead = 0
+        if lead >= cols: return soln(M)
+        i = r
+        while M[i][lead] == 0:
+            i += 1
+            if i == rows:
+                i, lead = r, lead + 1
+                if cols == lead: return soln(M)
+        while abs(M[r][lead]) < epsilon: lead += 1
+        if abs(M[r][lead]) > epsilon:
+            M[r] = [ mrx / M[r][lead] for mrx in M[r]]
+            for i in [j for j in range(rows) if j != r]:
+                if r < rows-1:
+                    M[i] = [ iv - M[i][lead]*rv for rv,iv in zip(M[r],M[i])]
+    return soln(M)</pre>
+  Below is an example of <code>solve()</code> being invoked:
+  <pre class="snippet">solve( ((1,3),(2,1)), (5,6) ) # Returns (2.6, 0.8).</pre>
+<ol>
+  <li> A definition of the <code>Span</code> class is provided below. Objects of this class represent spans; the <code>vectors</code> field
+       of each object is the finite set of vectors { %v_1, ..., %v_{%k} } in the notation \span { %v_1, ..., %v_{%k} }.
+  <pre class="snippet">class Span():
+    def __repr__(self): return "span " + str(self.vectors)
+    def __str__(self):  return "span " + str(self.vectors)
+    def __init__(self, vectors): self.vectors = vectors
+ 
+    def contains(self, v):
+        pass # Implement for Problem #1, part (a).
+ 
+    def __eq__(span1, span2):
+        pass # Implement for Problem #1, part (b).
+ 
+    def basis(self):
+        pass # Implement for Problem #1, part (c).
+ 
+    def dim(self):
+        pass # Implement for Problem #1, part (d).
+ 
+    def orthonormal(self):
+        pass # Implement for Problem #1, part (e).</pre>
+
+    <ol style="list-style-type:lower-alpha;">
+      <li> Define the <code>Span</code> class's <code>contains()</code> method, which returns <code>True</code> if the vector argument
+           <code>v</code> is in the vector space defined by the span, and <code>False</code> otherwise.
+           <pre class="snippet">V = Span( { (1,0), (0,1) } )
+V.contains((2,-3)) # Returns True.</pre>
+      </li>
+      <li> Define the <code>Span</code> class's <code>__eq__()</code> method, which takes two arguments that are both <code>Span</code>
+      objects. The method should return <code>True</code> if the two spans are equivalent; it should return <code>False</code> otherwise.
+      This method is invoked if you apply the <code>==</code> operator to two <code>Span</code> objects:
+      <pre class="snippet">Span( { (1,0), (0,1) } ) == Span( { (2,3) } ) # Returns False.</pre>
+      </li>
+      <li> Define the <code>Span</code> class's <code>basis()</code> method, which returns a finite set of vectors corresponding to a basis
+      of the vector space represented by the <code>Span</code> object.
+      </li>
+      <li> Define the <code>Span</code> class's <code>dim()</code> method, which returns a positive integer corresponding to the dimension
+      of the vector space represented by the <code>Span</code> object.
+      </li>
+      <li> Define the <code>Span</code> class's <code>orthonormal()</code> method, which returns a finite set of vectors corresponding to an
+      orthonormal basis of the vector space represented by the <code>Span</code> object.
+      </li>
+    </ol>
+  </li>
+ <li> Define a function <code>exactFit()</code> that takes as its input a set of vectors in \R^2.
+      If there are %k + 1 vectors in the input, the function should find a
+      polynomial of the form %f(%x) = %a_{%k} %x^{%k} + ... + %a_1 %x + %a_0 that exactly fits these vectors.
+      The function should return a single vector (%a_{%k}, ..., %a_1, %a_0) containing the coefficients of the polynomial.
+      <pre class="snippet">
+      exactFit( { \ 
+        (-1,31), (-4,  268327), ( 1,  17), (-5, -1520701), ( 3,  389147), \
+        (-3,  78869), (-6, -19979509), ( 5,  29571949), ( 0, -1), (-2,  5027) \
+        } )
+      # The above should return (8, 36, -1, -2, 0, -9, -4, 0, -10, -1) where k is 9.</pre>
+ </li>
+ <li> In this problem, input polynomials are represented as Python functions. Below are a few examples:
+      <pre class="snippet">def f(x): return 2 * x**2 + 3 * x - 5
+def g(x): return x**3 + 4 * x**2 - 2 * x + 8</pre>
+      Implement the following functions.
+
+    <ol style="list-style-type:lower-alpha;">
+      <li> Define a function <code>findK()</code> that takes two inputs, a function <code>f</code> and a positive integer
+           <code>k</code>. If there exists a polynomial of the form %f(%x) = %a_{%k} %x^{%k} + ... + %a_1 %x + %a_0 that represents
+           the function <code>f</code>, the function should return a vector (%a_{%k}, ..., %a_1, %a_0) containing the coefficients of the polynomial.
+           Otherwise, it should return <code>None</code>.
+      <pre class="snippet">def f(x): return x**3 + 4 * x**2 - 2 * x + 8
+findK(f, 3) # Should return (1, 4, -2, 8).</pre>
+      </li>
+      <li> Define a function <code>find()</code> that takes a single input, a function <code>f</code>.
+           If for any %k there exists a polynomial of the form %f(%x) = %a_{%k} %x^{%k} + ... + %a_1 %x + %a_0 that represents
+           the function <code>f</code>, the function should return a vector (%a_{%k}, ..., %a_1, %a_0) containing the coefficients of the polynomial.
+           Otherwise, it should return <code>None</code>.
+      <pre class="snippet">def f(x): return x**3 + 4 * x**2 - 2 * x + 8
+find(f) # Should return (1, 4, -2, 8).</pre>
+           Try to make your implementation of
+           <code>find()</code> as efficient as possible.
+      </li>
+    </ol>
+  </li>
+</ol>
+<hr/><br/>
+
+<!--/assignment3-->
+
+<!--assignment4-->
+
+<br/><hr/>
+<a name="4"></a>
+<a name="assignment4"></a>
+  <b>Assignment #4: Approximations and Linear Transformations</b> <span class="btn_assignment">(<a href="ext.php?hw=4">show only this assignment</a>)</span>
+
+
+  <p>In this assignment you will solve problems involving overdetermined systems and linear transformations.</p>
+
+  <p><b style="color:firebrick;">You are only required to choose and solve any four (4) of the problems below. 
+  Solutions to any additional problems will count as extra credit.</b></p>
+
+  <b>Please submit a single file <code>a4.*</code> containing your solutions. The file extension may be anything you choose;
+  please ask before submitting a file in an exotic or obscure file format (plain text is preferred).</b>
+
+
+<ol>
+  <li> For each of the linear transformations %f defined below, determine the following.
+    <ul>
+      <li>What are the domain and codomain?</li>
+      <li>Is it injective? If it is, provide a step-by-step argument. If not, provide a counterexample.</li>
+      <li>Is it surjective? If it is, provide a step-by-step argument. If not, provide a counterexample.</li>
+      <li>Is it bijective? Explain why or why not.</li>
+      <li>What is \dim(\im(%f))? Your answer must be an integer.</li>
+    </ul>
+
+    <ol style="list-style-type:lower-alpha;">
+      <li> The linear transformation %f : \R^3 \to \R^2 where:
+\begin{eqnarray}
+ %f(%v) & = & #[ 1 #, 2 #, 0 #; 2 #, 4 #, 1 #] \cdot %v
+\end{eqnarray}
+      </li>
+
+      <li> The linear transformation %f : \R^2 \to \R^2 where:
+\begin{eqnarray}
+ %f(%v) & = & #[ 1 #, 0 #; 0 #, 0 #] \cdot %v
+\end{eqnarray}
+      </li>
+
+      <li> The linear transformation %f : \R^5 \to \R<sup>1</sup> where:
+\begin{eqnarray}
+ %f(%v) & = & #[ 0 #, 0 #, 0 #, 1 #, 2 #] \cdot %v
+\end{eqnarray}
+      </li>
+
+      <li> The linear transformation %f : \R^2 \to \R^2 where:
+\begin{eqnarray}
+ %f(%v) & = & #[ 0 #, %a #; %a #, 0 #] \cdot %v \~ where %a \neq 0
+\end{eqnarray}
+      </li>
+    </ol>
+  </li>
+  <li> In this problem, you will practice finding the least-squares approximate solutions to overdetermined systems.
+
+    <ol style="list-style-type:lower-alpha;">
+      <li> Find the least-squarse approximate solution to the following equation, and compute the error of that solution:
+\begin{eqnarray}
+ #[ 1 #, -2 #; -2 #, 4 #] \cdot #[ %x #; %y #] & = & #[ 1 #; 5 #]
+\end{eqnarray}
+      </li>
+
+      <li> Suppose you are given the following polynomial:
+\begin{eqnarray}
+ %f(%x) & = & %x^2 - 2 %x + 6
+\end{eqnarray}
+           Find the best-fit curve in the space {%f | %f(%x) = %a %x + %b, %a,%b \in \R} for the above polynomial using the
+           %x values {-1, 0, 2}.
+      </li>
+
+      <li> Suppose you are given the following data points:
+\begin{eqnarray}
+ #[ 1 #; 2 #], #[ 0 #; 1 #] , #[ -1 #; 0 #], #[ -2 #; 3 #]
+\end{eqnarray}
+           Find the best-fit curve in the space {%f | %f(%x) = %a %x^2 + %b %x + %c, %a,%b,%c \in \R} for these data points.
+      </li>
+    </ol>
+  </li>
+
+  <li> Two engineers are trying to find the best-fit curve in the space { %f | %f(%x) = %a %x + %b, %a,%b \in \R } for a collection
+       of 100 data points of the form (%x_%i, %y_%i) for %i \in {1,...,100}, but that collection is split across two databases of 50
+       points each. Each engineer has access
+       to only one of the databases. Symbolically, the overdetermined system they are trying to solve is represented using
+       the following equation:
+\begin{eqnarray}
+ #[ %x_1 #, 1 #; \vdots #, \vdots #; %x<sub>100</sub> #, 1 #] \cdot #[ %a #; %b #] & = & #[ %y_1 #; \vdots #; %y<sub>100</sub> #]
+\end{eqnarray}
+       Suppose the two column vectors [%x_1; ...; %x<sub>100</sub>] and [1; ...; 1] of the matrix are orthogonal to one another (but not necessarily unit vectors). Then,
+       the first thing they need to do is project the vector of [%y_1; ...; %y<sub>100</sub>] onto the two column vectors of the matrix. Each engineer
+       computes the following values using the data available to them:
+\begin{eqnarray}
+ ||#[%x_1 #; \vdots #; %x<sub>50</sub> #] || & = & 3 & \~ & &nbsp;&nbsp;&nbsp;
+ %x_1 \cdot %y_1 + ... + %x<sub>50</sub> \cdot %y<sub>50</sub> & = & 62 & \~ & &nbsp;&nbsp;&nbsp;
+  %y_1 + ... + %y<sub>50</sub> & = & 120 \\
+ || #[ %x<sub>51</sub> #; \vdots #; %x<sub>100</sub> #] || & = & 4 & \~ & &nbsp;&nbsp;&nbsp;
+ %x<sub>51</sub> \cdot %y<sub>51</sub> + ... + %x<sub>100</sub> \cdot %y<sub>100</sub> & = & 38 & \~ & &nbsp;&nbsp;&nbsp;
+  %y<sub>51</sub> + ... + %y<sub>100</sub> & = & 80 
+\end{eqnarray}
+    <ol style="list-style-type:lower-alpha;">
+      <li> Once the engineers compute the projection of [%y_1; ...; %y<sub>100</sub>] onto span of the vector [%x_1; ...; %x<sub>100</sub>],
+           they collectively obtain some vector of the form:
+\begin{eqnarray}
+ %s \cdot #[%x_1#; \vdots #; %x<sub>100</sub>#] & = & orthogonal projection of #[%y_1#; \vdots #; %y<sub>100</sub>#] onto #[%x_1#; \vdots #; %x<sub>100</sub>#]
+\end{eqnarray}
+           for some %s. What is %s? Your answer must be an integer.
+      </li>
+      <li> Once the engineers compute the projection of [%y_1; ...; %y<sub>100</sub>] onto span of the vector [1; ...; 1],
+           they collectively obtain some vector of the form:
+\begin{eqnarray}
+ %t \cdot #[1#; \vdots #; 1#] & = & orthogonal projection of #[%y_1#; \vdots #; %y<sub>100</sub>#] onto #[1#; \vdots #; 1#]
+\end{eqnarray}
+           for some %t. What is %t? Your answer must be an integer.
+      </li>
+
+      <li> What are the coefficients %a and %b of the best-fit line %f(%x) = %a %x + %b for the data? Your answers should be integers.
+      </li>
+    </ol>
+  </li>
+  <li>
+Consider the following underdetermined system:
+\begin{eqnarray}
+ #[ 1 #, 3 #; 2 #, 6 #] \cdot #[ %x #; %y #] & = & #[ 10 #; 20 #]
+\end{eqnarray}
+    <ol style="list-style-type:lower-alpha;">
+      <li> Define the solution space to the above system; you must use set notation. We will call this space %W.
+      </li>
+      <li> Define an isomorphism between %W and a vector space %V. You must provide a definition of both the vector space and the isomorphism.
+      </li>
+      <li> Suppose that the cost of a solution vector %v to the above system is defined to be ||%p --- %v|| where
+\begin{eqnarray}
+ %p & = & #[ 2 #; 3 #]
+\end{eqnarray}
+           What is the solution to the above system that has the lowest cost?
+      </li>
+    </ol>
+  </li>
+
+
+    <li> Suppose you are assembling a processing plant that generates electricity and <b>produces</b> biofuel as a byproduct. 
+       You can purchase any number of each of the
+       following two types of generators:
+       <ul>
+         <li>generators of type A produce 4 units of electricity for every 1 unit of biofuel produced;
+         <li>generators of type B produce 8 units of electricity for every 2 units of biofuel produced.
+       </ul>
+       Furthermore, in order for the generators to work, each generator must be connected to every other generator
+       of the same type as well as a central controller, and connections cost $4. 
+       As a result, the connection cost for each kind of generator is computed as follows:
+       <ul>
+         <li>when you buy %x generators of type A, each generator of type A costs 4 \cdot %x dollars;
+         <li>when you buy %y generators of type B, each generator of type B costs 4 \cdot %y dollars.
+       </ul>
+       If you must generate exactly 40 units of electricity and 10 units of biofuel while paying the least connection cost possible,
+       how many of each kind of generator should you purchase?
+  </li>
+
+  <li> Suppose that vectors in \R^2 represent population quantities in two locations, the linear transformation %f:\R^2 \rightarrow \R^2 
+   represents a change in the quantities over the course of one year if the economy is doing well, %g:\R^2 \rightarrow \R^2 represents
+  a change in the quantities over the course of one year if the economy is not doing well, and
+  %v_0 is the initial state:
+\begin{eqnarray}
+ %f(%v) & = & #[ 2 #, 1 #; 4 #, 2 #] \cdot %v\\
+ %g(%v) & = & #[ 0.1 #, 0.2 #; 0.4 #, 0.3 #] \cdot %v\\
+ %v_0   & = & #[ 100 #; 200 #]
+\end{eqnarray}
+  The population state is initially %v_0; after 302 years have passed, the total number of years with a good economy was 100
+  and the total number of years with a poor economy was 202. What is the state of the population at this point?
+  </li>
+</ol>
+<hr/><br/>
+
+<!--/assignment4-->
+
+<!--eof-->

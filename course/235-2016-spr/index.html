@@ -1,0 +1,155 @@
+
+<html>
+ <head>
+ <title>BU CAS CS 235 Spring 2016</title>
+ <style>
+  body { font-family: Verdana,Arial,Sans-serif; font-size:12px; }
+  a { text-decoration:none; color:#AC701E; }
+  a:hover { text-decoration:underline; color:firebrick; }
+  #container { margin: 8px; }
+  #info { margin: 8px; float:left; display:inline-block; }
+  #info .lbl { font-weight:bold; color:#555555; }
+  #info .sect { color:#888888; }
+  #schedule {
+    /* max-width:400px; */
+    float:left; display:inline-block;
+    margin-top:20px; margin-left:10px; margin-bottom:15px; 
+    border-collapse:collapse; 
+    font-family: Verdana,Arial,Sans-serif; font-size:12px;
+    }
+  #schedule td { border: 1px solid #CCCCCC; padding:6px; }
+  #schedule .lecture { }
+  #schedule .nolecture { color:#AAAAAA; font-style:italic; }
+  #schedule .assignmentdate { }
+  #schedule .quiz { color:firebrick; font-weight:bold; }
+  #schedule .midterm { color:firebrick; font-weight:bold; }
+  #schedule .final { color:firebrick; font-weight:bold; }
+  #schedule .exam { color:firebrick; font-weight:bold; }
+  #schedule .review { font-weight:bold; }
+  #schedule .upcoming { background-color:#F9EFE1; }
+  #schedule .lecture_label { color:#AAAAAA; font-weight:normal; font-style:normal; }
+  #schedule .assignment_label { color:#AAAAAA; font-weight:normal; font-style:normal; }
+  ul { padding-top:0px; padding-bottom:0px; padding-left:0px; padding-right:25px; margin:0px;  }
+  li { 
+    list_style_type:none; list-style-image:url("data:image/gif;base64,R0lGODlhBwAHAIABAK+vr////yH5BAEAAAEALAAAAAAHAAcAAAIIjI+pwA0KYwEAOw=="); padding:0px;
+    min-width:200px; position:relative; left:15px; text-align:left; line-height:140%;
+    }
+  #info_items li { margin-bottom:4px; }
+  #info_items li ul { margin-top:4px; }
+  #info_items li ul li { margin-bottom:4px; }
+ </style>
+ <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90403446-1"></script>
+ <script>
+   window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-90403446-1');
+ </script>
+ </head>
+ <body>
+ <div id="container">
+
+  <div id="info">
+   <br/><b>BU CAS Computer Science 235</b>
+   <br/><b>Algebraic Algorithms</b>
+   <br/>
+   <br/>
+   <br/>
+   <ul class="info_items">
+    <li><span class="sect">lectures:</span>
+     <br/>&nbsp;&nbsp; Tue. & Thu., 9:30 - 11 AM in <a href="http://www.bu.edu/classrooms/classroom/epc-205/">EPC 205</a>
+     <br/>&nbsp;&nbsp; <span class="lbl">lecturer:</span> <a href="http://cs-people.bu.edu/lapets">Andrei Lapets</a>  (<a href="mailto:lapets@bu.edu">lapets@bu.edu</a>, MCS 176)
+     <br/>&nbsp;&nbsp; <span style="font-size:12px;"><span class="lbl">OH:</span> Tue. 4 - 6 PM; Thu. 11 AM - 12 PM (<a href="http://www.bu.edu/cs/resources/laboratories/undergraduate-lab/">CS lab</a>)</span>
+     <br/>
+     <br/>
+    </li>
+    <li><span class="sect">sections and other assistance:</span>
+     <br/>&nbsp;&nbsp; Wed., 3 PM - 4 PM in <a href="http://www.bu.edu/classrooms/classroom/cas-220/">CAS 220</a>
+     <br/>&nbsp;&nbsp; Wed., 4 PM - 5 PM in <a href="http://www.bu.edu/classrooms/classroom/psy-b55/">PSY B55</a>
+     <br/>&nbsp;&nbsp; Wed., 5 PM - 6 PM in <a href="http://www.bu.edu/classrooms/classroom/psy-b55/">PSY B55</a>
+     <br/>&nbsp;&nbsp; <span class="lbl">teaching fellow:</span> <a href="http://cs-people.bu.edu/ghasemi/">Maryam Ghasemi</a>
+     <br/>&nbsp;&nbsp; <span class="lbl">OH:</span> Wed. 10 AM - 12 PM (<a href="http://www.bu.edu/cs/resources/laboratories/undergraduate-lab/">CS lab</a>)
+     <br/>&nbsp;&nbsp; <span class="lbl"><a href="http://www.bu.edu/cs/resources/tutoring/">tutoring</a>:</span> Fri. 3 - 4 PM (<a href="http://www.bu.edu/cs/resources/laboratories/undergraduate-lab/">CS lab</a>)
+     <br/>
+     <br/>&nbsp;&nbsp; <span class="lbl">course assistant:</span> <a href="mailto:sandrall@bu.edu">Sandra Lefdal</a>
+     <br/>&nbsp;&nbsp; <span class="lbl">course assistant:</span> <a href="mailto:jgyou@bu.edu">Jacqueline You</a>
+     <br/>&nbsp;&nbsp; <span class="lbl">OH:</span> Fri. 4 - 6 PM (<a href="http://www.bu.edu/cs/resources/laboratories/undergraduate-lab/">CS lab</a>)
+     <br/>
+     <br/>
+    </li>
+    <li><span class="sect">questions and discussion:</span>
+     <br/>&nbsp;&nbsp; <a href="mailto:cascs235a1-l@bu.edu">cascs235a1-l@bu.edu</a> (course mailing list)
+     <br/>&nbsp;&nbsp; <a href="https://piazza.com/bu/spring2016/cs235">Q&amp;A page</a> on Piazza
+    </li>
+   </ul>
+   <br/>
+   <ul class="info_items">
+    <li><span class="sect">homework assignment policies:</span>
+     <br/>&nbsp;&nbsp; <span class="lbl">submission:</span> by 11:59 PM on due date (<a href="s.html?#A">gsubmit</a>)
+     <br/>&nbsp;&nbsp; <span class="lbl">collaboration:</span> discussion only; list all collaborators
+     <br/>&nbsp;&nbsp; <span class="lbl">late policy</span>: -10 points per day, 4 days maximum
+    </li>
+   </ul>
+   <br/>
+   <ul class="info_items">
+    <li><span class="sect">course grade:</span>
+     <!--<br/>&nbsp;&nbsp; 50% <i>homework</i> + 50% max{<i>final</i>, avg{<i>mid</i>, <i>final</i>}}</li>-->
+     <br/>&nbsp;&nbsp; 50% <i>homework</i> +
+     <br/>&nbsp;&nbsp; max{
+     <br/>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;50% max{<i>fin</i>, avg{<i>mid</i>, <i>fin</i>}},
+     <br/>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;40% max{<i>fin</i>, avg{<i>mid</i>, <i>fin</i>}} + 10% <i>quiz</i>
+     <br/>&nbsp;&nbsp; &nbsp;&nbsp;}
+    </li>
+   </ul>
+   <br/>
+   <ul class="info_items">
+    <li><span class="sect">course materials:</span>
+     <!--<br/>&nbsp;&nbsp; to be posted-->
+     <br/>&nbsp;&nbsp; <a href="s.html">lecture notes</a> (w/ assignments) <!-- &amp; review problems -->
+     <!--br/>&nbsp;&nbsp; <a href="exercises.php">random exercise generator</a-->
+     <br/>&nbsp;&nbsp; <b><a href="s.html?#assignment1">assignment #1</a></b>
+     <br/>&nbsp;&nbsp; <b><a href="s.html?#assignment2">assignment #2</a></b>
+     <br/>&nbsp;&nbsp; <b><a href="s.html?#assignment3">assignment #3</a></b>
+     <br/>&nbsp;&nbsp; <b><a href="s.html?#assignment4">assignment #4</a></b>
+     <br/>&nbsp;&nbsp; <b><a href="s.html?#assignment5">assignment #5</a></b>
+     <br/>&nbsp;&nbsp; <b><a href="s.html?#assignment6">assignment #6</a></b>
+    </li>
+   </ul>
+   <br/>
+   <ul class="info_items">
+    <li><span class="sect">software used in the course:</span>
+     <br/>&nbsp;&nbsp; <a href="https://www.python.org/downloads/">Python 3.3</a>+
+    </li>
+   </ul>
+   <br/>
+   <ul class="info_items">
+    <li><span class="sect">other reading materials (not required):</span>
+     <br/>
+     <br/>&nbsp;&nbsp; <b><a href="http://www.shoup.net/ntb/ntb-v2.pdf">A Computational Introduction to</a></b>
+     <br/>&nbsp;&nbsp; <b><a href="http://www.shoup.net/ntb/ntb-v2.pdf">Number Theory and Algebra.</a></b>
+     <br/>&nbsp;&nbsp;&nbsp;&nbsp; Victor Shoup.
+     <br/>
+     <br/>&nbsp;&nbsp; <b><a href="http://www.cs.bu.edu/faculty/gacs/courses/cs235/lectures/notes.pdf">Algebraic algorithms.</a></b>
+     <br/>&nbsp;&nbsp;&nbsp;&nbsp; Course notes by P&#0233;ter G&#0225;cs.
+     <br/>
+     <br/>&nbsp;&nbsp; <b><a href="http://cs-people.bu.edu/evimaria/cs131-11/mathcs.pdf">Mathematics for Computer Science.</a></b>
+     <br/>&nbsp;&nbsp;&nbsp;&nbsp; Eric Lehman and Tom Leighton.
+     <br/>
+     <br/>&nbsp;&nbsp; <b>A Concrete Introduction to Higher Algebra.</b>
+     <br/>&nbsp;&nbsp;&nbsp;&nbsp; Lindsay Childs.
+     <br/>
+     <br/>&nbsp;&nbsp; <b>The Higher Arithmetic:</b>
+     <br/>&nbsp;&nbsp; <b>An Introduction to the Theory of Numbers.</b>
+     <br/>&nbsp;&nbsp;&nbsp;&nbsp; H. Davenport.
+    </li>
+   </ul>
+   <br/>
+   <ul class="info_items">
+    <li><a href="http://www.bu.edu/academics/policies/academic-conduct-code/">academic conduct code</a></li>
+   </ul>
+   <br/>
+  </div>
+
+  <table id="schedule">
+   <tr class="lecture "><td>2016-01-19</td><td><span class="lecture_label">lecture:</span><br/>logic &amp; sets</td><td><ul><li><a href="s.html?#1">lecture notes</a></li><li>introduction and motivation</li><li>review of logical formulas</li><li>review of set theory</li></ul></td></tr><tr class="lecture "><td>2016-01-21</td><td><span class="lecture_label">lecture:</span><br/>logic &amp; sets</td><td><ul><li><a href="s.html?#2.5">lecture notes</a></li><li>logical quantifiers</li><li>comprehensions</li><li>set products &amp; relations</li></ul></td></tr><tr class="lecture "><td>2016-01-26</td><td><span class="lecture_label">lecture:</span><br/>logic &amp; sets</td><td><ul><li><a href="s.html?#2.8">lecture notes</a></li><li>reflexivity, symmetry, &amp; transitivity</li><li>equivalence relations</li><li>set quotients</li></ul></td></tr><tr class="lecture "><td>2016-01-28</td><td><span class="lecture_label">lecture:</span><br/>modular<br/>arithmetic</td><td><ul><li><a href="s.html?#3">lecture notes</a></li><li>congruence classes of integers</li><li>operations on congruence classes</li><li>solving equations over &#8484;/<i>m</i>&#8484;</li><li>algebra of congruence classes</li></ul></td></tr><tr class="assignmentdate "><td style="color:#AAAAAA; font-style:italic;"><span style="text-decoration:none;">2016-02-01<br/><span style="font-size:10px;">11:59 PM EST<br/></span></span></td><td><span class="assignment_label">assignment</span></td><td><ul><li><b><a href="s.html#assignment1">assignment #1</a> due</b></li></ul></td></tr><tr class="lecture "><td>2016-02-02</td><td><span class="lecture_label">lecture:</span><br/>modular<br/>arithmetic</td><td><ul><li><a href="s.html?#5a308a7e85aa11e5af63feff819cdc9f">lecture notes</a></li><li>more algebra of congruence classes</li><li>Euclid's lemma</li><li>solving equations &amp; Euclid's lemma</li></ul></td></tr><tr class="lecture "><td>2016-02-04</td><td><span class="lecture_label">lecture:</span><br/>modular<br/>arithmetic</td><td><ul><li><a href="s.html?#3.3">lecture notes</a></li><li>&#8484;/p&#8484; as a set of permutations</li><li>generating random numbers</li><li>greatest common divisor</li><li>generalized Euclid's lemma</li><li>finding coprimes</li></ul></td></tr><tr class="lecture "><td>2016-02-09</td><td><span class="lecture_label">lecture:</span><br/>modular<br/>arithmetic</td><td><ul><li><a href="s.html?#3a48cfd102124a17a72c0eb3e81c8724">lecture notes</a></li><li>more on finding coprimes</li><li>linear congruential generators</li><li>infinitude of primes</li><li>Fermat's little theorem</li><li>Fermat primality test</li></ul></td></tr><tr class="lecture "><td>2016-02-11</td><td><span class="lecture_label">lecture:</span><br/>modular<br/>arithmetic</td><td><ul><li><a href="s.html?#53ffd37ae6c747b6a590a84d8cc055c7">lecture notes</a></li><li>detecting probable primes</li><li>generating probable primes</li><li>multiplicative inverses in &#8484;/<i>m</i>&#8484;</li><li>Chinese remainder theorem (CRT)</li><li>applications of CRT</li></ul></td></tr><tr class="assignmentdate "><td style="color:#AAAAAA; font-style:italic;"><span style="text-decoration:none;">2016-02-16<br/><span style="font-size:10px;">11:59 PM EST</span><br/><span style="font-size:10px;">Monday sched.<br/></span></span></td><td><span class="assignment_label">assignment</span></td><td><ul><li><b><a href="s.html#assignment2">assignment #2</a> due</b></li></ul></td></tr><tr class="lecture "><td>2016-02-18</td><td><span class="lecture_label">lecture:</span><br/>modular<br/>arithmetic</td><td><ul><li><a href="s.html?#df42e88c1fcd11e3831ff55c91aec05A">lecture notes</a></li><li>more applications of CRT</li><li>computing CRT solutions</li></ul></td></tr><tr class="lecture "><td>2016-02-23</td><td><span class="lecture_label">lecture:</span><br/>modular<br/>arithmetic</td><td><ul><li><a href="s.html?#4353592f86d4482c93cebb6da6d749b9">lecture notes</a></li><li>B&eacute;zout's identity</li><li>extended Euclidean algorithm</li><li>Euler's totient function</li><li>Euler's theorem</li></ul></td></tr><tr class="review "><td>2016-02-25</td><td><span class="lecture_label">lecture:</span><br/>review</td><td><ul><li><a href="s.html?#R.1">lecture notes</a></li></ul></td></tr><tr class="assignmentdate "><td style="color:#AAAAAA; font-style:italic;"><span style="text-decoration:none;">2016-02-26<br/><span style="font-size:10px;">11:59 PM EST<br/></span></span></td><td><span class="assignment_label">assignment</span></td><td><ul><li><b><a href="s.html#assignment3">assignment #3</a> due</b></li></ul></td></tr><tr class="midterm "><td><span style="text-decoration:underline;">2016-03-01</span><br/><span style="font-size:10px;">Tuesday<br/>9:35-10:35 AM</span></td><td><span class="exam">midterm<br/>exam</span></td><td><ul></ul></td></tr><tr class="lecture "><td>2016-03-03</td><td><span class="lecture_label">lecture:</span><br/>modular<br/>arithmetic</td><td><ul><li>review of midterm solutions</li><li><a href="s.html?#15f709b061db4798ab0ff29bef64f200">lecture notes</a></li><li>more on Euler's totient function</li><li>closure of (&#8484;/<i>m</i>&#8484;)*</li></ul></td></tr><tr class="nolecture "><td>2016-03-08</td><td><span class="assignment_label">recess</span></td><td><ul></ul></td></tr><tr class="nolecture "><td>2016-03-10</td><td><span class="assignment_label">recess</span></td><td><ul></ul></td></tr><tr class="lecture "><td>2016-03-15</td><td><span class="lecture_label">lecture:</span><br/>complexity</td><td><ul><li><a href="s.html?#4">lecture notes</a></li><li>problem complexity</li><li>efficient arithmetic algorithms<ul><li>addition, multiplication</li><li>modular exponentiation</li></ul></li></ul></td></tr><tr class="lecture "><td>2016-03-17</td><td><span class="lecture_label">lecture:</span><br/>complexity</td><td><ul><li><a href="s.html?#8956b7ca2c7c49db8ce910ad6e21473c">lecture notes</a></li><li>efficient arithmetic algorithms<ul><li>division and modulus</li><li>gcd and inversion</li><li>solving CRT systems</li></ul></li><li>efficiency vs. intractability</li></ul></td></tr><tr class="lecture "><td>2016-03-22</td><td><span class="lecture_label">lecture:</span><br/>complexity</td><td><ul><li><a href="s.html?#4.3">lecture notes</a></li><li>complexity reductions</li><li>intractable problems<ul><li>factoring</li><li>computing &phi;</li><li>RSA problem (<i>e</i> roots)</li><li>discrete logarithm problem</li></ul></li><li>computing square roots in &#8484;/<i>m</i>&#8484;</li></ul></td></tr><tr class="lecture "><td>2016-03-24</td><td><span class="lecture_label">lecture:</span><br/>complexity</td><td><ul><li><a href="s.html?#4b7191643ef4439abe376faad0aee172">lecture notes</a></li><li>congruent squares problem</li><li>Hensel's lemma</li><li>Rabin encryption</li></ul></td></tr><tr class="assignmentdate "><td style="color:#AAAAAA; font-style:italic;"><span style="text-decoration:none;">2016-03-28<br/><span style="font-size:10px;">11:59 PM EDT<br/></span></span></td><td><span class="assignment_label">assignment</span></td><td><ul><li><b><a href="s.html#assignment4">assignment #4</a> due</b></li></ul></td></tr><tr class="lecture "><td>2016-03-29</td><td><span class="lecture_label">lecture:</span><br/>complexity</td><td><ul><li><a href="s.html?#4.4">lecture notes</a></li><li>applications of intractability<ul><li>RSA and Rabin encryption</li><li>Diffie-Hellman protocol</li><li>more random number generators</li></ul></li></ul></td></tr><tr class="quiz "><td><span style="text-decoration:underline;">2016-03-30</span><br/><span style="font-size:10px;">Wednesday<br/>sections</span></td><td><span class="exam">quiz</span></td><td><ul></ul></td></tr><tr class="lecture "><td>2016-03-31</td><td><span class="lecture_label">lecture:</span><br/>algebraic<br/>structures</td><td><ul><li><a href="s.html?#5">lecture notes</a></li><li>algebra of permutations<ul><li>swap &amp; adjacent swap</li><li>shift/cyclic</li><li>multiplication-induced</li><li>decomposition into swaps</li></ul></li><li>examples of isomorphisms</li></ul></td></tr><tr class="lecture "><td>2016-04-05</td><td><span class="lecture_label">lecture:</span><br/>algebraic<br/>structures</td><td><ul><li><a href="s.html?#6677b4ba24e041919b9a312bad737a87">lecture notes</a></li><li>more isomorphisms and examples</li><li>homomorphic encryption</li></ul></td></tr><tr class="lecture "><td>2016-04-07</td><td><span class="lecture_label">lecture:</span><br/>algebraic<br/>structures</td><td><ul><li><a href="s.html?#c8b18555cc484b6d956eca4589968ee1">lecture notes</a></li><li>compression as an isomorphism</li><li>generators and closures</li><li>linear congruence theorem (LCT)</li></ul></td></tr><tr class="assignmentdate "><td style="color:#AAAAAA; font-style:italic;"><span style="text-decoration:none;">2016-04-11<br/><span style="font-size:10px;">11:59 PM EDT<br/></span></span></td><td><span class="assignment_label">assignment</span></td><td><ul><li><b><a href="s.html#assignment5">assignment #5</a> due</b></li></ul></td></tr><tr class="lecture "><td>2016-04-12</td><td><span class="lecture_label">lecture:</span><br/>algebraic<br/>structures</td><td><ul><li><a href="s.html?#5.6">lecture notes</a></li><li>more on the LCT</li><li>CRT as an isomorphism</li><li>generalized CRT</li></ul></td></tr><tr class="lecture "><td>2016-04-14</td><td><span class="lecture_label">lecture:</span><br/>algebraic<br/>structures</td><td><ul><li><a href="s.html?#9713fd6d470a483cae1159e87897512b">lecture notes</a></li><li>more on the CRT isomorphism</li><li>generalized CRT practice</li><li>applications of the LCT<ul><li>unreliability and errors</li></ul></li></ul></td></tr><tr class="lecture "><td>2016-04-19</td><td><span class="lecture_label">lecture:</span><br/>algebraic<br/>structures</td><td><ul><li><a href="s.html?#9af23aa8e9bb46c0a8ade981711bf444">lecture notes</a></li><li>algebraic properties<ul><li>monoids</li><li>groups</li></ul></li><li>subgroups</li><li>direct products of groups</li></ul></td></tr><tr class="lecture "><td>2016-04-21</td><td><span class="lecture_label">lecture:</span><br/>algebraic<br/>structures</td><td><ul><li>polynomials in &#8484;/<i>m</i>&#8484;</li><li>representing groups as functions</li><li>Shor's algorithm</li></ul></td></tr><tr class="review "><td>2016-04-26</td><td><span class="lecture_label">lecture:</span><br/>review</td><td><ul><li><a href="s.html?#R.2">lecture notes</a></li></ul></td></tr><tr class="assignmentdate "><td style="color:#AAAAAA; font-style:italic;"><span style="text-decoration:none;">2016-04-27<br/><span style="font-size:10px;">11:59 PM EDT<br/></span></span></td><td><span class="assignment_label">assignment</span></td><td><ul><li><b><a href="s.html#assignment6">assignment #6</a> due</b></li></ul></td></tr><tr class="review "><td>2016-04-28</td><td><span class="lecture_label">lecture:</span><br/>review</td><td><ul></ul></td></tr><tr class="final "><td><span style="text-decoration:underline;">2016-05-03</span><br/><span style="font-size:10px;">Tuesday<br/>9:00-11:00 AM<br/><a href="http://www.bu.edu/classrooms/classroom/epc-205/">EPC 205</a></span></td><td><span class="exam">final<br/>exam</span></td><td><ul></ul></td></tr>  </table>
+
+ </div>
+ </body>
+</html>

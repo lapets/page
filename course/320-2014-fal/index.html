@@ -1,0 +1,139 @@
+
+<html>
+ <head>
+ <title>BU CAS CS 320 Fall 2014</title>
+ <style>
+  body { font-family: Verdana,Arial,Sans-serif; font-size:12px; }
+  a { text-decoration:none; color:#AC701E; }
+  a:hover { text-decoration:underline; color:firebrick; }
+  #container { margin: 8px; }
+  #info { margin: 8px; float:left; display:inline-block; }
+  #info .lbl { font-weight:bold; color:#555555; }
+  #info .sect { color:#888888; }
+  #schedule {
+    /* max-width:400px; */
+    float:left; display:inline-block;
+    margin-top:20px; margin-left:10px; margin-bottom:15px; 
+    border-collapse:collapse; 
+    font-family: Verdana,Arial,Sans-serif; font-size:12px;
+    }
+  #schedule td { border: 1px solid #CCCCCC; padding:6px; }
+  #schedule .lecture { }
+  #schedule .nolecture { color:#AAAAAA; font-style:italic; }
+  #schedule .assignmentdate { }
+  #schedule .quiz { color:firebrick; font-weight:bold; }
+  #schedule .midterm { color:firebrick; font-weight:bold; }
+  #schedule .final { color:firebrick; font-weight:bold; }
+  #schedule .review { font-weight:bold; }
+  #schedule .upcoming { background-color:#F9EFE1; }
+  #schedule .lecture_label { color:#AAAAAA; font-weight:normal; font-style:normal; }
+  #schedule .assignment_label { color:#AAAAAA; font-weight:normal; font-style:normal; }
+  ul { padding-top:0px; padding-bottom:0px; padding-left:0px; padding-right:25px; margin:0px;  }
+  li { 
+    list_style_type:none; list-style-image:url("data:image/gif;base64,R0lGODlhBwAHAIABAK+vr////yH5BAEAAAEALAAAAAAHAAcAAAIIjI+pwA0KYwEAOw=="); padding:0px;
+    min-width:200px; position:relative; left:15px; text-align:left; line-height:140%;
+    }
+  #info_items li { margin-bottom:4px; }
+  #info_items li ul { margin-top:4px; }
+  #info_items li ul li { margin-bottom:4px; }
+ </style>
+ <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90403446-1"></script>
+ <script>
+   window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-90403446-1');
+ </script>
+ </head>
+ <body>
+ <div id="container">
+
+  <div id="info">
+   <br/><b>BU CAS Computer Science 320</b>
+   <br/><b>Concepts of Programming Languages</b>
+   <br/>
+   <br/>
+   <br/>
+   <ul class="info_items">
+    <li><span class="sect">lectures:</span>
+     <br/>&nbsp;&nbsp; Tue. & Thu., 12:30 - 2 PM in <a href="http://www.bu.edu/classrooms/classroom/cas-B12/">CAS B12</a>
+     <br/>&nbsp;&nbsp; <span class="lbl">lecturer:</span> <a href="http://cs-people.bu.edu/lapets">Andrei Lapets</a> (<a href="mailto:lapets@bu.edu">lapets@bu.edu</a>, MCS 178)
+     <br/>&nbsp;&nbsp; <span class="lbl">OH:</span> Tue. 5 - 6:30 PM; Thu. 2 - 3:30 PM (<a href="http://www.bu.edu/cs/resources/laboratories/undergraduate-lab/">CS lab</a>)
+     <br/>
+     <br/>
+    </li>
+    <li><span class="sect">sections:</span>
+     <br/>&nbsp;&nbsp; Wed., 10 AM - 11 AM in <a href="http://www.bu.edu/classrooms/classroom/kcb-103/">KCB 103</a>
+     <br/>&nbsp;&nbsp; Wed., 11 AM - 12 PM in <a href="http://www.bu.edu/classrooms/classroom/kcb-103/">KCB 103</a>
+     <br/>&nbsp;&nbsp; Wed., 12 PM - 1 PM in <a href="http://www.bu.edu/classrooms/classroom/mcs-B23/">MCS B23</a>
+     <br/>&nbsp;&nbsp; Wed., 3 PM - 4 PM in <a href="http://www.bu.edu/classrooms/classroom/com-215/">COM 215</a>
+     <br/>&nbsp;&nbsp; <span class="lbl">teaching fellow:</span> <a href="https://sites.google.com/site/alex2ren/">Zhiqiang Ren</a> (<a href="http://teaching-space.readthedocs.org/en/latest/cs320_concept_programming_language_2014_fall/content.html">section notes</a>)
+     <br/>&nbsp;&nbsp; <span class="lbl">OH:</span> Wed. 4 - 5:30 PM; Thu. 4:30 - 6 PM (<a href="http://www.bu.edu/cs/resources/laboratories/undergraduate-lab/">CS lab</a>)
+     <br/>
+     <br/>&nbsp;&nbsp; <span class="lbl">course assistant:</span> <a href="mailto:edunton@bu.edu">Eric Dunton</a>
+     <br/>&nbsp;&nbsp; <span class="lbl">OH:</span> Thu. 5 - 7 PM (<a href="http://www.bu.edu/cs/resources/laboratories/undergraduate-lab/">CS lab</a>)
+     <br/>
+     <br/>
+    </li>
+    <li><span class="sect">for questions and discussion:</span>
+     <br/>&nbsp;&nbsp; <a href="mailto:cascs320a1-l@bu.edu">cascs320a1-l@bu.edu</a> (course mailing list)
+     <br/>&nbsp;&nbsp; <a href="https://piazza.com/bu/fall2014/cs320">Q&amp;A page</a> on Piazza
+    </li>
+   </ul>
+   <br/>
+   <ul class="info_items">
+    <li><span class="sect">homework assignment policies:</span>
+     <br/>&nbsp;&nbsp; <span class="lbl">submission:</span> by 11:59 PM on due date (<a href="s.html#A">gsubmit</a>)
+     <br/>&nbsp;&nbsp; <span class="lbl">collaboration:</span> discussion only; list all collaborators
+     <br/>&nbsp;&nbsp; <span class="lbl">late policy</span>: -10 points per day, 4 days maximum
+    </li>
+   </ul>
+   <br/>
+   <ul class="info_items">
+    <li><span class="sect">course grade:</span>
+     <br/>&nbsp;&nbsp; 50% <i>homework</i> + 50% max{<i>end</i>, avg{<i>mid</i>, <i>end</i>}}</li>
+    </li>
+   </ul>
+   <br/>
+   <ul class="info_items">
+    <li><span class="sect">course materials:</span>
+     <!--<br/>&nbsp;&nbsp; to be posted-->
+     <br/>&nbsp;&nbsp; <a href="s.html">lecture notes</a> (w/ assignments &amp; review problems)
+     <br/>&nbsp;&nbsp; <b><a href="s.html#assignment1">assignment #1</a></b>
+     <br/>&nbsp;&nbsp; <b><a href="s.html#assignment2">assignment #2</a></b>
+     <br/>&nbsp;&nbsp; <b><a href="s.html#assignment3">assignment #3</a></b>
+     <br/>&nbsp;&nbsp; <b><a href="s.html#M.1">midterm</a></b>
+     <br/>&nbsp;&nbsp; <b><a href="s.html#assignment4">assignment #4</a></b>
+     <br/>&nbsp;&nbsp; <b><a href="s.html#assignment5">assignment #5</a></b>
+     <br/>&nbsp;&nbsp; <b><a href="s.html#F">take-home project</a></b>
+    </li>
+    </li>
+   </ul>
+   <br/>
+   <ul class="info_items">
+    <li><span class="sect">software used in the course:</span>
+     <br/>&nbsp;&nbsp; <a href="https://www.python.org/downloads/">Python 3.3</a>+
+     <br/>&nbsp;&nbsp; <a href="http://www.haskell.org/platform/">Haskell Platform</a>
+    </li>
+   </ul>
+   <br/>
+   <ul class="info_items">
+    <li><span class="sect">other reading materials (not required):</span>
+     <br/>
+     <br/>&nbsp;&nbsp; <b><a href="http://www.cs.princeton.edu/~appel/modern/">Modern Compiler Implementation.</a></b>
+     <br/>&nbsp;&nbsp;&nbsp;&nbsp; Andew W. Appel.
+     <br/>
+     <br/>&nbsp;&nbsp; <b><a href="http://www.haskellcraft.com/">Haskell: the Craft of Functional Programming.</a></b>
+     <br/>&nbsp;&nbsp;&nbsp;&nbsp; Simon Thompson.
+    </li>
+   </ul>
+   <br/>
+   <ul class="info_items">
+    <li><a href="http://www.bu.edu/academics/policies/academic-conduct-code/">academic conduct code</a></li>
+   </ul>
+   <br/>
+  </div>
+
+  <table id="schedule">
+   <tr class="lecture "><td>2014-09-02</td><td><span class="lecture_label">lecture:</span><br/>languages</td><td><ul><li><a href="s.html#1">lecture notes</a></li><li>overview, motivation, &amp; background</li><li>defining programming languages<ul><li>sets of character strings</li><li>regular expressions</li><li>sets of token sequences</li><li>syntax and BNF notation</li></ul></li></ul></td></tr><tr class="lecture "><td>2014-09-04</td><td><span class="lecture_label">lecture:</span><br/>languages</td><td><ul><li><a href="s.html#8c1203dd65bb49868abc64ad5353725f">lecture notes</a></li><li>examples with regular expressions</li><li>more on syntax and BNF notation</li><li>concrete and abstract syntaxes</li><li>abstract syntax trees</li><li>lexing and parsing</li></ul></td></tr><tr class="lecture "><td>2014-09-09</td><td><span class="lecture_label">lecture:</span><br/>parsing</td><td><ul><li><a href="s.html#95cb72f5b4d24ddba2c8081c7b42618a">lecture notes</a></li><li>more on parsing algorithms</li><li>recursive descent parsers<ul><li>predictive</li><li>backtracking</li></ul></li></ul></td></tr><tr class="lecture "><td>2014-09-11</td><td><span class="lecture_label">lecture:</span><br/>interpretation<br/>&amp; compilation</td><td><ul><li><a href="s.html#3.3">lecture notes</a></li><li>more on parser implementation<ul><li>left factoring</li><li>elimination of left recursion</li></ul></li><li>operational semantics</li><li>inference rules</li><li>evaluation of expressions</li></ul></td></tr><tr class="assignmentdate "><td style="color:#AAAAAA; font-style:italic;">2014-09-15<br/><span style="font-size:10px;">11:59 PM EDT<br/></span></td><td><span class="assignment_label">assignment</span></td><td><ul><li><b><a href="s.html#assignment1">assignment #1</a> due</b></li></ul></td></tr><tr class="lecture "><td>2014-09-16</td><td><span class="lecture_label">lecture:</span><br/>interpretation<br/>&amp; compilation</td><td><ul><li><a href="s.html#60b6dc0bb16b498594677f3bb08ccc82">lecture notes</a></li><li>implementing interpreters<ul><li>evaluation of expressions</li><li>execution of statements<ul><li>control flow</li><li>environments/contexts</li><li>side effects</li></ul></li></ul></li></ul></td></tr><tr class="lecture "><td>2014-09-18</td><td><span class="lecture_label">lecture:</span><br/>interpretation<br/>&amp; compilation</td><td><ul><li><a href="s.html#cbfa02d3624d42b08704d6a4c4fb9e03">lecture notes</a></li><li>execution of statements<ul><li>environments/contexts</li><li>with variable assignment</li><li>with looping constructs</li></ul></li></ul></td></tr><tr class="lecture "><td>2014-09-23</td><td><span class="lecture_label">lecture:</span><br/>interpretation<br/>&amp; compilation</td><td><ul><li><a href="s.html#5">lecture notes</a></li><li>compilation<ul><li>history and background</li><li>formal definition</li><li>interpretation vs. compilation</li></ul></li><li>example of a machine language</li></ul></td></tr><tr class="lecture "><td>2014-09-25</td><td><span class="lecture_label">lecture:</span><br/>interpretation<br/>&amp; compilation</td><td><ul><li><a href="s.html#3246043602d540668dc63d5b6277a47f">lecture notes</a></li><li>machine language programs</li><li>compiling expressions</li></ul></td></tr><tr class="assignmentdate "><td style="color:#AAAAAA; font-style:italic;">2014-09-29<br/><span style="font-size:10px;">11:59 PM EDT<br/></span></td><td><span class="assignment_label">assignment</span></td><td><ul><li><b><a href="s.html#assignment2">assignment #2</a> due</b></li><li>first day late penalty waived</li><li>late penalty starts at 20 points</li></ul></td></tr><tr class="lecture "><td>2014-09-30</td><td><span class="lecture_label">lecture:</span><br/>interpretation<br/>&amp; compilation</td><td><ul><li><a href="s.html#5.5">lecture notes</a></li><li>compiling expressions<ul><li>with variables</li></ul></li><li>compiling statements<ul><li>with assignment</li><li>with procedures</li></ul></li></ul></td></tr><tr class="lecture "><td>2014-10-02</td><td><span class="lecture_label">lecture:</span><br/>interpretation<br/>&amp; compilation</td><td><ul><li><a href="s.html#5.7">lecture notes</a></li><li>register allocation<ul><li>interference graph</li><li>graph coloring</li><li>single static assignment</li></ul></li><li>compiler optimizations<ul><li>loop unrolling</li><li>constant folding</li></ul></li></ul></td></tr><tr class="lecture "><td>2014-10-07</td><td><span class="lecture_label">lecture:</span><br/>interpretation<br/>&amp; compilation</td><td><ul><li>compiling comprehensions</li><li>compiling procedures<ul><li>with procedure parameters</li><li>with local variables</li><li>with data structures</li></ul></li><li>memory management<ul><li>stack and heap</li><li>garbage collection</li></ul></li></ul></td></tr><tr class="lecture "><td>2014-10-09</td><td><span class="lecture_label">lecture:</span><br/>interpretation<br/>&amp; compilation</td><td><ul><li><a href="s.html#5.8">lecture notes</a></li><li>implementation correctness<ul><li>test cases</li><li>bounded exhaustive testing</li><li>formal verification</li></ul></li><li>static analysis<ul><li>type checking</li><li>error reporting</li></ul></li></ul></td></tr><tr class="nolecture "><td><span style="text-decoration:underline;">2014-10-14</span><br/><span style="font-size:10px;">Monday sched.<br/></span></td><td><span class="assignment_label"></span></td><td><ul></ul></td></tr><tr class="lecture "><td>2014-10-16</td><td><span class="lecture_label">lecture:</span><br/>static<br/>analysis</td><td><ul><li><a href="s.html#f7d615702fe211e38cf6ce3f5508acd9">lecture notes</a></li><li>type checking<ul><li>with variables</li><li>with functions</li></ul></li></ul></td></tr><tr class="assignmentdate "><td style="color:#AAAAAA; font-style:italic;">2014-10-20<br/><span style="font-size:10px;">11:59 PM EDT<br/></span></td><td><span class="assignment_label">assignment</span></td><td><ul><li><b><a href="s.html#assignment3">assignment #3</a> due</b></li></ul></td></tr><tr class="lecture "><td>2014-10-21</td><td><span class="lecture_label">lecture:</span><br/>static<br/>analysis</td><td><ul><li><a href="s.html#f7d60f9e2fe211e38cf6ce3f5508acd9">lecture notes</a></li><li>more on type checking</li><li>type checking with size annotations</li><li>review</li></ul></td></tr><tr class="lecture "><td>2014-10-23</td><td><span class="lecture_label">lecture:</span><br/>static<br/>analysis</td><td><ul><li><a href="s.html#f7d61e6c2fe211e38cf6ce3f5508acd9">lecture notes</a></li><li>type checking with size annotations</li><li>abstract interpretation</li><li>programming language paradigms</li></ul></td></tr><tr class="lecture "><td>2014-10-28</td><td><span class="lecture_label">lecture:</span><br/>static<br/>analysis</td><td><ul><li><a href="s.html#7">lecture notes</a></li><li>declarative languages</li><li>substitution &amp; unification</li></ul></td></tr><tr class="midterm "><td><span style="text-decoration:underline;">2014-10-29</span><br/><span style="font-size:10px;">11:59 PM EDT</td><td><span class="midterm">take-home<br/>midterm due</span></td><td><ul><li><b><a href="s.html#M.1">midterm posted</a></b></li><li>now due 11:59 PM, 2014-10-30</li><li>as before, no late submissions</li></ul></td></tr><tr class="lecture "><td>2014-10-30</td><td><span class="lecture_label">lecture:</span><br/>declarative<br/>programming</td><td><ul><li><a href="s.html#788d70ecb3ab4acaa98a9355657fca3d">lecture notes</a></li><li>more on substitution &amp; unification</li><li>Haskell syntax &amp; semantics</li><li>declarative programming</li><li>algebraic data types (ADTs)</li></ul></td></tr><tr class="lecture "><td>2014-11-04</td><td><span class="lecture_label">lecture:</span><br/>declarative<br/>programming</td><td><ul><li><a href="s.html#7.4">lecture notes</a></li><li>more Haskell examples</li><li>semantics of a declarative language</li></ul></td></tr><tr class="lecture "><td>2014-11-06</td><td><span class="lecture_label">lecture:</span><br/>declarative<br/>programming</td><td><ul><li><a href="s.html#7.6">lecture notes</a></li><li>Haskell type system</li><li>type synonyms</li><li>infinitely large values</li></ul></td></tr><tr class="lecture "><td>2014-11-11</td><td><span class="lecture_label">lecture:</span><br/>declarative<br/>programming</td><td><ul><li><a href="s.html#7.8">lecture notes</a></li><li>logic programming</li><li>higher-order functions</li><li>function types</li></ul></td></tr><tr class="assignmentdate "><td style="color:#AAAAAA; font-style:italic;">2014-11-12<br/><span style="font-size:10px;">11:59 PM EDT<br/></span></td><td><span class="assignment_label">assignment</span></td><td><ul><li><b><a href="s.html#assignment4">assignment #4</a> due</b></li></ul></td></tr><tr class="lecture "><td>2014-11-13</td><td><span class="lecture_label">lecture:</span><br/>functional<br/>programming</td><td><ul><li><a href="s.html#7.10">lecture notes</a></li><li>data encapsulation using ADTs</li><li>built-in Haskell type classes</li><li>defining and overloading operators</li><li>embedded languages</li></ul></td></tr><tr class="lecture "><td>2014-11-18</td><td><span class="lecture_label">lecture:</span><br/>functional<br/>programming</td><td><ul><li><a href="s.html#7.12">lecture notes</a></li><li>more Haskell features and examples</li><li>list comprehensions<ul><li>with pattern matching</li></ul></li><li>state space search</li></ul></td></tr><tr class="lecture "><td>2014-11-20</td><td><span class="lecture_label">lecture:</span><br/>functional<br/>programming</td><td><ul><li><a href="s.html#7.14">lecture notes</a></li><li>state space search<ul><li>representing state spaces</li><li>comparing states</li><li>optimizing choice of state</li></ul></li></ul></td></tr><tr class="lecture "><td>2014-11-25</td><td><span class="lecture_label">lecture:</span><br/>algebra of<br/>programming</td><td><ul><li><a href="s.html#7.16">lecture notes</a></li><li>folds and unfolds</li><li>map and filter</li><li>&lambda; abstractions</li></ul></td></tr><tr class="assignmentdate "><td style="color:#AAAAAA; font-style:italic;">2014-11-26<br/><span style="font-size:10px;">11:59 PM EDT<br/></span></td><td><span class="assignment_label">assignment</span></td><td><ul><li><b><a href="s.html#assignment5">assignment #5</a> due</b></li></ul></td></tr><tr class="nolecture "><td><span style="text-decoration:underline;">2014-11-27</span></td><td><span class="assignment_label">recess</span></td><td><ul></ul></td></tr><tr class="lecture "><td>2014-12-02</td><td><span class="lecture_label">lecture:</span><br/>algebra of<br/>programming</td><td><ul><li><a href="s.html#7.15">lecture notes</a></li><li>polymorphism<ul><li>ad-hoc (overloading)</li><li>parametric</li></ul></li><li>type inference &amp; unification</li></ul></td></tr><tr class="review "><td>2014-12-04</td><td><span class="lecture_label">lecture:</span><br/>review</td><td><ul><li><a href="s.html#R.1">lecture notes</a></li></ul></td></tr><tr class="final "><td><span style="text-decoration:underline;">2014-12-09</span><br/><span style="font-size:10px;">Tuesday<br/>12:35-1:55 PM<!--<br/><a href="http://www.bu.edu/maps/?id=??">???</a> ???--></span></td><td><span class="midterm">in-class<br/>exam</span></td><td><ul></ul></td></tr><tr class="final "><td><span style="text-decoration:underline;">2014-12-17</span><br/><span style="font-size:10px;">11:59 PM EDT</td><td><span class="midterm">take-home<br/>project due</span></td><td><ul><li><b><a href="s.html#F">project posted</a></b></li></ul></td></tr>  </table>
+
+ </div>
+ </body>
+</html>

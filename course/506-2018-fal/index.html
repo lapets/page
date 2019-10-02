@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="all" name="robots" />
+    <title>BU CAS CS 506 Fall 2018</title>
+    <style>
+    body { font-family:Verdana,Arial,Sans-serif; font-size:12px; }
+    h4 { display:block; margin:15px 0px 0px 0px; }
+    h5 { display:block; margin:0px 0px 30px 0px; font-size:12px; }
+    a { text-decoration:none; color:#AC701E; }
+    a:hover { text-decoration:underline; color:firebrick; }
+    #container { margin:8px; }
+    #container #info { float:left; display:inline-block; margin:8px 24px 8px 8px; }
+
+    #container #info > ul { margin-left:10px; padding:0px; }
+    #container #info > ul > li { list-style-type:none; margin-bottom:15px; padding:0px; text-indent:-10px; line-height:140%; }
+    #container #info > ul > li:before { content:"--\00a0"; color:#BBBBBB; }
+    #container #info > ul > li > span { color:#888888; }
+    #container #info > ul > li > ul { padding:0px 0px 0px 12px; }
+    #container #info > ul > li > ul > li { list-style-type:none; margin:0px 0px 0px 5px; text-indent:0px; }
+    #container #info > ul > li > ul > li > span { font-weight:bold; color:#555555; }
+    #container #info > ul > li > ol { padding:0px 0px 0px 12px; }
+    #container #info > ul > li > ol > li { list-style-type:none; margin:16px 0px 0px 5px; text-indent:0px; }
+    #container #info > ul > li > ol > li span { font-weight:bold; color:#555555; }
+
+    #container table ul { margin:0px 5px -1px 10px; padding:0px; }
+    #container table ul li { list-style-type:none; padding:0px; text-indent:-10px; line-height:140%; }
+    #container table ul li:before { content:"-\00a0"; color:#BBBBBB; }
+    #container table ul li ul { margin-left:-2px; }
+    #container table ul li ul li { list-style-type:none; margin:0px 0px 0px 5px; text-indent:0px; }
+
+    #container table { float:left; display:inline-block; margin:20px 0px 15px 10px; border-collapse:collapse; }
+    #container table tr td { border:1px solid #CCCCCC; padding:6px; }
+    #container table tr td .date-with-coordinates { text-decoration:underline; }
+    #container table tr td .coordinates { font-size:10px; }
+    #container table tr td:first-of-type > div > span { display:block; }
+    #container table .lecture td .type { color:#AAAAAA; }
+    #container table .recess { color:#AAAAAA; font-style:italic; }
+    #container table .recess td:first-child { color:#AAAAAA; font-weight:normal; font-style:italic; }
+    #container table .canceled { color:#AAAAAA; font-style:italic; }
+    #container table .canceled td:first-child { color:#AAAAAA; font-weight:normal; font-style:italic; }
+    #container table .office-hours { color:#AAAAAA; font-style:italic; }
+    #container table .office-hours td:first-child { color:#AAAAAA; font-weight:normal; font-style:italic; }
+    #container table .schedule-substitution { color:#AAAAAA; font-style:italic; }
+    #container table .schedule-substitution td:first-child { color:#AAAAAA; font-weight:normal; font-style:italic; }
+    #container table .assignment { }
+    #container table .assignment td .type { color:#AAAAAA; }
+    #container table .assignment td:first-child { color:#AAAAAA; font-weight:normal; font-style:italic; }
+    #container table .project { }
+    #container table .project td .type { color:#AAAAAA; }
+    #container table .project td:first-child { color:#AAAAAA; font-weight:normal; font-style:italic; }
+    #container table .quiz { color:firebrick; font-weight:bold; }
+    #container table .midterm { color:firebrick; font-weight:bold; }
+    #container table .final { color:firebrick; font-weight:bold; }
+    #container table .exam { color:firebrick; font-weight:bold; }
+    #container table .poster { color:firebrick; font-weight:bold; }
+    #container table .session { color:firebrick; font-weight:bold; }
+    #container table .review { font-weight:bold; }
+    #container table .upcoming { background-color:#F9EFE1; }
+    @media all and (max-width:500px) {
+      body { margin:0px; padding:0px; font-size:8px; }
+      h5 { font-size:8px; }
+      #container { margin:0px; }
+      #container #info { float:left; display:inline-block; margin:0px 24px 8px 14px; }
+      #container table { }
+      #container table tr td:first-of-type { font-size:8px; }
+      #container table tr td:nth-of-type(2) { font-size:6px; }
+      #container table tr td .coordinates { font-size:6px; }
+    }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90403446-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-90403446-1');
+    </script>
+    <script>
+        var course = {
+          'schedule': [
+            { 'date': '2018-09-04',
+              'type': 'lecture',
+              'topics': 'introduction',
+              'details': [
+                '<b><a href="https://github.com/lapets/course-data-science/blob/master/lecture-2018-09-04.ipynb">lecture notes</a></b>',
+                'introduction, background, and goals',
+                'organization, tools, and workflows',
+                'review of Python features'
+              ]
+            }
+            ,
+            { 'date': '2018-09-06',
+              'type': 'lecture',
+              'topics': 'linear<br/>algebra',
+              'details': [
+                '<b><a href="https://github.com/lapets/course-data-science/blob/master/lecture-2018-09-06.ipynb">lecture notes</a></b>',
+                'vector spaces as feature spaces',
+                'similiarity/dissimilarity using metrics',
+                'sets as bit vectors',
+                'examples: similarity for time series'
+              ]
+            }
+            ,
+            { 'date': '2018-09-11',
+              'type': 'lecture',
+              'topics': 'analytics<br/>software',
+              'details': [
+                '<b><a href="https://github.com/lapets/course-data-science/blob/master/lecture-2018-09-11.ipynb">lecture notes</a></b>',
+                'data analysis framework paradigm',
+                {'data frames in pandas': [
+                  'working with rows and columns',
+                  'built-in and other methods',
+                  'creating basic plots'
+                ]}
+              ]
+            }
+            ,
+            { 'date': '2018-09-13',
+              'type': 'lecture',
+              'topics': 'analytics<br/>software',
+              'details': [
+                '<b><a href="https://github.com/lapets/course-data-science/blob/master/lecture-2018-09-13.ipynb">lecture notes</a></b>',
+                {'more on data frames in pandas': [
+                  'filtering rows',
+                  'defining new columns/features',
+                  'indices and stacking'
+                ]},
+                'stock data comparison example'
+              ]
+            }
+            ,
+            { 'date': '2018-09-18',
+              'type': 'lecture',
+              'topics': 'concepts &amp;<br/>software',
+              'details': [
+                '<b><a href="https://github.com/lapets/course-data-science/blob/master/lecture-2018-09-18.ipynb">lecture notes</a></b>',
+                {'more on data frames in pandas': [
+                  'join/merge',
+                  'aggregation and sorting'
+                ]},
+                'feature extraction and scikit-learn'
+              ]
+            }
+            ,
+            { 'date': '2018-09-20',
+              'type': 'lecture',
+              'topics': 'probability &amp;<br/>statistics',
+              'details': [
+                '<b><a href="https://github.com/lapets/course-data-science/blob/master/lecture-2018-09-20.ipynb">lecture notes</a></b>',
+                'definition of probability measures',
+                'independence and conditioning',
+                'random variables'
+              ]
+            }
+            ,
+            { 'date': '2018-09-21',
+              'time': '11:59 PM EDT',
+              'type': 'assignment',
+              'details': [
+                '<b><a href="https://github.com/lapets/course-data-science/blob/master/assignment-2018-09-21.ipynb">assignment #1</a> due</b>'
+              ]
+            }
+            ,
+            { 'date': '2018-09-25',
+              'type': 'lecture',
+              'topics': 'project<br/>descriptions',
+              'details': [
+                '<a href="https://docs.google.com/document/d/1Ee6frmXYMPQW2UpXFUohPE0gXstlKognG_dS4khuB2w">project descriptions document</a>'
+              ]
+            }
+            ,
+            { 'date': '2018-09-27',
+              'type': 'lecture',
+              'topics': 'project<br/>descriptions',
+              'details': [
+                '<a href="https://docs.google.com/document/d/1Ee6frmXYMPQW2UpXFUohPE0gXstlKognG_dS4khuB2w">project descriptions document</a>'
+              ]
+            }
+            ,
+            { 'date': '2018-10-02',
+              'type': 'lecture',
+              'topics': 'clustering',
+              'details': [
+                '<b><a href="https://github.com/lapets/course-data-science/blob/master/lecture-2018-10-02.ipynb">lecture notes</a></b>',
+                'clustering overview',
+                'feature rescaling',
+                'low-dimensional embeddings',
+                'examples'
+              ]
+            }
+            ,
+            { 'date': '2018-10-04',
+              'type': 'lecture',
+              'topics': 'clustering',
+              'details': [
+                '<b><a href="https://github.com/lapets/course-data-science/blob/master/lecture-2018-10-04.ipynb">lecture notes</a></b>'
+              ]
+            }
+    		,
+        	{ 'date': '2018-10-09',
+    		  'comment': 'Monday sched.',
+              'type': 'schedule-substitution',
+              'details': []
+    		}
+            ,
+            { 'date': '2018-10-11',
+              'type': 'lecture',
+              'topics': 'clustering',
+              'details': [
+                '<b><a href="https://github.com/lapets/course-data-science/blob/master/lecture-2018-10-11.ipynb">lecture notes</a></b>',
+                'background about k-means',
+                'visualizing clusters',
+                'hierarchical clustering'
+              ]
+            }
+            ,
+            { 'date': '2018-10-16',
+              'type': 'canceled',
+              'details': []
+            }
+            ,
+            { 'date': '2018-10-18',
+              'type': 'lecture',
+              'topics': 'classification',
+              'details': [
+                '<b><a href="https://github.com/lapets/course-data-science/blob/master/lecture-2018-10-18.ipynb">lecture notes</a></b>',
+                'classification',
+                'decision trees',
+                'k-nearest neighbors'
+              ]
+            }
+            ,
+            { 'date': '2018-10-19',
+              'time': '11:59 PM EDT',
+              'type': 'project',
+              'details': [
+                'project proposal due (by email)'
+              ]
+            }
+            ,
+            { 'date': '2018-10-22',
+              'time': '11:59 PM EDT',
+              'type': 'assignment',
+              'details': [
+                '<b><a href="https://github.com/lapets/course-data-science/blob/master/assignment-2018-10-22.ipynb">assignment #2</a> due</b>',
+                'all late penalties waived'
+              ]
+            }
+            ,
+            { 'date': '2018-10-23',
+              'type': 'lecture',
+              'topics': 'classification',
+              'details': [
+                '<b><a href="https://github.com/lapets/course-data-science/blob/master/lecture-2018-10-23.ipynb">lecture notes</a></b>',
+                'clustering vs. classification',
+                'support vector machines',
+                'kernel functions'
+              ]
+            }
+            ,
+            { 'date': '2018-10-25',
+              'type': 'lecture',
+              'topics': 'regression',
+              'details': [
+                '<b><a href="https://github.com/lapets/course-data-science/blob/master/lecture-2018-10-25.ipynb">lecture notes</a></b>',
+                'overview of regression techniques',
+                'linear regression',
+                'least-squares (for any model)',
+                'multiple independent variables'
+              ]
+            }
+            ,
+            { 'date': '2018-10-30',
+              'type': 'lecture',
+              'topics': 'regression',
+              'details': [
+                '<b><a href="https://github.com/lapets/course-data-science/blob/master/lecture-2018-10-30.ipynb">lecture notes</a></b>',
+                'RMSE and <i>R</i><sup>2</sup>',
+                'overfitting and regularization'
+              ]
+            }
+            ,
+            { 'date': '2018-11-01',
+              'type': 'lecture',
+              'topics': 'regression',
+              'details': [
+                '<b><a href="https://github.com/lapets/course-data-science/blob/master/lecture-2018-11-01.ipynb">lecture notes</a></b>',
+                'logistic regression',
+                'logit function and its inverse',
+                'assessing performance'
+              ]
+            }
+            ,
+            { 'date': '2018-11-06',
+              'type': 'lecture',
+              'topics': 'neural<br/>networks',
+              'details': [
+                '<b><a href="https://github.com/lapets/course-data-science/blob/master/lecture-2018-11-06.ipynb">lecture notes</a></b>',
+                'basics of gradient descent',
+                'TensorFlow example'
+              ]
+            }
+            ,
+            { 'date': '2018-11-08',
+              'type': 'canceled',
+              'details': []
+            }
+            ,
+            { 'date': '2018-11-13',
+              'type': 'lecture',
+              'topics': 'network<br/>analysis',
+              'details': [
+                '<b><a href="https://github.com/lapets/course-data-science/blob/master/lecture-2018-11-13.ipynb">lecture notes</a></b>',
+                'graph data structures',
+                'clustering in graphs',
+                'connectedness',
+                'degree distributions',
+                'centrailty'
+              ]
+            }
+            ,
+            { 'date': '2018-11-15',
+              'type': 'lecture',
+              'topics': 'significance &amp;<br/>interpretation',  //interpretation<br/>&amp; validity
+              'details': [
+                'distributions',
+                'permutation test',
+                '<i>p</i>-values'
+              ]
+            }
+            ,
+            { 'date': '2018-11-20',
+              'type': 'lecture',
+              'topics': 'significance &amp;<br/>interpretation',
+              'details': [
+
+              ]
+            }
+            ,
+        	{ 'date': '2018-11-22',
+              'type': 'recess',
+              'details': []
+      	  	}
+            ,
+            { 'date': '2018-11-27',
+              'type': 'lecture',
+              'topics': 'other topics',
+              'details': [
+
+              ]
+            }
+            ,
+            { 'date': '2018-11-29',
+              'type': 'lecture',
+              'topics': 'other topics',
+              'details': [
+
+              ]
+            }
+            ,
+            { 'date': '2018-12-03',
+              'time': '11:59 PM EDT',
+              'type': 'assignment',
+              'details': [
+                '<b><a href="https://github.com/lapets/course-data-science/blob/master/assignment-2018-12-03.ipynb">assignment #3</a> due</b>'
+              ]
+            }
+            ,
+            { 'date': '2018-12-04',
+              'type': 'lecture',
+              'topics': 'other topics',
+              'details': [
+
+              ]
+            }
+            ,
+            { 'date': '2018-12-06',
+              'type': 'lecture',
+              'topics': 'other topics',
+              'details': [
+
+              ]
+            }
+            ,
+            { 'date': '2018-12-11',
+              'day': 'Tuesday',
+              'time': '3:00-5:00 PM',
+              'type': 'poster session',
+              'details': []
+            }
+          ]
+        };
+
+    function render_schedule(course) {
+      var table = document.getElementById("schedule");
+      var alreadyHighlighted = false;
+      for (var i = 0; i < course.schedule.length; i++) {
+        var entry = course.schedule[i];
+
+        var row = table.insertRow(-1);
+        var upcoming = today() <= entry.date && !alreadyHighlighted ? ' upcoming' : '';
+        alreadyHighlighted = alreadyHighlighted || (upcoming.length > 0);
+        row.className = entry.type + upcoming;
+
+        var date = row.insertCell(-1);
+        var coordinates =
+          (entry.day ? ('<span>' + entry.day + '</span>') : '') +
+          (entry.time ? ('<span>' + entry.time + '</span>') : '') +
+          (entry.location ? ('<span>' + entry.location + '</span>') : '') +
+          (entry.comment ? ('<span>' + entry.comment + '</span>') : '');
+        date.innerHTML = 
+          coordinates ?
+              ('<span class="date-with-coordinates">' + entry.date + '</span>' + '<div class="coordinates">' + coordinates + '</div>')
+            : entry.date;
+
+        var type = row.insertCell(-1);
+        type.innerHTML = 
+            '<span class="type">' + entry.type.replace(' ','<br/>').replace('-','<br/>') + 
+            (entry.topics ? (':</span>' + '<br/>' + entry.topics) : '');
+
+        var details = row.insertCell(-1);
+        details.innerHTML = render_details(entry.details);
+      }
+    }
+
+    function render_details(details) {
+      if (details == null) {
+        return "";
+      } else if (typeof details === 'string') {
+        return details;
+      } else if (details.constructor === Array) {
+        var output = '';
+        for (var j = 0; j < details.length; j++)
+          output += '<li>' + render_details(details[j]) + '</li>';
+        return '<ul>' + output + '</ul>';
+      } else {
+        for (var txt in details)
+          return txt + render_details(details[txt]);
+      }
+    }
+
+    function today() {
+      var now = new Date();
+      var dd = now.getDate(), 
+          mm = now.getMonth() + 1,
+          yyyy = now.getFullYear();  
+      dd = (dd < 10 ? '0' : '') + dd;
+      mm = (mm < 10 ? '0' : '') + mm;
+      return yyyy+'-'+mm+'-'+dd;
+    }
+  </script>
+  </head>
+  <body onload="render_schedule(course);">
+    <div id="container">
+      <div id="info">
+        <h4>BU CAS Computer Science 506</h4>
+        <h5>Tools for Data Science</h5>
+        <ul>
+          <li><span>lectures:</span>
+            <ul>
+              <li>Tue. &amp; Thu., 3:30 - 4:45 PM in <a href="http://www.bu.edu/classrooms/classroom/cgs-511/">CGS 511</a></li>
+              <li><span>instructor:</span> <a href="http://cs-people.bu.edu/lapets">Andrei Lapets</a>  (<a href="mailto:lapets@bu.edu">lapets@bu.edu</a>, MCS 174)</li>
+              <li><span>OH:</span> Tue. 5 - 7 PM in the <a href="http://www.bu.edu/cs/resources/laboratories/undergraduate-lab/">CS lab</a></li>
+            </ul>
+          </li>
+          <li><span>sections and other assistance:</span>
+            <ul>
+              <li>Mon., 1:25 - 2:15 PM in <a href="http://www.bu.edu/classrooms/classroom/mcs-B31/">MCS B31</a></li>
+              <li>Wed., 2:30 - 3:20 PM in <a href="http://www.bu.edu/classrooms/classroom/kcb-103/">KCB 103</a></li>
+              <li>Wed., 3:35 - 4:25 PM in <a href="http://www.bu.edu/classrooms/classroom/kcb-103/">KCB 103</a></li>
+              <li><span>teaching fellow:</span> Bassel El Mabsout (<a href="mailto:bmabsout@bu.edu">bmabsout@bu.edu</a>)</li>
+              <li><span>OH:</span> Fri. 2 - 5 PM in the <a href="http://www.bu.edu/cs/resources/laboratories/undergraduate-lab/">CS lab</a></li>
+            </ul>
+          </li>
+          <li><span>questions and discussion:</span>
+            <ul>
+              <li><a href="mailto:cascs506-l@bu.edu">cascs506-l@bu.edu</a> (course mailing list)</li>
+              <li><a href="https://piazza.com/bu/fall2018/cs506">Q&amp;A page</a> on Piazza</li>
+            </ul>
+          </li>
+          <li><span>assignment and project submission policies:</span>
+            <ul>
+              <li><span>submission:</span> by 11:59 PM on due date (via GitHub)</li>
+              <li><span>collaboration:</span> list all collaborators</li>
+              <li><span>late policy</span>: -15 points per day, 3 days maximum</li>
+            </ul>
+          </li>
+          <li><span>course grade:</span>
+            <ul>
+              <li>60% <i>assignments</i> + 40% <i>project</i></li>
+            </ul>
+          </li>
+          <li><span>course materials:</span>
+            <ul>
+              <!--li>to be posted</li-->
+              <li><a href="https://github.com/lapets/course-data-science">lecture notes</a></li>
+              <li><b><a href="https://github.com/lapets/course-data-science/blob/master/assignment-2018-09-21.ipynb">assignment #1</a></b></li>
+              <li><b><a href="https://github.com/lapets/course-data-science/blob/master/assignment-2018-10-22.ipynb">assignment #2</a></b></li>
+              <li><b><a href="https://github.com/lapets/course-data-science/blob/master/assignment-2018-12-03.ipynb">assignment #3</a></b></li>
+            </ul>
+          </li>
+          <li><span>software used in the course:</span>
+            <ul>
+              <li><a href="https://www.python.org/downloads/">Python 3.6</a>+</li>
+            </ul>
+          </li>
+        </ul>
+        <ul>
+          <li><a href="http://www.bu.edu/academics/policies/academic-conduct-code/">academic conduct code</a></li>
+        </ul>
+      </div>
+      <table id="schedule"></table>
+    </div>
+  </body>
+</html>

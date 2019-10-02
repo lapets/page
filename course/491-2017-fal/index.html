@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="all" name="robots" />
+    <title>BU CAS CS 491 L1 Fall 2017</title>
+    <style>
+    body { font-family:Verdana,Arial,Sans-serif; font-size:12px; }
+    h4 { display:block; margin:15px 0px 0px 0px; }
+    h5 { display:block; margin:0px 0px 30px 0px; font-size:12px; }
+    a { text-decoration:none; color:#AC701E; }
+    a:hover { text-decoration:underline; color:firebrick; }
+    #container { margin:8px; }
+    #container #info { float:left; display:inline-block; margin:8px 24px 8px 8px; }
+
+    #container #info > ul { margin-left:10px; padding:0px; }
+    #container #info > ul > li { list-style-type:none; margin-bottom:15px; padding:0px; text-indent:-10px; line-height:140%; }
+    #container #info > ul > li:before { content:"--\00a0"; color:#BBBBBB; }
+    #container #info > ul > li > span { color:#888888; }
+    #container #info > ul > li > ul { padding:0px 0px 0px 12px; }
+    #container #info > ul > li > ul > li { list-style-type:none; margin:0px 0px 0px 5px; text-indent:0px; }
+    #container #info > ul > li > ul > li > span { font-weight:bold; color:#555555; }
+    #container #info > ul > li > ol { padding:0px 0px 0px 12px; }
+    #container #info > ul > li > ol > li { list-style-type:none; margin:16px 0px 0px 5px; text-indent:0px; }
+    #container #info > ul > li > ol > li span { font-weight:bold; color:#555555; }
+
+    #container table ul { margin:0px 5px -1px 10px; padding:0px; }
+    #container table ul li { list-style-type:none; padding:0px; text-indent:-10px; line-height:140%; }
+    #container table ul li:before { content:"-\00a0"; color:#BBBBBB; }
+    #container table ul li ul { margin-left:-2px; }
+    #container table ul li ul li { list-style-type:none; margin:0px 0px 0px 5px; text-indent:0px; }
+
+    #container table { float:left; display:inline-block; margin:20px 0px 15px 10px; border-collapse:collapse; }
+    #container table tr td { border:1px solid #CCCCCC; padding:6px; }
+    #container table tr td .date-with-coordinates { text-decoration:underline; }
+    #container table tr td .coordinates { font-size:10px; }
+    #container table tr td:first-of-type > div > span { display:block; }
+    #container table .lecture td .type { color:#AAAAAA; }
+    #container table .update td .type { color:#AAAAAA; }
+    #container table .recess { color:#AAAAAA; font-style:italic; }
+    #container table .recess td:first-child { color:#AAAAAA; font-weight:normal; font-style:italic; }
+    #container table .canceled { color:#AAAAAA; font-style:italic; }
+    #container table .canceled td:first-child { color:#AAAAAA; font-weight:normal; font-style:italic; }
+    #container table .schedule-substitution { color:#AAAAAA; font-style:italic; }
+    #container table .schedule-substitution td:first-child { color:#AAAAAA; font-weight:normal; font-style:italic; }
+    #container table .assignment { }
+    #container table .assignment td .type { color:#AAAAAA; }
+    #container table .assignment td:first-child { color:#AAAAAA; font-weight:normal; font-style:italic; }
+    #container table .project { }
+    #container table .project td .type { color:#AAAAAA; }
+    #container table .project td:first-child { color:#AAAAAA; font-weight:normal; font-style:italic; }
+    #container table .quiz { color:firebrick; font-weight:bold; }
+    #container table .midterm { color:firebrick; font-weight:bold; }
+    #container table .quiz { color:firebrick; font-weight:bold; }
+    #container table .final { color:firebrick; font-weight:bold; }
+    #container table .exam { color:firebrick; font-weight:bold; }
+    #container table .poster { color:firebrick; font-weight:bold; }
+    #container table .session { color:firebrick; font-weight:bold; }
+    #container table .review { font-weight:bold; }
+    #container table .upcoming { background-color:#F9EFE1; }
+    @media all and (max-width:500px) {
+      body { margin:0px; padding:0px; font-size:8px; }
+      h5 { font-size:8px; }
+      #container { margin:0px; }
+      #container #info { float:left; display:inline-block; margin:0px 24px 8px 14px; }
+      #container table { }
+      #container table tr td:first-of-type { font-size:8px; }
+      #container table tr td:nth-of-type(2) { font-size:6px; }
+      #container table tr td .coordinates { font-size:6px; }
+    }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90403446-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-90403446-1');
+    </script>
+    <script>
+    var course = {
+      'schedule': [
+        { 'date': '2017-09-05',
+          'type': 'lecture',
+          'topics': 'introduction',
+          'details': [
+            'introduction, background, and goals',
+            'organization, topics, and workflows',
+            'potential projects'
+          ]
+        }
+        ,
+        { 'date': '2017-09-07',
+          'type': 'lecture',
+          'topics': 'requirements<br/>and design',
+          'details': [
+            'feasibility and requirements',
+            'non-functional requirements exercise',
+          ]
+        }
+        ,
+        { 'date': '2017-09-12',
+          'type': 'lecture',
+          'topics': 'requirements<br/>and design',
+          'details': [
+            'project/team selection',
+            'library/framework suggestions',
+            'background on use cases',
+            'use case exercise'
+          ]
+        }
+        ,
+        { 'date': '2017-09-14',
+          'type': 'lecture',
+          'topics': 'requirements<br/>and design',
+          'details': [
+            'history of open source',
+            'types of licenses'
+          ]
+        }
+        ,
+        { 'date': '2017-09-19',
+          'type': 'lecture',
+          'topics': 'requirements<br/>and design',
+          'details': [
+            '<b>due:</b> use case write-up',
+            '<b>due:</b> non-functional requirements',
+            'review and feedback'
+          ]
+        }
+        ,
+        { 'date': '2017-09-21',
+          'type': 'lecture',
+          'topics': 'project<br/>organization',
+          'details': [
+            'mobile app development',
+            'mobile frameworks',
+            'mobile app project setup'
+          ]
+        }
+        ,
+        { 'date': '2017-09-26',
+          'type': 'lecture',
+          'topics': 'project<br/>organization',
+          'details': [
+            '<b>due:</b> use case wireframe/mockup',
+            'review &amp; feedback for mockups'
+          ]
+        }
+        ,
+        { 'date': '2017-09-28',
+          'type': 'lecture',
+          'topics': 'project<br/>organization',
+          'details': [
+            'web back-end architectures',
+            'server-client communications',
+            'best practices'
+          ]
+        }
+        ,
+        { 'date': '2017-10-03',
+          'type': 'lecture',
+          'topics': 'project<br/>organization',
+          'details': [
+            'source/version control',
+            'Git branching models',
+            'projects and milestones'
+          ]
+        }
+        ,
+        { 'date': '2017-10-05',
+          'type': 'update',
+          'topics': 'project<br/>organization',
+          'details': [
+
+          ]
+        }
+		,
+    	{ 'date': '2017-10-10',
+		  'comment': 'Monday sched.',
+          'type': 'schedule-substitution',
+          'details': []
+		}
+        ,
+        { 'date': '2017-10-12',
+          'type': 'update',
+          'topics': 'project<br/>organization',
+          'details': [
+            '<b>due:</b> initial milestones'
+          ]
+        }
+        ,
+        { 'date': '2017-10-17',
+          'type': 'lecture',
+          'topics': '',
+          'details': [
+
+          ]
+        }
+        ,
+        { 'date': '2017-10-19',
+          'type': 'update',
+          'topics': '',
+          'details': [
+
+          ]
+        }
+        ,
+        { 'date': '2017-10-24',
+          'type': 'lecture',
+          'topics': '',
+          'details': [
+
+          ]
+        }
+        ,
+        { 'date': '2017-10-26',
+          'type': 'update',
+          'topics': '',
+          'details': [
+
+          ]
+        }
+        ,
+        { 'date': '2017-10-31',
+          'type': 'quiz',
+          'topics': '',
+          'details': []
+        }
+        ,
+        { 'date': '2017-11-02',
+          'type': 'update',
+          'topics': '',
+          'details': [
+
+          ]
+        }
+        ,
+        { 'date': '2017-11-07',
+          'type': 'lecture',
+          'topics': '',
+          'details': [
+
+          ]
+        }
+        ,
+        { 'date': '2017-11-09',
+          'type': 'update',
+          'topics': '',
+          'details': [
+
+          ]
+        }
+        ,
+        { 'date': '2017-11-14',
+          'type': 'lecture',
+          'details': [
+
+          ]
+        }
+        ,
+        { 'date': '2017-11-16',
+          'type': 'update',
+          'details': [
+
+          ]
+        }
+        ,
+        { 'date': '2017-11-21',
+          'type': 'lecture',
+          'topics': '',
+          'details': [
+
+          ]
+        }
+        ,
+    	{ 'date': '2017-11-23',
+          'type': 'recess',
+          'details': []
+  	  	}
+        ,
+        { 'date': '2017-11-28',
+          'type': 'lecture',
+          'topics': '',
+          'details': [
+
+          ]
+        }
+        ,
+        { 'date': '2017-11-30',
+          'type': 'update',
+          'topics': '',
+          'details': [
+
+          ]
+        }
+        ,
+        { 'date': '2017-12-05',
+          'type': 'lecture',
+          'topics': '',
+          'details': [
+
+          ]
+        }
+        ,
+        { 'date': '2017-12-07',
+          'type': 'update',
+          'topics': '',
+          'details': [
+
+          ]
+        }
+        ,
+        { 'date': '2017-12-12',
+          'type': 'update',
+          'topics': '',
+          'details': [
+
+          ]
+        }
+      ]
+    };
+
+    function render_schedule(course) {
+      var table = document.getElementById("schedule");
+      var alreadyHighlighted = false;
+      for (var i = 0; i < course.schedule.length; i++) {
+        var entry = course.schedule[i];
+
+        var row = table.insertRow(-1);
+        var upcoming = today() <= entry.date && !alreadyHighlighted ? ' upcoming' : '';
+        alreadyHighlighted = alreadyHighlighted || (upcoming.length > 0);
+        row.className = entry.type + upcoming;
+
+        var date = row.insertCell(-1);
+        var coordinates =
+          (entry.day ? ('<span>' + entry.day + '</span>') : '') +
+          (entry.time ? ('<span>' + entry.time + '</span>') : '') +
+          (entry.location ? ('<span>' + entry.location + '</span>') : '') +
+          (entry.comment ? ('<span>' + entry.comment + '</span>') : '');
+        date.innerHTML =
+          coordinates ?
+              ('<span class="date-with-coordinates">' + entry.date + '</span>' + '<div class="coordinates">' + coordinates + '</div>')
+            : entry.date;
+
+        var type = row.insertCell(-1);
+        type.innerHTML =
+            '<span class="type">' + entry.type.replace(' ','<br/>').replace('-','<br/>') +
+            (entry.topics ? (':</span>' + '<br/>' + entry.topics) : '');
+
+        var details = row.insertCell(-1);
+        details.innerHTML = render_details(entry.details);
+      }
+    }
+
+    function render_details(details) {
+      if (details == null) {
+        return "";
+      } else if (typeof details === 'string') {
+        return details;
+      } else if (details.constructor === Array) {
+        var output = '';
+        for (var j = 0; j < details.length; j++)
+          output += '<li>' + render_details(details[j]) + '</li>';
+        return '<ul>' + output + '</ul>';
+      } else {
+        for (var txt in details)
+          return txt + render_details(details[txt]);
+      }
+    }
+
+    function today() {
+      var now = new Date();
+      var dd = now.getDate(),
+          mm = now.getMonth() + 1,
+          yyyy = now.getFullYear();
+      dd = (dd < 10 ? '0' : '') + dd;
+      mm = (mm < 10 ? '0' : '') + mm;
+      return yyyy+'-'+mm+'-'+dd;
+    }
+  </script>
+  </head>
+  <body onload="render_schedule(course);">
+    <div id="container">
+      <div id="info">
+        <h4>BU CAS Computer Science 491 L1</h4>
+        <h5>Experiential Lab in Software Engineering</h5>
+        <ul>
+          <li><span>lectures:</span>
+            <ul>
+              <li>Tue. & Thu., 3:30 - 4:45 PM in MCS B08</li>
+              <li><span>lecturer:</span> <a href="http://cs-people.bu.edu/lapets">Andrei Lapets</a>  (<a href="mailto:lapets@bu.edu">lapets@bu.edu</a>, MCS 176)</li>
+              <li><span>OH:</span> Tue. 5 - 6:30 PM &amp; Thu. 11 AM - 12:30 PM at <a href="http://www.bu.edu/cs/resources/laboratories/undergraduate-lab/">CS lab</a></li>
+            </ul>
+          </li>
+          <li><span>questions and discussion:</span>
+            <ul>
+              <li><a href="mailto:cascs491l1-l@bu.edu">cascs491l1-l@bu.edu</a> (course mailing list)</li>
+              <li><a href="https://bu-else-2017.slack.com/">online workspace</a> on Slack</li>
+            </ul>
+          </li>
+          <li><span>course grade:</span>
+            <ul>
+              <li>20% <i>quizzes</i> + 50% <i>updates</i> + 30% <i>project</i></li>
+            </ul>
+          </li>
+          <li><span>course materials:</span>
+            <ul>
+              <!--li>to be posted</li-->
+              <li><a href="https://github.com/bu-else/2017-notes">lecture notes</a> on GitHub</li>
+            </ul>
+          </li>
+        </ul>
+        <ul>
+          <li><a href="http://www.bu.edu/academics/policies/academic-conduct-code/">academic conduct code</a></li>
+        </ul>
+      </div>
+      <table id="schedule"></table>
+    </div>
+  </body>
+</html>

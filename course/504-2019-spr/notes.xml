@@ -1,0 +1,2573 @@
+<sheaf title="Data Mechanics"
+       subtitle="for Pervasive Systems and Urban Applications"
+       author="Andrei Lapets"
+       authorlink="http://lapets.io"
+       >
+  <section title="Introduction, Background, and Motivation">
+    <subsection title="Overview">
+      <text><![CDATA[
+With over half of the world's population living in cities [<a href="#625662870761">#</a>], and given the possibility that cities are a more efficient [<a href="#aiid:1855401">#</a>] way to organize and distribute resources and activities, the rigorous study of cities as systems that can be modeled mathematically is a compelling proposition. With the advent of pervasive infrastructures of sensors and computational resources in urban environments (<a href="https://en.wikipedia.org/wiki/Smart_city"><i>smart cities</i></a>, <a href="https://www.sdxcentral.com/articles/news/englands-bristol-is-building-the-first-software-defined-city/2015/03/"><i>software-defined cities</i></a>, and the <a href="https://en.wikipedia.org/wiki/Internet_of_Things"><i>Internet of Things</i></a>), there is a potential to inform and validate such models using actual data, and to exploit them using the interoperability of the pervasive computational infrastructure that is available. 
+      ]]></text>
+      <paragraph><![CDATA[
+In this course, we introduce and define the novel term <i>data mechanics</i> to refer specifically to the study of a particular aspect of large, instrumented systems such as cities: how data can flow through institutions and computational infrastructures, how these flows can interact, integrate, and cleave, and how they can inform decisions and operations (in both online and offline regimes). We choose the term <i>mechanics</i> specifically because it connotes the study of mechanics (e.g., classical mechanics) in physics, where universal laws that govern the behavior and interactions between many forms of matter are studied. We also choose this term to emphasize that, often, the data involved will be tied to the physical environment: geospatial and temporal information is a common and integral part of data sets produced and consumed by instrumented environments.
+      ]]></paragraph>
+    </subsection>
+    <subsection title="Data Mechanics Repository and Platform">
+      <text hooks="math"><![CDATA[
+This course is somewhat unusual in that there are specific, concrete software development goals towards which the staff and students are working. In particular, one goal of the course is to construct a new general-purpose service platform for collecting, integrating, analyzing, and employing (both in real time and offline) real data sets derived from urban sensors and services (particularly those in the city of Boston). We will consider several real data sets and data feeds, including:
+<ul>
+  <li><a href="https://data.boston.gov/">Analyze Boston</a>;</li>
+  <li><a href="http://www.cambridgema.gov/departments/opendata">City of Cambridge Open Data Portal</a>;</li>
+  <li><a href="http://data.brooklinema.gov/">Brookline OpenData</a>;</li>
+  <li><a href="http://bostonopendata.boston.opendata.arcgis.com/">BostonMaps: Open Data</a>;</li>
+  <li><a href="https://dataverse.harvard.edu/dataverse/BARI">Boston Area Research Initiative Dataverse</a>;</li>
+  <li><a href="https://www.massdot.state.ma.us/DevelopersData.aspx">MassDOT Developers Resources</a>;</li>
+  <li><a href="http://www.mass.gov/opendata/#/">MassData</a>.</li>
+</ul>
+We will also secure additional data sets from the above sources as well as a few others. In particular, some nationwide data repositories may be worth considering:
+<ul>
+  <li><a href="https://chronicdata.cdc.gov/500-Cities/500-Cities-Local-Data-for-Better-Health/6vp6-wxuq">500 Cities: Local Data for Better Health</a>.</li>
+</ul>
+For the purposes of student projects, there are no limits on other sources of data or computation (e.g., Twitter, Mechanical Turk, and so on) that can be employed in conjunction with some of the above.
+      ]]></text>
+      <paragraph hooks="math"><![CDATA[
+Because this course involves the construction of a relatively large software application infrastructure, we will have the opportunity to introduce and practice a variety of standard software development and software engineering concepts and techniques. This includes source control, collaboration, documentation, modularity and encapsulation, testing and validation, inversion of control, and others. Students will also need to become familiar with how to use web service APIs used by government organizations (e.g., <a href="https://www.socrata.com/">Socrata</a>) to make queries and retrieve data.
+      ]]></paragraph>
+      <paragraph hooks="math"><![CDATA[
+The overall architecture of the service platform will have at least the following:
+<ul>
+  <li>a database/storage backend (<b>"repository"</b>) that houses:
+    <ul>
+      <li>original and derived data sets, with annotations that include:
+        <ul>
+          <li>from where, when, and by what algorithm it was retrieved</li>
+          <li>using what integration algorithms it was derived</li>
+        </ul>
+      </li>
+      <li>algorithms for data retrieval or integration, with references that include:
+        <ul>
+          <li>when it was written and by whom</li>
+          <li>in what data sets it is derived</li>
+          <li>from what component algorithms it is composed (if it is such)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>a web service (<b>"platform"</b>) with an <i>application program interface</i> (API) for running analysis and optimization algorithms:
+    <ul>
+      <li>a defined language for defining analysis and optimization algorithms over the data stored in the repository</li>
+      <li>an interface for submitting and running algorithms</li>
+    </ul>
+  </li>
+  <li>other features for data and result visualization, simulation using partial data, etc.</li>
+</ul>
+      ]]></paragraph>
+    </subsection>
+    <subsection title="Mathematical Modeling, Analysis Algorithms, and Optimization Techniques">
+      <text hooks="math"><![CDATA[
+There are a variety of problems that it may be possible to address using the data in the repository and the capabilities of the platform. This course will cover a variety of useful online and offline optimization topics in a mathematically rigorous but potentially application-specific way, including:
+<ul>
+  <li>a defined language for defining analysis and optimization algorithms over the data stored in the repository,</li>
+  <li>dual decomposition,</li>
+  <li>online optimization.</li>
+</ul>
+The goal is to apply some of these techniques to the data sets(including integrated or derived data sets) and solve practical problems. Some of the problems raised in discussions with the City of Boston DoIT and MassDOT teams are:
+<ul>
+  <li>characterizing intersections and coming up with a metric that incorporates:
+    <ul>
+      <li>intersection throughput (people per unit time),</li>
+      <li>modes of transportation (public transport, biking, walking),</li>
+      <li>intersection safety (vehicle speed, accidents, and so on),</li>
+      <li>intersection organization (no left turns, and so on);
+    </ul>
+  </li>
+  <li>characterizing streets and deriving metrics for:
+    <ul>
+      <li>number of parking spaces,</li>
+      <li>probability of an accident (e.g., using different modes of transportation),</li>
+      <li>senior and handicapped mobility;</li>
+    </ul>
+  </li>
+  <li>characterizing neighborhoods:
+    <ul>
+      <li>economic condition and gentrification,</li>
+      <li>senior and handicapped accessibility;</li>
+    </ul>
+  </li>
+  <li>how to allocate resources to optimize some of the metrics above:
+    <ul>
+      <li>where to perform repairs,</li>
+      <li>how to improve housing affordability,</li>
+      <li>where to place bike racks of ride sharing stations,</li>
+      <li>senior and handicapped accessibility;</li>
+    </ul>
+  </li>
+  <li>answering immediate questions relevant to an individual (e.g., in an app):
+    <ul>
+      <li>is a building accessible,</li>
+      <li>is there a place to park (or will there likely be at some other time),</li>
+      <li>is a neighborhood safe (or is it becoming less or more safe),</li>
+      <li>is a neighborhood affordable (or is it becoming less or more affordable),</li>
+      <li>are healthcare services nearby.</li>
+    </ul>
+  </li>
+  <li>integrating public transportation data with other data (e.g., Waze):
+    <ul>
+      <li>why are buses on a certain route late,</li>
+      <li>performance and problems during unexpected events (e.g., snow).</li>
+    </ul>
+  </li>
+</ul>
+The above list is far from complete, and we will update it as the course progresses. Students are encouraged to discuss project ideas with faculty and one another.
+      ]]></text>
+    </subsection>
+    <project title="Preparation and Trial Submission">
+      <instructions>
+        <text><![CDATA[
+The purpose of this project is to obtain the necessary credentials for subsequent projects and for everyone (including course staff) to become familiar with the submission process and address any issues.
+        ]]></text>
+      </instructions>
+      <problems>
+        <problem>
+          <text><![CDATA[
+Choose an initial team consisting of one or two members. If Alice and Bob form a team and have the BU login names <code>alice@bu.edu</code> and <code>bob@bu.edu</code>, the unique identifier for their team will be <code>alice_bob</code>, where, in cases with two members, the two usernames are in ascending alphabetical order and separated by an underscore. For a one-member team, it is simply the BU login name of the sole member (e.g., <code>alice</code>).
+          ]]></text>
+        </problem>
+        <problem>
+          <text><![CDATA[
+Depending on which data you think you might use, try signing up for one of the data services that require an account (e.g., the <a href="http://realtime.mbta.com/Portal/Account/Register">MBTA Developer Portal</a>). We may also make other data sets from these organizations and others over the course of the semester.
+          ]]></text>
+        </problem>
+        <problem>
+          <text><![CDATA[
+Create a GitHub account and follow the GitHub <a href="#A.1">submission instructions</a> by forking the public repository at <code><a href="https://github.com/Data-Mechanics/course-2019-spr-proj-zero">https://github.com/Data-Mechanics/course-2019-spr-proj-zero</a></code>, adding a single folder named using the group identifier (<code>alice</code> or <code>alice_bob</code>) that contains a single ASCII text file <code>members.txt</code>. Each team member should commit a line to that text file specifying a mapping from their GitHub username and their BU username. For example, if Alice and Bob have the GitHub usernames <code>alicegh</code> and <code>bobgh</code>, respectively, then the file should look as follows:
+          ]]></text>
+        <code class="bash"><![CDATA[
+alicegh:alice
+bobgh:bob
+        ]]></code>
+          <text><![CDATA[
+One of the team members should then make a pull request as specified in the <a href="#A.1">instructions</a> to submit the project. On subsequent projects, you will be forking a private repository once we add your user account to the <a href="https://github.com/Data-Mechanics">Data-Mechanics</a> organization (which we will retrieve from the <code>members.txt</code> file you add above).
+          ]]></text>
+        </problem>
+        <problem>
+          <text><![CDATA[
+Download and install the latest versions of Python 3 and MongoDB on your system if you do not have them already, then install the Data Mechanics Library (<a href="https://pypi.python.org/pypi/dml">dml</a>) and the PROV (<a href="https://pypi.python.org/pypi/prov">prov</a>) modules for Python.
+          ]]></text>
+        </problem>
+      </problems>
+    </project>
+  </section>
+  <section title="Modeling Data and Data Transformations">
+    <text><![CDATA[
+To study rigorously the ways data can behave and interact within an infrastructure that generates, transforms, and consumes data (e.g., to make decisions), it is necessary to define formally what data and data transformations are. One traditional, widely used, and widely accepted model for data is the <i>relational model</i>: any data set is a relation (i.e., a subset of a product of sets), and transformations on data are functions between relations. While the relational model is sufficient to define any transformation on data sets, the MapReduce paradigm is one modern framework for defining transformations between data sets.
+    ]]></text>
+    <paragraph><![CDATA[
+In modern contexts and paradigms, these models can be useful when studying relatively small collections of individual, curated data sets that do not change dramatically in the short term. However, these alone are not sufficient in a context in which data sets are overwhelmingly multitudinous, varying in structure, and continuously being generated, integrated, and transformed. One complementary discipline that can provide useful tools for dealing with numerous interdependent data sets is that of <i>data provenance</i> or <i>data lineage</i>. The <i>provenance</i> of a data set (or subset) is a formal record of its origin, which can include how the data was generated, from what data or other sources it was created or derived, what process was used or was responsible for creating or deriving it, and other such information. This information can be invaluable for a variety of reasons beyond the obvious ones (i.e., the origin of the data), such as:
+<ul>
+  <li>the same data be generated again or reproduced if an error occurs,</li>
+  <li>a data set can be updated from the original source if the source has been updated or changed,</li>
+  <li>the source of an inconsistency or aberration of data can be investigated,</li>
+  <li>any of the above could be applied to a subset because recomputing or investigating the entire data set would be prohibitively costly.</li>
+</ul>
+    ]]></paragraph>
+    <subsection title="Relational Data and the MapReduce Paradigm">
+      <text hooks="math"><![CDATA[
+The relational model for data can be expressed in a variety of ways: a data set is a relation on sets, a logical predicate governing terms, a collection of tuples or records with fields and values, a table of rows with labelled columns, and so on. Mathematically, they are all equivalent. In this course, we will adopt a particular model because it is well-suited for the tools and paradigms we will employ, and because it allows for one fairly clean mathematical integration of the study of relational data and data provenance.
+      ]]></text>
+      <definition required="true" hooks="math" id="e601deb568ed46a1a1d741907a6dcfa9">
+        <text><![CDATA[
+A <i>data set</i> (also known as a <i>store</i> or <i>database</i>) is a multiset %R: a collection (possibly with duplicates) of tuples of the form (%x_1,...,%x_{%n}) taken from the set product %X_1 \times ... \times %X_{%n}. Typically, some distinguished set (e.g., the left-most in the set product) will be a set of <i>keys</i>, so that every tuple contains a key. Whether a set is a key or not often depends on the particular paradigm and context, however.
+        ]]></text>
+      </definition>
+      <definition required="true" hooks="math" id="a123deb568ed46a1a1d436907a6dcfa9">
+        <text><![CDATA[
+A <i>data transformation</i> %T: %A \rightarrow %B is a mapping from one space of data sets %A to another space of data sets %B. Notice that an individual data set %S (i.e., a relation or, equivalently, a set of tuples) is just an <i>element</i> of %A. 
+        ]]></text>
+      </definition>
+      <text hooks="math"><![CDATA[
+Some of the typical building blocks for data transformations in the relational model are:
+<ul>
+  <li>union and difference (intersection can also be defined in terms of these),</li>
+  <li>projection (sometimes generalized into extended projection),</li>
+  <li>selection (filtering),</li>
+  <li>renaming,</li>
+  <li>Cartesian product,</li>
+  <li>variants of join operations (many can be constructed using the above, but other variants have been added as extensions),</li>
+  <li>aggregation (an extension).</li>
+</ul>
+One common operation on relations that is not possible to express in traditional formulations but found in some relational database systems is the transitive closure of a data set. Normally, this requires an iterative process consisting of a sequence of join operations.
+      ]]></text>
+      <example required="true" id="9da373c4cc654556bf2fa3fed6d56995">
+        <text hooks="math"><![CDATA[
+We can model and illustrate the transformations that constitute the MapReduce paradigm using Python. Note that selection and projection can be implemented directly using Python comprehensions, but we define wrappers below for purposes of illustration.
+        ]]></text>
+        <code class="py"><![CDATA[
+def union(R, S):
+    return R + S
+
+def difference(R, S):
+    return [t for t in R if t not in S]
+
+def intersect(R, S):
+    return [t for t in R if t in S]
+
+def project(R, p):
+    return [p(t) for t in R]
+
+def select(R, s):
+    return [t for t in R if s(t)]
+ 
+def product(R, S):
+    return [(t,u) for t in R for u in S]
+
+def aggregate(R, f):
+    keys = {r[0] for r in R}
+    return [(key, f([v for (k,v) in R if k == key])) for key in keys]
+        ]]></code>
+      </example>
+      <example required="true" id="ebd9fe9c61014bc9a2d743e069dc9d44">
+        <text hooks="math"><![CDATA[
+We consider a few simple examples that illustrate how transformations can be constructed within the relational model. We start by showing how <code>select</code> can be used with a predicate to filter a data set.
+        ]]></text>
+        <code class="py"><![CDATA[
+>>> def red(t): return t == 'tomato'
+>>> select(['banana', 'tomato'], red)
+['tomato']
+        ]]></code>
+        <text hooks="math"><![CDATA[
+Suppose we have two data sets and want to join them on a common field. The below sequence illustrates how that can be accomplished by building up the necessary expression out of simple parts.
+        ]]></text>
+        <code class="py"><![CDATA[
+>>> X = [('Alice', 22), ('Bob', 19)]
+>>> Y = [('Alice', 'F'), ('Bob', 'M')]
+
+>>> product(X,Y)
+[(('Alice', 'F'), ('Alice', 22)), (('Alice', 'F'), ('Bob', 19)), (('Bob', 'M'), ('Alice', 22)), (('Bob', 'M'), ('Bob', 19))]
+
+>>> select(product(X,Y), lambda t: t[0][0] == t[1][0])
+[(('Alice', 'F'), ('Alice', 22)), (('Bob', 'M'), ('Bob', 19))]
+
+>>> project(select(product(X,Y), lambda t: t[0][0] == t[1][0]), lambda t: (t[0][0], t[0][1], t[1][1]))
+[('Alice', 'F', 22), ('Bob', 'M', 19)]
+        ]]></code>
+        <text hooks="math"><![CDATA[
+Finally, the sequence below illustrates how we can compute an aggregate value for each unique key in a data set (such as computing the total age by gender).
+        ]]></text>
+        <code class="py"><![CDATA[
+>>> X = [('Alice', 'F', 22), ('Bob', 'M', 19), ('Carl', 'M', 25), ('Eve', 'F', 27)]
+
+>>> project(X, lambda t: (t[1], t[2]))
+[('F', 22), ('M', 19), ('M', 25), ('F', 27)]
+
+>>> aggregate(project(X, lambda t: (t[1], t[2])), sum)
+[('F', 49), ('M', 44)]
+        ]]></code>
+        <text hooks="math"><![CDATA[
+The following sequence explains what is happening inside the <code>aggregate</code> function for a particular key.
+        ]]></text>
+        <code class="py"><![CDATA[
+>>> Y = project(X, lambda t: (t[1], t[2]))
+>>> keys = {t[0] for t in Y}
+>>> keys
+{'F', 'M'}
+>>> [v for (k,v) in Y if k == 'F']
+[22, 27]
+>>> sum([v for (k,v) in Y if k == 'F'])
+49
+>>> ('F', sum([v for (k,v) in Y if k == 'F']))
+('F', 49)
+        ]]></code>
+      </example>
+      <example required="true" id="ffbbae67647e4daf838a79fb814e733a">
+        <text hooks="math"><![CDATA[
+Consider the following line of Python code that operates on a data set <code>D</code> containing some voting results broken down by voter, state where the voter participated in voting, and the candidate they chose:
+        ]]></text>
+        <code class="py"><![CDATA[
+R = sum([1 for (person, state, candidate) in D if state == "Massachusetts" and candidate == "Trump"])
+        ]]></code>
+        <text hooks="math"><![CDATA[
+We can identify which building blocks for transformations available in the relational model are being used in the above code; we can also draw a corresponding flow diagram that shows how they fit together.
+        ]]></text>
+        <text><![CDATA[
+<div class="pql" style="border:0px solid #000000; height:80px; display:inline-block; width:100%;">
+!table([
+  ['r:select``D', 'r:project``...', 'r:agg sum``...', 'R']
+])
+</div>
+        ]]></text>
+        <text hooks="math"><![CDATA[
+We can also rewrite the above using the <a href="#9da373c4cc654556bf2fa3fed6d56995">building blocks for transformations</a> in the relational model.
+        ]]></text>
+        <code class="py"><![CDATA[
+R = aggregate(project(select(D, lambda psc: if psc[1] == "Massachusetts" and psc[2] == "Trump"), lambda psc: 1), sum)
+        ]]></code>
+        <text hooks="math"><![CDATA[
+Notice that the order of the operations is important. If we tried to do the projection before the selection, the information that we are using to perform the selection would be gone after the projection. On the other hand, two selection (one immediately followed by another) can be done in any order. This is one reason why it makes sense to call the paradigm a relational <i>algebra</i>: there are algebraic laws that govern how the operations can be arranged.
+        ]]></text>
+      </example>
+      <paragraph hooks="math"><![CDATA[
+In the MapReduce paradigm, a smaller set of building blocks inspired by the functional programming paradigm (supported by languages such as ML and Haskell) exist for defining transformations between data sets. Beyond adapting (with some modification) the map and reduce (a.k.a., "fold") functions from functional programming, the contribution of the MapReduce paradigm is the improvement in the performance of these operations on very large distributed data sets. Because of the elegance of the small set of building blocks, and because of the scalability advantages under appropriate circumstances, it is worth studying the paradigm's two building blocks for data transformations: <i>map</i> and <i>reduce</i>:
+<ul>
+  <li>a map operation will apply some user-specified computation to every tuple in the data set, producing one or more new tuples,</li>
+  <li>a reduce operation will apply some user-specified aggregation computation to every set of tuples having the same key, producing a single result.</li>
+</ul>
+Notice that there is little restriction on the user-specified code other than the requirement that it be stateless in the sense that communication and coordination between parallel executions of the code is impossible. It is possible to express all the building blocks of the relational model using the building blocks of the MapReduce paradigm.
+      ]]></paragraph>
+      <example required="true" id="ebd9fe9c61014bc9a2d743e069dc9d5b">
+        <text hooks="math"><![CDATA[
+We can model and illustrate the two basic transformations that constitute the MapReduce paradigm in a concise way using Python.
+        ]]></text>
+        <code class="py"><![CDATA[
+def map(f, R):
+    return [t for (k,v) in R for t in f(k,v)]
+    
+def reduce(f, R):
+    keys = {k for (k,v) in R}
+    return [f(k1, [v for (k2,v) in R if k1 == k2]) for k1 in keys]
+        ]]></code>
+        <text hooks="math"><![CDATA[
+A <code>map</code> operation applies some function <code>f</code> to every key-value tuple and produces zero or more new key-value tuples. A <code>reduce</code> operation collects all values under the same key and performs an aggregate operation <code>f</code> on those values. Notice that the operation can be applied to any subset of the tuples in any order, so it is often necessary to use an operation that is associated and commutative.
+        ]]></text>
+      </example>
+      <paragraph hooks="math"><![CDATA[
+At the language design level, the relational model and the MapReduce paradigm are arguably complementary and simply represent different trade-offs; they can be used in conjunction on data sets represented as relations. Likewise, implementations of the two represent different performance trade-offs. Still, contexts in which they are used can also differ due to historical reasons or due to conventions and community standards.
+      ]]></paragraph>
+      <example required="true" id="ebd9fe9c61014bc9a2d743e069dc9d5a">
+        <text hooks="math"><![CDATA[
+We can use the Python implementations of the map and reduce operations in an <a href="#ebd9fe9c61014bc9a2d743e069dc9d5b">example above</a> to implement some common transformations in the relational model. For this example, we assume that the first field in each tuple in the data set is a unique key (in general, we assume there is a unique key field if we are working with the MapReduce paradigm). We illustrate how projection and aggregation can be implemented in the code below.
+        ]]></text>
+        <code class="py"><![CDATA[
+R = [('Alice', ('F', 23)), ('Bob', ('M', 19)), ('Carl', ('M', 22))]
+
+# Projection keeps only gender and age.
+# The original key (the name) is discarded.
+X = map(lambda k,v: [(v[0], v[1])], R)
+
+# Aggregation by the new key (i.e., gender).
+Y = reduce(lambda k,vs: (k, sum(vs)), X) 
+        ]]></code>
+        <text hooks="math"><![CDATA[
+Selection is not straightforward to implement because this is not a common use case for MapReduce workflows. However, it is possible by treating each tuple in the input data set as its own key and then keeping on the keys at the end.
+        ]]></text>
+        <code class="py"><![CDATA[
+R = [('Alice', 23), ('Bob', 19), ('Carl', 22)]
+
+X = map(lambda k,v: [((k,v), (k,v))] if v > 20 else [], R) # Selection.
+Y = reduce(lambda k,vs: k, X) # Keep same tuples (use tuples as unique keys).
+        ]]></code>
+        <text hooks="math"><![CDATA[
+We can also perform a simple join operation, although we also need to "combine" the two collections of data. This particular join operation is also simple because each tuple in the input is only joined with one other tuple. Join operations were also not originally envisioned as a common use case for MapReduce workflows.
+        ]]></text>
+        <code class="py"><![CDATA[
+R = [('Alice', 23), ('Bob', 19), ('Carl', 22)]
+S = [('Alice', 'F'), ('Bob', 'M'), ('Carl', 'M')]
+
+X =   map(lambda k,v: [(k, ('Age', v))], R)\
+    + map(lambda k,v: [(k, ('Gender', v))], S)
+Y = reduce(\
+        lambda k,vs:\
+          (k,(vs[0][1], vs[1][1]) if vs[0][0] == 'Age' else (vs[1][1],vs[0][1])),\
+        X\
+      )
+        ]]></code>
+      </example>
+      <example required="true" id="fa12ae67647e4daf838a79fb814e733b">
+        <text hooks="math"><![CDATA[
+Suppose you have a data set containing tuples of the form (<i>name</i>, <i>gender</i>, <i>age</i>). You want to produce a result of the form (<i>gender</i>, <i>total</i>) where <i>total</i> is the sum of the age values of all tuples with the corresponding <i>gender</i>. The code below illustrates using Python how this can be done in the MapReduce paradigm.
+        ]]></text>
+        <code class="py"><![CDATA[
+INPUT = [('Alice', ('F', 19)),\
+         ('Bob', ('M', 23)),\
+         ('Carl', ('M', 20)),\
+         ('Eve', ('F', 27))]
+TEMP = map(lambda k,v: [(v[0], v[1])], INPUT)
+OUTPUT = reduce(lambda k,vs: (k, sum(vs)), TEMP)
+        ]]></code>
+        <text hooks="math"><![CDATA[
+We provide an equivalent MapReduce paradigm implementation of the algorithm using MongoDB.
+        ]]></text>
+        <code class="js"><![CDATA[
+db.INPUT.insert({_id:"Alice", gender:"F", age:19});
+db.INPUT.insert({_id:"Bob", gender:"M", age:23});
+db.INPUT.insert({_id:"Carl", gender:"M", age:20});
+db.INPUT.insert({_id:"Eve", gender:"F", age:27});
+
+db.INPUT.mapReduce(
+  function() {
+    emit(this.gender, {age:this.age});
+  },
+  function(k, vs) {
+    var total = 0;
+    for (var i = 0; i < vs.length; i++)
+        total += vs[i].age;
+    return {age:total};
+  },
+  {out: "OUTPUT"}
+);
+        ]]></code>
+      </example>
+      <example required="true" id="ffbbae67647e4daf838a79fb814e733b">
+        <text hooks="math"><![CDATA[
+Suppose we have a data set containing tuples of the form (<i>name</i>, <i>city</i>, <i>age</i>). We want to produce a result of the form (<i>city</i>, <i>range</i>) where <i>range</i> is defined as the difference between the oldest and youngest person in each city.
+<ul>
+  <li>We can construct a sequence of transformations that will yield this result using the basic building blocks available in the relational model (projections, selections, aggregations, and so on).</li>
+  <li>Alternatively, we can use the MapReduce paradigm to construct a single-pass (one map operation and one reduce operation) MapReduce computation that computes the desired result. <b>Hint:</b> emit two copies of each entry (one for the computation of the maximum and one for the computation of the minimum).</li>
+</ul>
+        ]]></text>
+        <paragraph hooks="math"><![CDATA[
+One approach in the relational paradigm is to aggregate the minimum and maximum age for each city, negate the minimum ages, and aggregate once more to get the ranges.
+        ]]></paragraph>
+        <code class="py"><![CDATA[
+NCA = [('Alice', 'Boston', 23), ('Bob', 'Boston', 19), ('Carl', 'Seattle', 25)]
+CA = [(c,a) for (n,c,a) in NCA]
+MIN = aggregate(CA, min)
+MIN_NEG = [(c,-1*a) for (c,a) in MIN]
+MAX = aggregate(CA, max)
+RESULT = aggregate(union(MIN_NEG, MAX), sum)
+        ]]></code>
+        <text hooks="math"><![CDATA[
+Below is a flow diagram that represents the above transformations.
+        ]]></text>
+        <text><![CDATA[
+<div class="pql" style="border:0px solid #000000; height:280px; display:inline-block; width:100%;">
+!table([
+  [null , null, 'r:proj``MIN', 'rd:union``MIN_NEG', null , null],
+  ['r:proj``NCA', 'ru:aggmin`rd:agg max``CA', null , null     , 'r:agg sum``...', 'RESULT'],
+  [null , null, 'rru:union``MAX', null     , null , null]
+])
+</div>
+        ]]></text>
+        <text hooks="math"><![CDATA[
+Using the MapReduce paradigm, we may prefer to follow the paradigm's two-stage breakdown of a computation by first converting every single entry in the input data set into an <i>approximation</i> of the range. For example, given only the record <code>('Alice', ('Boston', 23))</code>, in the mapping stage we might estimate the range as <code>('Boston', (23, 23, 0))</code> where the second and third entries are the minimum and maximum "known so far" given the limited information (a single data point). Then, in the reduce stage, we would combine these estimates.
+        ]]></text>
+        <code class="py"><![CDATA[
+NCA = [('Alice', ('Boston', 23)), ('Bob', ('Boston', 19)), ('Carl', ('Seattle', 25))]
+I = map(lambda k, v: [(v[0], (v[1], v[1], 0))], NCA)
+
+def reducer(k, vs):
+    age_lo = min([l for (l,h,r) in vs])
+    age_hi = max([h for (l,h,r) in vs])
+    age_ran = age_hi - age_lo 
+    return (k, (age_lo, age_hi, age_ran))
+RESULT = reduce(reducer, I)
+        ]]></code>
+      </example>
+      <example required="true" id="cbb3ae67647e4daf838a79fb914e114a">
+        <text hooks="math"><![CDATA[
+Consider the following algorithm implemented as a collection of transformations drawn from the relational paradigm. The input data set consists of tuples of the form (<i>intersection</i>, <i>date</i>, <i>time</i>, <i>cars</i>). Each tuple represents a single accident took place at the specified intersection, occurred on the specified date and time, and involved the specified number of cars.
+        ]]></text>
+        <code class="py"><![CDATA[
+D = [('Commonwealth Ave./Mass Ave.', '2016-11-02', '11:34:00', 3), ...]
+M = project(D, lambda idtc: [(idtc[0], idtc[3])])
+R = aggregate(M, max)
+H = [(i,d,t) for ((i,m), (j,d,t,c)) in product(R, D) if i==j and m==c]
+        ]]></code>
+        <text hooks="math"><![CDATA[
+A data flow diagram representing the transformations is provided below.
+        ]]></text>
+        <text><![CDATA[
+<div class="pql" style="border:0px solid #000000; height:200px; display:inline-block; width:100%;">
+!table([
+  ['d:prod`r:proj``D', 'r:agg max``M', 'lld:prod``R'],
+  ['r:select``...', 'r:proj``...', 'H'] 
+])
+</div>
+        ]]></text>
+        <text hooks="math"><![CDATA[
+Complete the following tasks. To simplify the exercise, you may assume that there is at most one accident involving each possible quantity of cars (e.g., there is only one accident that involved five cars).
+<ul>
+  <li>Write a description of what the algorithm computes. What does the output data set represent?</li>
+  <li>Provide an implementation of this algorithm using the MapReduce paradigm. You only need one map and one reduce operation.</li>
+</ul>
+        ]]></text>
+        <solution>
+          <text hooks="math"><![CDATA[
+The output represents the dates and times of the largest accidents for each intersection. Note that the transformation first computes the number of cars involved in the largest accident at each intersection (this is the data set <code>R</code>), and then <i>joins</i> that result with the original data to extract the exact dates and times of the accidents that had that number of cars. As an example, we provide an implementation of this algorithms using the MapReduce feature provided by MongoDB. We assume that each tuple is represented using a JSON document of the form <code>{'intersection':..., 'date':..., 'time':..., 'cars':...}</code>.
+          ]]></text>
+          <code class="js"><![CDATA[
+db.D.mapReduce(
+  function() {
+    emit(this.intersection, {'date':this.date, 'time':this.time, 'cars':this.cars});
+  },
+  function(intersection, dtcs) {
+    var index_of_largest = 0;
+    dtcs.forEach(function(dtc, i) {
+      if (dtc.cars > dtcs[index_of_largest].cars)
+        index_of_largest = i;
+    });
+    // The intersection will already be the key.
+    return {'date':dtcs[index_of_largest].date, 'time':dtcs[index_of_largest].time};
+  },
+  { out: "R" }
+);
+          ]]></code>
+        </solution>
+      </example>
+    </subsection>
+    <subsection title="Composing Transformations into Algorithms">
+      <text hooks="math"><![CDATA[
+Whether we are using the relation model or the MapReduce paradigm, the available building blocks can be used to assemble fairly complex transformations on data sets. Each transformation can be written either using the concrete syntax of a particular programming language that implements the paradigm, or as a data flow diagram that describes how starting and intermediate data sets are combined to derive new data sets over the course of the algorithm's operation.
+      ]]></text>
+      <example required="true" id="cba5543907854ed28dbd3eeb874ebd54">
+        <text hooks="math"><![CDATA[
+We can use building blocks drawn from the relational model (defined for Python in <a href="#9da373c4cc654556bf2fa3fed6d56995">an example above</a>) to construct an implementation of the %k-means clustering algorithm.
+        ]]></text>
+        <code class="py"><![CDATA[
+def dist(p, q):
+    (x1,y1) = p
+    (x2,y2) = q
+    return (x1-x2)**2 + (y1-y2)**2
+
+def plus(args):
+    p = [0,0]
+    for (x,y) in args:
+        p[0] += x
+        p[1] += y
+    return tuple(p)
+
+def scale(p, c):
+    (x,y) = p
+    return (x/c, y/c)
+
+M = [(13,1), (2,12)]
+P = [(1,2),(4,5),(1,3),(10,12),(13,14),(13,9),(11,11)]
+
+OLD = []
+while OLD != M:
+    OLD = M
+
+    MPD = [(m, p, dist(m,p)) for (m, p) in product(M, P)]
+    PDs = [(p, dist(m,p)) for (m, p, d) in MPD]
+    PD = aggregate(PDs, min)
+    MP = [(m, p) for ((m,p,d), (p2,d2)) in product(MPD, PD) if p==p2 and d==d2]
+    MT = aggregate(MP, plus)
+
+    M1 = [(m, 1) for (m, _) in MP]
+    MC = aggregate(M1, sum)
+
+    M = [scale(t,c) for ((m,t),(m2,c)) in product(MT, MC) if m == m2]
+    print(sorted(M))
+        ]]></code>
+        <text hooks="math"><![CDATA[
+Below is a flow diagram describing the overall organization of the computation (nodes are data sets and edges are transformations). Note that the nodes labeled "..." are intermediate results that are implicit in the comprehension notation. For example, <code>[(m, p) for ((m,p,d), (p2,d2)) in product(MPD, PD) if p==p2 and d==d2]</code> first filters <code>product(MPD, PD)</code> using a selection criteria <code>if p==p2 and d==d2</code> and then performs a projection from tuples of the form <code>((m,p,d), (p2,d2))</code> to tuples of the form <code>(m, p)</code> to obtain the result.
+        ]]></text>
+        <text><![CDATA[
+<div class="pql" style="border:0px solid #000000; height:400px; display:inline-block; width:100%;">
+!table([
+  ['rd:prod``P', null, null, 'd:agg min``PDs'],
+  [null, 'r:proj``...', 'dr:prod`ru:proj``MPD', 'd:prod``PD'],
+  ['ru:prod``M', null,  null,     'd:selection``...'],
+  ['u:proj``...',    'ld:prod``MC',  'l:agg sum``M1',     'd:proj``...'],
+  ['u:selection``...',    'l:prod``MT',  null,     'lu:proj`ll:agg plus``MP']
+])
+</div>
+        ]]></text>
+      </example>
+      <example required="true" id="bca743938aa04d9ea43464f941bd70bc">
+        <text hooks="math"><![CDATA[
+We can use building blocks drawn from the MapReduce paradigm that are available in MongoDB to construct an implementation of the %k-means clustering algorithm. This implementation illustrates many of the idiosyncrasies of the MapReduce abstraction made available by MongoDB.
+        ]]></text>
+        <code class="js"><![CDATA[
+db.system.js.save({ _id:"dist" , value:function(u, v) {
+  return Math.pow(u.x - v.x, 2) + Math.pow(u.y - v.y, 2);
+}});
+
+function flatten(A) {
+  db[A].find().forEach(function(a) { db[A].update({_id: a._id}, a.value); });
+}
+
+function prod(A, B, AB) {
+  db[AB].remove({});
+  db.createCollection(AB);
+  db[A].find().forEach(function(a) {
+    db[B].find().forEach(function(b) {
+      db[AB].insert({left:a, right:b});
+    });
+  });
+}
+
+function union(A, B, AB) {
+  db[AB].remove({});
+  db.createCollection(AB);
+  db[A].find().forEach(function(a) {
+    db[AB].insert(a);
+  });
+  db[B].find().forEach(function(b) {
+    db[AB].insert(b);
+  });
+}
+
+function hash_means(M, HASH) {
+  db[M].mapReduce(
+    function() { emit("hash", {hash: this.x + this.y}); },
+    function(k, vs) {
+      var hash = 0;
+      vs.forEach(function(v) {
+        hash += v.hash;
+      });
+      return {hash: hash};
+    },
+    {out: HASH}
+  );
+}
+
+// We'll only perform a single product operation. Using map-reduce, we can perform
+// argmax and argmin more easily. We can also use map-reduce to compare progress.
+
+db.M.remove({});
+db.M.insert([{x:13,y:1},{x:2,y:12}]);
+db.P.remove({});
+db.P.insert([{x:1,y:2},{x:4,y:5},{x:1,y:3},{x:10,y:12},{x:13,y:14},{x:13,y:9},{x:11,y:11}]);
+
+var iterations = 0;
+do {
+  // Compute an initial hash of the means in order to have a baseline
+  // against which to compare when deciding whether to loop again.
+  hash_means("M", "HASHOLD");
+
+  prod("M", "P", "MP");
+  // At this point, entries in MP have the form
+  // {_id:..., left:{x:13,y:1}, right:{x:4,y:5}}.
+
+  // For each point, find the distance to the closest mean. The output after
+  // flattening has entries of the form {_id:{x:?, y:?}, m:{x:?, y:?}, d:?}
+  // where the identifier is the point.
+  db.MPs.remove({});
+  db.MP.mapReduce(
+    function() {
+      var point = {x:this.right.x, y:this.right.y};
+      var mean = {x:this.left.x, y:this.left.y};
+      emit(point, {m:mean, d:dist(point, mean)});
+    },
+    function(point, vs) {
+      // Each entry in vs is of the form {m:{x:?, y:?}, d:?}.
+      // We return the one that is closest to point.
+      var j = 0;
+      vs.forEach(function(v, i) {
+        if (v.d < vs[j].d)
+          j = i;
+      });
+      return vs[j]; // Has form {m:{x:?, y:?}, d:?}.
+    },
+    {out: "MPs"}
+  );
+  // At this point, entries in MPs have the form
+  // {_id:{x:2, y:3}, value:{m:{x:4, y:5}, d:1}}.
+
+  flatten("MPs");
+  // At this point, entries in MPs have the form
+  // {_id:{x:2, y:3}, m:{x:4, y:5}, d:1}.
+
+  // For each mean (i.e., key), compute the average of all the points that were
+  // "assigned" to that mean (because it was the closest mean to that point).
+  db.MPs.mapReduce(
+    function() {
+      // The key is the mean and the value is the point together with its counter.
+      var point = this._id;
+      var point_with_count = {x:point.x, y:point.y, c:1};
+      var mean = this.m;
+      emit(mean, point_with_count);
+    },
+    function(key, vs) {
+      // Remember that the reduce operations will be applied to the values for each key
+      // in some arbitrary order, so our aggregation operation must be commutative (in
+      // this case, it is vector addition).
+      var x = 0, y = 0, c = 0;
+      vs.forEach(function(v, i) {
+        x += v.x;
+        y += v.y;
+        c += v.c;
+      });
+      return {x:x, y:y, c:c};
+    },
+    { finalize: function(k, v) { return {x: v.x/v.c, y: v.y/v.c}; },
+      out: "M"
+    }
+  );
+  // At this point, entries in M have the form
+  // {_id:{x:2, y:3}, value:{x:4, y:5}}.
+
+  flatten("M");
+  // At this point, entries in MPs have the form
+  // {_id:{x:2, y:3}, x:4, y:5}. The identifier
+  // value does not matter as long as it is unique.
+
+  // Compute the hash of the new set of means.
+  hash_means("M", "HASHNEW");
+
+  // Extract the two hashes in order to compare them in the loop condition.
+  var hashold = db.HASHOLD.find({}).limit(1).toArray()[0].value.hash;
+  var hashnew = db.HASHNEW.find({}).limit(1).toArray()[0].value.hash;
+  print(hashold);
+  print(hashnew);
+  print(iterations);
+  iterations++;
+} while (hashold != hashnew);
+        ]]></code>
+      </example>
+      <example required="true" id="bfa741938aa04d9ea43464f951bd72bc">
+        <text hooks="math"><![CDATA[
+If we are certain that our %k-means algorithm will have a relatively small (e.g., constant) number of means, we can take advantage of this by only tracking the means in a local variable and using <code>.updateMany()</code> to distribute the means to all the points at the beginning of each iteration. This leads to a much more concise (and, for a small number of means, efficient) implementation of the algorithm than what is presented in a <a href="#bca743938aa04d9ea43464f941bd70bc">previous example</a>. In particular, it is no longer necessary to encode a production operation within MongoDB.
+        ]]></text>
+        <code class="js"><![CDATA[
+db.system.js.save({ _id:"dist" , value:function(u, v) {
+  return Math.pow(u.x - v.x, 2) + Math.pow(u.y - v.y, 2);
+}});
+
+db.P.insert([{x:1,y:2},{x:4,y:5},{x:1,y:3},{x:10,y:12},{x:13,y:14},{x:13,y:9},{x:11,y:11}]);
+
+var means = [{x:13,y:1}, {x:2,y:12}];
+do {
+  db.P.updateMany({}, {$set: {means: means}}); // Add a field to every object.
+  db.P.mapReduce(
+    function() {
+      var closest = this.means[0];
+      for (var i = 0; i < this.means.length; i++)
+        if (dist(this.means[i], this) < dist(closest, this))
+          closest = this.means[i];
+      emit(closest, {x:this.x, y:this.y, c:1});
+    },
+    function(key, vs) {
+      var x = 0, y = 0, c = 0;
+      vs.forEach(function(v, i) {
+        x += v.x;
+        y += v.y;
+        c += v.c;
+      });
+      return {x:x, y:y, c:c};
+    },
+    { finalize: function(k, v) { return {x: v.x/v.c, y: v.y/v.c}; },
+      out: "M"
+    }
+  );
+  means = db.M.find().toArray().map(function(r) { return {x:r.value.x, y:r.value.y}; });
+  printjson(means);
+} while (true);
+        ]]></code>
+        <text hooks="math"><![CDATA[
+We do not deal with the issue of convergence in the above example; an equality function on JSON/BSON objects (i.e., the list of means) would need to be defined to implement the loop termination condition. Below, we illustrate how the above implementation can be written within Python using PyMongo.
+        ]]></text>
+        <code class="py"><![CDATA[
+import pymongo
+import bson.code
+
+client = pymongo.MongoClient()
+db = client.local
+
+db.system.js.save({'_id':'dist', 'value': bson.code.Code("""
+    function(u, v) {
+        return Math.pow(u.x - v.x, 2) + Math.pow(u.y - v.y, 2);
+    }
+    """)})
+
+db.P.insert_many([{'x':1,'y':2},{'x':4,'y':5},{'x':1,'y':3},{'x':10,'y':12},\
+                  {'x':13,'y':14},{'x':13,'y':9},{'x':11,'y':11}])
+
+means = [{'x':13,'y':1}, {'x':2,'y':12}]
+
+while True:
+    db.P.update_many({}, {'$set': {'means': means}})
+
+    mapper = bson.code.Code("""
+        function() {
+            var closest = this.means[0];
+            for (var i = 0; i < this.means.length; i++)
+                if (dist(this.means[i], this) < dist(closest, this))
+                    closest = this.means[i];
+            emit(closest, {x:this.x, y:this.y, c:1});
+        }
+        """)
+    reducer = bson.code.Code("""
+        function(key, vs) {
+            var x = 0, y = 0, c = 0;
+            vs.forEach(function(v, i) {
+                x += v.x;
+                y += v.y;
+                c += v.c;
+            });
+            return {x:x, y:y, c:c};
+        }
+        """)
+    finalizer = bson.code.Code("""
+        function(k, v) { return {x: v.x/v.c, y: v.y/v.c}; }
+        """)
+    db.P.map_reduce(mapper, reducer, "M", finalize = finalizer)
+
+    means = [{'x':t['value']['x'], 'y':t['value']['y']} for t in db.M.find()]
+    print(means)
+        ]]></code>
+      </example>
+      <example required="true" id="7eee633a65814aacb951b667e38092ec">
+        <text hooks="math"><![CDATA[
+We can also use building blocks drawn from the relational model (defined for Python in <a href="#9da373c4cc654556bf2fa3fed6d56995">an example above</a>) to construct an implementation of the Floyd-Warshall shortest path algorithm.
+        ]]></text>
+        <code class="py"><![CDATA[
+N = ['a','b','c','d','e','f']
+E = [('a','b'),('b','c'),('a','c'),('c','d'),('d','e'),('e','f'),('b','f')]
+
+oo = float('inf') # This represents infinite distance.
+
+P = product(N,N)
+I = [((x,y),oo if x != y else 0) for (x,y) in P] # Zero distance to self, infinite distance to others.
+D = [((x,y),1) for (x,y) in E] # Edge-connected nodes are one apart.
+
+OUTPUT = aggregate(union(I,D), min)
+STEP = []
+while sorted(STEP) != sorted(OUTPUT):
+    STEP = OUTPUT
+    P = product(STEP, STEP) # All pairs of edges.
+    NEW = union(STEP,[((x,v),k+m) for (((x,y),k),((u,v),m)) in P if u == y]) # Add distances of connected edge pairs.
+    OUTPUT = aggregate(NEW, min) # Keep only shortest node-node distance entries.
+
+SHORTEST = OUTPUT
+        ]]></code>
+      </example>
+    </subsection>
+    
+    <subsection title="Data Provenance">
+      <text hooks="math"><![CDATA[
+<i>Data provenance</i> is an overloaded term that refers, in various contexts and communities, to the source, origin, or lifecycle of a particular unit of data (which could be an individual data point, a subset of a data set, or an entire data set). In this course, we will use the term primarily to refer to dependency relationships between data sets (or relationships between individual entries in those data sets) that may be derived from one another (usually over time). As an area of study within computer science, data provenance (also called <i>data lineage</i>) is arguably still being delineated and developed by the community. However, some community standards for general-purpose representations of data provenance have been established (e.g., PROV [<a href="#PROV-Primer">#</a>]).
+      ]]></text>
+      <paragraph hooks="math"><![CDATA[
+While the research literature explores various ways of categorizing approaches to data provenance, there are two dimensions that can be used to classify provenance techniques (surveyed in more detail in the literature [<a href="#ilprints918">#</a>]):
+<ul>
+  <li>from <i>where</i> the data was generated (e.g., what data sets or individual data entries) and <i>how</i> it was generated (e.g., what algorithms were used);</li>
+  <li>whether the lineage is tracked at a fine granularity (e.g., per data entry such as a row in a data set) or a coarse granularity (e.g., per data set).</li>
+</ul>
+      ]]></paragraph>
+      <table id="5a30782285aa11e4af63feff819cdc9f"><![CDATA[
+<table class="fig_table">
+ <tr>
+  <td></td>
+  <td><b>coarse</b></td>
+  <td><b>fine</b></td>
+ </tr>
+ <tr> 
+  <td><b>how</b></td>
+  <td>transformation</td>
+  <td>execution path through transformation algorithm</td>
+ </tr>
+ <tr> 
+  <td><b>from where</b></td>
+  <td>source data sets</td>
+  <td>specific entries in source data sets</td>
+ </tr>
+</table>
+      ]]></table>
+      <paragraph hooks="math"><![CDATA[
+When data lineage is being tracked at a fine granularity, there are at least two approaches one can use to determine provenance of a single entry within a data set produced using a specific transformation. One approach is to track the provenance of every entry within the transformation itself (sometimes called <i>tracing</i>); another approach is to determine the provenance of an entry after the transformation has already been performed (e.g., by another party and/or at some point in the past). The latter scenario is more likely if storage of per-entry provenance meta-data is an issue, or if the transformations are black boxes that cannot be inspected, modified, or extended before they are applied to input data sets.
+      ]]></paragraph>
+      <paragraph><![CDATA[
+For a transformation that may combine input data set entries in some way, a large number of entries in the input data set can influence an individual entry in the output data set. For such transformations, finding the per-entry provenance for an entry in the output data set can be non-trivial. Without additional information about the transformation, the conservative assumption to make is that all entries in the input data set may contribute to every entry in the output data set.
+      ]]></paragraph>
+      <paragraph hooks="math"><![CDATA[
+In some cases, we may know more about a transformation. Perhaps its definition is broken down into <a href="#2.1">building blocks found in the relational model</a> (e.g., selections and projections), or it can be defined using map and reduce operations in the MapReduce paradigm. In such cases, studying the data lineage of individual data items it may be possible to derive standard techniques [<a href="#Cui:2003:LTG:775452.775456">#</a>] for determining data lineage given the components that make up the transformation.
+      ]]></paragraph>
+      <fact required="true" hooks="math" id="f3951db0b6c94dd4b409e9ebb28bd2cd">
+        <text><![CDATA[
+For relational transformations that simply add or remove data set entries without changing their internal structure (i.e., schema) or data content (i.e., values), computing the per-entry provenance is relatively straightforward. In particular: for union, difference, intersection, selection, and product transformations, the per-entry provenance describing which input data set entries influenced an individual entry in the output data set (i.e., the fine-grained "where" provenance of an individual entry in the output) can be determined using a linear search through the input data set (or sets) for that entry.
+        ]]></text>
+      </fact>
+      <fact required="true" hooks="math" id="a1151db0b6c94dd4b409e9ebb28bd2cd">
+        <text><![CDATA[
+For projection transformations, the per-entry provenance describing which input data set entries influenced an individual entry in the output data set can be determined by applying the transformation to each entry in the input data set. Whenever this yields an output equivalent to the target, we know that the provenance for that output entry includes that input entry.
+        ]]></text>
+      </fact>
+      <paragraph hooks="math"><![CDATA[
+The above facts imply that for several relational transformation building blocks, per-entry provenance of output data set entries can be reconstructed efficiently. Note that by induction this also implies that any transformation composed of these building blocks is also amenable to efficient reconstruction of the provenance of any output data set entry.
+      ]]></paragraph>
+      <paragraph hooks="math"><![CDATA[
+If a transformation might <i>combine</i> subsets of the input entries to compute individual output entries (but we have no additional information about the transformation), then with regard to per-entry provenance a worst case scenario may apply.
+      ]]></paragraph>
+      <fact required="true" hooks="math" id="f3951db0b6c94dd4b409e9ebb28bd2ca">
+        <text><![CDATA[
+Suppose we know nothing about the internal structure of a transformation, but we want to determine what entries in the input data set influence a particular entry in the output data set. In this case, even running the entire transformation a second time (knowing the target entry) may provide no additional information about which subset of input data set entries produced that output data set entry. In this worst-case scenario, it would be necessary to run the transformation on all 2^{%n} subcollections of the input data set (for an input data set of size %n), and to check for each one of those 2^{%n} outputs whether the particular entry of interest from the output data set was generated.
+        ]]></text>
+      </fact>
+      <paragraph hooks="math"><![CDATA[
+However, it is possible that a transformation that combines input entries into output entries falls into one of a small number of categories that make it possible to compute per-entry provenance more efficiently.
+      ]]></paragraph>
+      <fact required="true" hooks="math" id="f3951db0b6c94dd4b409e9ebb28bd2cc">
+        <text><![CDATA[
+A transformation is <i>context-free</i> if any two entries in the input data set that contribute to the same output entry always do so (regardless of what other input entries are present in the input data set). If a transformation is context-free, then the provenance information for a given output data set entry can be computed in quadratic time. First, we can partition the input data set using the entries of the output data set (i.e., create one bucket of input data set entries for each output data set entry). Then, we can determine which partition contributed to the output data set entry of interest using linear search.
+        ]]></text>
+      </fact>
+      <fact required="true" hooks="math" id="f3951db0b6c94dd4b409e9ebb28bd2cb">
+        <text><![CDATA[
+A transformation is <i>key-preserving</i> if any two entries under the same keys in the input data set always contribute to an entry with the same output key in the output data set. If a transformation is key-preserving, then the provenance information for a given entry is easy to determine by building up a map from input data set keys to output data set keys, and then performing a linear search over the input data set.
+        ]]></text>
+      </fact>
+      <example required="true" hooks="math" id="f3951db0b6c23dd4b409e9ebb28bd2fd">
+        <text><![CDATA[
+Any <i>relational aggregation</i> (that is, a key-based aggregation operation as defined in the <a href="#2.1">relational model</a> that produces an output data set in which all keys are unique) is always key-preserving and context-free.
+        ]]></text>
+      </example>
+      <paragraph hooks="math"><![CDATA[
+The above example completes our understanding of the complexity of reconstructing per-entry provenance for all the <a href="#9da373c4cc654556bf2fa3fed6d56995">building blocks in the relational model</a>.
+      ]]></paragraph>
+      <table hooks="math" id="5a307822b5aa11e4af63feff819cdc9a"><![CDATA[
+<table class="fig_table">
+ <tr>
+  <td><b>transformation %f</b></td>
+  <td><b>per-entry provenance<br/>reconstruction approach</b></td>
+  <td><b>complexity for input data<br/>set with %n entries</b></td>
+ </tr>
+ <tr> 
+  <td>union<br/>intersection<br/>difference<br/>selection<br/>product</td>
+  <td>linear search over input data set<br/>to find entry</td>
+  <td>O(%n) entry equality checks</td>
+ </tr>
+ <tr> 
+  <td>projection</td>
+  <td>application of transformation once<br/>to each input data set entry</td>
+  <td>O(%n) executions of %f and<br/>O(%n) entry equality checks</td>
+ </tr>
+ <tr> 
+  <td>aggregation</td>
+  <td>application of transformation once<br/>to each input data set entry and<br/>construction of key-to-key map</td>
+  <td>O(%n) executions of %f and<br/>O(%n \log %n) to build and use<br/>key-to-key map</td>
+ </tr>
+</table>
+      ]]></table>
+      <example required="true" hooks="math" id="f3951db0b5c23dd4b109e9ebb28bd2ac">
+        <text><![CDATA[
+A transformation %f that takes a data set of points as its input, runs the %k-means algorithm on those points, and returns a data set of means is <i>not</i> context-free. To see why, consider its behavior on following inputs for %k = 2:
+\begin{eqnarray}
+ %f([(0,0), (2,2)]) & = & [(0,0), (2,2)] \\
+ %f([(0,0), (2,2), (100,100)]) & = & [(1,1), (100,100)]
+\end{eqnarray}
+Notice that in the first case, the input entries (0,0) and (2,2) each produce their own output entry. However, the introduction of a new point (100,100) results in (0,0) and (2,2) both contributing to the same output entry (1,1).
+        ]]></text>
+      </example>
+      <example required="true" hooks="math" id="f3951db0b5c23dd4b109e9ebb28bd2ab">
+        <text><![CDATA[
+A transformation can be context-free but not key-preserving. For example, suppose a transformation aggregates some vectors by key but then discards the key via a projection:
+\begin{eqnarray}
+ [(%j, (0,2)), (%j, (2,0)), (%k, (0,3)), (%k, (3,0))] & \mapsto & [(%j, (2,2)), (%k, (3,3))] & \mapsto & [(2,2), (3,3)]
+\end{eqnarray}
+The above is context-free because there is no way that other input entries can have any influence over the way existing entries aggregate by key. However, they key %j might map to any numeric value key in the output (depending on what the input entries are):
+\begin{eqnarray}
+ [(%j, (0,0))] & \mapsto & [(0,0)] \\
+ [(%j, (0,0)), (%j, (1,1))] & \mapsto & [(1,1)]
+\end{eqnarray}
+        ]]></text>
+      </example>
+      <theorem required="false" hooks="math" id="f3951db0b1c94dd4bbbbe9ebb28bd2cb">
+        <text><![CDATA[
+Any key-preserving transformation is context-free. To see this, suppose that there is some transformation %f that is key-preserving but not context-free. This would imply that there is some set of inputs (%i, %a), (%j, %b), and (%k, %c) for which the definition of context-free is not satisfied, such as a case in which two input entries each map to their own distinct output entries when on their own but map to the same output entry when the third input entry (%k, %c) is introduced:
+\begin{eqnarray}
+ %f([(%i, %a), (%j, %b)]) & = & [(%l, %d)] \\
+ %f([(%i, %a), (%j, %b), (%k, %c)]) & = & [(%l, %d), (%m, %e), (%n, %f)]
+\end{eqnarray}
+However, the above would imply that under different conditions, the keys %i and %j might either both map to a key %l or might map to two different keys %l and %m. But this would imply that entries with the key %j map to entries with either key %l or key %m. This is not key-preserving and contradicts our assumptions, so our premise must have been impossible.
+        ]]></text>
+      </theorem>
+      <text hooks="math"><![CDATA[
+The diagram below illustrates the relationships between the properties discussed above. Notice that whether a transformation is context-free and key-preserving is used to determine whether a transformation that combines input entries might have properties that allow us to compute per-entry provenance more efficiently. There is no need to check whether other transformations (such as projections and products) have these properties because per-entry provenance is <a href="#f3951db0b6c94dd4b409e9ebb28bd2cd">already efficiently computable in those cases</a>.
+      ]]></text>
+      <diagram hooks="math" id="123bf7b584394a8bb3a62e9be3fae8dc"><![CDATA[
+<table class="container">
+  <tr>
+    <td class="box" style="background-color:lightgrey;">
+      data set transformations
+      <table class="container">
+        <tr>
+          <td class="box" style="background-color:powderblue;">
+            transformations that combine multiple<br/>input entries into output entries
+            <br/><span style="font-weight:normal; font-style:italic;">(example: %k-means)</span>
+            <table class="container">
+              <tr>
+                <td class="box" style="background-color:lightgreen;">
+                  context-free transformations
+                  <br/><span style="font-weight:normal; font-style:italic;">(example: <a href="#f3951db0b5c23dd4b109e9ebb28bd2ab">aggregation by key that drops the key</a>)</span>
+                  <table class="container">
+                    <tr>
+                      <td class="box" style="background-color:lightyellow; padding-bottom:4px;">
+                        key-preserving transformations
+                        <br/><span style="font-weight:normal; font-style:italic;">(example: relational aggregation by key)</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td class="box" style="background-color:powderblue;">
+            other transformations
+            <br/><span style="font-weight:normal; font-style:italic;">(examples: selections, projections)</span>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+      ]]></diagram>
+      <paragraph hooks="math"><![CDATA[
+We provide explicit algorithms for computing per-entry provenance in three of the cases outlined above.
+      ]]></paragraph>
+      <example required="true" id="f3951db0b6c94dd4b409e9ebb28bddaa">
+        <text hooks="math"><![CDATA[
+If we introduce a function for computing powersets of entries in a data set (e.g., using a <a href="https://docs.python.org/3/library/itertools.html#itertools-recipes">Python recipe</a> for such a function), we can define an inefficient Python algorithm that can correctly determine per-entry provenance in the <a href="#f3951db0b6c94dd4b409e9ebb28bd2ca">general case</a> (i.e., not knowing any additional information about a transformation <code>f</code>).
+        ]]></text>
+        <code class="py"><![CDATA[
+from itertools import combinations, chain
+
+def powerset(iterable):
+    "powerset([1,2,3]) -> () (1,) (2,) (3,) (1,2) (1,3) (2,3) (1,2,3)"
+    s = list(iterable)
+    return chain.from_iterable(combinations(s, r) for r in range(len(s)+1))
+
+def general_prov(f, X, y):
+    for Y in reversed(powerset(X)): # From largest to smallest subset.
+        if list(f(list(Y))) == [y]:
+            return Y
+        ]]></code>
+      </example>
+      <example required="true" id="f3951db0b6c94dd4b409e9ebb28bd216">
+        <text hooks="math"><![CDATA[
+The function below determines the per-entry provenance for a <a href="#f3951db0b6c94dd4b409e9ebb28bd2cc">context-free transformation</a>. For this example, we assume that all data set entries are of the form (<i>key</i>, <i>value</i>).
+        ]]></text>
+        <code class="py"><![CDATA[
+def context_free_prov(f, X, y):
+
+    # Build the partitions of the input data set.
+    partitions = []
+    for (x_key, x_val) in X:
+        found = False
+        for i in range(0,len(partitions)):
+            if len(f(partitions[i] + [(x_key, x_val)])) == 1:
+                partitions[i].append((x_key, x_val))
+                found = True
+                break
+        # Create a new partition if adding to any other
+        # partition increases the size of the output data set.
+        if found == False:
+            partitions.append([(x_key, x_val)])
+
+    # Find the corresponding partition.
+    for partition in partitions:
+        if y in f(partition):
+             return partition
+        ]]></code>
+      </example>
+      <example required="true" id="f3951db0b6c94dd4b409e9ebb28bd11b">
+        <text hooks="math"><![CDATA[
+The function below determines the per-entry provenance for a <a href="#f3951db0b6c94dd4b409e9ebb28bd2cb">key-preserving transformation</a>. For this example, we assume that all data set entries are of the form (<i>key</i>, <i>value</i>).
+        ]]></text>
+        <code class="py"><![CDATA[
+def key_preserving_prov(f, X, y):
+    keymap = {}
+    
+    # Build up the map from input data set
+    # keys to output data set keys.
+    for (x_key, x_val) in X:
+        (y_key, y_val) = f([(x_key, x_val)])[0]
+        keymap[x_key] = y_key
+    (y_key, y_val) = y
+
+    # Collect all the tuples that contribute
+    # to the target result.
+    pre_image = set()
+    for (x_key, x_val) in X:
+        if keymap[x_key] == y_key:
+             pre_image.add((x_key, x_val))
+    return pre_image
+        ]]></code>
+      </example>
+      <exercise required="true" id="ffbbae67647e4daf838a79fb814e733d">
+        <text hooks="math"><![CDATA[
+For each of the following informal descriptions of data transformations, determine whether computing the per-entry provenance of a row in the output data set is easy (e.g., linear, O(%n \log %n), or quadratic time) or difficult (i.e., cannot be done in polynomial time), assuming that the transformation's implementation is a black box (except for the provided description).
+<ul>
+  <li>Given a data set containing entries of the form (<i>name</i>, <i>age</i>), the transformation produces a list of all entries corresponding to individuals who are of a legal voting age.</li>
+  <li>Given a data set containing entries of the form (<i>product</i>, (<i>department</i>, <i>price</i>, <i>date</i>)) describing sales that take place in a department store, the transformation computes the total revenue for each department to produce entries of the form (<i>department</i>, <i>revenue</i>). Assume that each product appears in exactly one department.</li>
+  <li>Given a data set containing entries of the form (<i>product</i>, (<i>department</i>, <i>price</i>, <i>date</i>)) describing sales that take place in a department store, the transformation computes the total revenue from each department for each possible date to produce entries of the form ((<i>date</i>, <i>department</i>), <i>revenue</i>).</li>
+  <li>Given a data set specifying the geographical locations of a collection of radio receivers in a bounded region, determine an optimal placement of 100 radio towers within that region that minimizes the aggregate of the distances between each tower-receiver pair.</li>
+</ul>
+        ]]></text>
+        <solution hooks="math"><![CDATA[
+The complexities are as follows.
+<ul>
+  <li>Selections simply produce a subset of the original input data set, and per-entry provenance can be computed in linear time for such transformations using a linear search through the input data set. It is not even necessary to compute the original transformation because tuples can be compared directly using equality.</li>
+  <li>We can compute the total revenue for each <i>department</i> using a relational aggregation by key, and all such aggregation transformations are key-preserving. There exists an <a href="#f3951db0b6c94dd4b409e9ebb28bd11b">efficient algorithm</a> to compute per-entry provenance for such transformations.</li>
+  <li>Since a product may be sold on different days, this transformation is not key-preserving. However, since it can be built up using a projection followed by a relational aggregation, it is context-free. Thus, per-entry provenance can be computed efficiently.</li>
+  <li>Computing an optimal placement for the radio towers would require the %k-means algorithm, which is <a href="#f3951db0b5c23dd4b109e9ebb28bd2ab">not context-free</a>. Thus, per-entry provenance cannot be computed efficiently (i.e., it would require exponential time).</li>
+</ul>
+        ]]></solution>
+      </exercise>
+      <exercise required="true" id="a4bbae67647e4daf838a79fb814e733d">
+        <text hooks="math"><![CDATA[
+Given a data set containing entries of the form (<i>restaurant</i>, <i>popularity</i>, <i>location</i>) that describe restaurants within the various neighborhoods in a city, the transformation uses an unknown machine learning algorithm to group the restaurants by similarity of cuisine into categories (each restaurant is assigned to exactly one cuisine category) and produces a data set with entries of the form (<i>cuisine</i>, <i>count</i>) specifying the number of restaurants that specialize in each type of cuisine. If you have no additional information, how difficult will it be to determine the provenance of an individual entry in the output?
+        ]]></text>
+        <solution hooks="math"><![CDATA[
+Since this transformation combines multiple input entries to produce its output entries and we have no additional information about its machine learning algorithm (for instance, it might not be context free), we must assume the worst-case difficulty: exponential time.
+        ]]></solution>
+      </exercise>
+      <paragraph hooks="math"><![CDATA[
+Tracking provenance at a coarse granularity (per data set) is relatively inexpensive in most applications (since the number of data sets is usually orders of magnitude less than the number of individual data set entries), and standards such as PROV provide authors of transformations a way to represent provenance information.
+      ]]></paragraph>
+      <example required="true" id="832a44dd32a640bb981e5fc8902cd348">
+        <text hooks="math"><![CDATA[
+Suppose Alice and Bob want to assemble a script that retrieves some information from an online resource and stores it in a database. We can use the <a href="https://pypi.python.org/pypi/prov"><code>prov</code></a> Python package to programmatically assemble a course granularity provenance record that conforms to the PROV standard and describes a particular execution of this script.
+        ]]></text>
+        <paragraph hooks="math"><![CDATA[
+We first create the document object and define the namespaces we will use for symbols in the document.
+        ]]></paragraph>
+        <code class="py"><![CDATA[
+doc = prov.model.ProvDocument()
+doc.add_namespace('alg', 'http://datamechanics.io/algorithm/alice_bob/') # The scripts in <folder>/<filename> format.
+doc.add_namespace('dat', 'http://datamechanics.io/data/alice_bob/') # The data sets in <user>/<collection> format.
+doc.add_namespace('ont', 'http://datamechanics.io/ontology#')
+doc.add_namespace('log', 'http://datamechanics.io/log#') # The event log.
+doc.add_namespace('bdp', 'https://data.cityofboston.gov/resource/')
+        ]]></code>
+        <text hooks="math"><![CDATA[
+We then use an <i>agent</i> to represent the script, en <i>entity</i> to represent a resource, and an <i>activity</i> to repsent this invocation of the script. We also <i>associate</i> this current activity with the script, and we and indicate that his activity <i>used</i> the entity representing the resource.
+        ]]></text>
+        <code class="py"><![CDATA[
+this_script = doc.agent('alg:example', {prov.model.PROV_TYPE:prov.model.PROV['SoftwareAgent'], 'ont:Extension':'py'})
+resource = doc.entity('bdp:wc8w-nujj', 
+    {'prov:label':'311, Service Requests', 
+    prov.model.PROV_TYPE:'ont:DataResource', 'ont:Extension':'json'}
+  )
+this_run = doc.activity(
+    'log:a'+str(uuid.uuid4()), startTime, endTime, 
+    {prov.model.PROV_TYPE:'ont:Retrieval', 'ont:Query':'?type=Animal+Found&$select=type,latitude,longitude,OPEN_DT'}
+  )
+doc.wasAssociatedWith(this_run, this_script)
+doc.used(this_run, resource, startTime)
+        ]]></code>
+        <text hooks="math"><![CDATA[
+Finally, we define an entity for the data obtained and indicate to what agent it was attributed, by what actvitity it was generated, and from what entity it was derived.
+        ]]></text>
+        <code class="py"><![CDATA[
+found = doc.entity('dat:found', {prov.model.PROV_LABEL:'Animals Found', prov.model.PROV_TYPE:'ont:DataSet'})
+doc.wasAttributedTo(found, this_script)
+doc.wasGeneratedBy(found, this_run, endTime)
+doc.wasDerivedFrom(found, resource, this_run, this_run, this_run)
+        ]]></code>
+        <text hooks="math"><![CDATA[
+We can view our completed provenance record in, for example, JSON form using <code>doc.serialize()</code>.
+        ]]></text>
+      </example>
+    </subsection>
+    <project title="Data Retrieval, Storage, Provenance, and Transformations">
+      <instructions>
+        <text><![CDATA[
+The purpose of this project is to practice using some of the tools available for retrieving and storing data sets within the context of a multi-contributor platform and repository, tracking provenance information for data sets, and performing some transformations using one or both of the presented paradigms.
+        ]]></text>
+        <text><![CDATA[
+For the purposes of this project description, we assume the submitting team consists of two members, Alice and Bob, with the team identifier <code>alice_bob</code> (in accordance with the requirements specified in <b><a href="#project0">Project #0</a></b>).
+        ]]></text>
+      </instructions>
+      <problems>
+        <problem>
+          <parts>
+            <part>
+              <text><![CDATA[
+Follow the GitHub <a href="#A.1">submission instructions</a> by forking the repository at <code><a href="https://github.com/Data-Mechanics/course-2019-spr-proj">https://github.com/Data-Mechanics/course-2019-spr-proj</a></code>. Note that we may commit and push a few additional fixes or updates to this repository before the deadline, so check for updates and pull them into your fork on a regular basis. Set up a MongoDB and Python environment as necessary for the project (including the installation of all dependencies). You should be able to run the <code>setup.js</code> script to prepare the repository, and then to start your MongoDB server with authentication enabled and run the <code>alice_bob/example.py</code> example script.
+              ]]></text>
+            </part>
+            <part>
+              <text><![CDATA[
+As in <b><a href="#project0">Project #0</a></b>, create a folder of the form <code>alice_bob</code> within the top-level directory of the project. All the code constituting your submission, including all of your scripts and algorithm files (i.e., for retrieval of data and for transforming data already within the repository), should be placed within this folder. <b>Do not place data files within this folder, or submit any data sets or data files via GitHub.</b>
+              ]]></text>
+              <paragraph><![CDATA[
+Note that the file name for each script should be reasonably descriptive, as it will act as the identifier for the script. Each script should contain exactly one extension of the <code>dml.Algorithm</code> base class (such that the class name matches exactly the filename). Consult <code>alice_bob/example.py</code> for a working example script and algorithm.
+              ]]></paragraph>
+              <code class="py"><![CDATA[
+class example(dml.Algorithm):
+    contributor = 'alice_bob'
+    reads = []
+    writes = ['alice_bob.lost', 'alice_bob.found']
+
+    @staticmethod
+    def execute(trial = False):
+        ...
+
+    @staticmethod
+    def provenance(doc = prov.model.ProvDocument(), startTime = None, endTime = None):
+        ...
+              ]]></code>
+              <text><![CDATA[
+Beyond this requirement, the scripts should also follow reasonable modularity and encapsulation practices, and should logically perform related operations. A larger number of smaller, simpler, and more reusable scripts that each perform a small task is preferable.
+              ]]></text>
+            </part>
+          </parts>
+        </problem>
+        <problem>
+          <parts>
+            <part>
+              <text><![CDATA[
+Choose <b>at least five</b> publicly available data sets, data streams, services, or documents from <b>at least three</b> different data portals or services. Note that some of your data sets may have similar schemas and may contain similar information, but all five data sets <b>cannot</b> have very similar schemas or very similar information. Write a short narrative and justification (5-10 sentences) explaining how these data sets can be combined to answer an interesting question or solve a problem. You do not need to solve the actual problem in this project, and it is acceptable to merely combine data sets in a way that is likely to support one or more solutions involving the particular data you choose. Include this narrative in a <code>README.md</code> file within your directory (along with any documentation you may write in that file).
+              ]]></text>
+            </part>
+            <part>
+              <text><![CDATA[
+Implement algorithms that retrieve these data sets automatically (i.e., by implementing one or more <code>dml.Algorithm</code> subclasses and defining their <code>reads</code> and <code>writes</code> fields, as well as their <code>execute</code> methods). Any authentication credentials your scripts use should be included in the file <code>auth.json</code>. All your scripts should retrieve the credential information they need from your copy of the file by using the existing <code>dml</code> functionality for doing so.
+              ]]></text>
+              <paragraph><![CDATA[
+<b>Do not submit your <code>auth.json</code> file and do not include hard-coded authentication credentials in your code.</b> We already added it to the <code>.gitignore</code> file to ensure you do not accidentally submit the credentials file. The course staff will use their own authentication credentials when running your code. Your <code>README.md</code> file should list any idiosyncratic details associated with the services and/or credentials needed to run your scripts.
+              ]]></paragraph>
+            </part>
+            <part>
+              <text><![CDATA[
+Implement algorithms that perform at least <b>three non-trivial transformations</b> that merge, combine, or otherwise process some of the five data sets into three new data sets. These new data sets should be inserted into the repository. You can choose one of the existing algorithms or tools we have considered so far, or something else (assuming you thoroughly document in your <code>README.md</code> file how to obtain and run those tools).
+              ]]></text>
+            </part>
+          </parts>
+        </problem>
+        <problem>
+          <text><![CDATA[
+Extend each script that you implemented in <b>Problem #2</b> so that it can produce the provenance information documenting the activities that take place during the operation of that script (i.e., by defining its <code>provenance()</code> method). Each algorithm should generate a single provenance document when its <code>provenance()</code> method is invoked.
+          ]]></text>
+        </problem>
+      </problems>
+    </project>
+  </section>
+  <section title="Systems, Models, and Algorithms">
+    <text><![CDATA[
+When using mathematics to solve problems involving real-world entities and phenomenon, we can introduce the notions of a <i>system</i>  (i.e., an organized collection of interdependent components and their possible states) that has distinct <i>system states</i> (which can capture spatial and temporal information about the system components, their behaviors, and their relationships). A mathematical <i>model</i> captures only some parts of the system and the possible system states, abstracting the other details away, and it does so using some particular symbolic language or representation.
+    ]]></text>
+    <paragraph hooks="math"><![CDATA[
+Four common abstract mathematical objects used to represent models of systems are particularly relevant given our application domain of interest:
+<ul>
+  <li>graphs consisting of a collection of nodes and edges (possibly weighted and directed) between those nodes,</li>
+  <li>vector spaces consisting of sets of vectors,</li>
+  <li>systems of equations and inequalities (or, equivalently, sets of <i>constraints</i> or set of logical formulas), and</li>
+  <li>functions (whether continuous or discrete).</li>
+</ul>
+In many cases, these mathematical objects can be used to represent each other (e.g., a graph can be represented as a function or as a system of equations), but each has its own characteristics that make it well-suited for modeling certain kinds of systems. Very often, two or more of these are combined when modeling a system.
+    ]]></paragraph>
+    <paragraph hooks="math"><![CDATA[
+Most data sets describing a real-world system are using one or more of the above languages for modeling that system. Identifying which of these is being used can inform our decisions about what techniques we can use to answer questions about that system or to solve problems involving that system. It can also tell us how we can convert to a different language or representation in order to convert, combine, or derive new data sets.
+    ]]></paragraph>
+    <subsection title="Systems, Models, and Metrics">
+      <text><![CDATA[
+We can provide abstract definitions for systems, models, and metrics. These then allow us to characterize satisfaction, search, and optimization problems in a general and consistent way.
+      ]]></text>
+      <definition required="true" hooks="math" id="f3951db0b6c94dd4b409e9ebb28bd2aa">
+        <text><![CDATA[
+A <i>system</i> is a set %S of distinct <i>system states</i> (possibly infinite). Often, each possible system state %s \in %S is called a <i>model</i> of the system.
+        ]]></text>
+      </definition>
+      <text><![CDATA[
+One mathematical object that is commonly used to represent systems is a vector space where individual vectors are the system states (i.e., models) of that system.
+      ]]></text>
+      <definition required="true" hooks="math" id="f3951db0b6c94dd4b409e9ebb28bd2ab">
+        <text><![CDATA[
+A <i>constraint set</i> is a set of logical formulas (written using a formal language that may contain terms such as integers, vector, matrices, sets, and so on), usually used to identify a subset of a system (i.e., a subset of the possible systems states or models). A system state or model <i>satisfies</i> a constraint or constraint set if the logical formulas are true for that model. The subset of all states that satisfy the constraints is sometimes called the <i>feasible region</i>.
+        ]]></text>
+      </definition>
+      <text hooks="math"><![CDATA[
+When using vector spaces, it is often possible to represent constraints using a matrix equation, e.g.:
+\begin{eqnarray}
+ %M \cdot %x & = & %b
+\end{eqnarray}
+In the above, %M might be a matrix from \R<sup>%n \times %m</sup>, %x might be a variable vector in \R^{%m}, and %b might be a vector in \R^{%n}.
+      ]]></text>
+      <definition required="true" hooks="math" id="4cc8b03c0ccd4318adb78496bcc730e3">
+        <text><![CDATA[
+Given a system %S and a set of constraints, a <i>constraint satisfaction problem</i> is the problem of finding a model (or set of models) in %S that satisfies that set of constraints.
+        ]]></text>
+      </definition>
+      <definition required="true" hooks="math" id="4cc8b03c0ccd4318adb78496bcc730e2">
+        <text><![CDATA[
+A <i>metric</i> over a system %S is a function %f: %S \rightarrow \R that maps system states to real numbers.
+        ]]></text>
+      </definition>
+      <definition required="true" hooks="math" id="f5cea5a026964477a864a079fefbf6e7">
+        <text><![CDATA[
+Given a system %S and metric %f, an <i>optimization problem</i> is the problem of finding %s \in %S that maximizes or minimizes %f:
+\begin{eqnarray}
+ argmax<sub>%s \in %S</sub> &nbsp;%f(%s) \\
+ argmin<sub>%s \in %S</sub> &nbsp;%f(%s)
+\end{eqnarray}
+        ]]></text>
+      </definition>
+      <example required="true" id="abc51db0b6c94dd4b409e9ebb28bddaa">
+        <text hooks="math"><![CDATA[
+Computing the argmax or argmin operation in the relational or MapReduce paradigms can be non-trivial, but it is still possible. For example, in the relational paradigm it is possible to compute it by combining two projections, an aggregation, and a selection.
+        ]]></text>
+        <code class="py"><![CDATA[
+def argmax(X, f):
+    Y = [f(x) for x in X] # Projection.
+    y_max = aggregate(Y, max)
+    XF = [(x, f(x)) for x in X] # Projection.
+    xs = [x for (x,y) in XF if y == y_max] # Selection.
+    return xs[0]
+        ]]></code>
+      </example>
+      <exercise required="true" id="abc51ab0bec94dd4b409e9ebb28bddaa">
+        <text hooks="math"><![CDATA[
+Consider a state space %S = {0,1}^4 with states of the form %x = (%x_1, %x_2, %x_3, %x_4) and the following set of constraints:
+\begin{eqnarray}
+  %x_1 > %x_2 \\
+  %x_3 \geq %x_4
+\end{eqnarray}
+<ul>
+  <li>What is the size of the state space?</li>
+  <li>Find a state in %S that solves this constraint satisfaction problem.</li>
+  <li>Suppose that this problem involves maximizing the objective function %f(%x) = %x_1 + %x_2 + %x_3 + %x_4; what state in %S solves this optimization problem?</li>
+</ul>
+        ]]></text>
+        <solution hooks="math">
+          <text hooks="math"><![CDATA[
+In order to demonstrate how such problems can be solved programmatically, we will answer the posed questions using Python. We define the various parts of the problem below.
+          ]]></text>
+          <code class="py"><![CDATA[
+from itertools import product
+S = list(product(*[{0,1}]*4)) # State space.
+R = [(x1,x2,x3,x4) for (x1,x2,x3,x4) in S if x1 > x2 and x3 >= x4] # Feasible region.
+metric = lambda s: sum(s) # Metric.
+o = max(R, key=metric) # State that maximizes metric.
+          ]]></code>
+          <text hooks="math"><![CDATA[
+We can now answer each question.
+          ]]></text>
+          <code class="py"><![CDATA[
+>>> len(S) # Size of state space.
+16
+>>> R[0] # A state that solves the constraint satisfaction problem.
+(1, 0, 0, 0)
+>>> o # # The state that solves the optimization problem.
+(1, 0, 1, 1)
+          ]]></code>
+        </solution>
+      </exercise>
+      
+      <example required="true" id="a2c51db0b6494dd4b409e9ebb28bddaa">
+        <text hooks="math"><![CDATA[
+Suppose we want to create an approximate, discrete version of the %k-means algorithm. We can do so by treating the outcome of the %k-means algorithm as the solution to an optimization problem. In order to make this concrete, we will work with the following set of points and Euclidean distances (as in a <a href="#cba5543907854ed28dbd3eeb874ebd54">previous example</a>).
+        ]]></text>
+        <code class="py"><![CDATA[
+P = [(1,2),(4,5),(1,3),(10,12),(13,14),(13,9),(11,11)]
+
+def dist(p, q):
+    (x1,y1) = p
+    (x2,y2) = q
+    return (x1-x2)**2 + (y1-y2)**2
+        ]]></code>
+        <text hooks="math"><![CDATA[
+For %k = 1, we can create a state space <code>S</code> that consists of all possible positions for the mean within a particular bounded region. The metric would be the sum of the distances from all the points in <code>P</code> to the mean <code>m</code>. The solution would be the one that minimizes the metric.
+        ]]></text>
+        <code class="py"><![CDATA[
+S = list(product(range(0,20), range(0,20))) # Possible locations for one mean.
+
+def metric(m):
+    return sum([dist(m, p) for p in P])
+
+o = min(S, key=metric)
+        ]]></code>
+        <text hooks="math"><![CDATA[
+For %k = 2, we would need to create a state space that represents all possible pairs of means. We would also need to adjust the metric function to consider in the sum only the distances from each point to the <i>closest</i> (i.e., minimum-distance) mean to that point.
+        ]]></text>
+        <code class="py"><![CDATA[
+V = list(product(range(0,20), range(0,20))) # Possible locations for one mean.
+S = list(product(V, V)) # Possible pairs of means.
+
+def metric(M):
+    return sum([min([dist(m, p) for m in M]) for p in P])
+
+o = min(S, key=metric)
+        ]]></code>
+      </example>
+      <exercise required="true" id="f5cea5a026964477a864a079fefbf6ea">
+        <text hooks="math"><![CDATA[
+Consider the following problem: given a data set describing a set of 10,000 spectators and their heights, determine if it is possible to seat them in a stadium of 10,000 seats so that no one blocks anyone else's view. Determine whether this is a constraint satisfaction problem or an optimization problem, and identify the state space, constraint set, and (if applicable) metric.
+        ]]></text>
+        <solution hooks="math">
+          <text hooks="math"><![CDATA[
+One approach is to use a variable that ranges over the real numbers to represent the height of the person in each seat. This leads to a state space of \R<sup>10,000</sup>. Any individual system state (x_1, ..., x<sub>10,000</sub>) is then a vector with 10,000 entries; each entry represents the height of the person in that particular seat.
+          ]]></text>
+          <paragraph hooks="math"><![CDATA[
+The constraints must encode two requirements: (1) that no two seats that are positioned with one in front of the other have a taller person in the front seat, and (2) for every possible height %h, that the number of seats occupied by someone having height %h matches the number of spectators of height %h.
+          ]]></paragraph>
+          <paragraph hooks="math"><![CDATA[
+For the first requirement, we can introduce a constraint for every pair of such seats. It might look something like %x_{%i} + 50 \leq %x_{%j} for every pair of seats %x_{%i} and %x_{%j} where %x_{%i} is in front of %x_{%j}. Given that the layout of the stadium is roughly planar, we would expect that this leads to a number of constraints that is within a constant factor of 10,000.
+          ]]></paragraph>
+          <paragraph hooks="math"><![CDATA[
+For the second requirement, suppose that the number of spectators of height %h is given by %N<sub>%h</sub>. Then we would need to generate a somewhat complex constraint for every possible height %h. We can do so using the building blocks for relational transformations: <code>[(h, N_h)] == select(aggregate([(seat_hgt, 1) for seat_hgt in x], sum), lambda t: t[0] == h)</code>. Note that while this is a fairly complex expression, it is still a logical formula that must be either true or false. In principle, we could expand it into a long expression consisting of basic logical and arithmetic operators.
+          ]]></paragraph>
+        </solution>
+      </exercise>
+      <exercise required="true" id="f5cea5a026964477a864a079fefbf6cd">
+        <text hooks="math"><![CDATA[
+For each of the following scenarios, determine whether it is an instance of a constraint satisfaction problem or an instance of an optimization problem. If it is an optimization problem, identify the objective function.
+<ul>
+  <li>Find the lowest-cost route between two destinations on a transportation network.</li>
+  <li>Given a social network where any pair of individual members can be "connected", determine if the whole network is connected (i.e., there exists a path from every member to every other member).</li>
+  <li>Given a social network where any pair of individual members can be "connected", find the smallest group of individuals that must be removed in order to make the network disconnected.</li>
+</ul>
+        ]]></text>
+        <solution hooks="math">
+          <text hooks="math"><![CDATA[
+<ul>
+  <li>
+    For the first example, the solution could be as follows.
+    <ul>
+      <li>
+        Each possible state is a path in the graph. A path is just a subset of the edges, so the state space can be the collection of all subsets of the edges. If the set of edges is %E, then the state space could be {0,1}<sup>|E|</sup> where each vector of the form (%x_1, ..., %x<sub>|E|</sub>) where %x_{%i} \in {0,1} represents whether a particular edge is included in the path.
+      </li>
+      <li>
+        Constraints would specify connectivity constraints (e.g., two edges %i and %j are connected then one constraint could be %x_{%i} \leq %x_{%j} to ensure that if edge %i is included in the path then so is edge %j).
+      </li>
+      <li>
+        The number of edges in the path specifies the path length. Thus, the metric could be %f(%x_1, ..., %x<sub>|E|</sub>) = %x_1 + ... +  %x<sub>|E|</sub>. The state (i.e., path) that minimizes this metric while satisfying the constraints would then be a shortest path.
+      </li>
+    </ul>
+  </li>
+</ul>
+          ]]></text>
+        </solution>
+      </exercise>
+    </subsection>
+    <subsection title="Linear systems, satisfiability modulo theories, and linear programming">
+      <text hooks="math"><![CDATA[
+We often say a system or subset of a system is <i>linear</i> if it can be modeled using a Euclidean vector space and can be defined using a collection of linear constraints of the form:
+\begin{eqnarray}
+ %a_1 \cdot %x_1 + ... + %a_{%n} \cdot %x_{%n} &nbsp;&#9830;&nbsp; %c
+\end{eqnarray}
+Where (%x_1, ..., %x_{%n}) \in \R^{%n} is a vector, the %a_{%i} are coefficients in \R, %c in \R is a constant, and &#9830; is a relation operator such as =, \leq, &lt;, \geq, or &gt;. Note that the constraints contain no higher-order %x_{%i} terms such as %x_{%i}^2.
+      ]]></text>
+      <text hooks="math"><![CDATA[
+There are three common techniques for solving constraint satisfaction and optimization problems involving linear systems:
+<ul>
+  <li>finding an exact or approximate solution (e.g., using some combination of matrix inversion, QR factorization, and <a href="https://en.wikipedia.org/wiki/Ordinary_least_squares">ordinary least squares</a>),</li>
+  <li>checking if a solution exists (and finding a witness system state or model proving this), and</li>
+  <li>finding a solution that minimizes or maximizes some (linear) metric over the vector space.</li>
+</ul>
+The third item (solving an optimization problem) is arguably a generalization of the first approach if we remove the requirement that the metric must be linear (since the first approach minimizes the Euclidean distance metric, which is quadratic and thus non-linear).
+      ]]></text>
+      <example required="true" id="0c4124b538154b5794b64fababbdd3e9">
+        <text hooks="math"><![CDATA[
+Suppose we want to use an SMT solver to solve a flow maximization problem for a flow graph (the variable on each represents the flow amount, and the parenthesized number is the maximum possible flow on that edge):
+        ]]></text>
+        <text><![CDATA[
+<div class="pql" style="border:0px solid #000000; height:200px; display:inline-block; width:100%;">
+!table([
+  [null,                  null,                            ('dd:x4 (6)`dr:x5 (3)``&bull;'), null, null],
+  [('r:x1 (?)``&bull;'), ('ur:x2 (7)`dr:x3 (8)``&bull;'), null,       ('r:x7 (5)``&bull;'), ('&bull;')],
+  [null,                  null,                            ('ur:x6 (4)``&bull;'), null, null],
+])
+</div>
+        ]]></text>
+        <text hooks="math"><![CDATA[
+Here, the system is the set of possible states of the graph in terms of the amount of material flowing along each edge (we model the flow that goes along each edge in the graph as a variable ranging over \R, and the flow in the overall graph containing seven edges as a vector in \R^7).
+        ]]></text>
+        <code class="py"><![CDATA[
+import z3
+
+(x1,x2,x3,x4,x5,x6,x7) = [z3.Real('x'+str(i)) for i in range(1,8)]
+
+S = z3.Solver()
+
+# Only allow non-negative flows.
+for x in (x1,x2,x3,x4,x5,x6,x7):
+    S.add(x >= 0)
+    
+# Edge capacity constraints.
+S.add(x2 <= 7, x3 <= 8, x4 <= 6)
+S.add(x5 <= 3, x6 <= 4, x7 <= 5)
+
+# Constraints derived from graph topology.
+S.add(x1 == x2+x3, x2 == x4+x5, x3+x4 == x6, x5+x6 == x7)
+
+S.add(x1 > 0) # We want a positive flow.
+
+print(S.check())
+print(S.model())
+        ]]></code>
+        <text hooks="math"><![CDATA[
+If we are allowed to vary only the variable for incoming edge, we can use the SMT solver together with binary search to find the maximum flow through the graph.
+        ]]></text>
+        <code class="py"><![CDATA[
+flow = 0
+for i in range(5, -1, -1):
+    S.push()
+    S.add(x1 >= (2**i + flow))
+    if str(S.check()) != 'unsat':
+        flow += 2**i
+    S.pop()
+
+S.add(x1 >= flow)
+print(S.model())
+        ]]></code>
+        <text hooks="math"><![CDATA[
+We could alternatively build up the constraint set from a starting matrix.
+        ]]></text>
+        <code class="py"><![CDATA[
+def dot(xs, ys):
+    return sum([x*y for (x,y) in zip(xs, ys)])
+
+x = [x1,x2,x3,x4,x5,x6,x7]
+
+M = [
+  [ 0,-1, 0, 0, 0, 0, 0],
+  [ 0, 0,-1, 0, 0, 0, 0],
+  [ 0, 0, 0,-1, 0, 0, 0],
+  [ 0, 0, 0, 0,-1, 0, 0],
+  [ 0, 0, 0, 0, 0,-1, 0],
+  [ 0, 0, 0, 0, 0, 0,-1],
+
+  [ 1, 0, 0, 0, 0, 0, 0],
+  [ 0, 1, 0, 0, 0, 0, 0],
+  [ 0, 0, 1, 0, 0, 0, 0],
+  [ 0, 0, 0, 1, 0, 0, 0],
+  [ 0, 0, 0, 0, 1, 0, 0],
+  [ 0, 0, 0, 0, 0, 1, 0],
+  [ 0, 0, 0, 0, 0, 0, 1],
+
+  [-1, 1, 1, 0, 0, 0, 0],
+  [ 0,-1, 0, 1, 1, 0, 0],
+  [ 0, 0,-1,-1, 0, 1, 0],
+  [ 0, 0, 0, 0,-1,-1, 1]
+  ]
+
+b = [-7,-8,-6,-3,-4,-5,
+      0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0]
+
+S = z3.Solver()
+
+for i in range(len(M)):
+    S.add(b[i] <= dot(M[i], x))
+
+print(S.check())
+print(S.model())
+        ]]></code>
+      </example>
+      <example required="true" id="0c4124b538154b5794b64fababbdd3e3">
+        <text hooks="math"><![CDATA[
+Suppose we want to use linear programming to solve the problem described in the <a href="#0c4124b538154b5794b64fababbdd3e9">example above</a>.
+        ]]></text>
+        <code class="py"><![CDATA[
+from scipy.optimize import linprog
+
+M = [
+  [ 1,-1,-1, 0, 0, 0, 0],
+  [ 0, 1, 0,-1,-1, 0, 0],
+  [ 0, 0, 1, 1, 0,-1, 0],
+  [ 0, 0, 0, 0, 1, 1,-1],
+  ]
+b = [0, 0, 0, 0]
+c = [-1, 0, 0, 0, 0, 0, 0]
+bounds = [(0, None), (0, 7), (0, 8), (0, 6), (0, 3), (0, 4), (0, 5)]
+
+result = linprog(c, A_ub = M, b_ub = b, bounds=bounds, options={"disp": True})
+print(result)
+        ]]></code>
+        <text hooks="math"><![CDATA[
+Note that this technique produces a potentially different solution from the one in the <a href="#0c4124b538154b5794b64fababbdd3e9">example above</a> (though both are optimal).
+        ]]></text>
+      </example>
+      <example required="true" id="27c51ab0bec94dd4b409e9ebb28bddaa">
+        <text hooks="math"><![CDATA[
+Suppose that you want to distribute two types of infrastructure improvements across the 20 neighborhoods of a city: road repairs and electric grid updates. Road repairs cost $100,000 per mile and electric grid updates cost $50,000 per mile. You have access to a data set %I that contains tuples of the form (<i>neighborhood</i>, <i>road-miles</i>, <i>grid-miles</i>) describing the quantity of each type of infrastructure in each neighborhood.
+        ]]></text>
+        <paragraph hooks="math"><![CDATA[
+You want to distribute the cost of improvements equitably such that every neighborhood receives exactly the same amount of funding, and every neighborhood is able to use all that funding it receives. If your overall budget is capped at $10,000,000, is this possible?
+        ]]></paragraph>
+        <text hooks="math"><![CDATA[
+One approach is to fix some constant %c and create two variables %x_{%i} and %y_{%i} and three constraints for every entry (%i, %r_{%i}, %g_{%i}) in %I:
+\begin{eqnarray}
+  %x_{%i} \cdot 100,000 + %y_{%i} \cdot 50,000 \geq %c \\
+  %x_{%i} \leq %r_{%i} \\
+  %y_{%i} \leq %g_{%i}
+\end{eqnarray}
+The above constraints ensure that at least %c funding is used in the neighborhood, but also that the amount of infrastructure repairs does not exceed the potential needs of the neighborhood. Thus, the state space consists of 20 \cdot 2 dimensions (i.e., the two vectors %x and %y having one component for every neighborhood).
+        ]]></text>
+        <paragraph hooks="math"><![CDATA[
+Note that if we wanted to check whether it is possible to disburse <i>all</i> the available funding equitably, we could set %c = 10,000,000/20. Alternatively, if we wanted to maximize %c, we could try larger and larger values of %c until it cannot be increased without causing the problem to become unsolvable. Alternatively, we could treat %c as another variable and define the objective function that must be maximized as %f(%x, %y, %c) = %c.
+        ]]></paragraph>
+      </example>
+    </subsection>
+    <subsection title="Graph and Spatial Problems as Constraint Satisfaction and Optimization Problems">
+      <text><![CDATA[
+We have already seen how we can define some basic algorithms that have natural spatial interpretations (basic clustering and shortest) using data transformations assembled from building blocks drawn from the relational and the MapReduce paradigms. These algorithms employed two different representations: a vector space (clustering) and a graph (shortest paths). In this section, we review how algorithms such as these can be viewed as solutions to constraint satisfaction and/or optimization problems.
+      ]]></text>
+      <definition required="true" id="22551db0b6c94dd4b409e9ebb28bddaa">
+        <text hooks="math"><![CDATA[
+Suppose we have a graph consisting of a set of nodes %N = {%n_1, %n_2, ...} and a set of edges %E of the form (%n_1, %n_2). The <i>minimum spanning tree</i> of this graph is the smallest subset %T \subset %E such that in the subgraph consisting of the edges in %T, every node can be reached from every other node (i.e., by traversing a path along the edges in %T).
+        ]]></text>
+      </definition>
+      <example required="true" id="22551db0b6c94344b409e9ebb28bddaa">
+        <text hooks="math"><![CDATA[
+The problem of finding a minimum spanning tree can be broken down into a constraint satisfaction problem:
+<ul>
+  <li>the set of system states is the collection of edge subsets (i.e., all 2<sup>|%E|</sup> possible subsets);</li>
+  <li>the set of constraints is the collection of reachability requirements (one for every pair nodes stating that those two nodes must be reachable from one another) and the requirement that the subset %T must be a tree (or, equivalent, that it must have at most |%N| %- 1 edges).</li>
+</ul>
+This problem can also be broken down into an optimization problem that minimizes a metric:
+<ul>
+  <li>the set of system states is the collection of edge subsets (i.e., all 2<sup>|%E|</sup> possible subsets);</li>
+  <li>the set of constraints is the collection of reachability requirements (one for every pair nodes stating that those two nodes must be reachable from one another);</li>
+  <li>the metric is a function that computes the size of %T (i.e., the number of edges in the spanning subtree).</li>
+</ul>
+        ]]></text>
+      </example>
+    </subsection>
+    <subsection title="Decomposition Techniques">
+      <text hooks="math"><![CDATA[
+General-purpose techniques for solving constraint satisfaction and optimization problems can sometimes be inefficient (potentially having a running time that is exponential in the number of state space dimensions and/or the number of constraints). This can be especially costly when state space dimensions or constraints are derived from large data sets having hundreds, thousands, or hundreds of thousands of entries.
+      ]]></text>
+      <paragraph hooks="math"><![CDATA[
+In such scenarios, it may be possible to apply general-purpose decomposition techniques for solving constraint satisfaction and optimization problems in a scalable way. Usually, these rely on certain assumptions about the properties of the constraints and/or the objective function.
+      ]]></paragraph>
+      <definition required="true" id="0c4124b538154b5794b64fababbdda54">
+        <text hooks="math"><![CDATA[
+Suppose we have a constraint satisfaction problem with an %n-dimensional state space %S containing system states of the form (%x_1, ...,%x_{%n}) and a set of constraints %C. If the set of constraints %C can be separated into two disjoint subsets such that %C = %C_1 \cup %C_2 where %C_1 and %C_2 share no variables, then the problem can be <i>decomposed</i> into two <i>independent subproblems</i>.
+        ]]></text>
+      </definition>
+      <fact required="true" id="0c4124b538154b5794b64fababbdda55">
+        <text hooks="math"><![CDATA[
+Suppose that a constraint satisfaction problem with state space %S and constraint set %C can be decomposed into two independent subproblems where %C = %C_1 \cup %C_2. If %s_1 \in %S is a solution to the subproblem corresponding to %C_1 and %s_2 \in %S is a solution to the subproblem corresponding to %C_2, then we can combine %s_1 and %s_2 to obtain a state that satisfies all the constraints in %C (using a linear-time scan through the representation of %s_1 and %s_2).
+        ]]></text>
+      </fact>
+      <definition required="true" id="0c4124b538154b5794b64fababbdda57">
+        <text hooks="math"><![CDATA[
+Suppose we have a constraint satisfaction problem with an (%n+%m)-dimensional state space %S containing system states of the form (%x_1, ...,%x_{%n}, %y_1, ..., %y_{%m}) and a set of constraints %C = %C<sub><b>x</b></sub> \cup %C<sub><b>xy</b></sub> \cup %C<sub><b>y</b></sub> where:
+<ul>
+  <li>all constraints in %C<sub><b>x</b></sub> only contain variables from the list %x_1, ...,%x_{%n};</li>
+  <li>all constraints in %C<sub><b>y</b></sub> only contain variables from the list %y_1, ...,%y_{%m};</li>
+  <li>every constraint in %C<sub><b>xy</b></sub> has at least one variable from %x_1, ...,%x_{%n} and at least one from %y_1, ...,%y_{%n}.</li>
+</ul>
+Then the constraints contained in %C<sub><b>xy</b></sub> are called the <i>complicating constraints</i> and the variables found in those constraints are called the <i>complicating variables</i>.
+        ]]></text>
+      </definition>
+      <example required="true" id="0c4b2425381a4b5794b64fababbdda57">
+        <text hooks="math"><![CDATA[
+Suppose we have a constraint satisfaction problem with states of the form (%x_1, ...,%x_{%n}, %y_1, ..., %y_{%m}) \in {0,1}<sup>%n+%m</sup> and a constraint set %C = %C<sub><b>x</b></sub> \cup %C<sub><b>xy</b></sub> \cup %C<sub><b>y</b></sub>. Suppose also that %x_1 and %y_1 are the only complicating variables and %x_1 \geq %y_1 is the only complicating constraint. Then we can consider four different subsets of the state space:
+<ul>
+  <li>all states in which %x_1 = 0 and %y_1 = 0;</li>
+  <li>all states in which %x_1 = 1 and %y_1 = 0;</li>
+  <li>all states in which %x_1 = 0 and %y_1 = 1;</li>
+  <li>all states in which %x_1 = 1 and %y_1 = 1.</li>
+</ul>
+Note that for each of the four scenarios, we can easily extend the two subproblems corresponding to %C<sub><b>x</b></sub> and %C<sub><b>y</b></sub> with one additional constraint (such as %x_1 = 1 for %C<sub><b>x</b></sub> and %y_1 = 0 for %C<sub><b>y</b></sub>). We can then eliminate the complicating constraint (which is redundant at that point), allowing us to decompose the new problem into two independent subproblems. If we find a solution to both subproblems in any of these four cases, then we have found a solution to the overall original problem corresponding to %C.
+        ]]></text>
+        <paragraph hooks="math"><![CDATA[
+This approach can lead to significant performance gains if the algorithmic complexity of solving the constraint satisfaction problem is worse than linear. For example, suppose that there are %k constraints and solving the problem takes exponential time in the number of constraints (such as 2^{%k}). If we can split the problem into two independent subproblems (each of size %k/2), then we have can compute the overall running time needed to solve <i>all four</i> pairs of independent subproblems:
+\begin{eqnarray}
+  4 \cdot 2 \cdot 2<sup>%k/2</sup> & = & 2<sup>%k/2 + 3</sup>
+\end{eqnarray}
+The running time 2<sup>%k/2 + 3</sup> is substantially faster than 2^{%k} for large %k. In fact, 2<sup>%k/2 + 3</sup> \approx \sqrt(2^{%k}).
+        ]]></paragraph>
+        <paragraph hooks="math"><![CDATA[
+In addition, note that the third scenario where %x_1 = 0 and %y_1 = 1 does not satisfy the complicated constraint %x_1 \geq %y_1, so we need not consider it at all. Thus, the running time would actually be 3 \cdot 2 \cdot 2<sup>%k/2</sup> if we avoid this case.
+        ]]></paragraph>
+      </example>
+      <fact required="true" id="0c4124b538154b5794b64fababbdda89">
+        <text hooks="math"><![CDATA[
+Suppose we have an optimization problem with an (%n+%m)-dimensional state space %S containing system states of the form (%x_1, ...,%x_{%n}, %y_1, ..., %y_{%m}), a set of constraints %C = %C<sub><b>x</b></sub> \cup %C<sub><b>y</b></sub>, and an objective function %f(%x_1, ...,%x_{%n}, %y_1, ..., %y_{%m}) = %g(%x_1, ...,%x_{%n}) + %h(%y_1, ...,%y_{%m}). Note that there are no complicating constraints or variables.
+        ]]></text>
+        <paragraph hooks="math"><![CDATA[
+In this scenario, we can decompose the problem into two independent optimization problems (with objective functions %g and %h, respectively). We can then find a solution %s_1 that optimizes %g under constraints %C<sub><b>x</b></sub> and a solution %s_2 that optimizes %h under constraints %C<sub><b>y</b></sub>. Finally, we can combine these two solutions %s_1 and %s_2 into a solution for the overall problem that optimizes %f. As in the corresponding <a href="#0c4124b538154b5794b64fababbdda55">fact</a> about constraint satisfaction problems, we can then use a linear-time scan through the representations of %s_1 and %s_2 to build this overall solution.
+        ]]></paragraph>
+      </fact>
+    </subsection>
+  </section>  
+  <section title="Statistical Analysis">
+    <text hooks="math"><![CDATA[
+Given a data set some of the optimization techniques we have studied can be used to find a best-fit model for that data. For example, given a data set of points in \R^2 representing some collection of observations measured along two dimensions, it is possible to find an  ordinary least squares "best fit" linear function (using algebra, optimization, gradient descent, and so on). However, just because we have found a "best fit" model for a data set from some given space of functions does not mean that the model is actually a good one for that particular data set. Perhaps the relationship between the two dimensions is not linear, or even completely non-existent. How can we determine if this is the case?
+    ]]></text>
+    <paragraph hooks="math"><![CDATA[
+In this section, we will present some statistical methods that can help us decide whether a linear model is actually appropriate for a given two-dimensional data set, and to quantify how appropriate it might be. We will review the mathematical foundations underlying the methods, how they can be applied, and how they can be realized as data transformations in the paradigms we have studied in earlier sections.
+    ]]></paragraph>
+    <subsection title="Review of Facts about Projections from Linear Algebra">
+      <text hooks="math"><![CDATA[
+We review a few useful definitions and facts about vectors in \R^{%n} from linear algebra. These provide a mathematical foundation for defining the statistical constructs discussed in this section.
+      ]]></text>
+      <definition required="true" hooks="math" id="aabb49ea963b4301995bcd19c5442807">
+        <text><![CDATA[
+A <i>vector</i> is an ordered, finite tuple of real numbers (%x_1, ..., %x_{%n}) \in \R^{%n}. Note that we will use individual variables to denote an entire vector (e.g., %x \in \R^{%n}), and that same variable with a subscript index (e.g., %x_{%i}) to denote individual components of that vector; thus, we have that %x = (%x_1, ..., %x_{%n}).
+        ]]></text>
+      </definition>
+      <fact required="true" hooks="math" id="ff3b49ea963b4301995bcd19c5442807">
+        <text><![CDATA[
+For a vector %x \in \R^{%n} and a scalar %s \in \R, we can scale %x by computing %s \cdot %x = (%s \cdot %x_1, ..., %s \cdot %x_{%n}). Note that for a scalar %s \in \R, we often use the shorthand notation %x/%s to mean (1/%s) \cdot %x.
+        ]]></text>
+      </fact>
+      <definition required="true" hooks="math" id="ff3249ea963b4301995bcd19c5442807">
+        <text><![CDATA[
+For a vector %x \in \R^{%n} the Euclidean length or <i>norm</i> of %x is ||%x|| = \sqrt(%x_1^2 + ... + %x_{%n}^2). We can also obtain a normalized unit vector of length one that points in the same direction as %x by computing %x/||%x||.
+        ]]></text>
+      </definition>
+      <definition required="true" hooks="math" id="ff3249ea963b4301995bcd19c5442803">
+        <text><![CDATA[
+Given two vectors %x \in \R^{%n} and %y \in \R^{%n}, the <i>dot product</i> of the two vectors is %x \cdot %y = %x_1 \cdot %y_1 + ... + %x_{%n} \cdot %y_{%n}.
+        ]]></text>
+      </definition>
+      <fact required="true" hooks="math" id="bca249ea963b4301995bcd19c5442803">
+        <text><![CDATA[
+We can compute the projection of a vector %x \in \R^{%n} onto another vector %y \in \R^{%n} by computing (%x \cdot (%y/||%y||)) \cdot (%y/||%y||).
+        ]]></text>
+      </fact>
+      <example required="true" hooks="math" id="ff3249ea963b4301995bcd19c5442801">
+        <text><![CDATA[
+Given two vectors (5,7) \in \R^2 and (3,0) \in \R^2, the normalized version of (3,0) is (1/3) \cdot (3,0) = (1,0). The projection of (5,7) onto (3,0) is then:
+\begin{eqnarray}
+  ((5,7) \cdot ((1/3) \cdot (3,0))) \cdot ((1/3) \cdot (3,0) & = & ((5,7) \cdot (1,0)) \cdot (1,0) \\
+                                  & = & (5 \cdot 1 + 7 \cdot 0) \cdot (1,0) \\
+                                  & = & 5 \cdot (1,0) \\
+                                  & = & (5,0).
+\end{eqnarray}
+        ]]></text>
+      </example>
+      <theorem required="true" title="Cauchy-Schwarz inequality" hooks="math" id="ff3b49ea963b4301995bcd19c544280a">
+        <text><![CDATA[
+Given two vectors %x \in \R^{%n} and %y \in \R^{%n}, the following inequality holds:
+\begin{eqnarray}
+  |%x \cdot %y| / (||%x|| \cdot ||%y||) & \leq & 1
+\end{eqnarray}
+Another way of writing the above is:
+\begin{eqnarray}
+  |&nbsp; (%x/||%x||) \cdot (%y/||%y||) &nbsp;|  & \leq & 1
+\end{eqnarray}
+The intuitive interpretation is as follows: if we try to find the projection of a unit vector %x/||%x|| onto another unit vector %y/||%y||, the resulting vector has length at most 1.
+        ]]></text>
+      </theorem>
+    </subsection>
+    <subsection title="Defining Mean and Standard Deviation using Concepts in Linear Algebra">
+      <text hooks="math"><![CDATA[
+In this section, we will assume that we are working with a data set of the form [(%x_1, %y_1), ..., (%x_{%n}, %y_{%n})] that contains %n (not necessarily distinct) tuples and where for 1 \leq %i \leq %n we have (%x_{%i}, %y_{%i}) \in \R^2. For the purposes of analysis, we will also often use two projections of this data set as vectors in their own right: (%x_1, ...,%x_{%n}) \in \R^{%n} and (%y_1, ...,%y_{%n}) \in \R^{%n}. We will also use the shorthand notation %x = (%x_1, ...,%x_{%n}) and %y = (%y_1, ...,%y_{%n}).
+      ]]></text>
+      <definition required="true" title="arithmetic mean" hooks="math" id="2a91b48a2e1040808d9538ff45aede2b">
+        <text><![CDATA[
+We define the arithmetic <i>mean</i> &mu;(%x) of a one-dimensional or one-column data set %x \in \R^{%n} where %x = (%x_1, ..., %x_{%n}) as:
+\begin{eqnarray}
+  &mu;(%x) & = & (1/%n) \cdot (%x_1 + ... + %x_{%n})
+\end{eqnarray}
+        ]]></text>
+      </definition>
+      <fact required="true" hooks="math" id="2a91b48a2e1040808d9538ff45aede2a">
+        <text><![CDATA[
+For %x \in \R^{%n}, &mu;(%x) is the quantity that minimizes the following objective function:
+\begin{eqnarray}
+  &mu;(%x) & = & argmin<sub>%a \in \R</sub> (\Sigma<sub>%i=1</sub><sup>%n</sup> (%x_{%i} - %a)^2)
+\end{eqnarray}
+To prove the above, assume that the true mean is some specific value %m. Next, we choose some arbitrary %a in the formula and proceed algebraically from there by multiplying the terms under the summation and then using the distributive property to factor out the terms without an index subscript:
+\begin{eqnarray}
+  \Sigma<sub>%i=1</sub><sup>%n</sup> (%x_{%i} - %a)^2 & = & \Sigma<sub>%i=1</sub><sup>%n</sup> ((%x_{%i} %- %m) + (%m %- %a))^2 \\
+                                                      & = & \Sigma<sub>%i=1</sub><sup>%n</sup> ( 
+                                                            (%x_{%i} %- %m)^2 +
+                                                            2 \cdot ((%x_{%i} %- %m) \cdot (%m %- %a))
+                                                            + (%m %- %a)^2 )\\
+                                                      & = & \Sigma<sub>%i=1</sub><sup>%n</sup> (%x_{%i} %- %m)^2 +
+                                                            2 \cdot (%m %- %a) \cdot (\Sigma<sub>%i=1</sub><sup>%n</sup> (%x_{%i} %- %m))
+                                                            + \Sigma<sub>%i=1</sub><sup>%n</sup> (%m %- %a)^2 \\
+                                                      & = & \Sigma<sub>%i=1</sub><sup>%n</sup> (%x_{%i} %- %m)^2 +
+                                                            2 \cdot (%m %- %a) \cdot (\Sigma<sub>%i=1</sub><sup>%n</sup> %x_{%i} %- \Sigma<sub>%i=1</sub><sup>%n</sup> %m))
+                                                            + \Sigma<sub>%i=1</sub><sup>%n</sup> (%m %- %a)^2
+\end{eqnarray}
+In the above, notice that \Sigma<sub>%i=1</sub><sup>%n</sup> %x_{%i} = \Sigma<sub>%i=1</sub><sup>%n</sup> %m because %m is the true mean, so the second term is just 2 \cdot (%m %- %a) \cdot 0 = 0. Thus, we can eliminate it. Furthermore, we have \Sigma<sub>%i=1</sub><sup>%n</sup> (%m %- %a)^2 = %n \cdot (%m %- %a)^2. Applying all these substitutions, we have:
+\begin{eqnarray}
+ \Sigma<sub>%i=1</sub><sup>%n</sup> (%x_{%i} - %a)^2 & = & (\Sigma<sub>%i=1</sub><sup>%n</sup> (%x_{%i} %- %m)^2 ) + %n \cdot (%m %- %a)^2
+\end{eqnarray}
+Notice that setting %a = %m minimizes the above because the first term does not contain %a at all, and the second term becomes 0 exactly when %a = %m. Thus, the %a that minimizes the objective \Sigma<sub>%i=1</sub><sup>%n</sup> (%x_{%i} - %a)^2 is exactly the mean.
+        ]]></text>
+      </fact>
+      <definition required="true" hooks="math" id="dfa1b48a2e1040808d9538ff45aede2a">
+        <text><![CDATA[
+For a given vector %x \in \R^{%n}, suppose we use &mu;(%x) to create a vector with %n entries (&mu;(%x), &mu;(%x), ..., &mu;(%x)) in which every entry is &mu;(%x). We can call this vector %x<sub>&mu;</sub>.
+        ]]></text>
+      </definition>
+      <fact required="true" hooks="math" id="bd91b48a2e1040808d9538ff45aede2a">
+        <text><![CDATA[
+The vector %x<sub>&mu;</sub> minimizes a particular objective function:
+\begin{eqnarray}
+  %x<sub>&mu;</sub> & = & argmin<sub>%v is on the diagonal in \R^{%n}</sub> ||%x - %v||
+\end{eqnarray}
+Another way of thinking about this is that %x<sub>&mu;</sub> as defined above is the projection of the vector %x onto the diagonal line in \R^{%n}. This means that %x<sub>&mu;</sub> is also the point on the diagonal in \R^{%n} that is <i>closest</i> to %x.
+        ]]></text>
+      </fact>
+      <text hooks="math"><![CDATA[
+Notice that the geometric, vector-based interpretation of the mean preserves an important property of the mean of a data set %x: rearranging the elements of %x should not change the mean. In fact, this is guaranteed because the dimensions are interchangeable: for any permuted version of %x (let us call it %x'), the distance of %x' from the diagonal will always be the same as the distance of %x from the diagonal because we can simply relabel the dimensions to bring %x' back to its original form %x.
+      ]]></text>      
+      <example required="true" hooks="math" id="2a91b48aaa1040808d9538ff45aede2c">
+        <text><![CDATA[
+Suppose that our data consists of only two points in one dimension: %x_1 = 10 and %x_2 = 2. We can compute:
+\begin{eqnarray}
+  &mu;(%x) & = & (1/2) \cdot (10 + 2) & = & 6 \\
+  %x<sub>&mu;</sub> & = & (6, 6)
+\end{eqnarray}
+Notice that (6, 6) is on the diagonal in \R^2. Notice also that the vector %x %- %x<sub>&mu;</sub> = (10, 2) - (6, 6) = (4, -4) has a slope of &nbsp;%- 1 (it is orthogonal to the diagonal). This is consistent with %x<sub>&mu;</sub> being a projection of %x onto the diagonal.
+        ]]></text>
+      </example>
+      <definition required="true" title="standard deviation" hooks="math" id="2a91b48a2e1040808d9538ff45aede2c">
+        <text><![CDATA[
+We define the <i>standard deviation</i> \sigma(%x) of a one-dimensional or one-column data set %x \in \R^{%n} where %x = (%x_1, ..., %x_{%n}) as:
+\begin{eqnarray}
+  \sigma(%x) & = & \sqrt( &nbsp; (1/%n) \cdot ((%x_1 %- &mu;(%x))^2 + ... + (%x_{%n} %- &mu;(%x))^2) &nbsp; )
+\end{eqnarray}
+        ]]></text>
+      </definition>
+      <fact required="true" hooks="math" id="2a91b48a2e1040808d9538ff45aede2d">
+        <text><![CDATA[
+For %x \in \R^{%n}, \sigma(%x) can be rewritten in terms of the norm (i.e., length) ||%x %- &mu;(%x)|| of the vector %x %- &mu;(%x):
+\begin{eqnarray}
+  \sigma(%x) & = & (1/\sqrt(%n)) \cdot \sqrt( &nbsp; ((%x_1 %- &mu;(%x))^2 + ... + (%x_{%n} %- &mu;(%x))^2) &nbsp; ) \\
+             & = & (1/\sqrt(%n)) \cdot ||%x %- %x<sub>&mu;</sub>||
+\end{eqnarray}
+In other words, we can view the standard deviation of a data vector %x as a normalized distance between %x and the diagonal in \R^{%n}.
+        ]]></text>
+      </fact>
+      <text hooks="math"><![CDATA[
+We might ask why the extra scalar term 1/\sqrt(%n) is necessary in the above. After all, the term ||%x %- %x<sub>&mu;</sub>|| already measures the distance between the vector %x and the diagonal. Furthermore, the individual %x_{%i} terms must represent some units specific to the domain from which the data is drawn (e.g., temperature, height, velocity, and so on), while %n and \sqrt(%n) have no units relevant to the domain of the data (they are just quantities associated with how many data points were collected).
+      ]]></text>
+      <paragraph hooks="math"><![CDATA[
+The reason is that when the number of components in the vector %x changes, the number of dimensions in the space from which the vector is drawn also changes. But the number of dimensions influences the lengths of vectors (if the individual vector components are about the same): the more dimensions there are, the longer a vector can become because the distances from all dimensions contribute to the length of a vector.
+      ]]></paragraph>
+      <example required="true" hooks="math" id="ff91b48a2e10408add9538ff45aede2d">
+        <text><![CDATA[
+Consider the lengths of the following vectors (each drawn from a vector space having its own distinct number of dimensions):
+\begin{eqnarray}
+  ||(1, 1)|| & = & \sqrt(2) \\
+  ||(1, 1, 1)|| & = & \sqrt(3) \\
+  ||(1, 1, 1, 1)|| & = & \sqrt(4) \\
+  ||(1, 1, 1, 1, 1)|| & = & \sqrt(5) \\
+   & \vdots & \\
+  ||(1, 1, 1, 1, 1, ..., 1)|| & = & \sqrt(%n)
+\end{eqnarray}
+In general, we can see that the following holds for a vector of length %n in which components are all the same value %s:
+\begin{eqnarray}
+  ||(%s, %s, %s, ..., %s)|| & = & \sqrt(%n \cdot %s^2) \\
+                            & = & %s \cdot \sqrt(%n)
+\end{eqnarray}
+        ]]></text>
+      </example>
+      <text hooks="math"><![CDATA[
+The above example shows that if we want to compare the standard deviations of two distinct data sets that are of different sizes, we need to account for the fact that the vectors are drawn from different vector spaces (in terms of the number of dimensions). The scalar term 1/\sqrt(%n) in the standard deviation formula accounts for this difference and makes comparisons possible.
+      ]]></text>
+      <paragraph hooks="math"><![CDATA[
+One practical issue that can be a concern when defining statistical analysis workflows (e.g., using the relational or MapReduce paradigms) over large data sets is how optimizations based on algebraic laws may interact with the representation size of numerical values within the language, library, or framework being used.
+      ]]></paragraph>
+      <example required="true" hooks="math" id="ff91b48a2e10408ad29538ff45aedebd">
+        <text><![CDATA[
+Suppose that we have a large data set %x \in \R<sup>1000</sup>consisting of 1000 entries: %x = (%x_1, ..., %x<sub>1000</sub>). Assume that 995 of these entries are approximately 0.1 while the other five are all larger (i.e., let us assume they are all 2). Furthermore, suppose that we have a representation size for floating point numbers such that the smallest floating point number we can represent is 0.001 (anything else is cut off and thus rounded to 0).
+        ]]></text>
+        <paragraph><![CDATA[
+If we want to compute the mean, we might decide to first scale every entry in the vector %x by dividing it by %n to obtain the vector (%x_1/%n, ..., %x<sub>1000</sub>/%n). However, notice that this will lead to 0.1/1000 = 0.0001 as the true mathematical answer for most of the data. Due to rounding errors, 995 of the data points will be treated as if they were 0. Thus, we will have:
+\begin{eqnarray}
+  &mu;(%x) & = & (2 + 2 + 2 + 2 + 2) / 1000 \\
+          & = & 0.01
+\end{eqnarray}
+But notice that the true mean is quite different; the error we see above is an entire order of magnitude (and grows as the number of data points grows):
+\begin{eqnarray}
+  &mu;(%x) & = & (2 + 2 + 2 + 2 + 2 + 0.1 \cdot 995) / 1000 \\
+          & = & (10 + 99.5) / 1000 \\
+          & = & 0.1095
+\end{eqnarray}
+One intuitive response might be to avoid the optimization and perform the summation of all components of %x before performing division by %n. But this may again lead to an issue when there are too many data points, as the total may exceed the maximum representation size of a number!
+        ]]></paragraph>
+      </example>
+      <text><![CDATA[
+Issues such as the above are less common in contemporary tool chains because many libraries use representations for numerical data structures that allow arbitrary precision and size. If such a library is not available, however, we must ensure that our optimizations do not introduce such errors. In the specific scenario above, the solution might be to split the data up into smaller chunks, perform the optimization over those small chunks, and then aggregate the results of those individual computations (though this would only work for associative operations such as summation).
+      ]]></text>
+    </subsection>
+    <subsection title="Covariance and Correlation">
+      <text hooks="math"><![CDATA[
+Given a data set that has two-dimensional entries of the form (%x_{%i}, %y_{%i}), it is possible to compare the two dimensions by comparing their standard deviation vectors.
+      ]]></text>
+      <definition required="true" title="covariance" hooks="math" id="2a91b48a2e1040808d9538ff45aede2e">
+        <text><![CDATA[
+For %x \in \R^{%n} and %y \in \R^{%n}, we define the <i>covariance</i> between %x and %y as:
+\begin{eqnarray}
+  cov(%x, %y) & = & (1/%n) \cdot ((%x_1 - &mu;(%x)) \cdot (%y_1 - &mu;(%y)) + ... + (%x_{%n} - &mu;(%x)) \cdot (%y_{%n} - &mu;(%y))) \\
+              & = & (1/%n) \cdot (\Sigma<sub>%i=1</sub><sup>%n</sup> (%x_{%i} - &mu;(%x)) \cdot (%y_{%i} - &mu;(%y))) \\
+              & = & (1/%n) \cdot (%x %- %x<sub>&mu;</sub>) \cdot (%y %- %y<sub>&mu;</sub>) \\
+              & = & ((1/\sqrt(%n)) \cdot (%x %- %x<sub>&mu;</sub>)) \cdot ((1/\sqrt(%n)) \cdot (%y %- %y<sub>&mu;</sub>))
+\end{eqnarray}
+Notice that the last line in the above indicates that we can view the covariance as the dot product of the vectors (%x %- %x<sub>&mu;</sub>) and (%y %- %y<sub>&mu;</sub>) (each of which represent how %x and %y deviate from their respective means).
+        ]]></text>
+      </definition>
+      <definition required="true" title="correlation coefficient" hooks="math" id="2a91b48a2e1040808d9538ff45aede2f">
+        <text><![CDATA[
+For %x \in \R^{%n} and %y \in \R^{%n}, we define the <i>correlation coefficient</i> (also known as the <i>Pearson product-moment correlation coefficient</i>) between %x and %y as:
+\begin{eqnarray}
+  &rho;(%x, %y) & = & cov(%x, %y) / (\sigma(%x) \cdot \sigma(%y))
+\end{eqnarray}
+        ]]></text>
+      </definition>
+      <fact required="true" hooks="math" id="2a91b48a2e1040808d9538ff45aeae2f">
+        <text><![CDATA[
+For %x \in \R^{%n} and %y \in \R^{%n}, it must be that -1 \leq &rho;(%x, %y) \leq 1. We can see this by noticing that the formula for &rho;(%x, %y) appears in the <a href="#ff3b49ea963b4301995bcd19c544280a">Cauchy-Schwarz inequality</a>:
+\begin{eqnarray}
+  &rho;(%x, %y) & = & cov(%x, %y) / (\sigma(%x) \cdot \sigma(%y)) \\
+                & = & ((1/%n) \cdot (%x %- %x<sub>&mu;</sub>) \cdot (%y %- %y<sub>&mu;</sub>)) / ((1/\sqrt(%n)) \cdot ||%x %- %x<sub>&mu;</sub>|| \cdot (1/\sqrt(%n)) \cdot ||%y %- %y<sub>&mu;</sub>||) \\
+                & = & ((1/%n) \cdot (%x %- %x<sub>&mu;</sub>) \cdot (%y %- %y<sub>&mu;</sub>)) / ((1/%n) \cdot ||%x %- %x<sub>&mu;</sub>|| \cdot ||%y %- %y<sub>&mu;</sub>||) \\
+                & = & ((%x %- %x<sub>&mu;</sub>) \cdot (%y %- %y<sub>&mu;</sub>)) / (||%x %- %x<sub>&mu;</sub>|| \cdot ||%y %- %y<sub>&mu;</sub>||)
+\end{eqnarray}
+Notice that the only difference between the above and the Cauchy-Schwarz inequality is that in the above, the numerator is not guaranteed to be positive. Thus, we have:
+\begin{eqnarray}
+  %-1 & \leq & cov(%x, %y) / (\sigma(%x) \cdot \sigma(%y)) & \leq & 1
+\end{eqnarray}
+In addition to being bounded by %-1 and 1, the correlation coefficient has some other useful properties. If %x and %y have a positive linear correlation, then &rho;(%x, %y) is positive. If they have a negative linear correlation, it is negative. Given two pairs of data sets %x, %y and %x', %y', if |&rho;(%x, y)| > |&rho;(%x', y')|, then %x and %y have a stronger correlation with each other than do %x' and %y'.
+        ]]></text>
+      </fact>
+      <text><![CDATA[
+While the correlation coefficient is useful for comparing correlations, the quantity itself should not be used to infer anything about the extent of the correlation. To do that with some rigor, it is necessary to introduce a few additional concepts.
+      ]]></text>
+      <example required="true" hooks="math" id="2a91b48aaa1040808d9538bb45aede2c">
+        <text><![CDATA[
+Suppose that our data consists of only a pair of two-dimensional tuples: %x = (2, 6) and %y = (20, 60). In other words, the data set is [(2,20), (6,60)]. Notice that the slopes of the orthogonal projections of %x and of %y onto the diagonal are the same, and if we normalize these projections, they become the same vector. That means (%x %- %x<sub>&mu;</sub>) / ||%x %- %x<sub>&mu;</sub>|| = (%y %- %y<sub>&mu;</sub>) / ||%y %- %y<sub>&mu;</sub>||. But the dot product of a vector with itself is the square of its length: %v \cdot %v = ||%v||^2. Thus, we have:
+\begin{eqnarray}
+  cov(%x, %y) / (\sigma(%x) \cdot \sigma(%y)) & = & (%x %- %x<sub>&mu;</sub>) \cdot (%y %- %y<sub>&mu;</sub>) / (||%x %- %x<sub>&mu;</sub>|| \cdot ||%y %- %y<sub>&mu;</sub>||) & = & 1
+\end{eqnarray}
+Thus, because the two dimensions have a positive linear correlation in this example, the correlation coefficient is 1.
+        ]]></text>
+      </example>
+    </subsection>
+    <subsection title="Observations, Hypothesis Testing, and Significance">
+      <text><![CDATA[
+The correlation coefficient gives us a way to quantify that there may exist a correlation between two dimensions in a data set. However, this correlation may be an artifact of the way we happened to obtain the data. For example, we may have obtained a biased sample. We can account for this by modeling the likelihood of obtaining a biased sample given the assumption that no correlation exists. If it is very unlikely that we would obtain a sample with the observed correlation if no correlation actually exists, then we might conclude that it is likely that a correlation does exist.
+      ]]></text>
+      <paragraph><![CDATA[
+To take this approach, we need to compare the correlation we observe against something (i.e., to decide how likely or unlikely it is if there is no correlation). This means we need to define mathematically what it means for there to be no correlation.
+      ]]></paragraph>
+      <definition required="true" title="distribution" hooks="math" id="3331b48a2e1040808d9538ff45aede3a">
+        <text><![CDATA[
+A <i>distribution</i> over a set %S is a function %f: %S \rightarrow \R. If %S represents a set of possible observations of a system (e.g., a collection of system states), then a distribution %f might represent the probability that the system is in that state, or the frequency with which that system state has been or can be observed.
+        ]]></text>
+      </definition>
+      <definition required="true" title="p-value" hooks="math" id="3331b48a2e1040808d9538ff45aede2f">
+        <text><![CDATA[
+Let a subset of the real number line %S \subset \R represent all possible system states that can be observed, and let %f be a distribution over %S that represents the probability of observing each of the possible states in %S. Given some state %s \in %S, the probability of observing %s is then %f(%s). We define the <i>p-value</i> at the observed state %s to be the probability of observing any state that is equal to or more extreme than the state %s.
+        ]]></text>
+      </definition>
+      <text hooks="math"><![CDATA[
+One way to define which states are more extreme is to consider all the states from %s to the nearest endpoint. Suppose %S is an interval [%a, %b]. If %s > (%a %- %b) / 2, then the %p-value would be computed by taking the definite integral of %f from %s to %b. Otherwise, it would be computed by taking the definite integral of %f from %s to %a.
+      ]]></text>
+      <paragraph hooks="math"><![CDATA[
+In order to use the %p-value concept to reason about correlation coefficients, it is necessary to model how the correlation coefficient should behave if no correlation exists. One way to do this using the data alone is to consider every permutation of the data.
+      ]]></paragraph>
+      <example required="true" hooks="math" id="2bb1b48aaa1040808d9538bb45aede2c">
+        <text><![CDATA[
+Assume we have a two-dimensional data set [(%x_1, %y_1), ..., (%x_{%n}, %y_{%n})], also represented by %x \in \R^{%n} and %y \in \R^{%n}. One way to obtain a range of possible correlation coefficients is to compute the correlation coefficient for all %n! possible permutations of the second dimension. Intuitively, if the data has no correlation, then performing this permutation should not change the correlation coefficient much. On the other hand, if the data does have a correlation, we should get a distribution of correlation coefficients with respect to which the true correlation coefficient is "extreme".
+        ]]></text>
+        <code class="py"><![CDATA[
+from random import shuffle
+from math import sqrt
+
+data = [(18, 28), (24, 18), (27, 31), (14, 15), (46, 23),
+        (36, 19), (27, 10), (34, 25), (19, 15), (13, 13),
+        (4, 2), (17, 20), (28, 12), (36, 11), (26, 14),
+        (19, 19), (24, 13), (25, 6), (20, 8), (17, 22),
+        (18, 8), (25, 12), (28, 27), (31, 28), (35, 22),
+        (17, 8), (19, 19), (23, 23), (22, 11)]
+x = [xi for (xi, yi) in data]
+y = [yi for (xi, yi) in data]
+
+def permute(x):
+    shuffled = [xi for xi in x]
+    shuffle(shuffled)
+    return shuffled
+
+def avg(x): # Average
+    return sum(x)/len(x)
+
+def stddev(x): # Standard deviation.
+    m = avg(x)
+    return sqrt(sum([(xi-m)**2 for xi in x])/len(x))
+
+def cov(x, y): # Covariance.
+    return sum([(xi-avg(x))*(yi-avg(y)) for (xi,yi) in zip(x,y)])/len(x)
+
+def corr(x, y): # Correlation coefficient.
+    if stddev(x)*stddev(y) != 0:
+        return cov(x, y)/(stddev(x)*stddev(y))
+
+def p(x, y):
+    c0 = corr(x, y)
+    corrs = []
+    for k in range(0, 2000):
+        y_permuted = permute(y)
+        corrs.append(corr(x, y_permuted))
+    return len([c for c in corrs if abs(c) >= abs(c0)])/len(corrs)
+        ]]></code>
+        <text><![CDATA[
+In the above, we compute the correlation coefficient for a large number of permuted data sets. We then compute the fraction of these data sets that have a correlation coefficient with a higher absolute value than the correlation coefficient of the original data. We can call this fraction the %p-value. Ideally, we would try all possible permutations; since this is infeasible, we can use this technique to get an approximation.
+        ]]></text>
+        <paragraph><![CDATA[
+Alternatively, we can use a library to compute the same information. The <code>scipy.stats.pearsonr()</code> function will return the correlation coefficient and the %p-value.
+        ]]></paragraph>
+        <code class="py"><![CDATA[
+import scipy.stats
+print(scipy.stats.pearsonr(x, y))
+        ]]></code>
+      </example>
+      <text hooks="math"><![CDATA[
+Another approach is to mathematically derive a distribution of correlation coefficients based on some assumptions about how the observation vectors %x and %y are distributed if they are independent of one another (i.e., not correlated) and each follow some distribution (e.g., the normal distribution). Then, computing a definite integral of this distribution from some specific observation to the nearest boundary would yield the %p-value for that observation. Taking this approach usually requires parameterizing the distribution using the size of the data set (i.e., the number of samples) because this can influence how the distribution of correlation coefficients should be computed.
+      ]]></text>
+      <example required="true" id="084e12ab2226470ebe2d13d00f0d1103">
+        <text hooks="math"><![CDATA[
+Suppose that you have a data set of %n observations in which each tuple is of the form (%w_{%i}, %x_{%i}, %y_{%i}, %z_{%i}), where %w = (%w_1, ..., %w_{%n}), %x = (%x_1, ..., %x_{%n}), %y = (%y_1, ..., %y_{%n}) and %z = (%z_1, ..., %z_{%n}). You compute some covariance and correlation coefficient quantities and find the following relationships:
+\begin{eqnarray}
+  cov(%x, %y) & &gt; & cov(%w, %z) \\
+  &rho;(%y, %z) & &gt; & &rho;(%w, %x) \\
+  &rho;(%w, %x) & &gt; & 0
+\end{eqnarray}
+<ul>
+  <li>Can you conclude that the correlation between %x and %y is stronger than the correlation between %w and %z?</li>
+  <li>Can you conclude that the correlation between %y and %z is stronger than the correlation between %w and %x?</li>
+  <li>Suppose that we change the last inequality to &rho;(%y, %z) < 0. Does this change your answers to any of the above?</li>
+</ul>      
+        ]]></text>
+      </example>
+      <exercise required="true" hooks="math" id="084e12ab2226470ebe2d13d00f0d1aaa">
+        <text><![CDATA[
+Suppose you have a data set %D consisting of tuples of the form (%x_{%i}, %y_{%i}) and you want to define the necessary transformations using the MapReduce paradigm to compute the covariance for this data set. Provide the definitions of the map and reduce operations necessary to accomplish this.
+        ]]></text>
+        <solution>
+          <text><![CDATA[
+Computing the average would require that we emit tuples of the form (*, %x_{%i}, %y_{%i}, 1) that all have the same key * and then reduce them with a component-wise addition operation. We would then perform another mapping from the data set of totals that contains only one entry of the form (*, %t<sub>%x</sub>, %t<sub>%y</sub>, %c) to a data set containing a single tuple (%t<sub>%x</sub>/%c, %t<sub>%y</sub>/%c) = (&mu;(%x), &mu;(y)). We will call this data set containing a single entry %M.
+          ]]></text>
+          <paragraph><![CDATA[
+Next, we would need to take the product %M and %D that has tuples of the form (%x_{%i}, %y_{%i}, &mu;(%x), &mu;(%y)), and would compute the covariance using a map operation that produces (*, (%x_{%i} %- &mu;(%x)) \cdot (%y_{%i} %- &mu;(%y)), 1) and a reduce operation that uses component-wise addition. A final map operation would convert the resulting single tuple by dividing both totals by the count, as before.
+          ]]></paragraph>
+          <paragraph><![CDATA[
+If we also wanted to compute the standard deviations, we would use an approach similar to the one used for computing the averages. We would then take the product of the two singleton data sets to compute the final result.
+          ]]></paragraph>
+          <paragraph><![CDATA[
+The Python implementation below illustrates the techniques described above.
+          ]]></paragraph>
+          <code class="py"><![CDATA[
+D = [(1,2), (3,4), (5,6)]
+
+def reducer(k, xycs):
+    (tx, ty, n) = (0, 0, 0)
+    for (x, y, c) in xycs:
+        (tx, ty, n) = (tx + x, ty + y, n + c)
+    return (tx/n, ty/n)
+
+[(mx, my)] = reduce(reducer, map(lambda x,y: [("*", (x, y, 1))], D))
+
+def reducer(k, ps):
+    (tp, n) = (0, 0)
+    for (p, c) in ps:
+        (tp, n) = (tp + p, n + c)
+    return (tp/n,)
+
+[(cov,)] = reduce(reducer, map(lambda x,y: [("*", ((x-mx) * (y-my), 1))], D))
+          ]]></code>
+        </solution>
+      </exercise>
+      <example required="true" id="084e12ab2226470ebe2d13d00f0d1aab">
+        <text hooks="math"><![CDATA[
+Suppose you have a data set %D consisting of tuples of the form (%x_{%i}, %y_{%i}) and you want to compute the correlation coefficient for this data set with a transformation sequence that uses building blocks from the relational paradigm. The flow diagram for this sequence of transformations is provided below.
+        ]]></text>
+        <text><![CDATA[
+<div class="pql" style="border:0px solid #000000; height:400px; display:inline-block; width:100%;">
+!table([
+  [['dr:prod`r:proj``(xi,yi)'],                     ['r:agg plus``(xi,yi,1)'], ['d:proj``(sx,sy,n)']],
+  [['d:agg plus``(((xi-&mu;(x))^2)/n, ((y-&mu;(y))^2)/n)'],  ['rd:proj`l:proj``(xi,yi,&mu;(x), &mu;(y), n)'],   ['l:prod``(&mu;(x) = sx/n, &mu;(y) = sy/n, n)']],
+  [['d:proj``(&sigma;(x)^2, &sigma;(y)^2)'], ['d:prod``(cov(x, y)'], ['l:agg plus``(1/n)*(x-&mu;(x))*(y-&mu;(y))']],
+  [['r:prod``(&sigma;(x), &sigma;(y))'], ['r:proj``(cov(x,y), &sigma;(x), &sigma;(y))'], ['(&rho;(x, y))']]
+])
+</div>
+        ]]></text>
+      </example>
+    </subsection>
+    <subsection title="Sampling and Inference">
+      <text><![CDATA[
+Often, data sets are partial observations of the overall system. Despite this, we may still be able to infer things about the system's properties from those partial observations. In this subsection we go over just a few of the many methods available for making inferences based on data obtained via sampling.
+      ]]></text>
+      <definition required="true" title="sampling" hooks="math" id="3331b48a2e1040808d9538ff45ae342f">
+        <text><![CDATA[
+Given some data set %S (which may not be known in its entirely and may only exist in theory, e.g., the data set of all humans, or the data set of all Earth-size planets in the galaxy), we call any subset %T \subset %S a <i>sample</i> of %S.
+        ]]></text>
+      </definition>
+      <text><![CDATA[
+Typically, the data set being sampled will contain records or tuples, each corresponding to an item or an individual. Each tuple provides some information about the properties or measurements of that item or individual along certain dimensions (e.g., size, location, and so on).
+      ]]></text> 
+      <definition required="true" title="probability sampling" hooks="math" id="3331b48a2e1040808d9538ff15ae342f">
+        <text><![CDATA[
+A <i>probability sample</i> of a data set %S is any sample %T \subset %S that is collected under the condition that for every tuple, the probabiility of selecting that tuple is known in advance.
+        ]]></text>
+      </definition>
+      <fact required="true" title="proportional reasoning between independent variables" hooks="math" id="1121b48a2e1040808d9538ff15aeaaaf">
+        <text><![CDATA[
+Assume a data set %S has information that can be used to derive two relevant binary characteristics describing the individuals or items in that data set (e.g., whether an individual is male or female, whether an individual resides in a particular neighborhood, and so on). We can define two (possibly overlapping) subsets %A \subset %S and %B \subset %S corresponding to those subsets that have each of those characteristics.
+        ]]></text>
+        <paragraph><![CDATA[
+If the two characteristics are independent we can conclude that:
+\begin{eqnarray}
+  |%A \cap %B|/|%B| & = & |%A \cap %S|/|%S| & = & |%A|/|%S|
+\end{eqnarray}
+In other words, if we treat the tuples from %B as a sample of %S and we find the fraction of those tuples that are also in %A, we can conclude that the same would have occurred if we had sampled the entirety of %S.
+        ]]></paragraph>
+      </fact>
+      <example required="true" hooks="math" id="2bb1b48aaa1040808d9538bb4baedb2c">
+        <text><![CDATA[
+Assume we know that within a certain geographical region, one out of every 10 people is a member of an online social networking mobile application that collects the geographical locations of its users. Suppose we take a sample of how many unique users were present in a particular neighborhood within that region over the course of a week, and we get a total of 1200 users. Assuming that there is no correlation between that particular neighborhood and the popularity of that mobile application (i.e., residency in that neighborhood and membership in the social network are independent variables), we can then infer the total population in that neighborhood by solving the following equation:
+\begin{eqnarray}
+  1/10 & = & 1200/%n
+\end{eqnarray}
+The above yields %n = 12,000, so we can conclude that there are about 12,000 residents in that particular neighborhood based on our observations.
+        ]]></text>
+      </example>
+      <text><![CDATA[
+In the <a href="#2bb1b48aaa1040808d9538bb4baedb2c">above example</a>, we could have also worked in the other direction if we only knew the overall population in the region, the population of the neighborhood, and the popularity of the application within the population in that neighborhood. This would allow us to derive the total number of users of the application in the region.
+      ]]></text>
+      <fact required="true" title="capture-recapture" hooks="math" id="1121b48a2e1040808d9538ff15ae342f">
+        <text><![CDATA[
+Suppose that we can use probability sampling of a data set of size %N, we know that the probability of selecting any individual tuple is equivalent to 1/%N, and we do not know the size %N of the data set. In addition, suppose we are allowed to "mark" any tuple that appears in a sample we take so that we can identify it (with complete certainty) as a previously marked tuple if we see it in subsequent samples.
+        ]]></text>
+        <paragraph><![CDATA[
+Under these conditions, we can estimate the size of the entire data set (an unknown quantity) in the following way. First, we take a sample of size %n of the data set, and we mark every tuple in that sample. Next, we take another (independent) sample of size %K and count the number of marked tuples in that sample (suppose it is %k \leq %K). We can then solve the following equation for %N:
+\begin{eqnarray}
+  %k/%K & = & %n/%N \\
+  %N & = & (%n \cdot %K) / %k
+\end{eqnarray}
+        ]]></paragraph>
+      </fact>
+      <example required="true" hooks="math" id="24b1b48aaa1040808d9538bb4baedb2c">
+        <text><![CDATA[
+Suppose that we want to know how many distinct people regularly visit a particular grocery store, and we can identify visitors in some way (e.g., by recording their unique identifiers). We can fix a particular time period and collect the identifiers of all the people who visit that store (suppose we collect %n of them). We can then fix another time period, again record the identifiers of all %K visitors during that time period, and then determine what fraction %k/%K of the identifiers from the first collection appears in the second collection. We could then estimate that the total number of individuals who visit the store regularly is around (%n \cdot %K) / %k.
+        ]]></text>
+      </example>
+      <exercise required="true" hooks="math" id="084e12ab2226470ebe2d13d00f0d1aac">
+        <text><![CDATA[
+You are obtaining a probability sample of a population such that the probability of selecting every individual is the same. You take a sample of 1000 individuals and find that 200 of them are members of a particular social network. Answer the following questions.
+<ul>
+  <li>Assuming that membership in the social network is completely independent of age, and that there are 20,000 individuals who are 18-24 years old in the overall population, provide one possible estimate %k for the number of individuals in the 18-24 age range who are members of the social network.</li>
+  <li>Suppose you determine that the social network has 10,000 unique members. What is the size %n of the population from which your sample was taken?</li>
+</ul>
+        ]]></text>
+        <solution>
+          <text hooks="math"><![CDATA[
+Since membership in the 18-24 demographic and membership in the social network are assumed to be independent, we can use proportional reasoning to obtain %k = 4000:
+\begin{eqnarray}
+  200/1000 & = & %k/20,000 \\
+  %k & = & 4000
+\end{eqnarray}
+If the social network has 10,000 members and 4000 of them are age 18-24, then we can use the fact that there are 20,000 individuals in the 18-24 demographic in the overall population to compute %n = 50,000:
+\begin{eqnarray}
+  4000/10,000 & = & 20,000/%n \\
+  %n & = & 50,000
+\end{eqnarray}
+          ]]></text>
+        </solution>
+      </exercise>
+      <fact required="true" title="Algorithm R and reservoir sampling" hooks="math" id="3aa1b48a2e1040808d9538ff45ae342f">
+        <text><![CDATA[
+Using <a href="https://en.wikipedia.org/wiki/Reservoir_sampling#Algorithm_R">Algorithm R</a>, it is possible to take a probability sample of size %k from an incoming sequence of data set entries (e.g., tuples) without knowing the length of the sequence in advance. Furthermore, it is guaranteed that every item in the sequence had an equal probability of being added to the sample.
+        ]]></text>
+      </fact>
+      <exercise required="true" hooks="math" id="084e12ab2226470ebe2d1342ff0d1aac">
+        <text><![CDATA[
+Assume we have enough storage in our database to store %n + %k tuples, and it currently holds a data set %X that has %n tuples. However, we expect that tomorrow, we will obtain a new data set %Y that also has %n tuples, so we cannot store it unless we delete %X completely. We need to take a probability sample of size %k from the collection %X \cup %Y such that any item has an equal likelihood of being added to the sample. Is this possible? Explain your answer. You may assume that every tuple in %X and %Y has a unique identifier and there is no overlap between %X and %Y.
+        ]]></text>
+        <solution>
+          <text hooks="math"><![CDATA[
+We can start by using the %k storage slots to perform Algorithm R over the data set %X. We can then discard %X in its entirety. Once we obtain %Y on the next day, we can store it in the %n available slots and contrinue running Algorithm R on the values of %Y from where we last stopped (i.e., when we had finished processing %X). In the end, Algorithm R guarantees that any of the |%X \cup %Y| elements that were encountered during its operation had an equal probability of 1/|%X \cup %Y| of being chosen.
+          ]]></text>
+        </solution>
+      </exercise>
+      <exercise required="true" hooks="math" id="084e12ab2226470ebe2d1342ff0d1dfc">
+        <text><![CDATA[
+You were using Algorithm R to perform reservoir sampling of packets as they were arriving, with a sample size of 100. You were also recording the number of packets there were corrupted, but you did not record the total number of packets that arrived.
+        ]]></text>
+        <paragraph><![CDATA[
+Later on, someone asks you to compute the total number of packets that had arrived during the sampling period. You look at your sample and you find that out of 100 packets, 7 were corrupted. You also recorded that a total of 1400 packets had been corrupted during the sample collection period. How many packets arrived during the sample collection period?
+        ]]></paragraph>
+        <solution>
+          <text hooks="math"><![CDATA[
+Since the sample obtained using Algorithm R is a probability sample such that every packet encountered had an equal probability of being in the sample, whether a packet is in the sample is independent of whether it is corrupted. Thus, since 7/100 packets were corrupted in the sample and 1400 in total were corrupted, the number of packets that arrived is 20,000:
+\begin{eqnarray}
+  7/100 & = & 1400/%n \\
+  %n & = & 20,000
+\end{eqnarray}
+          ]]></text>
+        </solution>
+      </exercise>
+      <exercise required="true" hooks="math" id="084e12abcdc6470ebe2d1342ff0d1dfc">
+        <text><![CDATA[
+Suppose there are exactly %n entries in a data set of all neighborhoods and that these entries can be divided into two dimensions: %x = (%x_1, ..., %x_{%n}) and %y = (%y_1, ..., %y_{%n}). Furthermore, for all 1 \leq %i \leq %n, we have that %x_{%i} \in {0,1} and %y_{%i} \in {0,1}, where each observation of the form (%x_{%i}, %y_{%i}) specifies whether the %ith neighborhood has a hospital (the %x_{%i} component) and whether it has a school (the %y_{%i} component).
+        ]]></text>
+        <paragraph><![CDATA[
+We compute the correlation coefficient and determine that &rho;(%x, %y) = 0. If there are 12 neighborhoods with a school, there are 6 neighborhoods that have both a school and a hospital, and there are 8 hospitals in total, what can these facts reasonably imply about the total number of neighborhoods %n?
+        ]]></paragraph>
+        <solution>
+          <text hooks="math"><![CDATA[
+Since the correlation coefficient is 0, it is likely that there is no correlation between the two dimensions being measured (i.e., the presence of a school in the neighborhood and the presence of a hospital in the neighborhood). This allows us to use <a href="#1121b48a2e1040808d9538ff15aeaaaf">proportional reasoning</a> between these independent variables. Of the 12 neighborhoods that have schools, 6 have hospitals. Since the sample of neighborhoods with schools is independent of the property of having a hospital, this 6/12 relationship must also hold for the set of all neighborhoods:
+\begin{eqnarray}
+  # with school and hospital / # with school & = & # with hospital / # neighborhoods
+\end{eqnarray}
+Thus, there are 16 neighborhoods:
+\begin{eqnarray}
+  6/12 & = & 8/%n \\
+  %n & = & 16
+\end{eqnarray}
+          ]]></text>
+        </solution>
+      </exercise>
+    </subsection>
+    <project title="Modeling, Optimization, and Statistical Analysis">
+      <instructions>
+        <text><![CDATA[
+The purpose of this project is to practice using the modeling, optimization, and statistical analysis tools we have covered to answer questions or solve problems using the data sets obtained by all the teams in <b><a href="#project1">Project #1</a></b>.
+        ]]></text>
+        <text><![CDATA[
+For the purposes of this project description, we assume a team consisting of two members, Alice and Bob, with the team identifier <code>alice_bob</code> in accordance with <b><a href="#project0">Project #0</a></b>. Teams consisting of up to four people are permitted for this project.
+        ]]></text>
+      </instructions>
+      <problems>
+        <problem>
+          <text><![CDATA[
+For this project, teams will work with the GitHub repository created for <b><a href="#project1">Project #1</a></b>, consisting of all the teams' submissions (merged via merge requests at the time of submission) at <code><a href="https://github.com/Data-Mechanics/course-2019-spr-proj">https://github.com/Data-Mechanics/course-2019-spr-proj</a></code>.
+<ul>
+  <li>
+    If your <b><a href="#project1">Project #1</a></b> team is not going to change, you should be able to continue working on your project on your own fork. Pull all the updates from the project repository to sync your fork with it (note that this will now include all the other teams' projects and scripts from <b><a href="#project1">Project #1</a></b>).
+  </li>
+  <li>
+    If you are creating a new or larger team, you should either create a new fork of the project repository, or rename the folder in your working fork to accurately represent the members of your new team. It is up to you how you combine your individual scripts and whether you wish to include or discard any redundant scripts or configuration files, but your project structure should be consistent with that of a single team and single team project.
+  </li>
+</ul>
+As before, the course staff may commit and push additional fixes or updates to the repository before the project deadline, so check for updates and pull them into your fork on a regular basis. If you are utilizing another team's data or scripts, or are allowing another team to utilize your data or scripts, <b>do not duplicate them in your own file tree</b>. Instead, reference them in their original location (using the other team's collection prefix identifier and/or folder path). If another team would like to use an updated version of your data sets and/or scripts, perform a pull request so that the course staff can merge your latest code in the project repository. At that point, the other team can pull that update from the project repository.
+          ]]></text>
+        </problem>
+        <problem>
+          <text><![CDATA[
+Choose a problem or family of problems that you wish to solve using some collection of relevant data sets. These data sets could already be available in the repository (thanks to a <b>Project #1</b> submission by your team or another team), or they may be additional data sets you plan to obtain with new retrieval scripts as you did in <b>Project #1</b>. The problem itself could require solving a graph problem, performing a statistical analysis or analyses, solving a constraint satisfaction or optimization problem, developing a scoring mechanism, or achieving some other quantifiable goal for which at least some of the techniques we have learned so far might be useful. It could be the original problem you intended to solve in <b>Project #1</b>, or something new.
+          ]]></text>
+          <parts>
+            <part>
+              <text><![CDATA[
+Write a short narrative and justification (at least 7-10 sentences) explaining how the data sets and techniques you hope to employ can address the problem you chose. Depending on what techniques you are using and what problem you are trying to solve, you may need to provide a justification or evaluation methodology for the techniques you are using (i.e., why you believe the chosen techniques will solve the problem you are trying to address). Include this narrative in the <code>README.md</code> file within your directory (you may only need to update your existing file).
+              ]]></text>
+            </part>
+            <part>
+              <text hooks="math"><![CDATA[
+Implement a non-trivial <b>constraint satisfaction or optimization technique</b> that requires the data sets you have collected and addresses aspects of the problem or problems described in part (a). You can choose one of the existing algorithms or tools we have considered so far, or something else that qualifies as a constraint satisfaction or optimization technique (assuming you thoroughly document in your <code>README.md</code> file how to obtain and run those tools). The technique can be a combinatorial or specialized algorithm (i.e., you can use %k-means, gradient descent, dynamic programming, greedy algorithms, graph algorithms, and so on).
+              ]]></text>
+            </part>
+            <part>
+              <text><![CDATA[
+Implement a non-trivial <b>statistical analysis or inference algorithm</b> that uses the data sets you have collected and addresses aspects of the problem or problems described in part (a). As in part (b), you can choose one of the existing algorithms or tools we have considered so far, or something else (assuming you thoroughly document in your <code>README.md</code> file how to obtain and run those tools).
+              ]]></text>
+            </part>
+          </parts>
+          <paragraph><![CDATA[
+As in <b>Project #1</b>, your algorithms should be implemented within scripts that extend the <code>dml.Algorithm</code> base class, should follow reasonable modularity and encapsulation practices, and should perform logically related operations. If the results you compute consist of new data sets; these should be inserted into the repository along with all the others in the usual way (and should be considered derived data sets).
+          ]]></paragraph>
+        </problem>
+        <problem>
+          <parts>
+            <part>
+              <text><![CDATA[
+Ensure that whatever scripts or algorithms you implemented in <b>Problem #2</b> can also produce the provenance information documenting the activities that take place and the data they generate during their operation. Each algorithm should produce a single provenance document when its <code>provenance()</code> method is invoked.
+              ]]></text>
+            </part>
+            <part>
+              <text><![CDATA[
+Ensure that whatever scripts or algorithms you implemented in <b>Problem #2</b>, add the capability to run the algorithm in <i>trial mode</i>, which should occur if the <code>trial</code> parameter of the <code>execute()</code> method is set to <code>True</code>. In trial mode, the algorithm should complete its execution very quickly (in at most a few seconds) by operating on a very small portion of the input data set(s). However, it should still run through most (or, ideally, all) the code paths in the algorithm definition when it does so. This will make it possible to easily test the algorithm without running it on the entire data set.
+              ]]></text>
+            </part>
+          </parts>
+        </problem>
+      </problems>
+    </project>
+  </section>
+  <section title="Visualizations and Web Services">
+    <subsection title="Visualizations">
+    </subsection>
+    <subsection title="Web Services">
+      <text><![CDATA[
+In this section, we present examples of how a few existing tools can be used to implement and test a basic web service. More generally, there are innumerable frameworks for building server-side and client-side application components.
+      ]]></text>
+      <example required="true" hooks="math" id="084e12abcdc6470ebe2d1342ff0d1bdd">
+        <text><![CDATA[
+The following presents one possible web service implementation using the Flask framework.
+        ]]></text>
+        <code class="py"><![CDATA[
+import jsonschema
+from flask import Flask, jsonify, abort, make_response, request
+from flask.ext.httpauth import HTTPBasicAuth
+
+app = Flask(__name__)
+auth = HTTPBasicAuth()
+
+users = [
+  { 'id': 1, 'username': u'alice' },
+  { 'id': 2, 'username': u'bob' }
+]
+
+schema = {
+  "type": "object", 
+  "properties": {"username" : {"type": "string"}},
+  "required": ["username"]
+}
+
+&commat;app.route('/client', methods=['OPTIONS'])
+def show_api():
+    return jsonify(schema)
+
+&commat;app.route('/client', methods=['GET'])
+&commat;auth.login_required
+def show_client():
+    return open('client.html','r').read()
+
+&commat;app.route('/app/api/v0.1/users', methods=['GET'])
+def get_users(): # Server-side reusable name for function.
+    print("I'm responding.")
+    return jsonify({'users': users})
+
+&commat;app.route('/app/api/v0.1/users/<int:user_id>', methods=['GET'])
+def get_user(user_id):
+    user = [user for user in users if user['id'] == user_id]
+    if len(user) == 0:
+        abort(404)
+    return jsonify({'user': user[0]})
+
+&commat;app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'error': 'Not found foo.'}), 404)
+
+&commat;app.route('/app/api/v0.1/users', methods=['POST'])
+def create_user():
+    print(request.json)
+    if not request.json:
+        print('Request not valid JSON.')
+        abort(400)
+
+    try:
+        jsonschema.validate(request.json, schema)
+        user = { 'id': users[-1]['id'] + 1, 'username': request.json['username'] }
+        users.append(user)
+        print(users)
+        return jsonify({'user': user}), 201
+    except:
+        print('Request does not follow schema.')
+        abort(400)
+
+&commat;auth.get_password
+def foo(username):
+    if username == 'alice':
+        return 'ecila'
+    return None
+
+&commat;auth.error_handler
+def unauthorized():
+    return make_response(jsonify({'error': 'Unauthorized access.'}), 401)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+        ]]></code>
+        <text><![CDATA[
+The HTML page below can be used to test the POST request handling capabilities of the application. 
+        ]]></text>
+        <code class="js"><![CDATA[
+&lt;script&gt;
+  function postSomething() {
+    var http = new XMLHttpRequest();
+    var url = "http://localhost:5000/app/api/v0.1/users";
+    var json = JSON.stringify({'name':'carl'});
+    http.open("POST", url, true);
+    http.setRequestHeader("Content-type", "application/json");
+    http.onreadystatechange = function() {
+      if (http.readyState == 4 && http.status == 200) {
+        console.log(http.responseText);
+      }
+    }
+    http.send(json);
+  }
+&lt;/script&gt;
+&lt;button onclick="postSomething();"&gt;Post new user&lt;/button&gt;
+        ]]></code>        
+      </example>
+    </subsection>
+    <project title="Visualizations, Web Services, and Complete Project">
+      <instructions>
+        <text><![CDATA[
+The purpose of this project is to expose the data sets and capabilities you assembled in previous projects using visualizations and/or web services, and to present your completed implementation (and any associated results). This is also the last project submission, and should represent the culmination of your work during the semester.
+        ]]></text>
+      </instructions>
+      <problems>
+        <problem>
+          <text><![CDATA[
+Extend your project with <b>two</b> new features/components, where each feature/component is either an interactive web-based visualization that can be displayed in a standard web browser or a web service with a RESTful web API. You might choose to create two visualizations given the results you produced a previous project, or you might choose to create an interactive client-server (i.e., web interface and web service) application that allows users to invoke an algorithm or statistical analysis using their own specific parameters.
+          ]]></text>
+        </problem>
+        <problem>
+          <text><![CDATA[
+Complete a well-written and thorough description of your project (and the components you implemented) in the form of a report (which can be a <code>README.md</code> file within your repository, though HTML or PDF are also acceptable). It is expected that the report should come out to at least 3-5 pages (if printed in a 12-point font with 1.5 spacing at most on 8.5 by 11 in. sheets), but there's no upper limit on length.
+          ]]></text>
+          <paragraph><![CDATA[
+The report should bring together all the text, diagrams, and images you generated and put them together into a coherent summary that explains what you did for someone who is not familiar with your project. Some ideas for what you may want to include (this is a rough outline in the form of introduction, methods, results, and future work, with suggested subtopics that may or may not apply in your case, so adjust or substitute as appropriate).
+<ul>
+  <li>an introduction/narrative describing the problem or topic you chose to address and any associated motivation or background:
+    <ul>
+      <li>list the data sets you used or other online resources you collected or retrieved automatically, and their origins, and</li>
+      <li>describe any data sets you assembled manually or programmatically using the above;</li>
+    </ul>
+  </li>
+  <li>specify which algorithms, analysis techniques, or tools you used, and describe any interesting issues you encountered with regard to:
+    <ul>
+      <li>usability and/or performance of the tool or technique,</li>
+      <li>necessary adjustments or transformations to the data in order to make it compatible with the tool or technique, and/or</li>
+      <li>limitations of the technique or the data;</li>
+    </ul>
+  </li>
+  <li>summarize the results and your conclusions about the problem or topic (whether or not they are definitive or open problems remain), and include screenshots of the visualizations (or the visualizations themselves);
+  </li>
+  <li>describe any ideas for future work that you had while working on the project that you think might be useful to pursue, or that you did not have a chance to pursue (this will be particularly useful to us for the next iteration of the course).
+  </li>
+</ul>
+          ]]></paragraph>
+        </problem>
+        <problem>
+          <text><![CDATA[
+Complete a poster for the poster session to which you have been assigned. The poster can contain the same information that your report contains, though visuals are usually more effective. You may choose to bring a demo to accompany your poster presentation. <b>Submit your poster file as part of the pull request with your final submission.</b> You may place the poster in the root directory of your project/group folder.
+          ]]></text>
+        </problem>
+      </problems>
+    </project>
+  </section>
+  <references>
+    <reference id="625662870761" type="article"
+               title="World's population increasingly urban with more than half living in urban areas"
+               url="https://www.un.org/development/desa/en/news/population/world-urbanization-prospects.html" />
+    <reference id="aiid:1855401" type="article"
+               author="Luís M. A. Bettencourt, José Lobo, Dirk Helbing, Christian Kühnert, and Geoffrey B. West"
+               title="Growth, innovation, scaling, and the pace of life in cities"
+               book="Proceedings of the National Academy of Sciences of the United States of America"
+               publication="2007;104(17):7301-7306"
+               url="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1852329/" />      
+    <reference id="Albright:2008:SSL:1376616.1376739" type="article"
+               author="Robert Albright, and Alan Demers, Johannes Gehrke, Nitin Gupta,  Hooyeon Lee, Rick Keilty, Gregory Sadowski, Ben Sowell, and Walker White"
+               title="SGL: A Scalable Language for Data-driven Games"
+               book="Proceedings of the 2008 ACM SIGMOD International Conference on Management of Data"
+               publication="2008"
+               url="http://www.cs.cornell.edu/~sowell/2008-sigmod-games-demo.pdf" />
+    <reference id="White:2008:DPC:1401843.1401847" type="article"
+               author="Walker White, Benjamin Sowell, Johannes Gehrke, and Alan Demers"
+               title="Declarative Processing for Computer Games"
+               book="Proceedings of the 2008 ACM SIGGRAPH Symposium on Video Games"
+               publication="2008"
+               url="http://www.cs.cornell.edu/~sowell/2008-sandbox-declarative.pdf" />
+    <reference id="PROV-Primer" type="article"
+               author="W3C Working Group"
+               title="PROV Model Primer"
+               url="https://www.w3.org/TR/prov-primer/" />
+    <reference id="ilprints918" type="article"
+               author="Robert Ikeda and Jennifer Widom"
+               title="Data Lineage: A Survey"
+               url="http://ilpubs.stanford.edu:8090/918/1/lin_final.pdf" />
+    <reference id="Cui:2003:LTG:775452.775456" type="article"
+               author="Y. Cui and J. Widom"
+               title="Lineage Tracing for General Data Warehouse Transformations"
+               book="The VLDB Journal"
+               publication="2003;12(1):41-58"
+               url="http://ilpubs.stanford.edu:8090/525/1/2001-5.pdf" />
+    <reference id="RePEc:eee:soceco:v:33:y:2004:i:5:p:587-606" type="article"
+               author="Gerd Gigerenzer"
+               title="Mindless statistics"
+               book="The Journal of Socio-Economics"
+               publication="2004;33(5):587-606"
+               url="http://www.unh.edu/halelab/BIOL933/papers/2004_Gigerenzer_JSE.pdf" />
+    <reference id="DBLP:journals-corr-ShahZ14" type="article"
+               author="Nihar B. Shah and Dengyong Zhou"
+               title="Double or Nothing: Multiplicative Incentive Mechanisms for Crowdsourcing"
+               book="CoRR"
+               publication="2014"
+               url="http://www.eecs.berkeley.edu/~nihar/publications/double_or_nothing.pdf" />
+  </references>
+  <appendix title="Using GitHub">
+    <text><![CDATA[
+In this course, staff will use <a href="http://github.com">GitHub</a> to distribute skeleton and evaluation code for assigned projects, and students will maintain their code, collaborate on their project, and submit their solution or implementation using GitHub. Students will need to <a href="https://github.com/join">register</a> on GitHub. Students should be able to sign up for a student discount, as well, using their Boston University credentials.
+    ]]></text>
+    <subsection title="Retrieving and Submitting Assigned Projects on GitHub">
+      <text><![CDATA[
+We assume that students are organized into groups (initially up to two students working together, though this limit will be raised to three for the later projects). Each group should designate a primary member. The workflow for student projects will be as follows.
+<ul>
+  <li>
+    For each project assigned during the course, a private repository will be created by course staff under the <a href="https://github.com/data-mechanics">Data-Mechanics</a> organization account with a name of the form <code>course-YYYY-SSS-proj-NNNN</code> where <code>YYYY</code> is the year, <code>SSSS</code> is the semester (<code>spr</code> or <code>fal</code>) and <code>NNNN</code> is <code>zero</code>, <code>one</code>, <code>two</code>, and so on.
+    <ul>
+      <li>
+        The first project (<code>course-YYYY-SSS-proj-zero</code>) will be a public repository so that those who are not members of the <a href="https://github.com/data-mechanics">Data-Mechanics</a> organization can see and fork it in the steps below, as that will be how the course staff obtain everyone's GitHub usernames.
+      </li>
+    </ul>
+  </li>
+  <li>
+    To begin working on that particular project, one of the group's members will <a href="https://help.github.com/articles/fork-a-repo/">fork</a> that project repository, and will ensure that the other group members have the necessary privileges to contribute to it by <a href="https://help.github.com/articles/inviting-collaborators-to-a-personal-repository/">adding them as collaborators</a>.
+    <ul>
+      <li>Within the forked repository's file tree, each group will create a subdirectory of the form <code>BUlogin1</code>, <code>BUlogin1_BUlogin2</code>, or <code>BUlogin1_BUlogin2_BUlogin3</code> (depending on the number of members), where the login names <code>BUloginN</code> are the official Boston University login names for the members, and they are ordered in ascending alphabetical order and separated by underscores. All changes constituting work on the project should be made within this subdirectory and nowhere else, unless otherwise specified in the posted project instructions.
+      <li>It will be the responsibility of the group to ensure that their repository <a href="https://help.github.com/articles/fork-a-repo/#keep-your-fork-synced">can be synced</a> with the original project repository (this step only needs to be performed once).</li>
+      <li>The group must also regularly <a href="https://help.github.com/articles/syncing-a-fork/">sync their fork</a> with the original repository in case course staff have made any changes to it. Course staff will usually announce when such changes take place.</li>
+    </ul>
+  </li>
+  <li>The group members may use as many branches as they need in their own fork, but their <code>master</code> branch will represent the group's submission. At some point before the project deadline, the group must <a href="https://help.github.com/articles/about-pull-requests/">submit a pull request</a> to officially submit their work. Only the changes that were committed before the merge request is made will be accepted as submitted.</li>
+</ul>
+      ]]></text>
+    </subsection>
+  </appendix>
+  <appendix title="Other Resources">
+    <subsection title="MongoDB and Related Resources">
+      <text><![CDATA[
+In this course, staff will use <a href="https://www.mongodb.org/">MongoDB</a> to store and work with large data sets. This section lists some resources that you may find useful.
+      ]]></text>
+      <paragraph><![CDATA[
+Some references, tutorials, and other materials of interest mentioned during lecture include the following.
+<ul>
+  <li>
+    The official documentation (<a href="https://docs.mongodb.org/manual/">https://docs.mongodb.org/manual/</a>), and in particular:
+    <ul>
+      <li>how to assemble relational queries (<a href="https://docs.mongodb.org/manual/core/aggregation-pipeline/">https://docs.mongodb.org/manual/core/aggregation-pipeline/</a>) and</li>
+      <li>how to assemble map-reduce queries (<a href="https://docs.mongodb.org/manual/core/map-reduce/">https://docs.mongodb.org/manual/core/map-reduce/</a>).</li>
+    </ul>
+  </li>
+  <li>
+    Issues and feature requests mentioned during lecture include:
+    <ul>
+      <li>flattening the results generated by <code>mapReduce</code> operations: <a href="https://jira.mongodb.org/browse/SERVER-2517">https://jira.mongodb.org/browse/SERVER-2517</a> and</li>
+      <li>deprecation and future removal of server-side <code>eval()</code> and stored procedure capabilities: <a href="https://jira.mongodb.org/browse/SERVER-17453">https://jira.mongodb.org/browse/SERVER-17453</a>.</li>
+    </ul>
+  </li>
+  <li>A tutorial suggested by a student: <a href="http://openmymind.net/mongly/">http://openmymind.net/mongly/</a>.</li>
+  <li>PyMongo Python library documentation: <a href="http://api.mongodb.org/python/current/">http://api.mongodb.org/python/current/</a>.</li>
+  <li>
+    Some resources dealing with using and building geospatial data set indices include:
+    <ul>
+      <li><a href="http://geojson.org/">the GeoJSON format</a>,</li>
+      <li><a href="https://docs.mongodb.org/manual/applications/geospatial-indexes/">using geospatial indices and queries in MongoDB</a>,</li>
+      <li><a href="http://api.mongodb.org/python/current/examples/geo.html">example</a> illustrating how to create a <code>GEO2D</code> index using PyMongo, and</li>
+      <li><a href="https://www.openstreetmap.org/">OpenStreetMap</a>.</li>
+    </ul>
+  </li>
+</ul>
+      ]]></paragraph>
+    </subsection>
+    <subsection title="Installation Resources for Other Software Packages and Libraries">
+      <text><![CDATA[
+This subsection contains links to other useful resources that may help with installing packages and libraries we use in this course.
+      ]]></text>
+      <paragraph><![CDATA[
+Some resources that may be useful when working with the <a href="https://pypi.python.org/pypi/prov"><code>prov</code></a> package:
+<ul>
+  <li>when installing the <a href="https://pypi.python.org/pypi/prov"><code>prov</code></a> library for Python on Windows, you may have some trouble installing the <a href="https://pypi.python.org/pypi/lxml"><code>lxml</code></a> package. Try obtaining the precompiled package <a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/">here</a>, instead, and installing it using <code>pip install *.whl</code>;</li>
+  <li>a short tutorial is available <a href="http://nbviewer.jupyter.org/github/trungdong/notebooks/blob/master/PROV%20Tutorial.ipynb">here</a>.</li>
+</ul>
+      ]]></paragraph>
+      <paragraph><![CDATA[
+As we use the JSON format for storing authentication, configuration, and provenance information, the <a href="http://json-schema.org/">JSON Schema</a> is useful and there is a corresponding <a href="https://pypi.python.org/pypi/jsonschema">jsonschema</a> Python package that you will need to install.
+      ]]></paragraph>
+      <paragraph><![CDATA[
+Two useful kinds of tools for solving problems that can be represented as systems of equations and inequalities are SMT solvers and linear optimization packages.
+<ul>
+  <li>
+    The <a href="http://www.scipy.org/">SciPy</a> library collection includes the <a href="http://docs.scipy.org/doc/scipy-0.17.0/reference/optimize.linprog-simplex.html"><code>optimize.linprog</code></a> module for solving linear optimization problems, and the library is relatively straightforward to install:
+    <ul>
+      <li>using Windows, it may be easiest to obtain and install precompiled binaries for <a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy">numpy</a> and <a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy">scipy</a> (in that order);</li>
+      <li>using Mac OS X or Linux, running <code>pip install numpy</code> and <code>pip install scipy</code>should be sufficient (you may need to download and install <a href="https://gcc.gnu.org/wiki/GFortranBinaries">a Fortran compiler</a> first under some configurations).</li>
+    </ul>
+  </li>
+  <li>The <a href="https://github.com/Z3Prover/z3/wiki">Z3</a> SMT solver is now open source and very easy to use with Python; precompiled binaries are also <a href="https://github.com/Z3Prover/bin/tree/master/releases">available</a>.
+  </li>
+</ul>
+      ]]></paragraph>
+    </subsection>
+  </appendix>
+</sheaf>

@@ -1,2 +1,2 @@
-# lapets.github.io
+# lapets.io
 Personal/professional webpage.

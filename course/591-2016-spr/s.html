@@ -1,0 +1,1235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta charset="utf-8">
+<title>BU CAS CS 591 L1 Spring 2016</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-90403446-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-90403446-1');
+</script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/vs.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script type="text/javascript" src="sheaf/protoql.js"></script>
+<link rel="stylesheet" href="sheaf/sheaf.css">
+<script type="text/javascript" src="sheaf/sheaf.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div class="sheaf" id="sheaf"><b>NOTE:</b> This page contains all the examples presented during the lectures, as well as all the homework assignments. <b><a href="index.html">Click here</a></b> to go back to the main page with the course information and schedule.<br/><div class="toc"><ul> <li>1. <a href="#1">Introduction, Background, and Motivation</a>
+  <ul>  <li>1.1. <a href="#1.1">Overview</a></li>  <li>1.2. <a href="#1.2">Data Mechanics Repository and Platform</a></li>  <li>1.3. <a href="#1.3">Mathematical Modeling, Analysis Algorithms, and Optimization Techniques</a></li>  <li>1.4. <a href="#1.4"><b>Project #0: Preparation and Trial Submission</b></a></li>
+  </ul>
+ </li> <li>2. <a href="#2">Modeling Data and Data Transformations</a>
+  <ul>  <li>2.1. <a href="#2.1">Relational Data and the MapReduce Paradigm</a></li>  <li>2.2. <a href="#2.2">Data Provenance</a></li>  <li>2.3. <a href="#2.3">Composing Transformations into Algorithms</a></li>  <li>2.4. <a href="#2.4"><b>Project #1: Data Retrieval, Storage, Provenance, and Transformation</b></a></li>
+  </ul>
+ </li> <li>3. <a href="#3">Systems, Models, and Algorithms</a>
+  <ul>  <li>3.1. <a href="#3.1">Systems, Models, and Metrics</a></li>  <li>3.2. <a href="#3.2">Spatial and Graph Algorithms</a></li>  <li>3.3. <a href="#3.3">Linear systems, satisfiability modulo theories, and linear programming</a></li>  <li>3.4. <a href="#3.4">General-purpose Optimization Techniques</a></li>
+  </ul>
+ </li> <li>4. <a href="#4">Statistical Analysis</a>
+  <ul>  <li>4.1. <a href="#4.1">Review of Facts about Projections from Linear Algebra</a></li>  <li>4.2. <a href="#4.2">Mean, Standard Deviation, Covariance, and Correlation</a></li>  <li>4.3. <a href="#4.3">Observations, Hypothesis Testing, and Significance</a></li>  <li>4.4. <a href="#4.4">Sampling and Inference</a></li>  <li>4.5. <a href="#4.5"><b>Project #2: Modeling, Optimization, Statistical Analysis, and Visualization</b></a></li>
+  </ul>
+ </li> <li><a href="#bib">References</a></li> <li>Appendix A. <a href="#A">Using GitHub</a>
+  <ul>  <li>A.1. <a href="#A.1">Retrieving and Submitting Assigned Projects on GitHub</a></li>
+  </ul>
+ </li> <li>Appendix B. <a href="#B">Other Resources</a>
+  <ul>  <li>B.1. <a href="#B.1">MongoDB and Related Resources</a></li>  <li>B.2. <a href="#B.2">Installation Resources for Other Software Packages and Libraries</a></li>
+  </ul>
+ </li></ul></div>
+<a name="1"></a>
+<div class="section"><hr /><h2 class="linked"><span class="link-title">[<a href="#1">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">1.</span> Introduction, Background, and Motivation</h2>
+  <a name="1.1"></a><div class="subsection"><h3 class="linked"><span class="link-title">[<a href="#1.1">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">1.1.</span> Overview</h3>
+<span class="text top">With over half of the world's population living in cities [<a href="#625662870761">#</a>], and given the possibility that cities are a more efficient [<a href="#aiid:1855401">#</a>] way to organize and distribute resources and activities, the rigorous study of cities as systems that can be modeled mathematically is a compelling proposition. With the advent of pervasive infrastructures of sensors and computational resources in urban environments (<a href="https://en.wikipedia.org/wiki/Smart_city"><i>smart cities</i></a>, <a href="https://www.sdxcentral.com/articles/news/englands-bristol-is-building-the-first-software-defined-city/2015/03/"><i>software-defined cities</i></a>, and the <a href="https://en.wikipedia.org/wiki/Internet_of_Things"><i>Internet of Things</i></a>), there is a potential to inform and validate such models using actual data, and to exploit them using the interoperability of the pervasive computational infrastructure that is available.</span><div class="paragraph">
+In this course, we introduce and define the novel term <i>data mechanics</i> to refer specifically to the study of a particular aspect of large, instrumented systems such as cities: how data can flow through institutions and computational infrastructures, how these flows can interact, integrate, and cleave, and how they can inform decisions and operations (in both online and offline regimes). We choose the term <i>mechanics</i> specifically because it connotes the study of mechanics (e.g., classical mechanics) in physics, where universal laws that govern the behavior and interactions between many forms of matter are studied. We also choose this term to emphasize that, often, the data involved will be tied to the physical environment: geospatial and temporal information is a common and integral part of data sets produced and consumed by instrumented environments.
+      </div></div>
+  <a name="1.2"></a><div class="subsection"><h3 class="linked"><span class="link-title">[<a href="#1.2">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">1.2.</span> Data Mechanics Repository and Platform</h3>
+<span class="text top">This course is somewhat unusual in that there are specific, concrete software development goals towards which the staff and students are working. In particular, one goal of the course is to construct a new general-purpose service platform for collecting, integrating, analyzing, and employing (both in real time and offline) real data sets derived from urban sensors and services (particularly those in the city of Boston). We will consider several real data sets and data feeds, including:
+<ul>
+  <li><a href="https://data.cityofboston.gov/">City of Boston Data Portal</a>;</li>
+  <li><a href="https://www.massdot.state.ma.us/DevelopersData.aspx">MassDOT Developers Resources</a>.</li>
+</ul>
+We will also secure additional data sets from the above sources as well as a few others, and for the purposes of student projects, there are no limits on other sources of data or computation (e.g., Twitter, Mechanical Turk, and so on) that can be employed in conjunction with some of the above.</span><div class="paragraph">
+Because this course involves the construction of a relatively large software application infrastructure, we will have the opportunity to introduce and practice a variety of standard software development and software engineering concepts and techniques. This includes source control, collaboration, documentation, modularity and encapsulation, testing and validation, inversion of control, and others. Students will also need to become familiar with how to use web service APIs used by government organizations (e.g., <a href="https://www.socrata.com/">Socrata</a>) to make queries and retrieve data.
+      </div><div class="paragraph">
+The overall architecture of the service platform will have at least the following:
+<ul>
+  <li>a database/storage backend (<b>"repository"</b>) that houses:
+    <ul>
+      <li>original and derived data sets, with annotations that include:
+        <ul>
+          <li>from where, when, and by what algorithm it was retrieved</li>
+          <li>using what integration algorithms it was derived</li>
+        </ul>
+      </li>
+      <li>algorithms for data retrieval or integration, with references that include:
+        <ul>
+          <li>when it was written and by whom</li>
+          <li>in what data sets it is derived</li>
+          <li>from what component algorithms it is composed (if it is such)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>a web service (<b>"platform"</b>) witha n <i>application program interface</i> (API) for running analysis and optimization algorithms:
+    <ul>
+      <li>a defined language for defining analysis and optimization algorithms over the data stored in the repository</li>
+      <li>an interface for submitting and running algorithms</li>
+    </ul>
+  </li>
+  <li>other features for data and result visualization, simulation using partial data, etc.</li>
+</ul>
+      </div></div>
+  <a name="1.3"></a><div class="subsection"><h3 class="linked"><span class="link-title">[<a href="#1.3">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">1.3.</span> Mathematical Modeling, Analysis Algorithms, and Optimization Techniques</h3>
+<span class="text top">There are a variety of problems that it may be possible to address using the data in the repository and the capabilities of the platform. This course will cover a variety of useful online and offline optimization topics in a mathematically rigorous but potentially application-specific way, including:
+<ul>
+  <li>a defined language for defining analysis and optimization algorithms over the data stored in the repository,</li>
+  <li>dual decomposition,</li>
+  <li>online optimization.</li>
+</ul>
+The goal is to apply some of these techniques to the data sets(including integrated or derived data sets) and solve practical problems. Some of the problems raised in discussions with the City of Boston DoIT and MassDOT teams are:
+<ul>
+  <li>characterizing intersections and coming up with a metric that incorporates:
+    <ul>
+      <li>intersection throughput (people per unit time),</li>
+      <li>modes of transportation (public transport, biking, walking),</li>
+      <li>intersection safety (vehicle speed, accidents, and so on),</li>
+      <li>intersection organization (no left turns, and so on);
+    </ul>
+  </li>
+  <li>characterizing streets and deriving metrics for:
+    <ul>
+      <li>number of parking spaces,</li>
+      <li>probability of an accident (e.g., using different modes of transportation),</li>
+      <li>senior and handicapped mobility;</li>
+    </ul>
+  </li>
+  <li>characterizing neighborhoods:
+    <ul>
+      <li>economic condition and gentrification,</li>
+      <li>senior and handicapped accessibility;</li>
+    </ul>
+  </li>
+  <li>how to allocate resources to optimize some of the metrics above:
+    <ul>
+      <li>where to perform repairs,</li>
+      <li>how to improve housing affordability,</li>
+      <li>where to place bike racks of ride sharing stations,</li>
+      <li>senior and handicapped accessibility;</li>
+    </ul>
+  </li>
+  <li>answering immediate questions relevant to an individual (e.g., in an app):
+    <ul>
+      <li>is a building accessible,</li>
+      <li>is there a place to park (or will there likely be at some other time),</li>
+      <li>is a neighborhood safe (or is it becoming less or more safe),</li>
+      <li>is a neighborhood affordable (or is it becoming less or more affordable),</li>
+      <li>are healthcare services nearby.</li>
+    </ul>
+  </li>
+  <li>integrating public transportation data with other data (e.g., Waze):
+    <ul>
+      <li>why are buses on a certain route late,</li>
+      <li>performance and problems during unexpected events (e.g., snow).</li>
+    </ul>
+  </li>
+</ul>
+The above list is far from complete, and we will update it as the course progresses. Students are encouraged to discuss project ideas with faculty and one another.</span></div><br/><hr class="work_separator"/><a name="1.4"></a><a name="project0"></a><a name="hw0"></a><div class="work project"><h3 class="work_header linked"><span class="link-title">[<a href="#1.4">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">1.4.</span> <span class="work_title">Project #0: Preparation and Trial Submission</span></h3><div class="instructions">
+        
+<span class="text">The purpose of this project is to obtain the necessary credentials for subsequent projects and for everyone (including course staff) to become familiar with the submission process and address any issues.</span>
+      </div><ol class="problems"><li class="problem">
+<span class="text">Choose an initial team consisting of one or two members. If Alice and Bob form a team and have the BU login names <code>alice@bu.edu</code> and <code>bob@bu.edu</code>, the unique identifier for their team will be <code>alice_bob</code>, where, in cases with two members, the two usernames are in ascending alphabetical order and separated by an underscore. For a one-member team, it is simply the BU login name of the sole member (e.g., <code>alice</code>).</span></li><li class="problem">
+<span class="text">Depending on which data you think you might use, sign up for the <a href="https://data.cityofboston.gov/signup">City of Boston Data Portal</a> and/or the <a href="http://realtime.mbta.com/Portal/Account/Register">MBTA Developer Portal</a>. We will make other, larger raw data sets from these organizations available soon, once we obtain them and set up the appropriate servers.</span></li><li class="problem">
+<span class="text">Create a GitHub account and follow the GitHub <a href="#A.1">submission instructions</a> by forking the public repository at <code><a href="https://github.com/Data-Mechanics/course-2016-spr-proj-zero">https://github.com/Data-Mechanics/course-2016-spr-proj-zero</a></code>, adding a single folder named using the group identifier (<code>alice</code> or <code>alice_bob</code>) that contains a single ASCII text file <code>members.txt</code>. Each team member should commit a line to that text file specifying a mapping from their GitHub username and their BU username. For example, if Alice and Bob have the GitHub usernames <code>alicegh</code> and <code>bobgh</code>, respectively, then the file should look as follows:</span>
+<div class="code"><div class="source"><br/>alicegh:alice<br/>bobgh:bob<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></div>
+<span class="text">One of the team members should then make a pull request as specified in the <a href="#A.1">instructions</a> to submit the project. On subsequent projects, you will be forking a private repository once we add your user account to the <a href="https://github.com/Data-Mechanics">Data-Mechanics</a> organization (which we will retrieve from the <code>members.txt</code> file you add above).</span></li><li class="problem">
+<span class="text">Download and install Python 3 and MongoDB on your system if you do not have them already, review the <a href="https://dev.socrata.com/consumers/getting-started.html">Socrata API</a> (try the example below with different data sets and query parameters), and try installing the <a href="https://pypi.python.org/pypi/prov">prov</a> module for Python.</span>
+<div class="code"><div class="source"><br/><span class="keyword">import</span>&nbsp;urllib.request<br/><span class="keyword">import</span>&nbsp;json<br/><br/>url&nbsp;=&nbsp;<span class="literal">"https://data.cityofboston.gov/resource/awu8-dc52.json?$limit=10"</span><br/>response&nbsp;=&nbsp;urllib.request.urlopen(url).read().decode(<span class="literal">"utf-8"</span>)<br/><span class="builtin">print</span>(json.dumps(json.loads(response),&nbsp;sort_keys=True,&nbsp;indent=2))<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></div></li></ol>
+</div><hr class="work_separator"/><br/>
+</div>
+<a name="2"></a>
+<div class="section"><hr class="last_subsection_was_work"/><h2 class="linked"><span class="link-title">[<a href="#2">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">2.</span> Modeling Data and Data Transformations</h2>
+<span class="text top">To study rigorously the ways data can behave and interact within an infrastructure that generates, transforms, and consumes data (e.g., to make decisions), it is necessary to define formally what data and data transformations are. One traditional, widely used, and widely accepted model for data is the <i>relational model</i>: any data set is a relation (i.e., a subset of a product of sets), and transformations on data are functions between relations. While the relational model is sufficient to define any transformation on data sets, the MapReduce paradigm is one modern framework for defining transformations between data sets.</span><div class="paragraph">
+In modern contexts and paradigms, these models can be useful when studying relatively small collections of individual, curated data sets that do not change dramatically in the short term. However, these alone are not sufficient in a context in which data sets are overwhelmingly multitudinous, varying in structure, and continuously being generated, integrated, and transformed. One complementary discipline that can provide useful tools for dealing with numerous interdependent data sets is that of <i>data provenance</i> or <i>data lineage</i>. The <i>provenance</i> of a data set (or subset) is a formal record of its origin, which can include how the data was generated, from what data or other sources it was created or derived, what process was used or was responsible for creating or deriving it, and other such information. This information can be invaluable for a variety of reasons beyond the obvious ones (i.e., the origin of the data), such as:
+<ul>
+  <li>the same data be generated again or reproduced if an error occurs,</li>
+  <li>a data set can be updated from the original source if the source has been updated or changed,</li>
+  <li>the source of an inconsistency or aberration of data can be investigated,</li>
+  <li>any of the above could be applied to a subset because recomputing or investigating the entire data set would be prohibitively costly.</li>
+</ul>
+    </div>
+  <a name="2.1"></a><div class="subsection"><h3 class="linked"><span class="link-title">[<a href="#2.1">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">2.1.</span> Relational Data and the MapReduce Paradigm</h3>
+<span class="text top">The relational model for data can be expressed in a variety of ways: a data set is a relation on sets, a logical predicate governing terms, a collection of tuples or records with fields and values, a table of rows with labelled columns, and so on. Mathematically, they are all equivalent. In this course, we will adopt a particular model because it is well-suited for the tools and paradigms we will employ, and because it allows for one fairly clean mathematical integration of the study of relational data and data provenance.</span>
+<a name="e601deb568ed46a1a1d741907a6dcfa9"></a><div class="linked block"><div class="link-block">[<a href="#e601deb568ed46a1a1d741907a6dcfa9">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="definition true_required"><span class="block_label">Definition:</span> 
+        
+<span class="text">A <i>data set</i> (also known as a <i>store</i> or <i>database</i>) is a multiset <i>R</i>: a collection (possibly with duplicates) of tuples of the form (<i>x</i><sub>1</sub>,...,<i>x</i><sub><i>n</i></sub>) taken from the set product <i>X</i><sub>1</sub> &#215 ... &#215 <i>X</i><sub><i>n</i></sub>. Typically, some distinguished set (e.g., the left-most in the set product) will be a set of <i>keys</i>, so that every tuple contains a key. Whether a set is a key or not often depends on the particular paradigm and context, however.</span>
+      </div></div></div>
+<a name="a123deb568ed46a1a1d436907a6dcfa9"></a><div class="linked block"><div class="link-block">[<a href="#a123deb568ed46a1a1d436907a6dcfa9">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="definition true_required"><span class="block_label">Definition:</span> 
+        
+<span class="text">A <i>data transformation</i> <i>T</i>: <i>A</i> <span style="font-size:12px;">&#8594;</span> <i>B</i> is a mapping from one space of data sets <i>A</i> to another space of data sets <i>B</i>. Notice that an individual data set <i>S</i> (i.e., a relation or, equivalently, a set of tuples) is just an <i>element</i> of <i>A</i>.</span>
+      </div></div></div>
+<span class="text top">Some of the typical building blocks for data transformations in the relational model are:
+<ul>
+  <li>union and difference (intersection can also be defined in terms of these),</li>
+  <li>projection (sometimes generalized into extended projection),</li>
+  <li>selection (filtering),</li>
+  <li>renaming,</li>
+  <li>Cartesian product,</li>
+  <li>variants of join operations (many can be constructed using the above, but other variants have been added as extensions),</li>
+  <li>aggregation (an extension).</li>
+</ul>
+One common operation on relations that is not possible to express in traditional formulations but found in some relational database systems is the transitive closure of a data set. Normally, this requires an iterative process consisting of a sequence of join operations.</span>
+<a name="9da373c4cc654556bf2fa3fed6d56995"></a><div class="linked block"><div class="link-block">[<a href="#9da373c4cc654556bf2fa3fed6d56995">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="example task_required"><span class="block_label">Example:</span> 
+        
+<span class="text">We can model and illustrate the transformations that constitute the MapReduce paradigm using Python. Note that selection and projection can be implemented directly using Python comprehensions, but we define wrappers below for purposes of illustration.</span>
+        
+<div class="code"><div class="source">
+<pre><code class="py">
+def union(R, S):
+    return R + S
+
+def difference(R, S):
+    return [t for t in R if t not in S]
+
+def intersect(R, S):
+    return [t for t in R if t in S]
+
+def project(R, p):
+    return [p(t) for t in R]
+
+def select(R, s):
+    return [t for t in R if s(t)]
+ 
+def product(R, S):
+    return [(t,u) for t in R for u in S]
+
+def aggregate(R, f):
+    keys = {r[0] for r in R}
+    return [(key, f([v for (k,v) in R if k == key])) for key in keys]
+</code></pre>
+        </div></div>
+      </div></div></div><div class="paragraph">
+In the MapReduce paradigm, a smaller set of building blocks inspired by the functional programming paradigm (supported by languages such as ML and Haskell) exist for defining transformations between data sets. Beyond adapting (with some modification) the map and reduce (a.k.a., "fold") functions from functional programming, the contribution of the MapReduce paradigm is the improvement in the performance of these operations on very large distributed data sets. Because of the elegance of the small set of building blocks, and because of the scalability advantages under appropriate circumstances, it is worth studying the paradigm's two building blocks for data transformations: <i>map</i> and <i>reduce</i>:
+<ul>
+  <li>a map operation will apply some user-specified computation to every tuple in the data set, producing one or more new tuples,</li>
+  <li>a reduce operation will apply some user-specified aggregation computation to every set of tuples having the same key, producing a single result.</li>
+</ul>
+Notice that there is little restriction on the user-specified code other than the requirement that it be stateless in the sense that communication and coordination between parallel executions of the code is impossible. It is possible to express all the building blocks of the relational model using the building blocks of the MapReduce paradigm.
+      </div>
+<a name="ebd9fe9c61014bc9a2d743e069dc9d5b"></a><div class="linked block"><div class="link-block">[<a href="#ebd9fe9c61014bc9a2d743e069dc9d5b">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="example task_required"><span class="block_label">Example:</span> 
+        
+<span class="text">We can model and illustrate the two basic transformations that constitute the MapReduce paradigm in a concise way using Python.</span>
+        
+<div class="code"><div class="source">
+<pre><code class="py">
+def map(f, R):
+    return [t for (k,v) in R for t in f(k,v)]
+    
+def reduce(f, R):
+    keys = {k for (k,v) in R}
+    return [f(k1, [v for (k2,v) in R if k1 == k2]) for k1 in keys]
+</code></pre>
+        </div></div>
+        
+<span class="text">A <code>map</code> operation applies some function <code>f</code> to every key-value tuple and produces zero or more new key-value tuples. A <code>reduce</code> operation collects all values under the same key and performs an aggregate operation <code>f</code> on those values. Notice that the operation can be applied to any subset of the tuples in any order, so it is often necessary to use an operation that is associated and commutative.</span>
+      </div></div></div><div class="paragraph">
+At the language design level, the relational model and the MapReduce paradigm are arguably complementary and simply represent different trade-offs; they can be used in conjunction on data sets represented as relations. Likewise, implementations of the two represent different performance trade-offs. Still, contexts in which they are used can also differ due to historical reasons or due to conventions and community standards.
+      </div>
+<a name="ebd9fe9c61014bc9a2d743e069dc9d5a"></a><div class="linked block"><div class="link-block">[<a href="#ebd9fe9c61014bc9a2d743e069dc9d5a">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="example task_required"><span class="block_label">Example:</span> 
+        
+<span class="text">We can use the Python implementations of the map and reduce operations in an <a href="#ebd9fe9c61014bc9a2d743e069dc9d5a">example above</a> to implement some common transformations in the relational model. For this example, we assume that the first field in each tuple in the data set is a unique key (in general, we assume there is a unique key field if we are working with the MapReduce paradigm). We illustrate how selection can be implemented in the code below.</span>
+        
+<div class="code"><div class="source">
+<pre><code class="py">
+R = [('Alice', 23), ('Bob', 19), ('Carl', 22)]
+
+X = map(lambda k,v: [((k,v), (k,v))] if v > 20 else [], R) # Selection.
+Y = reduce(lambda k,vs: k, X) # Keep same tuples (use tuples as unique keys).
+</code></pre>
+        </div></div>
+        
+<span class="text">We can also perform projection and aggregation.</span>
+        
+<div class="code"><div class="source">
+<pre><code class="py">
+R = [('Alice', ('F', 23)), ('Bob', ('M', 19)), ('Carl', ('M', 22))]
+
+X = map(lambda k,v: [(v[0], v[1])], R) # Projection keeps only gender and age.
+Y = reduce(lambda k,vs: (k, sum(vs)), X) # Aggregates ages by gender.
+</code></pre>
+        </div></div>
+        
+<span class="text">We can also perform a simple join operation, although we also need to "combine" the two collections of data. This particular join operation is also simple because each tuple in the input is only joined with one other tuple.</span>
+        
+<div class="code"><div class="source">
+<pre><code class="py">
+R = [('Alice', 23), ('Bob', 19), ('Carl', 22)]
+S = [('Alice', 'F'), ('Bob', 'M'), ('Carl', 'M')]
+
+X =   map(lambda k,v: [(k, ('Age', v))], R)\
+    + map(lambda k,v: [(k, ('Gender', v))], S)
+Y = reduce(\
+        lambda k,vs:\
+          (k,(vs[0][1], vs[1][1]) if vs[0][0] == 'Age' else (vs[1][1],vs[0][1])),\
+        X\
+      )
+</code></pre>
+        </div></div>
+      </div></div></div>
+<a name="ffbbae67647e4daf838a79fb814e733b"></a><div class="linked block"><div class="link-block">[<a href="#ffbbae67647e4daf838a79fb814e733b">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="exercise task_required"><span class="block_label">Exercise:</span> 
+        
+<span class="text">Suppose you have a data set containing tuples of the form (<i>name</i>, <i>city</i>, <i>age</i>). You want to produce a result of the form (<i>city</i>, <i>range</i>) where <i>range</i> is defined as the difference between the oldest and youngest person in each city.
+<ul>
+  <li>Construct a sequence of transformations that will yield this result using the basic building blocks available in the relational model (projections, selections, aggregations, and so on).</li>
+  <li>Use the MapReduce paradigm to construct a single-pass (one map operation and one reduce operation) MapReduce computation that computes the desired result. <b>Hint:</b> emit two copies of each entry (one for the computation of the maximum and one for the computation of the minimum).</li>
+</ul></span>
+      </div></div></div>
+<a name="ffbbae67647e4daf838a79fb814e733a"></a><div class="linked block"><div class="link-block">[<a href="#ffbbae67647e4daf838a79fb814e733a">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="exercise task_required"><span class="block_label">Exercise:</span> 
+        
+<span class="text">Consider the following line of Python code that operates on a data set <code>D</code> containing some voting results broken down by voter, state where the voter participated in voting, and the candidate they chose:</span>
+        
+<div class="code"><div class="source">
+<pre><code class="py">
+sum([1 for (person, state, candidate) in D if state == "Massachusetts" and candidate == "Trump"])
+</code></pre>
+        </div></div>
+        
+<span class="text">Identify which building blocks for transformations available in the relational model are being used in the above code, and draw a corresponding flow diagram that shows how they fit together.</span>
+      </div></div></div></div>
+  <a name="2.2"></a><div class="subsection"><h3 class="linked"><span class="link-title">[<a href="#2.2">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">2.2.</span> Data Provenance</h3>
+<span class="text top"><i>Data provenance</i> is an overloaded term that refers, in various contexts and communities, to the source, origin, or lifecycle of a particular unit of data (which could be an individual data point, a subset of a data set, or an entire data set). In this course, we will use the term primarily to refer to dependency relationships between data sets that may be derived from one another (usually over time). The study of data provenance (also called <i>data lineage</i>) is arguably still being developed. However, more recently, standards for general-purpose representations of data provenance have been established (e.g., PROV [<a href="#PROV-Primer">#</a>]).</span><div class="paragraph">
+While the research literature explores various ways of categorizing approaches to data provenance, there are two dimensions that can be used to classify provenance techniques (surveyed in more detail in the literature [<a href="#ilprints918">#</a>]):
+<ul>
+  <li>from <i>where</i> the data was generated (e.g., what data sets or individual data entries) and <i>how</i> it was generated (e.g., what algorithms were used);</li>
+  <li>whether the linear is tracked at a fine granularity (e.g., per data entry such as a row in a data set) or a coarse granularity (e.g., per data set).</li>
+</ul>
+Because data transformations can be broken down into building blocks (e.g., selections and projections in the relational model, or map and reduce operations in the MapReduce paradigm), when studying data lineage of individual data items it may be possible to derive standard techniques [<a href="#Cui:2003:LTG:775452.775456">#</a>] for determining data lineage given the components that make up the transformation.
+      </div><div class="paragraph">
+There are at least two approaches one can use to determine provenance of a single entry within a data set produced using a specific transformation. One is to track the provenance of every entry within the transformation itself, and another is to determine the provenance of an entry after the transformation has already been performed (e.g., by another party and/or at some point in the past). The latter scenario is more likely if storage of per-entry provenance meta-data is an issue, or if the transformations are black boxes that cannot be modified or extended before they are applied.
+      </div>
+<a name="f3951db0b6c94dd4b409e9ebb28bd2cd"></a><div class="linked block"><div class="link-block">[<a href="#f3951db0b6c94dd4b409e9ebb28bd2cd">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="fact true_required"><span class="block_label">Fact:</span> 
+        
+<span class="text">For intersection, union, difference, projection, and selection transformations, the per-entry provenance describing which input data set entries influenced an individual entry in the output data set (i.e., the "where" provnenance of an individual entry in the output) can be determined using a linear search through the input data sets for that item.</span>
+      </div></div></div>
+<a name="f3951db0b6c94dd4b409e9ebb28bd2ca"></a><div class="linked block"><div class="link-block">[<a href="#f3951db0b6c94dd4b409e9ebb28bd2ca">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="fact true_required"><span class="block_label">Fact:</span> 
+        
+<span class="text">For an aggregation transformation, finding the per-entry provenance for an entry in the output data set is non-trivial. Note that even running the entire transformation again would not yield the subset of input data set entries that produced the output data set entry in question. In the worst, case, it would be necessary to run the transformation on all 2<sup><i>n</i></sup> subcollections of the input data set (for an input data set of size <i>n</i>) and to check for each one whether the given entry in the output data set was generated.</span>
+        <div class="paragraph">
+If we add the additional condition that the aggregation transformation is <i>key-preserving</i> (which means any two entries under the same keys in the input data set always contribute to an entry with the same output key in the output data set), then the provenance information is easy to determine using linear search.
+        </div>
+        <div class="paragraph">
+If we add the additional condition that the aggregation transformation is <i>context-free</i> (which means any two entries in the input data set always contribute to the same output entry regardless of what other input entries are present), then the provenance information can be determined by partitioning the input data set using the entries of the output data set (i.e., there is one output data set entry per input data set entry), and the determinine which partition contributed to the output data set entry of interest using linear search. This could be done in polynomial time.
+        </div>
+      </div></div></div>
+<a name="ffbbae67647e4daf838a79fb814e733d"></a><div class="linked block"><div class="link-block">[<a href="#ffbbae67647e4daf838a79fb814e733d">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="exercise task_required"><span class="block_label">Exercise:</span> 
+        
+<span class="text">For each of the following informal descriptions of data transformations, determine whether computing the per-entry provenance of a row in the output data set is easy (i.e., linear time) or difficult (i.e., cannot be done in polynomial time), assuming that the transformation's implementation is a black box (except for the provided description).
+<ul>
+  <li>Given a data set containing entries of the form (<i>name</i>, <i>age</i>), the transformation produces a list of all entries corresponding to individuals who are of a legal voting age.</li>
+  <li>Given a data set containing entries of the form (<i>product</i>, <i>department</i>, <i>price</i>, <i>date</i>) describing sales that take place in a department store, the transformation computes the total revenue from each department for each possible date.</li>
+  <li>Given a data set specifying the geographical locations of a collection of radio receivers in a bounded region, determine an optimal placement of 100 radio towers within that region that minimizes the aggregate of the distances between each tower-receiver pair.</li>
+</ul></span>
+      </div></div></div><div class="paragraph">
+Tracking provenance at a coarse granularity (per data set) is relatively inexpensive in most applications (since the number of data sets is usually orders of magnitude less than the number of individual data set entries), and standards such as PROV provide authors of transformations a way to represent provenance information.
+      </div>
+<a name="832a44dd32a640bb981e5fc8902cd348"></a><div class="linked block"><div class="link-block">[<a href="#832a44dd32a640bb981e5fc8902cd348">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="example task_required"><span class="block_label">Example:</span> 
+        
+<span class="text">Suppose Alice and Bob want to assemble a script that retrieves some information from an online resource and stores it in a database. We can use the <a href="https://pypi.python.org/pypi/prov"><code>prov</code></a> Python package to programmatically assemble a course granularity provenance record that conforms to the PROV standard and describes a particular execution of this script.</span>
+        <div class="paragraph">
+We first create the document object and define the namespaces we will use for symbols in the document.
+        </div>
+        
+<div class="code"><div class="source">
+<pre><code class="py">
+doc = prov.model.ProvDocument()
+doc.add_namespace('alg', 'http://datamechanics.io/algorithm/alice_bob/') # The scripts in <folder>/<filename> format.
+doc.add_namespace('dat', 'http://datamechanics.io/data/alice_bob/') # The data sets in <user>/<collection> format.
+doc.add_namespace('ont', 'http://datamechanics.io/ontology#')
+doc.add_namespace('log', 'http://datamechanics.io/log#') # The event log.
+doc.add_namespace('bdp', 'https://data.cityofboston.gov/resource/')
+</code></pre>
+        </div></div>
+        
+<span class="text">We then use an <i>agent</i> to represent the script, en <i>entity</i> to represent a resource, and an <i>activity</i> to repsent this invocation of the script. We also <i>associate</i> this current activity with the script, and we and indicate that his activity <i>used</i> the entity representing the resource.</span>
+        
+<div class="code"><div class="source">
+<pre><code class="py">
+this_script = doc.agent('alg:example', {prov.model.PROV_TYPE:prov.model.PROV['SoftwareAgent'], 'ont:Extension':'py'})
+resource = doc.entity('bdp:wc8w-nujj', 
+    {'prov:label':'311, Service Requests', 
+    prov.model.PROV_TYPE:'ont:DataResource', 'ont:Extension':'json'}
+  )
+this_run = doc.activity(
+    'log:a'+str(uuid.uuid4()), startTime, endTime, 
+    {prov.model.PROV_TYPE:'ont:Retrieval', 'ont:Query':'?type=Animal+Found&$select=type,latitude,longitude,OPEN_DT'}
+  )
+doc.wasAssociatedWith(this_run, this_script)
+doc.used(this_run, resource, startTime)
+</code></pre>
+        </div></div>
+        
+<span class="text">Finally, we define an entity for the data obtained and indicate to what agent it was attributed, by what actvitity it was generated, and from what entity it was derived.</span>
+        
+<div class="code"><div class="source">
+<pre><code class="py">
+found = doc.entity('dat:found', {prov.model.PROV_LABEL:'Animals Found', prov.model.PROV_TYPE:'ont:DataSet'})
+doc.wasAttributedTo(found, this_script)
+doc.wasGeneratedBy(found, this_run, endTime)
+doc.wasDerivedFrom(found, resource, this_run, this_run, this_run)
+
+repo.record(doc.serialize()) # Record the provenance document.
+</code></pre>
+        </div></div>
+        
+<span class="text">We can view our completed provenance record in, for example, JSON form using <code>doc.serialize()</code>.</span>
+      </div></div></div></div>
+  <a name="2.3"></a><div class="subsection"><h3 class="linked"><span class="link-title">[<a href="#2.3">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">2.3.</span> Composing Transformations into Algorithms</h3>
+<span class="text top">Whether we are using the relation model or the MapReduce paradigm, the available building blocks can be used to assemble fairly complex transformations on data sets. Each transformation can be written either using the concrete syntax of a particular programming language that implements the paradigm, or as a data flow diagram that describes how starting and imtermediate data sets are combined to derive new data sets over the course of the algorithm's operation.</span>
+<a name="cba5543907854ed28dbd3eeb874ebd54"></a><div class="linked block"><div class="link-block">[<a href="#cba5543907854ed28dbd3eeb874ebd54">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="example task_required"><span class="block_label">Example:</span> 
+        
+<span class="text">We can use building blocks drawn from the relational model (defined for Python in <a href="#9da373c4cc654556bf2fa3fed6d56995">an example above</a>) to construct an implementation of the <i>k</i>-means clustering algorithm.</span>
+        
+<div class="code"><div class="source">
+<pre><code class="py">
+def dist(p, q):
+    (x1,y1) = p
+    (x2,y2) = q
+    return (x1-x2)**2 + (y1-y2)**2
+
+def plus(args):
+    p = [0,0]
+    for (x,y) in args:
+        p[0] += x
+        p[1] += y
+    return tuple(p)
+
+def scale(p, c):
+    (x,y) = p
+    return (x/c, y/c)
+
+M = [(13,1), (2,12)]
+P = [(1,2),(4,5),(1,3),(10,12),(13,14),(13,9),(11,11)]
+
+OLD = []
+while OLD != M:
+    OLD = M
+
+    MPD = [(m, p, dist(m,p)) for (m, p) in product(M, P)]
+    PDs = [(p, dist(m,p)) for (m, p, d) in MPD]
+    PD = aggregate(PDs, min)
+    MP = [(m, p) for ((m,p,d), (p2,d2)) in product(MPD, PD) if p==p2 and d==d2]
+    MT = aggregate(MP, plus)
+
+    M1 = [(m, 1) for ((m,p,d), (p2,d2)) in product(MPD, PD) if p==p2 and d==d2]
+    MC = aggregate(M1, sum)
+
+    M = [scale(t,c) for ((m,t),(m2,c)) in product(MT, MC) if m == m2]
+    print(sorted(M))
+</code></pre>
+        </div></div>
+        
+<span class="text">Below is a flow diagram describing the overall organization of the computation (nodes are data sets and edges are transformations). Note that the nodes labeled "..." are intermediate results that are implicit in the comprehension notation. For example, <code>[(m, p) for ((m,p,d), (p2,d2)) in product(MPD, PD) if p==p2 and d==d2]</code> first filters <code>product(MPD, PD)</code> using a selection criteria <code>if p==p2 and d==d2</code> and then performs a projection from tuples of the form <code>((m,p,d), (p2,d2))</code> to tuples of the form <code>(m, p)</code> to obtain the result.</span>
+        
+<span class="text"><div class="pql" style="border:0px solid #000000; height:400px; display:inline-block; width:100%;">
+table([
+  ['rd:prod``P', null, null, 'd:agg min``PDs'],
+  [null, 'r:proj``...', 'dr:prod`ru:proj``MPD', 'd:prod``PD'],
+  ['ru:prod``M', null,  null,     'd:selection``...'],
+  ['u:proj``...',    'ld:prod``MC',  'l:agg sum``M1',     'l:proj`d:proj``...'],
+  ['u:selection``...',    'l:prod``MT',  null,     'll:agg plus``MP']
+])
+</div></span>
+      </div></div></div>
+<a name="7eee633a65814aacb951b667e38092ec"></a><div class="linked block"><div class="link-block">[<a href="#7eee633a65814aacb951b667e38092ec">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="example task_required"><span class="block_label">Example:</span> 
+        
+<span class="text">We can also use building blocks drawn from the relational model (defined for Python in <a href="#9da373c4cc654556bf2fa3fed6d56995">an example above</a>) to construct an implementation of the Floyd-Warshall shortest path algorithm.</span>
+        
+<div class="code"><div class="source">
+<pre><code class="py">
+N = ['a','b','c','d','e','f']
+E = [('a','b'),('b','c'),('a','c'),('c','d'),('d','e'),('e','f'),('b','f')]
+
+P = product(N,N)
+I = [((x,y),100 if x != y else 0) for (x,y) in P]
+D = [((x,y),1) for (x,y) in E]
+
+OUTPUT = aggregate(union(I,D), min)
+STEP = []
+while sorted(STEP) != sorted(OUTPUT):
+    STEP = OUTPUT
+    P = product(STEP, STEP)
+    NEW = union(STEP,[((x,v),k+m) for (((x,y),k),((u,v),m)) in P if u == y])
+    OUTPUT = aggregate(NEW, min)
+
+SHORTEST = OUTPUT
+</code></pre>
+        </div></div>
+      </div></div></div>
+<a name="bca743938aa04d9ea43464f941bd70bc"></a><div class="linked block"><div class="link-block">[<a href="#bca743938aa04d9ea43464f941bd70bc">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="example task_required"><span class="block_label">Example:</span> 
+        
+<span class="text">We can use building blocks drawn from the MapReduce paradigm that are available in MongoDB to construct an implementation of the <i>k</i>-means clustering algorithm. This implementation illustrates many of the idiosyncracies of the MapReduce abstraction made available by MongoDB.</span>
+        
+<div class="code"><div class="source">
+<pre><code class="js">
+db.M.remove({});
+db.P.remove({});
+db.createCollection("M");
+db.createCollection("P");
+
+db.system.js.save({ _id:"dist" , value:function(u, v) {
+  return Math.pow(u.x - v.x, 2) + Math.pow(u.y - v.y, 2);
+}});
+
+function flatten(X) {
+    db[X].find().forEach(function(x) { db[X].update({_id: x._id}, x.value); });
+}
+
+function prod(X, Y, XY) {
+  db[XY].remove({});
+  db.createCollection(XY);
+  db[X].find().forEach(function(x) {
+    db[Y].find().forEach(function(y) {
+      db[XY].insert({left:x, right:y});
+    });
+  });
+}
+
+function union(X, Y, XY) {
+  db[XY].remove({});
+  db.createCollection(XY);
+  db[X].find().forEach(function(x) {
+    db[XY].insert(x);
+  });
+  db[Y].find().forEach(function(y) {
+    db[XY].insert(y);
+  });
+}
+
+// We'll only perform a single product operation.
+// Using map-reduce, we can perform argmax and argmin more easily.
+// We can also use map-reduce to compare progress.
+
+db.M.insert([{x:13,y:1}, {x:2,y:12}]);
+db.P.insert([{x:1,y:2},{x:4,y:5},{x:1,y:3},{x:10,y:12},{x:13,y:14},{x:13,y:9},{x:11,y:11}]);
+
+db.createCollection("HASHOLD");
+db.createCollection("HASHNEW");
+
+var iter = 0;
+do {
+
+  db.M.mapReduce(
+    function() { emit("hash", {hash: this.x + this.y})},
+    function(k, vs) {
+      var hash = 0;
+      vs.forEach(function(v) {
+        hash += v.hash;
+      });
+      return {hash: hash};
+    },
+    {out: "HASHOLD"}
+  );
+
+  prod("M", "P", "MP");
+  db.MPD.remove({});
+  db.MP.mapReduce(
+    function() { emit(this._id, {m:this.left, p:this.right, d:dist(this.left, this.right)}); },
+    function() { },
+    {out: "MPD"}
+  );
+  flatten("MPD");
+
+  // No need to flatten when multiple map-reduce operations are taking place.
+
+  db.MPD2.remove({});
+  db.MPD.mapReduce(
+    function() { emit(this.p._id, this); },
+    function(key, vs) {
+      var j = 0;
+      vs.forEach(function(v, i) {
+        if (v.d < vs[j].d)
+          j = i;
+      });
+      return vs[j];
+    },
+    {out: "MPD2"}
+  );
+
+  // Remember that the reduce operation will be applied multiple times, in any order.
+  // Cannot assume all will come in at once. Must be associative and commutative.
+
+  db.MPD2.mapReduce(
+    function() { emit(this.value.m._id, {x: this.value.p.x, y:this.value.p.y, c:1}); },
+    function(key, vs) {
+      var x = 0, y = 0, c = 0;
+      vs.forEach(function(v, i) {
+        x += v.x;
+        y += v.y;
+        c += v.c;         
+      });
+      return {x:x, y:y, c:c};
+    },
+    { finalize: function(k, v) { return {x: v.x/v.c, y: v.y/v.c}; },
+      out: "M"
+    }
+  );
+  flatten("M");
+
+  db.M.mapReduce(
+    function() { emit("hash", {hash: this.x + this.y})},
+    function(k, vs) {
+      var hash = 0;
+      vs.forEach(function(v) {
+        hash += v.hash;
+      });
+      return {hash: hash};
+    },
+    {out: "HASHNEW"}
+  );
+
+  var o = db.HASHOLD.find({}).limit(1).toArray()[0].value.hash;
+  var n = db.HASHNEW.find({}).limit(1).toArray()[0].value.hash;
+  print(o);
+  print(n);
+  print(iter);
+  iter++;
+} while (o != n);
+</code></pre>
+        </div></div>
+      </div></div></div></div><br/><hr class="work_separator"/><a name="2.4"></a><a name="project1"></a><a name="hw1"></a><div class="work project"><h3 class="work_header linked"><span class="link-title">[<a href="#2.4">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">2.4.</span> <span class="work_title">Project #1: Data Retrieval, Storage, Provenance, and Transformation</span></h3><div class="instructions">
+        
+<span class="text">The purpose of this project is to practice using some of the tools necessary for retrieving and storing data sets, tracking provenance information for data sets, and performing some transformations using one or both of the presented paradigms.</span>
+        
+<span class="text">For the purposes of this project description, we assume a team consisting of two members, Alice and Bob, with the team identifier <code>alice_bob</code> in accordance with <b><a href="#project0">Project #0</a></b>.</span>
+      </div><ol class="problems"><li class="problem"><ol class="parts"><li class="part">
+<span class="text">Follow the GitHub <a href="#A.1">submission instructions</a> by forking the public repository at <code><a href="https://github.com/Data-Mechanics/course-2016-spr-proj-one">https://github.com/Data-Mechanics/course-2016-spr-proj-one</a></code>. Note that we may commit and push a few additional fixes or updates to this repository before the deadline, so check for updates and pull them into your fork on a regular basis. Set up a MongoDB and Python environment as necessary for the project. You should be able to run the <code>setup.js</code> script to prepare the repository, and then to start your MongoDB server with authentication enabled and run the <code>alice_bob</code> example script.</span></li><li class="part">
+<span class="text">As in <b><a href="#project0">Project #0</a></b>, create a folder of the form <code>alice_bob</code> within the top-level directory of the project. All your scripts for retrieval of data and for transforming data already within the repository should be placed within this folder. Note that the file name for each script should be reasonably descriptive, as it will act as the identifier for the script. The scripts should also follow reasonable modularity and encapsulation practices, and should logically perform related operations. A larger number of smaller simpler, and more reusable scripts that each perform a small task is preferable.</span></li></ol></li><li class="problem"><ol class="parts"><li class="part">
+<span class="text">Choose <b>at least three</b> publicly available data sets, data streams, services, or documents and write a short narrative and justification (5-10 sentences) explaining how these data sets can be combined to answer an interesting question or solve a problem. You do not need to solve the actual problem in this project, and it is acceptable to merely combine data sets in a way that is likely to support one or more solutions involving the particular data you choose. Include this narrative in a <code>README.md</code> file within your directory (along with any documentation you may write in that file).</span></li><li class="part">
+<span class="text">Implement scripts that retrieve these data sets automatically. Any authentication credentials your scripts use should be included in a <code>auth.json</code> file, and all your scripts should retrieve the credential information from that file when it is passed to them over the command line, as seen below.</span>
+<div class="code"><div class="source"><br/>python&nbsp;example.py&nbsp;auth.json<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></div>
+<span class="text"><b>Do not submit your <code>auth.json</code> file and do not include hard-coded authentication credentials in your code.</b> You can use a <code>.gitignore</code> file to ensure you do not accidentially submit the credentials file. The course staff will use their own authentication credentials when running your code. Your <code>README.md</code> file should list any idiosyncratic details associated with the credentials needed to run your scripts.</span></li><li class="part">
+<span class="text">Implement scripts that perform at least <b>two non-trivial transformations</b> that merge, combine, or otherwise process these data sets into two new data sets. These new data sets should be inserted into the repository. You can choose one of the existing algorithms or tools we have considered so far, or something else (assuming you thoroughly document in your <code>README.md</code> file how to obtain and run those tools).</span></li></ol></li><li class="problem"><ol class="parts"><li class="part">
+<span class="text">Extend each of the scripts you implemented in <b>Problem #2</b> to also store the provenance information documenting the activities that take place during the operation of that script. Each script should generate a single document once it finishes running, and should insert that document into the repository using <code>record()</code>.</span></li><li class="part">
+<span class="text">Create a separate JSON file <code>plan.json</code> in the directory that encodes the overall plan describing what all the scripts do. It should not have explicit time stamps, but it should be a provenance document conforming to the PROV standard that is the union of the all the PROV documents that the individual scripts generate. The information in this file, together with the scripts, should be sufficient to reproduce the data obtained and generated by the scripts.</span></li></ol></li></ol>
+</div><hr class="work_separator"/><br/>
+</div>
+<a name="3"></a>
+<div class="section"><hr class="last_subsection_was_work"/><h2 class="linked"><span class="link-title">[<a href="#3">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">3.</span> Systems, Models, and Algorithms</h2>
+<span class="text top">When using mathematics to solve problems involving real-world entities and phenomenon, we can introduce the notions of a <i>system</i>  (i.e., an organized collection of interdependent components and their possible states) that has distinct <i>system states</i> (which can capture spatial and temporal information about the system components, their behaviors, and their relationships). A mathematical <i>model</i> captures only some parts of the system and the possible system states, abstracting the other details away, and it does so using some particular symbolic language or representation.</span><div class="paragraph">
+Four common abstract mathematical objects used to represent models of systems are particularly relevant given our application domain of interest:
+<ul>
+  <li>graphs consisting of a collection of nodes and edges (possibly weighted and directed) between those nodes,</li>
+  <li>vector spaces consisting of sets of vectors,</li>
+  <li>systems of equations and inequalities (or, equivalently, sets of <i>constraints</i> or set of logical formulas), and</li>
+  <li>functions (whether continuous or discrete).</li>
+</ul>
+In many cases, these mathematical objects can be used to represent each other (e.g., a graph can be represented as a function or as a system of equations), but each has its own characteristics that make it well-suited for modeling certain kinds of systems. Very often, two or more of these are combined when modeling a system.
+    </div><div class="paragraph">
+Most data sets describing a real-world system are using one or more of the above languages for modeling that system. Identifying which of these is being used can inform our decisions about what techniques we can use to answer questions about that system or to solve problems involving that system. It can also tell us how we can convert to a different language or representation in order to convert, combine, or derive new data sets.
+    </div>
+  <a name="3.1"></a><div class="subsection"><h3 class="linked"><span class="link-title">[<a href="#3.1">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">3.1.</span> Systems, Models, and Metrics</h3>
+<span class="text top">We can provide abstract definitions for systems, models, and metrics. These then allow us to characterize satisfaction, search, and optimization problems in a general and consistent way.</span>
+<a name="f3951db0b6c94dd4b409e9ebb28bd2aa"></a><div class="linked block"><div class="link-block">[<a href="#f3951db0b6c94dd4b409e9ebb28bd2aa">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="definition true_required"><span class="block_label">Definition:</span> 
+        
+<span class="text">A <i>system</i> is a set <i>S</i> of distinct <i>system states</i> (possibly infinite). Often, each possible system state <i>s</i> <span style="font-size:12px;">&#8712;</span> <i>S</i> is called a <i>model</i> of the system.</span>
+      </div></div></div>
+<span class="text top">One mathematical object that is commonly used to represent systems is a vector space where individual vectors are the system states (i.e., models) of that system.</span>
+<a name="f3951db0b6c94dd4b409e9ebb28bd2ab"></a><div class="linked block"><div class="link-block">[<a href="#f3951db0b6c94dd4b409e9ebb28bd2ab">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="definition true_required"><span class="block_label">Definition:</span> 
+        
+<span class="text">A <i>constraint set</i> is a set of logical formulas (written using a formal language that may contain terms such as integers, vector, matrices, sets, and so on), usually used to identify a subset of a system (i.e., a subset of the possible systems states or models). A system state or model <i>satisfies</i> a constraint or constraint set if the logical formulas are true for that model.</span>
+      </div></div></div>
+<span class="text top">When using vector spaces, it is often possible to represent constraints using a matrix equation, e.g.:
+<table style="padding-left:20px; margin:4px 0px 4px 0px;"><tr><td style="text-align:right; white-space:nowrap;"><table style="width:100%;"><tr><td style="text-align:right;"> <i>M</i> &sdot; <i>x</i> <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> <i>b</i>
+</td></tr></table></td></tr></table>
+In the above, <i>M</i> might be a matrix from &#8477;<sup><i>n</i> &#215 <i>m</i></sup>, <i>x</i> might be a variable vector in &#8477;<sup><i>m</i></sup>, and <i>b</i> might be a vector in &#8477;<sup><i>n</i></sup>.</span>
+<a name="4cc8b03c0ccd4318adb78496bcc730e3"></a><div class="linked block"><div class="link-block">[<a href="#4cc8b03c0ccd4318adb78496bcc730e3">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="definition true_required"><span class="block_label">Definition:</span> 
+        
+<span class="text">A <i>constraint satisfaction problem</i> is the problem of finding a model or set of models that satisfy a constraint set.</span>
+      </div></div></div>
+<a name="4cc8b03c0ccd4318adb78496bcc730e2"></a><div class="linked block"><div class="link-block">[<a href="#4cc8b03c0ccd4318adb78496bcc730e2">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="definition true_required"><span class="block_label">Definition:</span> 
+        
+<span class="text">A <i>metric</i> over a system <i>S</i> is a function <i>f</i>: <i>S</i> <span style="font-size:12px;">&#8594;</span> &#8477; that maps system states to real numbers.</span>
+      </div></div></div>
+<a name="f5cea5a026964477a864a079fefbf6e7"></a><div class="linked block"><div class="link-block">[<a href="#f5cea5a026964477a864a079fefbf6e7">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="definition true_required"><span class="block_label">Definition:</span> 
+        
+<span class="text">Given a system <i>S</i> and metric <i>f</i>, an <i>optimization problem</i> is the problem of finding <i>s</i> <span style="font-size:12px;">&#8712;</span> <i>S</i> that maximizes or minimizes <i>f</i>:
+<table style="padding-left:20px; margin:4px 0px 4px 0px;"><tr><td style="text-align:right; white-space:nowrap;"><table style="width:100%;"><tr><td style="text-align:right;"> argmax<sub><i>s</i> <span style="font-size:12px;">&#8712;</span> <i>S</i></sub> &nbsp;<i>f</i>(<i>s</i>) </td></tr></table></td></tr><tr><td style="text-align:right;"><table style="width:100%;"><tr><td style="text-align:right;">
+ argmin<sub><i>s</i> <span style="font-size:12px;">&#8712;</span> <i>S</i></sub> &nbsp;<i>f</i>(<i>s</i>)
+</td></tr></table></td></tr></table></span>
+      </div></div></div>
+<a name="f5cea5a026964477a864a079fefbf6ea"></a><div class="linked block"><div class="link-block">[<a href="#f5cea5a026964477a864a079fefbf6ea">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="exercise task_required"><span class="block_label">Exercise:</span> 
+        
+<span class="text">For each of the following scenarios, determine whether it is an instance of a constraint satisfaction problem or an instance of an optimization problem. If it is an optimization problem, identify the objective function.
+<ul>
+  <li>Given a data set describing a set of spectators and their heights, determine if it is possible to seat them in a stadium so that no one blocks anyone else's view.</li>
+  <li>Find the lowest-cost route between two destinations on a transportation network.</li>
+  <li>Given a social network where any pair of individual members can be "connected", determine if the whole network is connected (i.e., there exists a path from every member to every other member).</li>
+  <li>Given a social network where any pair of individual members can be "connected", find the smallest group of individuals that must be removed in order to make the network disconnected.</li>
+</ul></span>
+      </div></div></div></div>
+  <a name="3.2"></a><div class="subsection"><h3 class="linked"><span class="link-title">[<a href="#3.2">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">3.2.</span> Spatial and Graph Algorithms</h3>
+<span class="text top">In the section above, we used some basic algorthms that have natural spatial interpretations (basic clustering, shortest paths, and shortest routes) in order to illustrate how to build data transformations using building blocks drawn from the relational model and the MapReduce paradigm. These two algorithms employed two different representations: a vector space (clustering) and a graph (shortest paths and routes). In this section, we review a few other such algorithms.</span></div>
+  <a name="3.3"></a><div class="subsection"><h3 class="linked"><span class="link-title">[<a href="#3.3">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">3.3.</span> Linear systems, satisfiability modulo theories, and linear programming</h3>
+<span class="text top">We often say a system or subset of a system is <i>linear</i> if it can be modeled using a Euclidean vector space and can be defined using a collection of linear constraints of the form:
+<table style="padding-left:20px; margin:4px 0px 4px 0px;"><tr><td style="text-align:right; white-space:nowrap;"><table style="width:100%;"><tr><td style="text-align:right;"> <i>a</i><sub>1</sub> &sdot; <i>x</i><sub>1</sub> + ... + <i>a</i><sub><i>n</i></sub> &sdot; <i>x</i><sub><i>n</i></sub> &nbsp;&#9830;&nbsp; <i>c</i>
+</td></tr></table></td></tr></table>
+Where (<i>x</i><sub>1</sub>, ..., <i>x</i><sub><i>n</i></sub>) <span style="font-size:12px;">&#8712;</span> &#8477;<sup><i>n</i></sup> is a vector, the <i>a</i><sub><i>i</i></sub> are coefficients in &#8477;, <i>c</i> in &#8477; is a constant, and &#9830; is a relation operator such as =, &le;, &lt;, &ge;, or &gt;. Note that the constraints contain no higher-order <i>x</i><sub><i>i</i></sub> terms such as <i>x</i><sub><i>i</i></sub><sup>2</sup>.</span>
+<span class="text top">There are three common techniques for solving constraint satisfaction and optimization problems involving linear systems:
+<ul>
+  <li>finding an exact or approximate solution (e.g., using some combination of matrix inversion, QR factorization, and <a href="https://en.wikipedia.org/wiki/Ordinary_least_squares">ordinary least squares</a>),</li>
+  <li>checking if a solution exists (and finding a witness system state or model proving this), and</li>
+  <li>finding a solution that minimizes or maximizes some (linear) metric over the vector space.</li>
+</ul>
+The third item (solving an optimization problem) is arguably a generalization of the first approach if we remove the requirement that the metric must be linear (since the first approach minimizes the Euclidean distance metric, which is quadratic and thus non-linear).</span>
+<a name="0c4124b538154b5794b64fababbdd3e9"></a><div class="linked block"><div class="link-block">[<a href="#0c4124b538154b5794b64fababbdd3e9">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="example task_required"><span class="block_label">Example:</span> 
+        
+<span class="text">Suppose we want to use an SMT solver to solve a flow maximization problem for a flow graph (the variable on each represents the flow amount, and the parenthesized number is the maximum possible flow on that edge):</span>
+        
+<span class="text"><div class="pql" style="border:0px solid #000000; height:200px; display:inline-block; width:100%;">
+table([
+  [null,                  null,                            ('dd:x4 (6)`dr:x5 (3)``&gamma;'), null, null],
+  [('r:x1 (?)``&alpha;'), ('ur:x2 (7)`dr:x3 (8)``&beta;'), null,       ('r:x7 (5)``&epsilon;'), ('&zeta;')],
+  [null,                  null,                            ('ur:x6 (4)``&delta;'), null, null],
+])
+</div></span>
+        
+<span class="text">Here, the system is the set of possible states of the graph in terms of the amount of material flowing along each edge (we model the flow that goes along each edge in the graph as a variable ranging over &#8477;, and the flow in the overall graph containing seven edges as a vector in &#8477;<sup>7</sup>).</span>
+        
+<div class="code"><div class="source">
+<pre><code class="py">
+import z3
+
+(x1,x2,x3,x4,x5,x6,x7) = [z3.Real('x'+str(i)) for i in range(1,8)]
+
+S = z3.Solver()
+
+# Only allow non-negative flows.
+for x in (x1,x2,x3,x4,x5,x6,x7):
+    S.add(x >= 0)
+    
+# Edge capacity constraints.
+S.add(x2 <= 7, x3 <= 8, x4 <= 6)
+S.add(x5 <= 3, x6 <= 4, x7 <= 5)
+
+# Constraints derived from graph topology.
+S.add(x1 <= x2+x3, x2 <= x4+x5, x3+x4 <= x6, x5+x6 <= x7)
+
+S.add(x1 > 0) # We want a positive flow.
+
+print(S.check())
+print(S.model())
+</code></pre>
+        </div></div>
+        
+<span class="text">If we are allowed to vary only the variable for incoming edge, we can use the SMT solver together with binary search to find the maximum flow through the graph.</span>
+        
+<div class="code"><div class="source">
+<pre><code class="py">
+flow = 0
+for i in range(5, -1, -1):
+    S.push()
+    S.add(x1 >= (2**i + flow))
+    if str(S.check()) != 'unsat':
+        flow += 2**i
+    S.pop()
+
+S.add(x1 >= flow)
+print(S.model())
+</code></pre>
+        </div></div>
+        
+<span class="text">We could alternatively build up the constraint set from a starting matrix.</span>
+        
+<div class="code"><div class="source">
+<pre><code class="py">
+def dot(xs, ys):
+    return sum([x*y for (x,y) in zip(xs, ys)])
+
+x = [x1,x2,x3,x4,x5,x6,x7]
+
+M = [
+  [ 0,-1, 0, 0, 0, 0, 0],
+  [ 0, 0,-1, 0, 0, 0, 0],
+  [ 0, 0, 0,-1, 0, 0, 0],
+  [ 0, 0, 0, 0,-1, 0, 0],
+  [ 0, 0, 0, 0, 0,-1, 0],
+  [ 0, 0, 0, 0, 0, 0,-1],
+
+  [ 1, 0, 0, 0, 0, 0, 0],
+  [ 0, 1, 0, 0, 0, 0, 0],
+  [ 0, 0, 1, 0, 0, 0, 0],
+  [ 0, 0, 0, 1, 0, 0, 0],
+  [ 0, 0, 0, 0, 1, 0, 0],
+  [ 0, 0, 0, 0, 0, 1, 0],
+  [ 0, 0, 0, 0, 0, 0, 1],
+
+  [-1, 1, 1, 0, 0, 0, 0],
+  [ 0,-1, 0, 1, 1, 0, 0],
+  [ 0, 0,-1,-1, 0, 1, 0],
+  [ 0, 0, 0, 0,-1,-1, 1]
+  ]
+
+b = [-7,-8,-6,-3,-4,-5,
+      0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0]
+
+S = z3.Solver()
+
+for i in range(len(M)):
+    S.add(b[i] <= dot(M[i], x))
+
+print(S.check())
+print(S.model())
+</code></pre>
+        </div></div>
+      </div></div></div>
+<a name="0c4124b538154b5794b64fababbdd3e3"></a><div class="linked block"><div class="link-block">[<a href="#0c4124b538154b5794b64fababbdd3e3">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="example task_required"><span class="block_label">Example:</span> 
+        
+<span class="text">Suppose we want to use linear programming to solve the problem described in the <a href="#0c4124b538154b5794b64fababbdd3e9">example above</a>.</span>
+        
+<div class="code"><div class="source">
+<pre><code class="py">
+from scipy.optimize import linprog
+
+M = [
+  [ 1,-1,-1, 0, 0, 0, 0],
+  [ 0, 1, 0,-1,-1, 0, 0],
+  [ 0, 0, 1, 1, 0,-1, 0],
+  [ 0, 0, 0, 0, 1, 1,-1],
+  ]
+b = [0, 0, 0, 0]
+c = [-1, 0, 0, 0, 0, 0, 0]
+bounds = [(0, None), (0, 7), (0, 8), (0, 6), (0, 3), (0, 4), (0, 5)]
+
+result = linprog(c, A_ub = M, b_ub = b, bounds=bounds, options={"disp": True})
+print(result)
+</code></pre>
+        </div></div>
+        
+<span class="text">Note that this technique produces a potentially different solution from the one in the <a href="#0c4124b538154b5794b64fababbdd3e9">example above</a> (though both are optimal).</span>
+      </div></div></div></div>
+  <a name="3.4"></a><div class="subsection"><h3 class="linked"><span class="link-title">[<a href="#3.4">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">3.4.</span> General-purpose Optimization Techniques</h3>
+<span class="text top">There exist general-purpose techniques for solving an optimization problem given a set of constraints and an objective function. Usually, these rely on certain general assumptions about the properties of the constraints and the objective function.</span>
+<a name="0c4124b538154b5794b64fababbdd3e1"></a><div class="linked block"><div class="link-block">[<a href="#0c4124b538154b5794b64fababbdd3e1">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="example task_required"><span class="block_label">Example:</span> 
+        
+<span class="text">Suppose we want to find a "best fit" line <i>y</i> = <i>a</i> &sdot; <i>x</i> + <i>b</i> for a collection of <i>k</i> points in two dimensions. For the purposes of this example, we will assume that there is a solution that fits the data exactly. This amounts to solving a system of the form <i>A</i> &sdot; <i>v</i> = <i>w</i> where each row <i>i</i> of the matrix <i>A</i> has two entries <i>x</i><sub><i>i</i></sub> and 1, <i>v</i> is a vertical vector with two variable entries <i>a</i> and <i>b</i>, and <i>w</i> is a vertical vector where each row <i>i</i> is one entry <i>y</i><sub><i>i</i></sub>.</span>
+        <div class="paragraph">
+We can define a closed form for the gradient for this optimization problem in the following way. First, we define a closed form for the error function:
+<table style="padding-left:20px; margin:4px 0px 4px 0px;"><tr><td style="text-align:right; white-space:nowrap;"><table style="width:100%;"><tr><td style="text-align:right;">  &epsilon;(<i>a</i>, <i>b</i>) <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> &Sigma;<sub><i>i</i></sub> [((<i>a</i><i>x</i><sub><i>i</i></sub> + <i>b</i>) &#8722; <i>y</i><sub><i>i</i></sub>)<sup>2</sup>] </td></tr></table></td></tr><tr><td style="text-align:right;"><table style="width:100%;"><tr><td style="text-align:right;">
+                      <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> &Sigma;<sub><i>i</i></sub> [(<i>a</i><sup>2</sup> <i>x</i><sub><i>i</i></sub><sup>2</sup> + 2<i>a</i><i>b</i> <i>x</i><sub><i>i</i></sub> + <i>b</i><sup>2</sup>) &#8722; 2<i>y</i><sub><i>i</i></sub> (<i>a</i><i>x</i><sub><i>i</i></sub> + <i>b</i>) + <i>y</i><sub><i>i</i></sub><sup>2</sup>] </td></tr></table></td></tr><tr><td style="text-align:right;"><table style="width:100%;"><tr><td style="text-align:right;">
+                      <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> <i>a</i><sup>2</sup>(&Sigma;<sub><i>i</i></sub> <i>x</i><sub><i>i</i></sub><sup>2</sup>) + <i>a</i><i>b</i> (&Sigma;<sub><i>i</i></sub> 2<i>x</i><sub><i>i</i></sub>) &#8722; <i>a</i>(&Sigma;<sub><i>i</i></sub> 2<i>y</i><sub><i>i</i></sub> <i>x</i><sub><i>i</i></sub> ) &#8722; <i>b</i>(&Sigma;<sub><i>i</i></sub> 2<i>y</i><sub><i>i</i></sub>) + <i>k</i><i>b</i><sup>2</sup> + &Sigma;<sub><i>i</i></sub> <i>y</i><sub><i>i</i></sub><sup>2</sup>
+</td></tr></table></td></tr></table>
+We now need a closed form for the gradient of &epsilon; with respect to <i>a</i> and <i>b</i>. We can obtain this by taking the partial derivatives of &epsilon; with respect to <i>a</i> and <i>b</i>.
+<table style="padding-left:20px; margin:4px 0px 4px 0px;"><tr><td style="text-align:right; white-space:nowrap;"><table style="width:100%;"><tr><td style="text-align:right;">  &part;&epsilon;(<i>a</i>, <i>b</i>)/&part;<i>a</i> <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> <i>a</i>(2&Sigma;<sub><i>i</i></sub> <i>x</i><sub><i>i</i></sub><sup>2</sup>) + <i>b</i> (&Sigma;<sub><i>i</i></sub> 2<i>x</i><sub><i>i</i></sub>) &#8722; (&Sigma;<sub><i>i</i></sub> 2<i>y</i><sub><i>i</i></sub> <i>x</i><sub><i>i</i></sub>) </td></tr></table></td></tr><tr><td style="text-align:right;"><table style="width:100%;"><tr><td style="text-align:right;">
+  &part;&epsilon;(<i>a</i>, <i>b</i>)/&part;<i>b</i> <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> 2<i>k</i><i>b</i> + <i>a</i> (&Sigma;<sub><i>i</i></sub> 2<i>x</i><sub><i>i</i></sub>) &#8722; (&Sigma;<sub><i>i</i></sub> 2<i>y</i><sub><i>i</i></sub>) </td></tr></table></td></tr><tr><td style="text-align:right;"><table style="width:100%;"><tr><td style="text-align:right;">
+                                     <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> <i>b</i>(2<i>k</i>) + <i>a</i> (&Sigma;<sub><i>i</i></sub> 2<i>x</i><sub><i>i</i></sub>) &#8722; (&Sigma;<sub><i>i</i></sub> 2<i>y</i><sub><i>i</i></sub>)
+</td></tr></table></td></tr></table>
+The above suggests that we can perform an aggregate computation to obtain a matrix representation of the gradient:
+<table style="padding-left:20px; margin:4px 0px 4px 0px;"><tr><td style="text-align:right; white-space:nowrap;"><table style="width:100%;"><tr><td style="text-align:right;">  &nabla;&epsilon; <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> </td><td><table cellpadding="0" cellspacing="0" style="display:inline;"><tr><td class="html_matrix_lft">&nbsp;</td><td><table cellpadding="0" cellspacing="0" style="font-size:12px;"><tr><td style="white-space:nowrap;"> 2&Sigma;<sub><i>i</i></sub> <i>x</i><sub><i>i</i></sub><sup>2</sup> </td><td style="padding-left:8px; white-space:nowrap;"> &Sigma;<sub><i>i</i></sub> 2<i>x</i><sub><i>i</i></sub> </td><td style="padding-left:8px; white-space:nowrap;"> &#8722; &Sigma;<sub><i>i</i></sub> 2<i>y</i><sub><i>i</i></sub> <i>x</i><sub><i>i</i></sub> </td></tr><tr><td style="white-space:nowrap;"> (&Sigma;<sub><i>i</i></sub> 2<i>x</i><sub><i>i</i></sub>) </td><td style="padding-left:8px; white-space:nowrap;"> 2<i>k</i> </td><td style="padding-left:8px; white-space:nowrap;"> &#8722; (&Sigma;<sub><i>i</i></sub> 2<i>y</i><sub><i>i</i></sub>) </td></tr></table></td><td class="html_matrix_rgt">&nbsp;</td></tr></table></td><td> &sdot; </td><td><table cellpadding="0" cellspacing="0" style="display:inline;"><tr><td class="html_matrix_lft">&nbsp;</td><td><table cellpadding="0" cellspacing="0" style="font-size:12px;"><tr><td style="white-space:nowrap;"> <i>a</i> </td></tr><tr><td style="white-space:nowrap;"> <i>b</i> </td></tr><tr><td style="white-space:nowrap;"> 1 </td></tr></table></td><td class="html_matrix_rgt">&nbsp;</td></tr></table></td><td>
+</td></tr></table></td></tr></table>
+        </div>
+      </div></div></div></div>
+</div>
+<a name="4"></a>
+<div class="section"><hr /><h2 class="linked"><span class="link-title">[<a href="#4">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">4.</span> Statistical Analysis</h2>
+<span class="text top">Given a data set some of the optimization techniques we have studied can be used to find a best-fit model for that data. For example, given a data set of points in &#8477;<sup>2</sup> representing some collection of observations measured along two dimensions, it is possible to find an  ordinary least squares "best fit" linear function (using algebra, optimization, gradient descent, and so on). However, just because we have found a "best fit" model for a data set from some given space of functions does not mean that the model is actually a good one for that particular data set. Perhaps the relationship between the two dimensions is not linear, or even completely non-existent. How can we determine if this is the case?</span><div class="paragraph">
+In this section, we will present some statistical methods that can help us decide whether a linear model is actually appropriate for a given two-dimensional data set, and to quantify how appropriate it might be. We will review the mathematical foundations underlying the methods, how they can be applied, and how they can be realized as data transformations in the paradigms we have studied in earlier sections.
+    </div>
+  <a name="4.1"></a><div class="subsection"><h3 class="linked"><span class="link-title">[<a href="#4.1">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">4.1.</span> Review of Facts about Projections from Linear Algebra</h3>
+<span class="text top">We review a few useful facts about vectors in &#8477;<sup><i>n</i></sup> from linear algebra. These provide a mathematical foundation for defining the statistical constructs discussed in this section.</span>
+<a name="ff3b49ea963b4301995bcd19c5442807"></a><div class="linked block"><div class="link-block">[<a href="#ff3b49ea963b4301995bcd19c5442807">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="fact true_required"><span class="block_label">Fact:</span> 
+        
+<span class="text">For a vector <i>x</i> <span style="font-size:12px;">&#8712;</span> &#8477;<sup><i>n</i></sup> and a scalar <i>s</i> <span style="font-size:12px;">&#8712;</span> &#8477;, we can scale <i>x</i> by computing <i>s</i> &sdot; <i>x</i> = (<i>s</i> &sdot; <i>x</i><sub>1</sub>, ..., <i>s</i> &sdot; <i>x</i><sub><i>n</i></sub>).</span>
+      </div></div></div>
+<a name="ff3249ea963b4301995bcd19c5442807"></a><div class="linked block"><div class="link-block">[<a href="#ff3249ea963b4301995bcd19c5442807">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="fact true_required"><span class="block_label">Fact:</span> 
+        
+<span class="text">For a vector <i>x</i> <span style="font-size:12px;">&#8712;</span> &#8477;<sup><i>n</i></sup> the length of <i>x</i> is ||<i>x</i>|| = &radic;(<i>x</i><sub>1</sub><sup>2</sup> + ... + <i>x</i><sub><i>n</i></sub><sup>2</sup>). We can also obtain a normalized unit vector of length one that points in the same direction as <i>x</i> by computing <i>x</i>/||<i>x</i>||.</span>
+      </div></div></div>
+<a name="ff3249ea963b4301995bcd19c5442803"></a><div class="linked block"><div class="link-block">[<a href="#ff3249ea963b4301995bcd19c5442803">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="fact true_required"><span class="block_label">Fact:</span> 
+        
+<span class="text">Given two vectors <i>x</i> <span style="font-size:12px;">&#8712;</span> &#8477;<sup><i>n</i></sup> and <i>y</i> <span style="font-size:12px;">&#8712;</span> &#8477;<sup><i>n</i></sup>, the dot product of the two vector is <i>x</i> &sdot; <i>y</i> = <i>x</i><sub>1</sub> &sdot; <i>y</i><sub>1</sub> + ... + <i>x</i><sub><i>n</i></sub> &sdot; <i>y</i><sub><i>n</i></sub>. We can compute the projection of <i>x</i> onto <i>y</i> by computing <i>x</i> &sdot; (<i>y</i>/||<i>y</i>||).</span>
+      </div></div></div>
+<a name="ff3249ea963b4301995bcd19c5442801"></a><div class="linked block"><div class="link-block">[<a href="#ff3249ea963b4301995bcd19c5442801">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="example task_required"><span class="block_label">Example:</span> 
+        
+<span class="text">Given two vectors (5,7) <span style="font-size:12px;">&#8712;</span> &#8477;<sup>2</sup> and (3,0) <span style="font-size:12px;">&#8712;</span> &#8477;<sup>2</sup>, the normalized version of (3,0) is (1/3) &sdot; (3,0) = (1,0). The projection of (5,7) onto (3,0) is then (5,7) &sdot; ((1/3) &sdot; (3,0)) = (5,7) &sdot; (1,0) = (5,0).</span>
+      </div></div></div>
+<a name="ff3b49ea963b4301995bcd19c544280a"></a><div class="linked block"><div class="link-block">[<a href="#ff3b49ea963b4301995bcd19c544280a">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="theorem true_required"><span class="block_label">Theorem (Cauchy-Schwarz inequality):</span> 
+        
+<span class="text">Given two vectors <i>x</i> <span style="font-size:12px;">&#8712;</span> &#8477;<sup><i>n</i></sup> and <i>y</i> <span style="font-size:12px;">&#8712;</span> &#8477;<sup><i>n</i></sup>, the following inequality holds:
+<table style="padding-left:20px; margin:4px 0px 4px 0px;"><tr><td style="text-align:right; white-space:nowrap;"><table style="width:100%;"><tr><td style="text-align:right;">  |<i>x</i> &sdot; <i>y</i>| / ||<i>x</i>|| &sdot; ||<i>y</i>|| <td></tr></table></td><td style="text-align:center;"> &le; </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> 1
+</td></tr></table></td></tr></table>
+Another way of writing the above is:
+<table style="padding-left:20px; margin:4px 0px 4px 0px;"><tr><td style="text-align:right; white-space:nowrap;"><table style="width:100%;"><tr><td style="text-align:right;">  ||&nbsp; (<i>x</i>/||<i>x</i>||) &sdot; (<i>y</i>/||<i>y</i>||) &nbsp;||  <td></tr></table></td><td style="text-align:center;"> &le; </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> 1
+</td></tr></table></td></tr></table>
+The intuitive interpretation is as follows: if we try to find the projection of a unit vector <i>x</i>/||<i>x</i>|| onto another unit vector <i>y</i>/||<i>y</i>||, the resulting vector has length at most 1.</span>
+      </div></div></div></div>
+  <a name="4.2"></a><div class="subsection"><h3 class="linked"><span class="link-title">[<a href="#4.2">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">4.2.</span> Mean, Standard Deviation, Covariance, and Correlation</h3>
+<span class="text top">In this section, we will assume that we are working with a data set of the form [(<i>x</i><sub>1</sub>, <i>y</i><sub>1</sub>), ..., (<i>x</i><sub><i>n</i></sub>, <i>y</i><sub><i>n</i></sub>)] that contains <i>n</i> (not necessarily distinct) tuples and where for 1 &le; <i>i</i> &le; <i>n</i> we have (<i>x</i><sub><i>i</i></sub>, <i>y</i><sub><i>i</i></sub>) <span style="font-size:12px;">&#8712;</span> &#8477;<sup>2</sup>. For the purposes of analysis, we will also often use two projections of this data set as vectors in their own right: (<i>x</i><sub>1</sub>, ...,<i>x</i><sub><i>n</i></sub>) <span style="font-size:12px;">&#8712;</span> &#8477;<sup><i>n</i></sup> and (<i>y</i><sub>1</sub>, ...,<i>y</i><sub><i>n</i></sub>) <span style="font-size:12px;">&#8712;</span> &#8477;<sup><i>n</i></sup>. We will also use the shorthand notation <i>x</i> = (<i>x</i><sub>1</sub>, ...,<i>x</i><sub><i>n</i></sub>) and <i>y</i> = (<i>y</i><sub>1</sub>, ...,<i>y</i><sub><i>n</i></sub>).</span>
+<a name="2a91b48a2e1040808d9538ff45aede2b"></a><div class="linked block"><div class="link-block">[<a href="#2a91b48a2e1040808d9538ff45aede2b">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="definition true_required"><span class="block_label">Definition (arithmetic mean):</span> 
+        
+<span class="text">We define the arithmetic <i>mean</i> &mu;(<i>x</i>) of a one-dimensional or one-column data set <i>x</i> <span style="font-size:12px;">&#8712;</span> &#8477;<sup><i>n</i></sup> where <i>x</i> = (<i>x</i><sub>1</sub>, ..., <i>x</i><sub><i>n</i></sub>) as:
+<table style="padding-left:20px; margin:4px 0px 4px 0px;"><tr><td style="text-align:right; white-space:nowrap;"><table style="width:100%;"><tr><td style="text-align:right;">  &mu;(<i>x</i>) <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> (1/<i>n</i>) &sdot; (<i>x</i><sub>1</sub> + ... + <i>x</i><sub><i>n</i></sub>)
+</td></tr></table></td></tr></table></span>
+      </div></div></div>
+<a name="2a91b48a2e1040808d9538ff45aede2a"></a><div class="linked block"><div class="link-block">[<a href="#2a91b48a2e1040808d9538ff45aede2a">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="fact true_required"><span class="block_label">Fact:</span> 
+        
+<span class="text">For <i>x</i> <span style="font-size:12px;">&#8712;</span> &#8477;<sup><i>n</i></sup>, &mu;(<i>x</i>) is the quantity that minimizes the following objective function:
+<table style="padding-left:20px; margin:4px 0px 4px 0px;"><tr><td style="text-align:right; white-space:nowrap;"><table style="width:100%;"><tr><td style="text-align:right;">  &mu;(<i>x</i>) <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> argmin<sub><i>a</i> <span style="font-size:12px;">&#8712;</span> &#8477;</sub> (&Sigma;<sub><i>i</i>=1</sub><sup><i>n</i></sup> (<i>x</i><sub><i>i</i></sub> - <i>a</i>)<sup>2</sup>)
+</td></tr></table></td></tr></table>
+To prove the above, let's suppose that we choose some arbitrary <i>a</i> in the formula, introduce the true mean <i>m</i>, and proceed from there:
+<table style="padding-left:20px; margin:4px 0px 4px 0px;"><tr><td style="text-align:right; white-space:nowrap;"><table style="width:100%;"><tr><td style="text-align:right;">  &Sigma;<sub><i>i</i>=1</sub><sup><i>n</i></sup> (<i>x</i><sub><i>i</i></sub> - <i>a</i>)<sup>2</sup> <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> &Sigma;<sub><i>i</i>=1</sub><sup><i>n</i></sup> ((<i>x</i><sub><i>i</i></sub> &#8722; <i>m</i>) + (<i>m</i> &#8722; <i>a</i>))<sup>2</sup> </td></tr></table></td></tr><tr><td style="text-align:right;"><table style="width:100%;"><tr><td style="text-align:right;">
+                                                      <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> &Sigma;<sub><i>i</i>=1</sub><sup><i>n</i></sup> (<i>x</i><sub><i>i</i></sub> &#8722; <i>m</i>)<sup>2</sup> +
+                                                            2 &sdot; (&Sigma;<sub><i>i</i>=1</sub><sup><i>n</i></sup> (<i>x</i><sub><i>i</i></sub> &#8722; <i>m</i>) &sdot; (<i>m</i> &#8722; <i>a</i>))
+                                                            + &Sigma;<sub><i>i</i>=1</sub><sup><i>n</i></sup> (<i>m</i> &#8722; <i>a</i>)<sup>2</sup> </td></tr></table></td></tr><tr><td style="text-align:right;"><table style="width:100%;"><tr><td style="text-align:right;">
+                                                      <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> (&Sigma;<sub><i>i</i>=1</sub><sup><i>n</i></sup> (<i>x</i><sub><i>i</i></sub> &#8722; <i>m</i>)<sup>2</sup> ) + <i>n</i> &sdot; (<i>m</i> &#8722; <i>a</i>)<sup>2</sup>
+</td></tr></table></td></tr></table>
+Notice that setting <i>a</i> = <i>m</i> minimizes the above because the second term becomes 0.</span>
+        <div class="paragraph">
+Suppose we use &mu;(<i>x</i>) to create a vector with <i>n</i> entries (&mu;(<i>x</i>), &mu;(<i>x</i>), ..., &mu;(<i>x</i>)) in which every entry is &mu;(<i>x</i>). We can call this vector <i>x</i><sub>&mu;</sub>. Then we can say that this is the vector that minimizes the following objective function:
+<table style="padding-left:20px; margin:4px 0px 4px 0px;"><tr><td style="text-align:right; white-space:nowrap;"><table style="width:100%;"><tr><td style="text-align:right;">  <i>x</i><sub>&mu;</sub> <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> argmin<sub><i>v</i> is on the diagonal in &#8477;<sup><i>n</i></sup></sub> ||<i>x</i> - <i>v</i>||
+</td></tr></table></td></tr></table>
+Another way of thinking about it is that <i>x</i><sub>&mu;</sub> as defined above is the projection of the vector <i>x</i> onto the diagonal line in &#8477;<sup><i>n</i></sup>. This meas that <i>x</i><sub>&mu;</sub> is also the point on the diagonal that is <i>closest</i> to <i>x</i>.
+        </div>
+      </div></div></div>
+<a name="2a91b48aaa1040808d9538ff45aede2c"></a><div class="linked block"><div class="link-block">[<a href="#2a91b48aaa1040808d9538ff45aede2c">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="example task_required"><span class="block_label">Example:</span> 
+        
+<span class="text">Suppose that our data consists of only two points in one dimension: <i>x</i><sub>1</sub> = 10 and <i>x</i><sub>2</sub> = 2. We can compute:
+<table style="padding-left:20px; margin:4px 0px 4px 0px;"><tr><td style="text-align:right; white-space:nowrap;"><table style="width:100%;"><tr><td style="text-align:right;">  &mu;(<i>x</i>) <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> (1/2) &sdot; (10 + 2) <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> 6 </td></tr></table></td></tr><tr><td style="text-align:right;"><table style="width:100%;"><tr><td style="text-align:right;">
+  <i>x</i><sub>&mu;</sub> <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> (6, 6)
+</td></tr></table></td></tr></table>
+Notice that (6, 6) is on the diagonal in &#8477;<sup>2</sup>. Notice also that the vector <i>x</i> &#8722; <i>x</i><sub>&mu;</sub> = (10, 2) - (6, 6) = (4, -4) has a slope of &#8722; 1 (it is orthogonal to the diagonal). This is consistent with <i>x</i><sub>&mu;</sub> being a projection of <i>x</i> onto the diagonal.</span>
+      </div></div></div>
+<a name="2a91b48a2e1040808d9538ff45aede2c"></a><div class="linked block"><div class="link-block">[<a href="#2a91b48a2e1040808d9538ff45aede2c">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="definition true_required"><span class="block_label">Definition (standard deviation):</span> 
+        
+<span class="text">We define the <i>standard deviation</i> &sigma;(<i>x</i>) of a one-dimensional or one-column data set <i>x</i> <span style="font-size:12px;">&#8712;</span> &#8477;<sup><i>n</i></sup> where <i>x</i> = (<i>x</i><sub>1</sub>, ..., <i>x</i><sub><i>n</i></sub>) as:
+<table style="padding-left:20px; margin:4px 0px 4px 0px;"><tr><td style="text-align:right; white-space:nowrap;"><table style="width:100%;"><tr><td style="text-align:right;">  &sigma;(<i>x</i>) <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> &radic;( &nbsp; (1/<i>n</i>) &sdot; ((<i>x</i><sub>1</sub> &#8722; &mu;(<i>x</i>))<sup>2</sup> + ... + (<i>x</i><sub><i>n</i></sub> &#8722; &mu;(<i>x</i>))<sup>2</sup>) &nbsp; )
+</td></tr></table></td></tr></table></span>
+      </div></div></div>
+<a name="2a91b48a2e1040808d9538ff45aede2d"></a><div class="linked block"><div class="link-block">[<a href="#2a91b48a2e1040808d9538ff45aede2d">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="fact true_required"><span class="block_label">Fact:</span> 
+        
+<span class="text">For <i>x</i> <span style="font-size:12px;">&#8712;</span> &#8477;<sup><i>n</i></sup>, &sigma;(<i>x</i>) can be rewritten in terms of the norm (i.e., length) ||<i>x</i> &#8722; &mu;(<i>x</i>)|| of the vector <i>x</i> &#8722; &mu;(<i>x</i>):
+<table style="padding-left:20px; margin:4px 0px 4px 0px;"><tr><td style="text-align:right; white-space:nowrap;"><table style="width:100%;"><tr><td style="text-align:right;">  &sigma;(<i>x</i>) <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> (1/&radic;(<i>n</i>)) &sdot; &radic;( &nbsp; ((<i>x</i><sub>1</sub> &#8722; &mu;(<i>x</i>))<sup>2</sup> + ... + (<i>x</i><sub><i>n</i></sub> &#8722; &mu;(<i>x</i>))<sup>2</sup>) &nbsp; ) </td></tr></table></td></tr><tr><td style="text-align:right;"><table style="width:100%;"><tr><td style="text-align:right;">
+             <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> (1/&radic;(<i>n</i>)) &sdot; ||<i>x</i> &#8722; <i>x</i><sub>&mu;</sub>||
+</td></tr></table></td></tr></table>
+In other words, we can view the standard deviation as a normalized distance between a vector <i>x</i> and the diagonal in &#8477;<sup><i>n</i></sup>.</span>
+      </div></div></div>
+<a name="2a91b48a2e1040808d9538ff45aede2e"></a><div class="linked block"><div class="link-block">[<a href="#2a91b48a2e1040808d9538ff45aede2e">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="definition true_required"><span class="block_label">Definition (covariance):</span> 
+        
+<span class="text">For <i>x</i> <span style="font-size:12px;">&#8712;</span> &#8477;<sup><i>n</i></sup> and <i>y</i> <span style="font-size:12px;">&#8712;</span> &#8477;<sup><i>n</i></sup>, we define the <i>covariance</i> between <i>x</i> and <i>y</i> as:
+<table style="padding-left:20px; margin:4px 0px 4px 0px;"><tr><td style="text-align:right; white-space:nowrap;"><table style="width:100%;"><tr><td style="text-align:right;">  cov(<i>x</i>, <i>y</i>) <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> (1/<i>n</i>) &sdot; ((<i>x</i><sub>1</sub> - &mu;(<i>x</i>)) &sdot; (<i>y</i><sub>1</sub> - &mu;(<i>y</i>)) + ... + (<i>x</i><sub><i>n</i></sub> - &mu;(<i>x</i>)) &sdot; (<i>y</i><sub><i>n</i></sub> - &mu;(<i>y</i>))) </td></tr></table></td></tr><tr><td style="text-align:right;"><table style="width:100%;"><tr><td style="text-align:right;">
+              <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> (1/<i>n</i>) &sdot; (&Sigma;<sub><i>i</i>=1</sub><sup><i>n</i></sup> (<i>x</i><sub><i>i</i></sub> - &mu;(<i>x</i>)) &sdot; (<i>y</i><sub><i>i</i></sub> - &mu;(<i>y</i>))) </td></tr></table></td></tr><tr><td style="text-align:right;"><table style="width:100%;"><tr><td style="text-align:right;">
+              <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> (1/<i>n</i>) &sdot; (<i>x</i> &#8722; <i>x</i><sub>&mu;</sub>) &sdot; (<i>y</i> &#8722; <i>y</i><sub>&mu;</sub>)
+</td></tr></table></td></tr></table>
+Notice that the last line in the above indicates that we can view the covariance as the dot product of the vectors (<i>x</i> &#8722; <i>x</i><sub>&mu;</sub>) and (<i>y</i> &#8722; <i>y</i><sub>&mu;</sub>) that represent how <i>x</i> and <i>y</i> deviate from their respective means.</span>
+      </div></div></div>
+<a name="2a91b48a2e1040808d9538ff45aede2f"></a><div class="linked block"><div class="link-block">[<a href="#2a91b48a2e1040808d9538ff45aede2f">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="definition true_required"><span class="block_label">Definition (correlation coefficient):</span> 
+        
+<span class="text">For <i>x</i> <span style="font-size:12px;">&#8712;</span> &#8477;<sup><i>n</i></sup> and <i>y</i> <span style="font-size:12px;">&#8712;</span> &#8477;<sup><i>n</i></sup>, we define the <i>correlation coefficient</i> (also known as the <i>Pearson product-moment correlation coefficient</i>) between <i>x</i> and <i>y</i> as:
+<table style="padding-left:20px; margin:4px 0px 4px 0px;"><tr><td style="text-align:right; white-space:nowrap;"><table style="width:100%;"><tr><td style="text-align:right;">  &rho;(<i>x</i>, <i>y</i>) <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> cov(<i>x</i>, <i>y</i>) / (&sigma;(<i>x</i>) &sdot; &sigma;(<i>y</i>))
+</td></tr></table></td></tr></table></span>
+      </div></div></div>
+<a name="2a91b48a2e1040808d9538ff45aeae2f"></a><div class="linked block"><div class="link-block">[<a href="#2a91b48a2e1040808d9538ff45aeae2f">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="fact true_required"><span class="block_label">Fact:</span> 
+        
+<span class="text">For <i>x</i> <span style="font-size:12px;">&#8712;</span> &#8477;<sup><i>n</i></sup> and <i>y</i> <span style="font-size:12px;">&#8712;</span> &#8477;<sup><i>n</i></sup>, it must be that -1 &le; &rho;(<i>x</i>, <i>y</i>) &le; 1. We can see this by noticing that the formula for &rho;(<i>x</i>, <i>y</i>) appears in the <a href="#ff3b49ea963b4301995bcd19c544280a">Cauchy-Schwarz inequality</a>:
+<table style="padding-left:20px; margin:4px 0px 4px 0px;"><tr><td style="text-align:right; white-space:nowrap;"><table style="width:100%;"><tr><td style="text-align:right;">  &rho;(<i>x</i>, <i>y</i>) <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> cov(<i>x</i>, <i>y</i>) / (&sigma;(<i>x</i>) &sdot; &sigma;(<i>y</i>)) </td></tr></table></td></tr><tr><td style="text-align:right;"><table style="width:100%;"><tr><td style="text-align:right;">
+                <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> ((1/<i>n</i>) &sdot; (<i>x</i> &#8722; <i>x</i><sub>&mu;</sub>) &sdot; (<i>y</i> &#8722; <i>y</i><sub>&mu;</sub>)) / ((1/&radic;(<i>n</i>)) &sdot; ||<i>x</i> &#8722; <i>x</i><sub>&mu;</sub>|| &sdot; (1/&radic;(<i>n</i>)) &sdot; ||<i>y</i> &#8722; <i>y</i><sub>&mu;</sub>||) </td></tr></table></td></tr><tr><td style="text-align:right;"><table style="width:100%;"><tr><td style="text-align:right;">
+                <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> ((1/<i>n</i>) &sdot; (<i>x</i> &#8722; <i>x</i><sub>&mu;</sub>) &sdot; (<i>y</i> &#8722; <i>y</i><sub>&mu;</sub>)) / ((1/<i>n</i>) &sdot; ||<i>x</i> &#8722; <i>x</i><sub>&mu;</sub>|| &sdot; ||<i>y</i> &#8722; <i>y</i><sub>&mu;</sub>||) </td></tr></table></td></tr><tr><td style="text-align:right;"><table style="width:100%;"><tr><td style="text-align:right;">
+                <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> ((<i>x</i> &#8722; <i>x</i><sub>&mu;</sub>) &sdot; (<i>y</i> &#8722; <i>y</i><sub>&mu;</sub>)) / (||<i>x</i> &#8722; <i>x</i><sub>&mu;</sub>|| &sdot; ||<i>y</i> &#8722; <i>y</i><sub>&mu;</sub>||)
+</td></tr></table></td></tr></table>
+Notice that the only difference between the above and the Cauchy-Schwarz inequality is that in the above, the numerator is not guaranteed to be positive. Thus, we have:
+<table style="padding-left:20px; margin:4px 0px 4px 0px;"><tr><td style="text-align:right; white-space:nowrap;"><table style="width:100%;"><tr><td style="text-align:right;">  &#8722;1 <td></tr></table></td><td style="text-align:center;"> &le; </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> cov(<i>x</i>, <i>y</i>) / (&sigma;(<i>x</i>) &sdot; &sigma;(<i>y</i>)) <td></tr></table></td><td style="text-align:center;"> &le; </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> 1
+</td></tr></table></td></tr></table>
+In addition to being bounded by &#8722;1 and 1, the correlation coefficient has some other useful properties. If <i>x</i> and <i>y</i> have a positive linear correlation, then &rho;(<i>x</i>, <i>y</i>) is positive. If they have a negative linear correlation, it is negative. Given two pairs of data sets <i>x</i>, <i>y</i> and <i>x</i>', <i>y</i>', if |&rho;(<i>x</i>, y)| > |&rho;(<i>x</i>', y')|, then <i>x</i> and <i>y</i> have a stronger correlation with each other than do <i>x</i>' and <i>y</i>'.</span>
+      </div></div></div>
+<span class="text top">While the correlation coefficient is useful for comparing correlations, the quantity itself should not be used to infer anything about the extent of the correlation. To do that with some rigor, it is necessary to introduce a few additional concepts.</span>
+<a name="2a91b48aaa1040808d9538bb45aede2c"></a><div class="linked block"><div class="link-block">[<a href="#2a91b48aaa1040808d9538bb45aede2c">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="example task_required"><span class="block_label">Example:</span> 
+        
+<span class="text">Suppose that our data consists of only a pair of two-dimensional tuples: <i>x</i> = (2, 6) and <i>y</i> = (20, 60). In other words, the data set is [(2,20), (6,60)]. Notice that the slopes of the orthogonal projections of <i>x</i> and of <i>y</i> onto the diagonal are the same, and if we normalize these projections, they become the same vector. That means (<i>x</i> &#8722; <i>x</i><sub>&mu;</sub>) / ||<i>x</i> &#8722; <i>x</i><sub>&mu;</sub>|| = (<i>y</i> &#8722; <i>y</i><sub>&mu;</sub>) / ||<i>y</i> &#8722; <i>y</i><sub>&mu;</sub>||. But the dot product of a vector with itself is the square of its length: <i>v</i> &sdot; <i>v</i> = ||<i>v</i>||<sup>2</sup>. Thus, we have:
+<table style="padding-left:20px; margin:4px 0px 4px 0px;"><tr><td style="text-align:right; white-space:nowrap;"><table style="width:100%;"><tr><td style="text-align:right;">  cov(<i>x</i>, <i>y</i>) / (&sigma;(<i>x</i>) &sdot; &sigma;(<i>y</i>)) <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> (<i>x</i> &#8722; <i>x</i><sub>&mu;</sub>) &sdot; (<i>y</i> &#8722; <i>y</i><sub>&mu;</sub>) / (||<i>x</i> &#8722; <i>x</i><sub>&mu;</sub>|| &sdot; ||<i>y</i> &#8722; <i>y</i><sub>&mu;</sub>||) <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> 1
+</td></tr></table></td></tr></table>
+Thus, because the two dimensions have a positive linear correlation in this example, the correlation coefficient is 1.</span>
+      </div></div></div></div>
+  <a name="4.3"></a><div class="subsection"><h3 class="linked"><span class="link-title">[<a href="#4.3">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">4.3.</span> Observations, Hypothesis Testing, and Significance</h3>
+<span class="text top">The correlation coefficient gives us a way to quantify that there may exist a correlation between two dimensions in a data set. However, this correlation may be an artifact of the way we happened to obtain the data. For example, we may have obtained a biased sample. We can account for this by modeling the likelihood of obtaining a biased sample given the assumption that no correlation exists. If it is very unlikely that we would obtain a sample with the observed correlation if no correlation actually exists, then we might conclude that it is likely that a correlation does exist.</span><div class="paragraph">
+To take this approach, we need to compare the correlation we observe against something (i.e., to decide how likely or unlikely it is if there is no correlation). This means we need to define mathematically what it means for there to be no correlation.
+      </div>
+<a name="3331b48a2e1040808d9538ff45aede3a"></a><div class="linked block"><div class="link-block">[<a href="#3331b48a2e1040808d9538ff45aede3a">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="definition true_required"><span class="block_label">Definition (distribution):</span> 
+        
+<span class="text">A <i>distribution</i> over a set <i>S</i> is a function <i>f</i>: <i>S</i> <span style="font-size:12px;">&#8594;</span> &#8477;. If <i>S</i> represents a set of possible observations of a system (e.g., a collection of system states), then a distribution <i>f</i> might represent the probability that the system is in that state, or the frequency with which that system state has been or can be observed.</span>
+      </div></div></div>
+<a name="3331b48a2e1040808d9538ff45aede2f"></a><div class="linked block"><div class="link-block">[<a href="#3331b48a2e1040808d9538ff45aede2f">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="definition true_required"><span class="block_label">Definition (p-value):</span> 
+        
+<span class="text">Let a subset of the real number line <i>S</i> &sub; &#8477; represent all possible system states that can be observed, and let <i>f</i> be a distribution over <i>S</i> that represents the probability of observing each of the possible states in <i>S</i>. Given some state <i>s</i> <span style="font-size:12px;">&#8712;</span> <i>S</i>, the probability of observing <i>s</i> is then <i>f</i>(<i>s</i>). We define the <i>p-value</i> at the observed state <i>s</i> to be the probability of observing any state that is equal to or more extreme than the state <i>s</i>.</span>
+      </div></div></div>
+<span class="text top">One way to define which states are more extreme is to consider all the states from <i>s</i> to the nearest endpoint. Suppose <i>S</i> is an interval [<i>a</i>, <i>b</i>]. If <i>s</i> > (<i>a</i> &#8722; <i>b</i>) / 2, then the <i>p</i>-value would be computed by taking the definite integral of <i>f</i> from <i>s</i> to <i>b</i>. Otherwise, it would be computed by taking the definite integral of <i>f</i> from <i>s</i> to <i>a</i>.</span><div class="paragraph">
+In order to use the <i>p</i>-value concept to reason about correlation coefficients, it is necessary to model how the correlation coefficient should behave if no correlation exists. One way to do this using the data alone is to consider every permutation of the data.
+      </div>
+<a name="2bb1b48aaa1040808d9538bb45aede2c"></a><div class="linked block"><div class="link-block">[<a href="#2bb1b48aaa1040808d9538bb45aede2c">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="example task_required"><span class="block_label">Example:</span> 
+        
+<span class="text">Assume we have a two-dimensional data set [(<i>x</i><sub>1</sub>, <i>y</i><sub>1</sub>), ..., (<i>x</i><sub><i>n</i></sub>, <i>y</i><sub><i>n</i></sub>)], also represented by <i>x</i> <span style="font-size:12px;">&#8712;</span> &#8477;<sup><i>n</i></sup> and <i>y</i> <span style="font-size:12px;">&#8712;</span> &#8477;<sup><i>n</i></sup>. One way to obtain a range of possible correlation coefficients is to compute the correlation coefficient for all <i>n</i>! possible permutations of the second dimension. Intuitively, if the data has no correlation, then performing this permutation should not change the correlation coefficient much. On the other hand, if the data does have a correlation, we should get a distribution of correlation coefficients with respect to which the true correlation coefficient is "extreme".</span>
+        
+<div class="code"><div class="source">
+<pre><code class="py">
+from random import shuffle
+from math import sqrt
+
+data = [(18, 28), (24, 18), (27, 31), (14, 15), (46, 23),
+        (36, 19), (27, 10), (34, 25), (19, 15), (13, 13),
+        (4, 2), (17, 20), (28, 12), (36, 11), (26, 14),
+        (19, 19), (24, 13), (25, 6), (20, 8), (17, 22),
+        (18, 8), (25, 12), (28, 27), (31, 28), (35, 22),
+        (17, 8), (19, 19), (23, 23), (22, 11)]
+x = [xi for (xi, yi) in data]
+y = [yi for (xi, yi) in data]
+
+def permute(x):
+    shuffled = [xi for xi in x]
+    shuffle(shuffled)
+    return shuffled
+
+def avg(x): # Average
+    return sum(x)/len(x)
+
+def stddev(x): # Standard deviation.
+    m = avg(x)
+    return sqrt(sum([(xi-m)**2 for xi in x])/len(x))
+
+def cov(x, y): # Covariance.
+    return sum([(xi-avg(x))*(yi-avg(y)) for (xi,yi) in zip(x,y)])/len(x)
+
+def corr(x, y): # Correlation coefficient.
+    if stddev(x)*stddev(y) != 0:
+        return cov(x, y)/(stddev(x)*stddev(y))
+
+def p(x, y):
+    c0 = corr(x, y)
+    corrs = []
+    for k in range(0, 2000):
+        y_permuted = permute(y)
+        corrs.append(corr(x, y_permuted))
+    return len([c for c in corrs if abs(c) > c0])/len(corrs)
+</code></pre>
+        </div></div>
+        
+<span class="text">In the above, we compute the correlation coefficient for a large number of permuted data sets. We then compute the fraction of these data sets that have a correlation coefficient with a higher absolute value than the correlation coefficient of the original data. We can call this fraction the <i>p</i>-value. Ideally, we would try all possible permutations; since this is infeasible, we can use this technique to get an approximation.</span>
+        <div class="paragraph">
+Alternatively, we can use a library to compute the same information. The <code>scipy.stats.pearsonr()</code> function will return the correlation coefficient and the <i>p</i>-value.
+        </div>
+        
+<div class="code"><div class="source">
+<pre><code class="py">
+import scipy.stats
+print(scipy.stats.pearsonr(x, y))
+</code></pre>
+        </div></div>
+      </div></div></div>
+<span class="text top">Another approach is to mathematically derive a distribution of correlation coefficients based on some assumptions about how the observation vectors <i>x</i> and <i>y</i> are distributed if they are independent of one another (i.e., not correlated) and each follow some distribution (e.g., the normal distribution). Then, computing a definite integral of this distribution from some specific observation to the nearest boundary would yield the <i>p</i>-value for that observation. Taking this approach usually requires parameterizing the distribution using the size of the data set (i.e., the number of samples) because this can influence how the distribution of correlation coefficients should be computed.</span>
+<a name="084e12ab2226470ebe2d13d00f0d1103"></a><div class="linked block"><div class="link-block">[<a href="#084e12ab2226470ebe2d13d00f0d1103">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="example task_required"><span class="block_label">Example:</span> 
+        
+<span class="text">Suppose that you have a data set of <i>n</i> observations in which each tuple is of the form (<i>w</i><sub><i>i</i></sub>, <i>x</i><sub><i>i</i></sub>, <i>y</i><sub><i>i</i></sub>, <i>z</i><sub><i>i</i></sub>), where <i>w</i> = (<i>w</i><sub>1</sub>, ..., <i>w</i><sub><i>n</i></sub>), <i>x</i> = (<i>x</i><sub>1</sub>, ..., <i>x</i><sub><i>n</i></sub>), <i>y</i> = (<i>y</i><sub>1</sub>, ..., <i>y</i><sub><i>n</i></sub>) and <i>z</i> = (<i>z</i><sub>1</sub>, ..., <i>z</i><sub><i>n</i></sub>). You compute some covariance and correlation coefficient quantities and find the following relationships:
+<table style="padding-left:20px; margin:4px 0px 4px 0px;"><tr><td style="text-align:right; white-space:nowrap;"><table style="width:100%;"><tr><td style="text-align:right;">  cov(<i>x</i>, <i>y</i>) <td></tr></table></td><td style="text-align:center;"> &gt; </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> cov(<i>w</i>, <i>z</i>) </td></tr></table></td></tr><tr><td style="text-align:right;"><table style="width:100%;"><tr><td style="text-align:right;">
+  &rho;(<i>y</i>, <i>z</i>) <td></tr></table></td><td style="text-align:center;"> &gt; </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> &rho;(<i>w</i>, <i>x</i>) </td></tr></table></td></tr><tr><td style="text-align:right;"><table style="width:100%;"><tr><td style="text-align:right;">
+  &rho;(<i>w</i>, <i>x</i>) <td></tr></table></td><td style="text-align:center;"> &gt; </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> 0
+</td></tr></table></td></tr></table>
+<ul>
+  <li>Can you conclude that the correlation between <i>x</i> and <i>y</i> is stronger than the correlation between <i>w</i> and <i>z</i>?</li>
+  <li>Can you conclude that the correlation between <i>y</i> and <i>z</i> is stronger than the correlation between <i>w</i> and <i>x</i>?</li>
+  <li>Suppose that we change the last inequality to &rho;(<i>y</i>, <i>z</i>) < 0. Does this change your answers to any of the above?</li>
+</ul></span>
+      </div></div></div>
+<a name="084e12ab2226470ebe2d13d00f0d1aaa"></a><div class="linked block"><div class="link-block">[<a href="#084e12ab2226470ebe2d13d00f0d1aaa">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="example task_required"><span class="block_label">Example:</span> 
+        
+<span class="text">Suppose you have a data set <i>D</i> consisting of tuples of the form (<i>x</i><sub><i>i</i></sub>, <i>y</i><sub><i>i</i></sub>) and you want to define the necessary transformations using the MapReduce paradigm to compute the covariance for this data set. Provide the definitions of the map and reduce operations necessary to accomplish this.</span>
+        
+<div class="button"><button class="solution_toggle">show solution</button></div><div class="solution_container" style="display:none;"><div class="solution">
+          
+<span class="text">Computing the average would require that we emit tuples of the form (*, <i>x</i><sub><i>i</i></sub>, <i>y</i><sub><i>i</i></sub>, 1) that all have the same key * and then reduce them with a component-wise addition operation. We would then perform another mapping from the data set of totals that contains only one entry of the form (*, <i>t</i><sub><i>x</i></sub>, <i>t</i><sub><i>y</i></sub>, <i>c</i>) to a data set containing a single tuple (<i>t</i><sub><i>x</i></sub>/<i>c</i>, <i>t</i><sub><i>y</i></sub>/<i>c</i>) = (&mu;(<i>x</i>), &mu;(y)). We will call this data set containing a single entry <i>M</i>.</span>
+          <div class="paragraph">
+Next, we would need to take the product <i>M</i> and <i>D</i> that has uples of the form (<i>x</i><sub><i>i</i></sub>, <i>y</i><sub><i>i</i></sub>, &mu;(<i>x</i>), &mu;(<i>y</i>)), and would compute the covariance using a map operation that produces (*, (<i>x</i><sub><i>i</i></sub>-&mu;(<i>x</i>)) &sdot; (<i>y</i><sub><i>i</i></sub>-&mu;(<i>y</i>)), 1) and a reduce operation that uses component-wise addition. A final map operation would convert the resulting single tuple by dividing both totals by the count, as before.
+          </div>
+          <div class="paragraph">
+If we also wanted to compute the standard deviations, we would use an approach similar to the one used for computing the averages. We would then take the product of the two singleton data sets to compute the final result.
+          </div>
+        </div></div><div class="solution_spacer"></div>
+      </div></div></div>
+<a name="084e12ab2226470ebe2d13d00f0d1aab"></a><div class="linked block"><div class="link-block">[<a href="#084e12ab2226470ebe2d13d00f0d1aab">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="example task_required"><span class="block_label">Example:</span> 
+        
+<span class="text">Suppose you have a data set <i>D</i> consisting of tuples of the form (<i>x</i><sub><i>i</i></sub>, <i>y</i><sub><i>i</i></sub>) and you want to compute the correlation coefficient for this data set with a transformation sequence that uses building blocks from the relational paradigm. The flow diagram for this sequence of transformations is provided below.</span>
+        
+<span class="text"><div class="pql" style="border:0px solid #000000; height:400px; display:inline-block; width:100%;">
+table([
+  [['dr:prod`r:proj``(xi,yi)'],                     ['r:agg plus``(xi,yi,1)'], ['d:proj``(sx,sy,n)']],
+  [['d:agg plus``(((xi-&mu;(x))^2)/n, ((y-&mu;(y))^2)/n)'],  ['rd:proj`l:proj``(xi,yi,&mu;(x), &mu;(y), n)'],   ['l:prod``(&mu;(x) = sx/n, &mu;(y) = sy/n, n)']],
+  [['d:proj``(&sigma;(x)^2, &sigma;(y)^2)'], ['d:prod``(cov(x, y)'], ['l:agg plus``(1/n)*(x-&mu;(x))*(y-&mu;(y))']],
+  [['r:prod``(&sigma;(x), &sigma;(y))'], ['r:proj``(cov(x,y), &sigma;(x), &sigma;(y))'], ['(&rho;(x, y))']]
+])
+</div></span>
+      </div></div></div></div>
+  <a name="4.4"></a><div class="subsection"><h3 class="linked"><span class="link-title">[<a href="#4.4">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">4.4.</span> Sampling and Inference</h3>
+<span class="text top">Often, data sets are partial observations of the overall system. Despite this, we may still be able to infer things about the system's properties from those partial observations. In this subsection we go over just a few of the many methods available for making inferences based on data obtained via sampling.</span>
+<a name="3331b48a2e1040808d9538ff45ae342f"></a><div class="linked block"><div class="link-block">[<a href="#3331b48a2e1040808d9538ff45ae342f">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="definition true_required"><span class="block_label">Definition (sampling):</span> 
+        
+<span class="text">Given some data set <i>S</i> (which may not be known in its entirely and may only exist in theory, e.g., the data set of all humans, or the data set of all Earth-size planets in the galaxy), we call any subset <i>T</i> &sub; <i>S</i> a <i>sample</i> of <i>S</i>.</span>
+      </div></div></div>
+<span class="text top">Typically, the data set being sampled will contain records or tuples, each corresponding to an item or an individual. Each tuple provides some information about the properties or measurements of that item or individual along certain dimensions (e.g., size, location, and so on).</span>
+<a name="3331b48a2e1040808d9538ff15ae342f"></a><div class="linked block"><div class="link-block">[<a href="#3331b48a2e1040808d9538ff15ae342f">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="definition true_required"><span class="block_label">Definition (probability sampling):</span> 
+        
+<span class="text">A <i>probability sample</i> of a data set <i>S</i> is any sample <i>T</i> &sub; <i>S</i> that is collected under the condition that for every tuple, the probabiility of selecting that tuple is known in advance.</span>
+      </div></div></div>
+<a name="1121b48a2e1040808d9538ff15aeaaaf"></a><div class="linked block"><div class="link-block">[<a href="#1121b48a2e1040808d9538ff15aeaaaf">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="fact true_required"><span class="block_label">Fact:</span> 
+        
+<span class="text">Assume a data set <i>S</i> has information that can be used to derive two relevant binary characteristics describing the individuals or items in that data set (e.g., whether an individual is male or female, whether an individual resides in a particular neighborhood, and so on). We can define two (possibly overlapping) subsets <i>A</i> &sub; <i>S</i> and <i>B</i> &sub; <i>S</i> corresponding to those subsets that have each of those characteristics.</span>
+        <div class="paragraph">
+If the two characteristics are independent we can conclude that:
+<table style="padding-left:20px; margin:4px 0px 4px 0px;"><tr><td style="text-align:right; white-space:nowrap;"><table style="width:100%;"><tr><td style="text-align:right;">  |<i>A</i> &cap; <i>B</i>|/|<i>B</i>| <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> |<i>A</i> &cap; <i>S</i>|/|<i>S</i>| <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> |<i>A</i>|/|<i>S</i>|
+</td></tr></table></td></tr></table>
+In other words, if we treat the tuples from <i>B</i> as a sample of <i>S</i> and we find the fraction of those tuples that are also in <i>A</i>, we can conclude that the same would have occurred if we had sampled the entirety of <i>S</i>.
+        </div>
+      </div></div></div>
+<a name="2bb1b48aaa1040808d9538bb4baedb2c"></a><div class="linked block"><div class="link-block">[<a href="#2bb1b48aaa1040808d9538bb4baedb2c">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="example task_required"><span class="block_label">Example:</span> 
+        
+<span class="text">Assume we know that within a certain geographical region, one out of every 10 people is a member of an online social networking mobile application that collects the geographical locations of its users. Suppose we take a sample of how many unique users were present in a particular neighborhood within that region over the course of a week, and we get a total of 1200 users. Assuming that there is no correlation between that particular neighborhood and the popularity of that mobile application (i.e., residency in that neighborhood and membership in the social network are independent variables), we can then infer the total population in that neighborhood by solving the following equation:
+<table style="padding-left:20px; margin:4px 0px 4px 0px;"><tr><td style="text-align:right; white-space:nowrap;"><table style="width:100%;"><tr><td style="text-align:right;">  1/10 <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> 1200/<i>n</i>
+</td></tr></table></td></tr></table>
+The above yields <i>n</i> = 12,000, so we can conclude that there are about 12,000 residents in that particular neighborhood based on our observations.</span>
+      </div></div></div>
+<span class="text top">In the <a href="#2bb1b48aaa1040808d9538bb4baedb2c">above example</a>, we could have also worked in the other direction if we only knew the overall population in the region, the population of the neighborhood, and the popularity of the application within the population in that neighborhood. This would allow us to derive the total number of users of the application in the region.</span>
+<a name="1121b48a2e1040808d9538ff15ae342f"></a><div class="linked block"><div class="link-block">[<a href="#1121b48a2e1040808d9538ff15ae342f">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="fact true_required"><span class="block_label">Fact (capture-recapture):</span> 
+        
+<span class="text">Suppose that we can use probability sampling of a data set of size <i>N</i>, we know that the probability of selecting any individual tuple is equivalent to 1/<i>N</i>, and we do not know the size <i>N</i> of the data set. In addition, suppose we are allowed to "mark" any tuple that appears in a sample we take so that we can identify it (with complete certainty) as a previously marked tuple if we see it in subsequent samples.</span>
+        <div class="paragraph">
+Under these conditions, we can estimate the size of the entire data set (an unknown quantity) in the following way. First, we take a sample of size <i>n</i> of the data set, and we mark every tuple in that sample. Next, we take another (indepedent) sample of size <i>K</i> and count the number of marked tuples in that sample (suppose it is <i>k</i> &le; <i>K</i>). We can then solve the following equation for <i>N</i>:
+<table style="padding-left:20px; margin:4px 0px 4px 0px;"><tr><td style="text-align:right; white-space:nowrap;"><table style="width:100%;"><tr><td style="text-align:right;">  <i>k</i>/<i>K</i> <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> <i>n</i>/<i>N</i> </td></tr></table></td></tr><tr><td style="text-align:right;"><table style="width:100%;"><tr><td style="text-align:right;">
+  <i>N</i> <td></tr></table></td><td style="text-align:center;"> = </td><td><table style="white-space:nowrap;"><tr><td style="white-space:nowrap;"> (<i>n</i> &sdot; <i>K</i>) / <i>k</i>
+</td></tr></table></td></tr></table>
+        </div>
+      </div></div></div>
+<a name="24b1b48aaa1040808d9538bb4baedb2c"></a><div class="linked block"><div class="link-block">[<a href="#24b1b48aaa1040808d9538bb4baedb2c">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="example task_required"><span class="block_label">Example:</span> 
+        
+<span class="text">Suppose that we want to know how many distinct people regularly visit a particular grocery store, and we can identify visitors in some way (e.g., by recording their unique identifiers). We can fix a particular time period and collect the identifiers of all the people who visit that store (suppose we collect <i>n</i> of them). We can then fix another time period, again record the identifiers of all <i>K</i> visitors during that time period, and then determine what fraction <i>k</i>/<i>K</i> of the identifiers from the first collection appears in the second collection. We could then estimate that the total number of individuals who visit the store regularly is around (<i>n</i> &sdot; <i>K</i>) / <i>k</i>.</span>
+      </div></div></div>
+<a name="084e12ab2226470ebe2d13d00f0d1aac"></a><div class="linked block"><div class="link-block">[<a href="#084e12ab2226470ebe2d13d00f0d1aac">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="example task_required"><span class="block_label">Example:</span> 
+        
+<span class="text">You are doing a probability sample of a population such that the probability of selecting every individual is the same. You take a sample of 1000 individuals and find that 200 of them are members of a particular social network. Answer the following questions.
+<ul>
+  <li>Assuming that membership in the social network is completely independent of age, and that there are 20,000 individuals who are 18-24 years old in the overall population, provide one possible estimate for the number of individuals in the 18-24 age range who are members of the social network.</li>
+  <li>Suppose you determine that the social network has 10,000 unique members. What is the size of the population from which your sample was taken?</li>
+</ul></span>
+      </div></div></div>
+<a name="3aa1b48a2e1040808d9538ff45ae342f"></a><div class="linked block"><div class="link-block">[<a href="#3aa1b48a2e1040808d9538ff45ae342f">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="fact true_required"><span class="block_label">Fact (Algorithm R and reservoir sampling):</span> 
+        
+<span class="text">Using <a href="https://en.wikipedia.org/wiki/Reservoir_sampling#Algorithm_R">Algorithm R</a>, it is possible to take a probability sample of size <i>k</i> from an incoming sequence of data set entries (e.g., tuples) without knowing the length of the sequence in advance. Furthermore, it is guaranteed that every item in the sequence had an equal probability of being added to the sample.</span>
+      </div></div></div>
+<a name="084e12ab2226470ebe2d1342ff0d1aac"></a><div class="linked block"><div class="link-block">[<a href="#084e12ab2226470ebe2d1342ff0d1aac">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="example task_required"><span class="block_label">Example:</span> 
+        
+<span class="text">Assume we have enough storage in our database to store <i>n</i> + <i>k</i> tuples, and it currently holds a data set <i>X</i> that has <i>n</i> tuples. However, we expect that tomorrow, we will obtain a new data set <i>Y</i> that also has <i>n</i> tuples, so we cannot store it unless we delete <i>X</i> completely. We need to take a probability sample of size <i>k</i> from the union <i>X</i> &cup; <i>Y</i> such that any item has an equal likelihood of being added to the sample. Is this possible, and if so, how would you do it?</span>
+      </div></div></div>
+<a name="084e12ab2226470ebe2d1342ff0d1dfc"></a><div class="linked block"><div class="link-block">[<a href="#084e12ab2226470ebe2d1342ff0d1dfc">link</a>]&nbsp;&nbsp;</div><div style="width:100%; display:inline-block;"><div style="width:auto;" class="example task_required"><span class="block_label">Example:</span> 
+        
+<span class="text">You were using Algorithm R to perform reservoir sampling of packets as they were arriving, with a sample size of 100. You were also recording the number of packets there were corrupted, but you did not record the total number of packets that arrived.</span>
+        <div class="paragraph">
+Later on, someone asks you to compute the total number of packets that had arrived during the sampling period. You look at your sample and you find that out of 100 packets, 7 were corrupted. You also recorded that a total of 1400 packets had been corrupted during the sample collection period. How many packets arrived during the sample collection period?
+        </div>
+      </div></div></div></div><br/><hr class="work_separator"/><a name="4.5"></a><a name="project2"></a><a name="hw2"></a><div class="work project"><h3 class="work_header linked"><span class="link-title">[<a href="#4.5">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">4.5.</span> <span class="work_title">Project #2: Modeling, Optimization, Statistical Analysis, and Visualization</span></h3><div class="instructions">
+        
+<span class="text">The purpose of this project is to practice using the modeling, optimization, and statistical analysis tools we have covered to answer questions or solve problems using the data sets obtained by all the teams in <b><a href="#project1">Project #1</a></b>.</span>
+        
+<span class="text">For the purposes of this project description, we assume a team consisting of two members, Alice and Bob, with the team identifier <code>alice_bob</code> in accordance with <b><a href="#project0">Project #0</a></b>. Teams consisting of up to four people are permitted for this project.</span>
+      </div><ol class="problems"><li class="problem">
+<span class="text">The GitHub repository for <b><a href="#project1">Project #1</a></b>, consisting of all the teams' submissions (merged via merge requests at the time of submission) has been renamed to <code><a href="https://github.com/Data-Mechanics/course-2016-spr-proj-two">https://github.com/Data-Mechanics/course-2016-spr-proj-two</a></code>.
+<ul>
+  <li>
+    If your <b><a href="#project1">Project #1</a></b> team is not going to change, you should be able to continue working on your project on your own fork. Pull all the updates from the project repository to sync your fork with it (note that this will now include all the other teams' projects and scripts from <b><a href="#project1">Project #1</a></b>).
+  </li>
+  <li>
+    If you are creating a new or larger team, you should either create a new fork of the project repository, or rename the folder in your working fork to accurately represent the members of your new team. It is up to you how you combine your individual scripts and whether you wish to include or discard any redundant scripts or configuration files, but your project structure should be consistent with that of a single team and single team project.
+  </li>
+</ul>
+As before, the course staff may commit and push additional fixes or updates to the repository before the project deadline, so check for updates and pull them into your fork on a regular basis. If you are utilizing another team's data or scripts, or are allowing another team to utilize your data or scripts, <b>do not duplicate them in your own file tree</b>. Instead, reference them in their original location (using the other team's collection prefix identifier and/or folder path). If another team would like to use an updated version of your data sets and/or scripts, perform a pull request so that the course staff can merge your latest code in the project repository. At that point, the other team can pull that update from the project repository.</span></li><li class="problem">
+<span class="text">Choose a problem or family of problems that you wish to solve using some collection of relevant data sets. These data sets could already be available in the repository (thanks to a <b>Project #1</b> submission by your team or another team), or they may be additional data sets you plan to obtain with new retrieval scripts as you did in <b>Project #1</b>. The problem itself could involve solving a graph problem, performing a statistical analysis or analyses, solving a constraint satisfaction or optimization problem, developing a scoring mechanism, or achieving some other quantifiable goal for which at least some of the techniques we have learned so far might be useful. It could be the original problem you intended to solve in <b>Project #1</b>, or something new.</span><ol class="parts"><li class="part">
+<span class="text">Write a short narrative and justification (at least 7-10 sentences) explaining how the data sets and techniques you hope to employ can address the problem you chose. Depending on what techniques you are using and what problem you are trying to solve, you may need to provide a justification or evaluation methodology for the techniques you are using (i.e., why you believe the chosen techniques will solve the problem you are trying to address). Include this narrative in the <code>README.md</code> file within your directory (you may only need to update your existing file).</span></li><li class="part">
+<span class="text">Implement <b>at least two</b> non-trivial constraint satisfaction, optimization, statistical analysis, inference, or other algorithms that use the data sets and address the problem or problems described in part (a). You can choose one of the existing algorithms or tools we have considered so far, or something else (assuming you thoroughly document in your <code>README.md</code> file how to obtain and run those tools). If you anticipate that an algorithm or technique you employ could be applied to much larger data sets, you should try to implement it as a transformation in the relational model or the MapReduce paradigm. In most cases, the results will consist of new data sets; these should be inserted into the repository along with all the others in the usual way (and should be considered derived data sets).</span></li><li class="part">
+<span class="text">Implement <b>at least two</b> interactive information visualizations of two or more of your data sets. These could be the data sets representing your final results, or some intermediate data sets; a single visualization can incorporate multiple data sets. The visualizations could be plots, histograms, heat maps, graphs, trees, maps, or something else. Ideally, it should be possible to view and interact with these visualization in a standard browser running on a laptop.</span></li></ol></li><li class="problem"><ol class="parts"><li class="part">
+<span class="text">Ensure that whatever scripts or algorithms you implemented in <b>Problem #2</b> also store the provenance information documenting the activities that take place and the data they generate during their operation. Each script should generate a single document once it finishes running, and should insert that document into the repository using <code>record()</code>.</span></li><li class="part">
+<span class="text">Create or update the <code>plan.json</code> file in your project directory that encodes the overall plan describing what all the scripts do. It should not have explicit time stamps, but it should be a provenance document conforming to the PROV standard that is the union of the all the PROV documents that the individual scripts generate. As before, the information in this file, together with the scripts, should be sufficient to reproduce the data obtained and generated by the scripts.</span></li></ol></li></ol>
+</div><hr class="work_separator"/><br/>
+</div><a name="bib"></a><div class="references"><hr class="last_subsection_was_work"/><h2 class="linked"><span class="link-title">[<a href="#bib">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">References</span></h2><table><tr><td class="cite"><a name="625662870761"></a>[1]</td><td> "<b>World's population increasingly urban with more than half living in urban areas</b>". <a href="https://www.un.org/development/desa/en/news/population/world-urbanization-prospects.html">https://www.un.org/development/desa/en/news/population/world-urbanization-prospects.html</a></td></tr><tr><td class="cite"><a name="aiid:1855401"></a>[2]</td><td> Luís M. A. Bettencourt, José Lobo, Dirk Helbing, Christian Kühnert, and Geoffrey B. West. "<b>Growth, innovation, scaling, and the pace of life in cities</b>". <i>Proceedings of the National Academy of Sciences of the United States of America</i> 2007;104(17):7301-7306. <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1852329/">http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1852329/</a></td></tr><tr><td class="cite"><a name="Albright:2008:SSL:1376616.1376739"></a>[3]</td><td> Robert Albright, and Alan Demers, Johannes Gehrke, Nitin Gupta,  Hooyeon Lee, Rick Keilty, Gregory Sadowski, Ben Sowell, and Walker White. "<b>SGL: A Scalable Language for Data-driven Games</b>". <i>Proceedings of the 2008 ACM SIGMOD International Conference on Management of Data</i> 2008. <a href="http://www.cs.cornell.edu/~sowell/2008-sigmod-games-demo.pdf">http://www.cs.cornell.edu/~sowell/2008-sigmod-games-demo.pdf</a></td></tr><tr><td class="cite"><a name="White:2008:DPC:1401843.1401847"></a>[4]</td><td> Walker White, Benjamin Sowell, Johannes Gehrke, and Alan Demers. "<b>Declarative Processing for Computer Games</b>". <i>Proceedings of the 2008 ACM SIGGRAPH Symposium on Video Games</i> 2008. <a href="http://www.cs.cornell.edu/~sowell/2008-sandbox-declarative.pdf">http://www.cs.cornell.edu/~sowell/2008-sandbox-declarative.pdf</a></td></tr><tr><td class="cite"><a name="PROV-Primer"></a>[5]</td><td> W3C Working Group. "<b>PROV Model Primer</b>". <a href="https://www.w3.org/TR/prov-primer/">https://www.w3.org/TR/prov-primer/</a></td></tr><tr><td class="cite"><a name="ilprints918"></a>[6]</td><td> Robert Ikeda and Jennifer Widom. "<b>Data Lineage: A Survey</b>". <a href="http://ilpubs.stanford.edu:8090/918/1/lin_final.pdf">http://ilpubs.stanford.edu:8090/918/1/lin_final.pdf</a></td></tr><tr><td class="cite"><a name="Cui:2003:LTG:775452.775456"></a>[7]</td><td> Y. Cui and J. Widom. "<b>Lineage Tracing for General Data Warehouse Transformations</b>". <i>The VLDB Journal</i> 2003;12(1):41-58. <a href="http://ilpubs.stanford.edu:8090/525/1/2001-5.pdf">http://ilpubs.stanford.edu:8090/525/1/2001-5.pdf</a></td></tr><tr><td class="cite"><a name="RePEc:eee:soceco:v:33:y:2004:i:5:p:587-606"></a>[8]</td><td> Gerd Gigerenzer. "<b>Mindless statistics</b>". <i>The Journal of Socio-Economics</i> 2004;33(5):587-606. <a href="http://www.unh.edu/halelab/BIOL933/papers/2004_Gigerenzer_JSE.pdf">http://www.unh.edu/halelab/BIOL933/papers/2004_Gigerenzer_JSE.pdf</a></td></tr><tr><td class="cite"><a name="DBLP:journals-corr-ShahZ14"></a>[9]</td><td> Nihar B. Shah and Dengyong Zhou. "<b>Double or Nothing: Multiplicative Incentive Mechanisms for Crowdsourcing</b>". <i>CoRR</i> 2014. <a href="http://www.eecs.berkeley.edu/~nihar/publications/double_or_nothing.pdf">http://www.eecs.berkeley.edu/~nihar/publications/double_or_nothing.pdf</a></td></tr></table></div><a name="A"></a><div class="appendix"><hr /><h2 class="linked"><span class="link-title">[<a href="#A">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">Appendix A.</span> Using GitHub</h2>
+<span class="text top">In this course, staff will use <a href="http://github.com">GitHub</a> to distribute skeleton and evaluation code for assigned projects, and students will maintain their code, collaborate on their project, and submit their solution or implementation using GitHub. Students will need to <a href="https://github.com/join">register</a> on GitHub. Students should be able to sign up for a student discount, as well, using their Boston University credentials.</span>
+  <a name="A.1"></a><div class="subsection"><h3 class="linked"><span class="link-title">[<a href="#A.1">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">A.1.</span> Retrieving and Submitting Assigned Projects on GitHub</h3>
+<span class="text top">We assume that students are organized into groups (initially up to two students working together, though this limit will be raised to three for the later projects). Each group should designate a primary member. The workflow for student projects will be as follows.
+<ul>
+  <li>
+    For each project assigned during the course, a private repository will be created by course staff under the <a href="https://github.com/data-mechanics">Data-Mechanics</a> organization account with a name of the form <code>course-YYYY-SSS-proj-NNNN</code> where <code>YYYY</code> is the year, <code>SSSS</code> is the semester (<code>spr</code> or <code>fal</code>) and <code>NNNN</code> is <code>zero</code>, <code>one</code>, <code>two</code>, and so on.
+    <ul>
+      <li>
+        The first project (<code>course-YYYY-SSS-proj-zero</code>) will be a public repository so that those who are not members of the <a href="https://github.com/data-mechanics">Data-Mechanics</a> organozation can see and fork it in the steps below, as that will be how the course staff obtain everyone's GitHub usernames.
+      </li>
+    </ul>
+  </li>
+  <li>
+    To begin working on that particular project, one of the group's members will <a href="https://help.github.com/articles/fork-a-repo/">fork</a> that project repository, and will ensure that the other group members have the necessary privileges to contribute to it by <a href="https://help.github.com/articles/adding-collaborators-to-a-personal-repository/">adding them as collaborators</a>.
+    <ul>
+      <li>Within the forked repository's file tree, each group will create a subdirectory of the form <code>BUlogin1</code>, <code>BUlogin1_BUlogin2</code>, or <code>BUlogin1_BUlogin2_BUlogin3</code> (depending on the number of members), where the login names <code>BUloginN</code> are the official Boston University login names for the members, and they are ordered in ascending alphabetical order and separated by underscores. All changes constituting work on the project should be made within this subdirectory and nowhere else, unless otherwise specified in the posted project instructions.
+      <li>It will be the responsibility of the group to ensure that their repository <a href="https://help.github.com/articles/fork-a-repo/#keep-your-fork-synced">can be synced</a> with the original project repository (this step only needs to be performed once).</li>
+      <li>The group must also regularly <a href="https://help.github.com/articles/syncing-a-fork/">sync their fork</a> with the original repository in case course staff have made any changes to it. Course staff will usually announce when such changes take place.</li>
+    </ul>
+  </li>
+  <li>The group members may use as many branches as they need in their own fork, but their <code>master</code> branch will represent the group's submission. At some point before the project deadline, the group must <a href="https://help.github.com/articles/using-pull-requests/">submit a pull request</a> to official submit their work. Only the changes that were committed before the merge request is made will be accepted as submitted.</li>
+</ul></span></div></div><a name="B"></a><div class="appendix"><hr /><h2 class="linked"><span class="link-title">[<a href="#B">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">Appendix B.</span> Other Resources</h2>
+  <a name="B.1"></a><div class="subsection"><h3 class="linked"><span class="link-title">[<a href="#B.1">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">B.1.</span> MongoDB and Related Resources</h3>
+<span class="text top">In this course, staff will use <a href="https://www.mongodb.org/">MongoDB</a> to store and work with large data sets. This section lists some resources that you may find useful.</span><div class="paragraph">
+Some references, tutorials, and other materials of interest mentioned during lecture include the following.
+<ul>
+  <li>
+    The official documentation (<a href="https://docs.mongodb.org/manual/">https://docs.mongodb.org/manual/</a>), and in particular:
+    <ul>
+      <li>how to assemble relational queries (<a href="https://docs.mongodb.org/manual/core/aggregation-pipeline/">https://docs.mongodb.org/manual/core/aggregation-pipeline/</a>) and</li>
+      <li>how to assemble map-reduce queries (<a href="https://docs.mongodb.org/manual/core/map-reduce/">https://docs.mongodb.org/manual/core/map-reduce/</a>).</li>
+    </ul>
+  </li>
+  <li>
+    Issues and feature requests mentioned during lecture include:
+    <ul>
+      <li>flattening the results generated by <code>mapReduce</code> operations: <a href="https://jira.mongodb.org/browse/SERVER-2517">https://jira.mongodb.org/browse/SERVER-2517</a> and</li>
+      <li>deprecation and future removal of server-side <code>eval()</code> and stored procedure capabilities: <a href="https://jira.mongodb.org/browse/SERVER-17453">https://jira.mongodb.org/browse/SERVER-17453</a>.</li>
+    </ul>
+  </li>
+  <li>A tutorial suggested by a student: <a href="http://openmymind.net/mongly/">http://openmymind.net/mongly/</a>.</li>
+  <li>PyMongo Python library documentation: <a href="http://api.mongodb.org/python/current/">http://api.mongodb.org/python/current/</a>.</li>
+  <li>
+    Some resources dealing with using and building geospatial data set indices include:
+    <ul>
+      <li>the GeoJSON format: <a href="http://geojson.org/geojson-spec.html">http://geojson.org/geojson-spec.html</a>,</li>
+      <li>using geospatial indices and queries in MongoDB: <a href="https://docs.mongodb.org/manual/applications/geospatial-indexes/">https://docs.mongodb.org/manual/applications/geospatial-indexes/</a>,</li>
+      <li>example illustrating how to create a <code>GEO2D</code> index using PyMongo: <a href="http://api.mongodb.org/python/current/examples/geo.html">http://api.mongodb.org/python/current/examples/geo.html</a>, and</li>
+      <li>extracts of <a href="https://www.openstreetmap.org/">OpenStreetMap</a> data for metropolitan areas: <a href="https://mapzen.com/data/metro-extracts/">https://mapzen.com/data/metro-extracts/</a>.</li>
+    </ul>
+  </li>
+</ul>
+      </div></div>
+  <a name="B.2"></a><div class="subsection"><h3 class="linked"><span class="link-title">[<a href="#B.2">link</a>]&nbsp;&nbsp;</span><span class="header_numeral">B.2.</span> Installation Resources for Other Software Packages and Libraries</h3>
+<span class="text top">This subsection contains links to other useful resources that may help with installing packages and libraries we use in this course.</span><div class="paragraph">
+Some resources that may be useful when working with the <a href="https://pypi.python.org/pypi/prov"><code>prov</code></a> package:
+<ul>
+  <li>when installing the <a href="https://pypi.python.org/pypi/prov"><code>prov</code></a> library for Python on Windows, you may have some trouble installing the <a href="https://pypi.python.org/pypi/lxml"><code>lxml</code></a> package. Try obtaining the precompiled package <a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/">here</a>, instead, and installing it using <code>pip install *.whl</code>;</li>
+  <li>a short tutorial: <a href="http://nbviewer.jupyter.org/github/trungdong/notebooks/blob/master/PROV%20Tutorial.ipynb">http://nbviewer.jupyter.org/github/trungdong/notebooks/blob/master/PROV%20Tutorial.ipynb</a>.</li>
+</ul>
+      </div><div class="paragraph">
+As we use the JSON format for storing authentication, configuration, and provenance information, the <a href="http://json-schema.org/">JSON Schema</a> is useful and there is a corresponding <a href="https://pypi.python.org/pypi/jsonschema">jsonschema</a> Python package that you will need to install.
+      </div><div class="paragraph">
+Two useful kinds of tools for solving problems that can be represented as systems of equations and inequalities are SMT solvers and linear optimization packages.
+<ul>
+  <li>
+    The <a href="http://www.scipy.org/">SciPy</a> library collection includes the <a href="http://docs.scipy.org/doc/scipy-0.17.0/reference/optimize.linprog-simplex.html"><code>optimize.linprog</code></a> module for solving linear optimization problems, and the library is relatively straightforward to install:
+    <ul>
+      <li>using Windows, it may be easiest to obtain and install precompiled binaries for <a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy">numpy</a> and <a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy">scipy</a> (in that order);</li>
+      <li>using Mac OS X or Linux, you will likely need to download and install <a href="https://gcc.gnu.org/wiki/GFortranBinaries">a Fortran compiler</a> first, after which running <code>pip install numpy</code> and <code>pip install scipy</code>should be sufficient.</li>
+    </ul>
+  </li>
+  <li>The <a href="https://github.com/Z3Prover/z3/wiki">Z3</a> SMT solver is now open source and very easy to use with Python; precompiled binaries are also <a href="https://github.com/Z3Prover/bin/tree/master/releases">available</a>.
+  </li>
+</ul>
+      </div></div></div>
+</div><div class="footer"><div class="sheaflink">represented and rendered using <a href="http://sheaf.io">sheaf</a></div></div></body>
+</html>
+<!--eof-->

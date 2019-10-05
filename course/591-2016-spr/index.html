@@ -1,0 +1,113 @@
+
+<html>
+ <head>
+ <title>BU CAS CS 591 L1 Spring 2016</title>
+ <style>
+  body { font-family: Verdana,Arial,Sans-serif; font-size:12px; }
+  a { text-decoration:none; color:#AC701E; }
+  a:hover { text-decoration:underline; color:firebrick; }
+  #container { margin: 8px; }
+  #info { margin: 8px; float:left; display:inline-block; }
+  #info .lbl { font-weight:bold; color:#555555; }
+  #info .sect { color:#888888; }
+  #schedule {
+    /* max-width:400px; */
+    float:left; display:inline-block;
+    margin-top:20px; margin-left:10px; margin-bottom:15px; 
+    border-collapse:collapse; 
+    font-family: Verdana,Arial,Sans-serif; font-size:12px;
+    }
+  #schedule td { border: 1px solid #CCCCCC; padding:6px; }
+  #schedule .lecture { }
+  #schedule .nolecture { color:#AAAAAA; font-style:italic; }
+  #schedule .assignmentdate { }
+  #schedule .quiz { color:firebrick; font-weight:bold; }
+  #schedule .midterm { color:firebrick; font-weight:bold; }
+  #schedule .final { color:firebrick; font-weight:bold; }
+  #schedule .exam { color:firebrick; font-weight:bold; }
+  #schedule .session { color:firebrick; font-weight:bold; }
+  #schedule .review { font-weight:bold; }
+  #schedule .upcoming { background-color:#F9EFE1; }
+  #schedule .lecture_label { color:#AAAAAA; font-weight:normal; font-style:normal; }
+  #schedule .assignment_label { color:#AAAAAA; font-weight:normal; font-style:normal; }
+  ul { padding-top:0px; padding-bottom:0px; padding-left:0px; padding-right:25px; margin:0px;  }
+  li { 
+    list_style_type:none; list-style-image:url("data:image/gif;base64,R0lGODlhBwAHAIABAK+vr////yH5BAEAAAEALAAAAAAHAAcAAAIIjI+pwA0KYwEAOw=="); padding:0px;
+    min-width:200px; position:relative; left:15px; text-align:left; line-height:140%;
+    }
+  #info_items li { margin-bottom:4px; }
+  #info_items li ul { margin-top:4px; }
+  #info_items li ul li { margin-bottom:4px; }
+ </style>
+ <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90403446-1"></script>
+ <script>
+   window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-90403446-1');
+ </script>
+ </head>
+ <body>
+ <div id="container">
+
+  <div id="info">
+   <br/><b>BU CAS Computer Science 591 L1</b>
+   <br/><b>Data Mechanics</b>
+   <br/>
+   <br/>
+   <br/>
+   <ul class="info_items">
+    <li><span class="sect">lectures:</span>
+     <br/>&nbsp;&nbsp; Tue. & Thu., 2 - 3:30 PM in <a href="http://www.bu.edu/classrooms/classroom/mcs-b33/">MCS B33</a>
+     <br/>&nbsp;&nbsp; <span class="lbl">lecturer:</span> <a href="http://cs-people.bu.edu/lapets">Andrei Lapets</a>  (<a href="mailto:lapets@bu.edu">lapets@bu.edu</a>, MCS 176)
+     <br/>&nbsp;&nbsp; <span style="font-size:12px;"><span class="lbl">OH:</span> Tue. 4 - 6 PM; Thu. 11 AM - 12 PM (<a href="http://www.bu.edu/cs/resources/laboratories/undergraduate-lab/">CS lab</a>)</span>
+     <br/>
+     <br/>
+    </li>
+    <li><span class="sect">questions and discussion:</span>
+     <br/>&nbsp;&nbsp; <a href="mailto:cascs591l1-l@bu.edu">cascs591l1-l@bu.edu</a> (course mailing list)
+     <br/>&nbsp;&nbsp; <a href="https://piazza.com/bu/spring2016/cs591l1">Q&amp;A page</a> on Piazza
+    </li>
+   </ul>
+   <br/>
+   <ul class="info_items">
+    <li><span class="sect">project submission policies:</span>
+     <br/>&nbsp;&nbsp; <span class="lbl">submission:</span> by 11:59 PM on due date (via <a href="s.html#A.1">GitHub</a>)
+     <br/>&nbsp;&nbsp; <span class="lbl">collaboration:</span> list all collaborators outside of group
+     <br/>&nbsp;&nbsp; <span class="lbl">late policy</span>: -15 points per day, 3 days maximum
+    </li>
+   </ul>
+   <br/>
+   <ul class="info_items">
+    <li><span class="sect">course grade:</span>
+     <br/>&nbsp;&nbsp; 30% <i>exams</i> + 70% <i>projects</i>
+    </li>
+   </ul>
+   <br/>
+   <ul class="info_items">
+    <li><span class="sect">course materials:</span>
+     <!--<br/>&nbsp;&nbsp; to be posted-->
+     <br/>&nbsp;&nbsp; <a href="s.html">lecture notes</a> <!--(w/ projects &amp; organization notes)-->
+     <br/>&nbsp;&nbsp; <b><a href="s.html?#project0">project #0</a></b>
+     <br/>&nbsp;&nbsp; <b><a href="s.html?#project1">project #1</a></b>
+     <br/>&nbsp;&nbsp; <b><a href="s.html?#project2">project #2</a></b>
+    </li>
+   </ul>
+   <br/>
+   <ul class="info_items">
+    <li><span class="sect">software used in the course:</span>
+     <br/>&nbsp;&nbsp; <a href="https://www.python.org/downloads/">Python 3.3</a>+
+     <br/>&nbsp;&nbsp; <a href="https://www.mongodb.org/">MongoDB</a>
+    </li>
+   </ul>
+   <br/>
+   <br/>
+   <ul class="info_items">
+    <li><a href="http://www.bu.edu/academics/policies/academic-conduct-code/">academic conduct code</a></li>
+   </ul>
+   <br/>
+  </div>
+
+  <table id="schedule">
+   <tr class="lecture "><td>2016-01-19</td><td><span class="lecture_label">lecture</span></td><td><ul><li><b><a href="s.html#1">lecture notes</a></b></li><li>introduction, background, and goals</li><li>organization and workflow</li><li>potential data sets and problems</li></ul></td></tr><tr class="lecture "><td>2016-01-21</td><td><span class="lecture_label">lecture:</span><br/>data and<br/>transformations</td><td><ul><li><b><a href="s.html#2">lecture notes</a></b></li><li>formal definitions of data<ul><li>relational model</li><li>MapReduce paradigm</li><li>other algebraic considerations</li></ul></li><li>data provenance</li></ul></td></tr><tr class="lecture "><td>2016-01-26</td><td><span class="lecture_label">lecture:</span><br/>data and<br/>transformations</td><td><ul><li>data transformations</li><li>fine-grained data provenance</li><li>data flows in the relational model</li><li><i>k</i>-means relational data flow</li></ul></td></tr><tr class="assignmentdate "><td style="color:#AAAAAA; font-style:italic;"><span style="text-decoration:none;">2016-01-27</span></td><td><span class="assignment_label">project</span></td><td><ul><li><b><a href="s.html#project0">project #0</a> due</b></li></ul></td></tr><tr class="lecture "><td>2016-01-28</td><td><span class="lecture_label">lecture:</span><br/>data and<br/>transformations</td><td><ul><li>algorithms in the relational model<ul><li>Floyd-Warshall shortest paths</li><li>shortest routes</li><li><i>k</i>-means clustering</li></ul></li></ul></td></tr><tr class="lecture "><td>2016-02-02</td><td><span class="lecture_label">lecture:</span><br/>data and<br/>transformations</td><td><ul><li>algorithms using the MapReduce paradigm<ul><li>using MapReduce in MongoDB</li><li><i>k</i>-means clustering</li><li>comparing data sets</li></ul></li></ul></td></tr><tr class="lecture "><td>2016-02-04</td><td><span class="lecture_label">lecture:</span><br/>models &amp;<br/>algorithms</td><td><ul><li>Cartesian products using MapReduce</li><li>spatial algorithms &amp; data structures<ul><li>minimum/maximum spanning tree</li><li>shortest/widest paths</li><li>quadtrees</li></ul></li></ul></td></tr><tr class="lecture "><td>2016-02-09</td><td><span class="lecture_label">lecture:</span><br/>models &amp;<br/>algorithms</td><td><ul><li>relational queries in MongoDB</li><li>repository/platform architecture</li><li>systems and models<ul><li>representations for modeling</li><li>models used in algorithms</li></ul></li></ul></td></tr><tr class="lecture "><td>2016-02-11</td><td><span class="lecture_label">lecture:</span><br/>models &amp;<br/>algorithms</td><td><ul><li>more on provenance</li><li>PROV standard</li></ul></td></tr><tr class="nolecture "><td><span style="text-decoration:underline;">2016-02-16</span><br/><span style="font-size:10px;">Monday sched.<br/></span></td><td><span class="assignment_label"></span></td><td><ul></ul></td></tr><tr class="lecture "><td>2016-02-18</td><td><span class="lecture_label">lecture:</span><br/>models &amp;<br/>algorithms</td><td><ul><li>JSON schemas</li><li>more on systems and models</li><li>tools for finding models<ul><li>matrix equations</li><li>SMT solvers</li><li>linear programming</li></ul></li></ul></td></tr><tr class="lecture "><td>2016-02-23</td><td><span class="lecture_label">lecture:</span><br/>optimization</td><td><ul><li>optimization &amp; decomposition</li></ul></td></tr><tr class="lecture "><td>2016-02-25</td><td><span class="lecture_label">lecture:</span><br/>optimization</td><td><ul><li>review of calculus</li><li>basic gradient descent</li></ul></td></tr><tr class="lecture "><td>2016-03-01</td><td><span class="lecture_label">lecture:</span><br/>optimization</td><td><ul><li><b><a href="s.html#project1">project #1</a> due</b></li></ul></td></tr><tr class="lecture "><td>2016-03-03</td><td><span class="lecture_label">lecture:</span><br/>optimization</td><td><ul></ul></td></tr><tr class="nolecture "><td><span style="text-decoration:underline;">2016-03-08</span></td><td><span class="assignment_label">recess</span></td><td><ul></ul></td></tr><tr class="nolecture "><td><span style="text-decoration:underline;">2016-03-10</span></td><td><span class="assignment_label">recess</span></td><td><ul></ul></td></tr><tr class="lecture "><td>2016-03-15</td><td><span class="lecture_label">lecture</span></td><td><ul><li>review for midterm</li></ul></td></tr><tr class="midterm "><td><span style="text-decoration:underline;">2016-03-17</span><br/><span style="font-size:10px;">Tuesday<br/>2:05-3:05 PM</span></td><td><span class="exam">midterm<br/>exam</span></td><td><ul></ul></td></tr><tr class="lecture "><td>2016-03-22</td><td><span class="lecture_label">lecture:</span><br/>statistics</td><td><ul><li>review of midterm solutions</li><li><b><a href="s.html#4">lecture notes</a></b></li><li>Cauchy-Schwarz inequality</li><li>means &amp; standard deviations</li><li>covariance &amp; correlation</li></ul></td></tr><tr class="lecture "><td>2016-03-24</td><td><span class="lecture_label">lecture:</span><br/>statistics</td><td><ul><li><b><a href="s.html#4.2">lecture notes</a></b></li><li>more on covariance &amp; correlation</li><li>distributions</li><li><i>p</i>-values &amp; significance</li></ul></td></tr><tr class="lecture "><td>2016-03-29</td><td><span class="lecture_label">lecture:</span><br/>statistics</td><td><ul><li><b><a href="s.html#4.4">lecture notes</a></b></li><li>proportions</li><li>probability sampling</li><li>reservoir sampling</li></ul></td></tr><tr class="lecture "><td>2016-03-31</td><td><span class="lecture_label">lecture:</span><br/>visualization</td><td><ul><li>SVG and D3.js</li><li>networks and graphs with D3</li></ul></td></tr><tr class="lecture "><td>2016-04-05</td><td><span class="lecture_label">lecture:</span><br/>visualization</td><td><ul><li>plots &amp; charts with D3</li></ul></td></tr><tr class="lecture "><td>2016-04-07</td><td><span class="lecture_label">lecture:</span><br/>visualization</td><td><ul><li>web-based map APIs</li><li>visualization design topics</li><li>visual perception</li></ul></td></tr><tr class="lecture "><td>2016-04-12</td><td><span class="lecture_label">lecture:</span><br/>other topics</td><td><ul><li>more on GeoJSON and mapping</li><li>comments on ZIP archives</li><li>crowdsourcing</li><li>incentive compatibility</li></ul></td></tr><tr class="assignmentdate "><td style="color:#AAAAAA; font-style:italic;"><span style="text-decoration:none;">2016-04-13</span></td><td><span class="assignment_label">project</span></td><td><ul><li><b><a href="s.html#project2">project #2</a> due</b></li></ul></td></tr><tr class="lecture "><td>2016-04-14</td><td><span class="lecture_label">lecture:</span><br/>other topics</td><td><ul><li>web services &amp; web applications</li><li>REST architectures</li><li>implementing a web service</li></ul></td></tr><tr class="lecture "><td>2016-04-19</td><td><span class="lecture_label">lecture:</span><br/>other topics</td><td><ul><li>review for midterm</li></ul></td></tr><tr class="midterm "><td><span style="text-decoration:underline;">2016-04-21</span><br/><span style="font-size:10px;">Thursday<br/>2:05-3:05 PM</span></td><td><span class="exam">midterm<br/>exam</span></td><td><ul></ul></td></tr><tr class="session "><td><span style="text-decoration:underline;">2016-04-26</span><br/><span style="font-size:10px;">Tuesday<br/>2:00-5:00 PM</span></td><td><span class="exam">poster<br/>session</span></td><td><ul></ul></td></tr><tr class="lecture "><td>2016-04-28</td><td><span class="lecture_label">lecture</span></td><td><ul></ul></td></tr>  </table>
+
+ </div>
+ </body>
+</html>

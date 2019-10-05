@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="all" name="robots" />
+    <title>BU CAS CS 591 L1 Spring 2018</title>
+    <style>
+    body { font-family:Verdana,Arial,Sans-serif; font-size:12px; }
+    h4 { display:block; margin:15px 0px 0px 0px; }
+    h5 { display:block; margin:0px 0px 30px 0px; font-size:12px; }
+    a { text-decoration:none; color:#AC701E; }
+    a:hover { text-decoration:underline; color:firebrick; }
+    #container { margin:8px; }
+    #container #info { float:left; display:inline-block; margin:8px 24px 8px 8px; }
+
+    #container #info > ul { margin-left:10px; padding:0px; }
+    #container #info > ul > li { list-style-type:none; margin-bottom:15px; padding:0px; text-indent:-10px; line-height:140%; }
+    #container #info > ul > li:before { content:"--\00a0"; color:#BBBBBB; }
+    #container #info > ul > li > span { color:#888888; }
+    #container #info > ul > li > ul { padding:0px 0px 0px 12px; }
+    #container #info > ul > li > ul > li { list-style-type:none; margin:0px 0px 0px 5px; text-indent:0px; }
+    #container #info > ul > li > ul > li > span { font-weight:bold; color:#555555; }
+    #container #info > ul > li > ol { padding:0px 0px 0px 12px; }
+    #container #info > ul > li > ol > li { list-style-type:none; margin:16px 0px 0px 5px; text-indent:0px; }
+    #container #info > ul > li > ol > li span { font-weight:bold; color:#555555; }
+
+    #container table ul { margin:0px 5px -1px 10px; padding:0px; }
+    #container table ul li { list-style-type:none; padding:0px; text-indent:-10px; line-height:140%; }
+    #container table ul li:before { content:"-\00a0"; color:#BBBBBB; }
+    #container table ul li ul { margin-left:-2px; }
+    #container table ul li ul li { list-style-type:none; margin:0px 0px 0px 5px; text-indent:0px; }
+
+    #container table { float:left; display:inline-block; margin:20px 0px 15px 10px; border-collapse:collapse; }
+    #container table tr td { border:1px solid #CCCCCC; padding:6px; }
+    #container table tr td .date-with-coordinates { text-decoration:underline; }
+    #container table tr td .coordinates { font-size:10px; }
+    #container table tr td:first-of-type > div > span { display:block; }
+    #container table .lecture td .type { color:#AAAAAA; }
+    #container table .recess { color:#AAAAAA; font-style:italic; }
+    #container table .recess td:first-child { color:#AAAAAA; font-weight:normal; font-style:italic; }
+    #container table .canceled { color:#AAAAAA; font-style:italic; }
+    #container table .canceled td:first-child { color:#AAAAAA; font-weight:normal; font-style:italic; }
+    #container table .office-hours { color:#AAAAAA; font-style:italic; }
+    #container table .office-hours td:first-child { color:#AAAAAA; font-weight:normal; font-style:italic; }
+    #container table .schedule-substitution { color:#AAAAAA; font-style:italic; }
+    #container table .schedule-substitution td:first-child { color:#AAAAAA; font-weight:normal; font-style:italic; }
+    #container table .assignment { }
+    #container table .assignment td .type { color:#AAAAAA; }
+    #container table .assignment td:first-child { color:#AAAAAA; font-weight:normal; font-style:italic; }
+    #container table .project { }
+    #container table .project td .type { color:#AAAAAA; }
+    #container table .project td:first-child { color:#AAAAAA; font-weight:normal; font-style:italic; }
+    #container table .quiz { color:firebrick; font-weight:bold; }
+    #container table .midterm { color:firebrick; font-weight:bold; }
+    #container table .final { color:firebrick; font-weight:bold; }
+    #container table .exam { color:firebrick; font-weight:bold; }
+    #container table .poster { color:firebrick; font-weight:bold; }
+    #container table .session { color:firebrick; font-weight:bold; }
+    #container table .review { font-weight:bold; }
+    #container table .upcoming { background-color:#F9EFE1; }
+    @media all and (max-width:500px) {
+      body { margin:0px; padding:0px; font-size:8px; }
+      h5 { font-size:8px; }
+      #container { margin:0px; }
+      #container #info { float:left; display:inline-block; margin:0px 24px 8px 14px; }
+      #container table { }
+      #container table tr td:first-of-type { font-size:8px; }
+      #container table tr td:nth-of-type(2) { font-size:6px; }
+      #container table tr td .coordinates { font-size:6px; }
+    }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90403446-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-90403446-1');
+    </script>
+    <script>
+    var course = {
+      'schedule': [
+        { 'date': '2018-01-18',
+          'type': 'lecture',
+          'details': [
+            '<b><a href="s.html#1">lecture notes</a></b>',
+            'introduction, background, and goals',
+            'organization, tools, and workflows',
+            'potential data sets and challenges'
+          ]
+        }
+        ,
+        { 'date': '2018-01-23',
+          'type': 'lecture',
+          'topics': 'data and<br/>transformations',
+          'details': [
+            '<b><a href="s.html#2">lecture notes</a></b>',
+            'formal definitions of data',
+            { 'paradigms for data transformations': [
+              'relational model',
+              'MapReduce paradigm'
+            ]},
+            'examples of transformations',
+            'data flow diagrams'
+          ]
+        }
+        ,
+        { 'date': '2018-01-25',
+          'type': 'lecture',
+          'topics': 'data and<br/>transformations',
+          'details': [
+            '<b><a href="s.html#fa12ae67647e4daf838a79fb814e733b">lecture notes</a></b>',
+            'web-based data portal APIs',
+            'more data transformation examples',
+            'non-trivial MapReduce examples',
+            'scalability of distributed approaches',
+            '<i>k</i>-means as a use case'
+          ]
+        }
+        ,
+        { 'date': '2018-01-26',
+          'time': '11:59 PM EST',
+          'type': 'project',
+          'details': [
+            '<b><a href="s.html#project0">project #0</a> due</b>'
+          ]
+        }
+        ,
+        { 'date': '2018-01-30',
+          'type': 'lecture',
+          'topics': 'data and<br/>transformations',
+          'details': [
+            '<b><a href="s.html#2.2">lecture notes</a></b>',
+            '<i>k</i>-means using relational paradigm',
+            'MongoDB features and abstractions',
+            'MapReduce with MongoDB',
+            "<i>k</i>-means using MapReduce"
+          ]
+        }
+        ,
+        { 'date': '2018-02-01',
+          'type': 'lecture',
+          'topics': 'data and<br/>transformations',
+          'details': [
+            '<b><a href="s.html#bca743938aa04d9ea43464f941bd70bc">lecture notes</a></b>',
+            "more MongoDB features",
+            "using MongoDB within Python",
+            "iteration termination &amp; hashing",
+            "GeoJSON format and examples",
+            "project infrastructure"
+          ]
+        }
+        ,
+        { 'date': '2018-02-06',
+          'type': 'lecture',
+          'topics': 'data and<br/>transformations',
+          'details': [
+            '<b><a href="s.html#7eee633a65814aacb951b667e38092ec">lecture notes</a></b>',
+            "relational Floyd-Warshall example",
+            "introduction to data provenance",
+            'PROV standard',
+            'using PROV with Python'
+          ]
+        }
+        ,
+        { 'date': '2018-02-08',
+          'type': 'lecture',
+          'topics': 'data and<br/>transformations',
+          'details': [
+            '<b><a href="s.html#2.3">lecture notes</a></b>',
+            "more on project infrastructure",
+            'classification of transformations',
+            'fine-grained provenance complexity'
+          ]
+        }
+        ,
+        { 'date': '2018-02-13',
+          'type': 'lecture',
+          'topics': 'data and<br/>transformations',
+          'details': [
+            'more on provenance complexity',
+            'quadtrees and R-trees',
+            'introduction to systems and models'
+          ]
+        }
+        ,
+        { 'date': '2018-02-14',
+          'time': '11:59 PM EST',
+          'type': 'project',
+          'details': [
+            '<b><a href="s.html#project1">project #1</a> due</b>'
+          ]
+        }
+        ,
+        { 'date': '2018-02-15',
+          'type': 'lecture',
+          'topics': 'models &amp;<br/>algorithms',
+          'details': [
+            '<b><a href="s.html#3.1">lecture notes</a></b>',
+            { 'systems and models': [
+              'state space representations',
+              'constraint satisfaction problems',
+              'metrics and optimization'
+            ]},
+            '<i>k</i>-means using optimization'
+          ]
+        }
+		,
+		{ 'date': '2018-02-20',
+          'time': '11:59 PM EST',
+		  'comment': 'Monday sched.',
+		  'type': 'schedule-substitution',
+		  'details': []
+		}
+        ,
+        { 'date': '2018-02-22',
+          'type': 'review',
+          'details': [
+            'review for midterm'
+          ]
+        }
+        ,
+        { 'date': '2018-02-27',
+          'day': 'Tuesday',
+          'time': '9:35-10:35 AM',
+          'type': 'midterm exam',
+          'details': []
+        }
+        ,
+        { 'date': '2018-03-01',
+          'type': 'lecture',
+          'topics': 'models &amp;<br/>algorithms',
+          'details': [
+            'review of midterm solutions',
+            '<b><a href="s.html#f5cea5a026964477a864a079fefbf6cd">lecture notes</a></b>',
+            'more on systems and models',
+            'using SMT solvers to find models'
+          ]
+        }
+    	,
+		{ 'date': '2018-03-06',
+    	  'type': 'recess'
+  		}
+		,
+		{ 'date': '2018-03-08',
+	  	  'type': 'recess'
+   	 	}
+        ,
+        { 'date': '2018-03-13',
+          'type': 'canceled'
+        }
+        ,
+        { 'date': '2018-03-15',
+          'type': 'lecture',
+          'topics': 'optimization',
+          'details': [
+            '<b><a href="s.html#0c4124b538154b5794b64fababbdd3e9">lecture notes</a></b>',
+            'more on using SMT solvers',
+            'optimization via search',
+            'satisfaction/optimization examples'
+          ]
+        }
+        ,
+        { 'date': '2018-03-20',
+          'type': 'lecture',
+          'topics': 'optimization',
+          'details': [
+            '<b><a href="s.html#0c4124b538154b5794b64fababbdd3e3">lecture notes</a></b>',
+            'linear programming',
+            'decomposition methods'
+          ]
+        }
+        ,
+        { 'date': '2018-03-22',
+          'type': 'lecture',
+          'topics': 'optimization',
+          'details': [
+             'more on decomposition methods',
+             'record linkage via optimization'
+          ]
+        }
+        ,
+        { 'date': '2018-03-27',
+          'type': 'lecture',
+          'topics': 'statistics',
+          'details': [
+            '<b><a href="s.html#4">lecture notes</a></b>',
+            'linear algebra review',
+            'means &amp; standard deviations',
+            'Cauchy-Schwarz inequality',
+            'covariance &amp; correlation'
+          ]
+        }
+        ,
+        { 'date': '2018-03-29',
+          'type': 'lecture',
+          'topics': 'statistics',
+          'details': [
+            '<b><a href="s.html#4.3">lecture notes</a></b>',
+            'more on correlation',
+            'distributions',
+            '<i>p</i>-values &amp; significance'
+          ]
+        }
+        ,
+        { 'date': '2018-04-03',
+          'type': 'lecture',
+          'topics': 'statistics',
+          'details': [
+            '<b><a href="s.html#4.5">lecture notes</a></b>',
+            'independence and proportions',
+			'capture-recapture',
+            'probability sampling',
+            'reservoir sampling'
+          ]
+        }
+   	 	,
+        { 'date': '2018-04-04',
+          'time': '11:59 PM EST',
+          'type': 'project',
+          'details': [
+            '<b><a href="s.html#project2">project #2</a> due</b>'
+          ]
+        }
+        ,
+        { 'date': '2018-04-05',
+          'type': 'review',
+          'details': [
+            'review for midterm'  
+          ]
+        }
+        ,
+        { 'date': '2018-04-10',
+          'day': 'Tuesday',
+          'time': '9:35-10:35 AM',
+          'type': 'midterm exam',
+          'details~': []
+        }
+        ,
+        { 'date': '2018-04-12',
+          'type': 'lecture',
+          'topics': 'visualization',
+          'details': [
+            'HTML5, SVG, JavaScript HTML DOM',
+            'data-driven document abstractions',
+            'networks/graphs with D3.js'
+          ]
+        }
+        ,
+        { 'date': '2018-04-17',
+          'type': 'lecture',
+          'topics': 'visualization',
+          'details': [
+            'more on networks/graphs with D3.js',
+            'plots &amp; charts with D3.js',
+            'visualization design topics'
+          ]
+        }
+        ,
+        { 'date': '2018-04-19',
+          'type': 'lecture',
+          'topics': 'web services',
+          'details': [
+            'more on plots &amp; charts with D3.js',
+            'map visualization frameworks',
+            'web services &amp; web applications',
+            'API request/response schemas',
+            'web service example'
+          ]
+        }
+        ,
+        { 'date': '2018-04-24',
+          'type': 'lecture',
+          'topics': 'web services',
+          'details': [
+            'HTTP and REST architectures',
+            'web service &amp; visualization example',
+            'scalable in-browser data processing'
+          ]
+        }
+        ,
+        { 'date': '2018-04-26',
+          'type': 'lecture',
+		  'topics': 'other topics',
+          'details': [
+            'continuation-passing style &amp; callbacks',
+            'asynchronous frameworks',
+            'JavaScript promises'
+          ]
+        }
+        ,
+        { 'date': '2018-05-01',
+          'day': 'Tuesday',
+          'time': '3:00-5:00 PM',
+          'type': 'poster session',
+          'details': [
+            'no regularly scheduled lecture',
+            'every team must present poster'
+          ]
+        }
+   	 	,
+        { 'date': '2018-05-02',
+          'time': '11:59 PM EDT',
+          'type': 'project',
+          'details': [
+            '<b><a href="s.html#project3">project #3</a> due</b>'
+          ]
+        }
+      ]
+    };
+
+    function render_schedule(course) {
+      var table = document.getElementById("schedule");
+      var alreadyHighlighted = false;
+      for (var i = 0; i < course.schedule.length; i++) {
+        var entry = course.schedule[i];
+
+        var row = table.insertRow(-1);
+        var upcoming = today() <= entry.date && !alreadyHighlighted ? ' upcoming' : '';
+        alreadyHighlighted = alreadyHighlighted || (upcoming.length > 0);
+        row.className = entry.type + upcoming;
+
+        var date = row.insertCell(-1);
+        var coordinates =
+          (entry.day ? ('<span>' + entry.day + '</span>') : '') +
+          (entry.time ? ('<span>' + entry.time + '</span>') : '') +
+          (entry.location ? ('<span>' + entry.location + '</span>') : '') +
+          (entry.comment ? ('<span>' + entry.comment + '</span>') : '');
+        date.innerHTML = 
+          coordinates ?
+              ('<span class="date-with-coordinates">' + entry.date + '</span>' + '<div class="coordinates">' + coordinates + '</div>')
+            : entry.date;
+
+        var type = row.insertCell(-1);
+        type.innerHTML = 
+            '<span class="type">' + entry.type.replace(' ','<br/>').replace('-','<br/>') + 
+            (entry.topics ? (':</span>' + '<br/>' + entry.topics) : '');
+
+        var details = row.insertCell(-1);
+        details.innerHTML = render_details(entry.details);
+      }
+    }
+
+    function render_details(details) {
+      if (details == null) {
+        return "";
+      } else if (typeof details === 'string') {
+        return details;
+      } else if (details.constructor === Array) {
+        var output = '';
+        for (var j = 0; j < details.length; j++)
+          output += '<li>' + render_details(details[j]) + '</li>';
+        return '<ul>' + output + '</ul>';
+      } else {
+        for (var txt in details)
+          return txt + render_details(details[txt]);
+      }
+    }
+
+    function today() {
+      var now = new Date();
+      var dd = now.getDate(), 
+          mm = now.getMonth() + 1,
+          yyyy = now.getFullYear();  
+      dd = (dd < 10 ? '0' : '') + dd;
+      mm = (mm < 10 ? '0' : '') + mm;
+      return yyyy+'-'+mm+'-'+dd;
+    }
+  </script>
+  </head>
+  <body onload="render_schedule(course);">
+    <div id="container">
+      <div id="info">
+        <h4>BU CAS Computer Science 591 L1</h4>
+        <h5>Data Mechanics</h5>
+        <ul>
+          <li><span>lectures:</span>
+            <ul>
+              <li>Tue. &amp; Thu., 9:30 - 10:45 AM in <a href="http://www.bu.edu/classrooms/classroom/sci-117/">SCI 117</a></li>
+              <li><span>lecturer:</span> <a href="http://cs-people.bu.edu/lapets">Andrei Lapets</a>  (<a href="mailto:lapets@bu.edu">lapets@bu.edu</a>, MCS 172)</li>
+              <li><span>OH:</span> Tue. 6 - 7:30 PM &amp; Thu. 6 - 7:30 PM at <a href="http://www.bu.edu/cs/resources/laboratories/undergraduate-lab/">CS lab</a></li>
+            </ul>
+          </li>
+          <li><span>questions and discussion:</span>
+            <ul>
+              <li><a href="mailto:cascs591l1-l@bu.edu">cascs591l1-l@bu.edu</a> (course mailing list)</li>
+              <li><a href="https://piazza.com/bu/spring2018/cs591l1">Q&amp;A page</a> on Piazza</li>
+            </ul>
+          </li>
+          <li><span>project submission policies:</span>
+            <ul>
+              <li><span>submission:</span> by 11:59 PM on due date (via <a href="s.html#A.1">GitHub</a>)</li>
+              <li><span>collaboration:</span> list all collaborators outside of group</li>
+              <li><span>late policy</span>: -15 points per day, 3 days maximum</li>
+            </ul>
+          </li>
+          <li><span>course grade:</span>
+            <ul>
+              <li>30% <i>exams</i> + 70% <i>projects</i></li>
+            </ul>
+          </li>
+          <li><span>course materials:</span>
+            <ul>
+              <!--li>to be posted</li-->
+              <li><a href="s.html">lecture notes</a> (w/ projects &amp; organization notes)</li>
+              <li><b><a href="s.html?#project0">project #0</a></b></li>
+              <li><b><a href="s.html?#project1">project #1</a></b></li>
+              <li><b><a href="s.html?#project2">project #2</a></b></li>
+              <li><b><a href="s.html?#project3">project #3</a></b></li>
+            </ul>
+          </li>
+          <li><span>software used in the course:</span>
+            <ul>
+              <li><a href="https://www.python.org/downloads/">Python 3.6</a>+</li>
+              <li><a href="https://www.mongodb.com/download-center#community">MongoDB Community Server</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul>
+          <li><a href="http://www.bu.edu/academics/policies/academic-conduct-code/">academic conduct code</a></li>
+        </ul>
+      </div>
+      <table id="schedule"></table>
+    </div>
+  </body>
+</html>

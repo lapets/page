@@ -12,17 +12,19 @@ var bib =
 
   "authors":{
     "lapets": {"name":"Andrei Lapets", "html":"Lapets"},
+    "globus-harris": {"name":"Ira Globus-Harris", "html":"Globus-Harris"},
+    "flockhart": {"name":"Peter Flockhart", "html":"Flockhart"},
     "getchell": {"name":"Ben Getchell", "html":"Getchell"},
     "qin": {"name":"Lucy Qin", "html":"Qin", "url":"http://lucyq.in/"},
     "pandit": {"name":"Shreya Pandit", "html":"Pandit"},
     "slavin": {"name":"Mary Slavin", "html":"Slavin"},
     "dakalbab": {"name":"Kinan Dak Al Bab", "html":"Dak Albab", "url":"https://cs-people.bu.edu/babman/"},
     "issa": {"name":"Rawane Issa", "html":"Issa", "url":"https://cs-people.bu.edu/ra1issa/"},
-    "volgushev": {"name":"Nikolaj Volgushev", "html":"Volgushev"},
+    "volgushev": {"name":"Nikolaj Volgushev", "html":"Volgushev", "url":"https://n1v0lg.github.io/"},
     "bestavros": {"name":"Azer Bestavros", "html":"Bestavros", "url":"http://azer.bestavros.net/"},
     "jansen": {"name":"Frederick Jansen", "html":"Jansen"},
     "varia": {"name":"Mayank Varia", "html":"Varia", "url":"http://www.mvaria.com/"},
-    "schwarzkopf": {"name":"Malte Schwarzkopf", "html":"Schwarzkopf", "url":"https://people.csail.mit.edu/malte/"},
+    "schwarzkopf": {"name":"Malte Schwarzkopf", "html":"Schwarzkopf", "url":"http://cs.brown.edu/people/malte/"},
     "dunton": {"name":"Eric Dunton", "html":"Dunton"},
     "holzinger": {"name":"Kyle Holzinger", "html":"Holzinger"},
     "kong": {"name":"Derrick Kong", "html":"Kong"},
@@ -34,7 +36,7 @@ var bib =
     "kfoury": {"name":"Assaf Kfoury", "html":"Kfoury", "url":"https://www.cs.bu.edu/faculty/kfoury/"},
     "mirzaei": {"name":"Saber Mirzaei", "html":"Mirzaei"},
     "bassem": {"name":"Christine Bassem", "html":"Bassem", "url":"https://cbassem.wordpress.com/"},
-    "bahargam": {"name":"Sanaz Bahargam", "html":"Bahargam", "url":"http://cs-people.bu.edu/bahargam/"},
+    "bahargam": {"name":"Sanaz Bahargam", "html":"Bahargam"},
     "kazdagli": {"name":"Mikhail Kazdagli", "html":"Kazdagli"},
     "lalwani": {"name":"Prakash Lalwani", "html":"Lalwani"},
     "wong": {"name":"Lily Wong", "html":"Wong"},
@@ -56,8 +58,34 @@ var bib =
 
   "documents":[
 
+     {"#authors": ["lapets", "dakalbab", "issa", "qin", "varia", "bestavros", "jansen"],
+      "#topics": ["mpc"],
+      "#report": "cryptoeprint:2017:803",
+      "#url": "https://lapets.io/pub/mpc-roles.pdf",
+      "@inproceedings":{"LDIQVBJ:secdev2019":{
+       "author": "Andrei Lapets and Kinan Dak Albab and Rawane Issa and Lucy Qin and Mayank Varia and Azer Bestavros and Frederick Jansen",
+       "title": "{Role-Based Ecosystem for the Design, Development, and Deployment of Secure Multi-Party Data Analytics Applications}",
+       "booktitle": "2019 IEEE Cybersecurity Development (SecDev)",
+       "address": "McLean, VA, USA",
+       "month": "September",
+       "year": "2019"
+     }}},
+
+     {"#authors": ["dakalbab", "issa", "lapets", "flockhart", "qin", "globus-harris"],
+      "#topics": ["mpc"],
+      "#url": "https://lapets.io/pub/mpc-jiff-tut.pdf",
+      "@inproceedings":{"DILFQG:secdev2019":{
+       "author": "Kinan Dak Albab and Rawane Issa and Andrei Lapets and Peter Flockhart and Lucy Qin and Ira Globus-Harris",
+       "title": "{Tutorial: Deploying Secure Multi-Party Computation on the Web Using JIFF}",
+       "booktitle": "2019 IEEE Cybersecurity Development (SecDev)",
+       "address": "McLean, VA, USA",
+       "month": "September",
+       "year": "2019"
+     }}},
+
      {"#authors": ["volgushev", "schwarzkopf", "getchell", "varia", "lapets", "bestavros"],
       "#topics": ["mpc"],
+      "#url": "https://lapets.io/pub/conclave.pdf",
       "@inproceedings":{"VSGVLB:eurosys2019":{
        "author": "Nikolaj Volgushev and Malte Schwarzkopf and Ben Getchell and Mayank Varia and Andrei Lapets and Azer Bestavros",
        "title": "{Conclave: Secure Multi-Party Computation on Big Data}",

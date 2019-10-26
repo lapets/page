@@ -12,6 +12,7 @@ var bib =
 
   "authors":{
     "lapets": {"name":"Andrei Lapets", "html":"Lapets"},
+    "roberts": {"name":"Shannon C. Roberts", "html":"Roberts", "url":"https://people.umass.edu/scroberts/"},
     "globus-harris": {"name":"Ira Globus-Harris", "html":"Globus-Harris"},
     "flockhart": {"name":"Peter Flockhart", "html":"Flockhart"},
     "getchell": {"name":"Ben Getchell", "html":"Getchell"},
@@ -82,6 +83,31 @@ var bib =
        "month": "September",
        "year": "2019"
      }}},
+
+     {"#authors": ["qin", "flockhart", "lapets", "jansen", "dakalbab", "varia", "roberts", "globus-harris"],
+      "#topics": ["mpc"],
+      "#report": "cryptoeprint:2019:734",
+      "#url": "https://eprint.iacr.org/2019/734.pdf",
+      "@inproceedings":{"QFLJDVRG:2019":{
+       "author": "Lucy Qin and Peter Flockhart and Andrei Lapets and Kinan Dak Albab and Mayank Varia and Shannon Roberts and Ira Globus-Harris",
+       "title": "From Usability to Secure Computing and Back Again",
+       "booktitle": "Proceedings of the 15th Symposium on Usable Privacy and Security (SOUPS)",
+       "address": "Santa Clara, CA, USA",
+       "month": "August",
+       "year": "2019"
+     }}},
+
+    {"#authors": ["qin", "flockhart", "lapets", "jansen", "dakalbab", "varia", "roberts", "globus-harris"],
+     "#topics": ["mpc"],
+     "#url": "https://eprint.iacr.org/2019/734.pdf",
+     "@misc":{"cryptoeprint:2019:734":{
+      "author": "Lucy Qin and Peter Flockhart and Andrei Lapets and Kinan Dak Albab and Mayank Varia and Shannon Roberts and Ira Globus-Harris",
+      "title": "From Usability to Secure Computing and Back Again",
+      "howpublished": "Cryptology ePrint Archive, Report 2019/734",
+      "month": "June",
+      "year": "2019",
+      "note": "Available at \\url{https://eprint.iacr.org/2019/734.pdf}"
+    }}},
 
      {"#authors": ["volgushev", "schwarzkopf", "getchell", "varia", "lapets", "bestavros"],
       "#topics": ["mpc"],
@@ -196,7 +222,8 @@ var bib =
 
     {"#authors": ["bestavros", "lapets", "varia"],
      "#topics": ["mpc"],
-     "#url": "http://cacm.acm.org/magazines/2017/2/212427-user-centric-distributed-solutions-for-privacy-preserving-analytics/fulltext",
+     "#url": "https://cacm.acm.org/magazines/2017/2/212427-user-centric-distributed-solutions-for-privacy-preserving-analytics/fulltext",
+     "#pdf": "https://lapets.io/pub/mpc-viewpoints.pdf",
      "@article":{"BestavrosLapetsVaria:CACM2017":{
       "author": "Azer Bestavros and Andrei Lapets and Mayank Varia",
       "title": "User-Centric Distributed Solutions for Privacy-Preserving Analytics",
@@ -214,6 +241,7 @@ var bib =
 
     {"#authors": ["lapets", "volgushev", "bestavros", "jansen", "varia"],
      "#topics": ["mpc"],
+     "#pdf": "https://lapets.io/pub/mpc-web.pdf",
      "#report": "BUCS-TR-2016-008",
      "@inproceedings":{"LVBJV:secdev2016":{
       "author": "Andrei Lapets and Nikolaj Volgushev and Azer Bestavros and Frederick Jansen and Mayank Varia",

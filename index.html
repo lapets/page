@@ -48,7 +48,9 @@
           h = ' ' +s(b.booktitle)+ '. ' +s(b.address)+ '. ' +s(b.month)+ ' ' +s(b.year)+ '.';
         }} else if ('@article' in json) { for (var id in json['@article']) {
           var b = json['@article'][id];
-          h = ' <i>' +s(b.journal)+ '</i>, <b>' +s(b.volume)+ '</b>(' +s(b.number)+ '):' +s(b.pages)+ ', ' + s(b.year)+ '.';
+          h = ' <i>' +s(b.journal)+ '</i>, <b>' +s(b.volume)+ '</b>' +
+              (('number' in b && b['number'] != '') ? ('('+s(b.number)+')') : '')+
+              ':' +s(b.pages)+ ', ' + s(b.year)+ '.';
         }}
         return (h != null) ? (title(docs, jsons, id, json, b) + '<span>'+h+'</span>') : null;
       }

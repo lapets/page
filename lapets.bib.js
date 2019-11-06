@@ -49,7 +49,7 @@ var bib =
     "silva": {"name":"Marcus Silva", "html":"Silva", "url":"https://marcusps.github.io/"},
     "thome": {"name":"Michael Thome", "html":"Thome"},
     "adler": {"name":"Aaron Adler", "html":"Adler", "url":"http://people.csail.mit.edu/cadlerun/"},
-    "beal": {"name":"Jacob Beal", "html":"Beal", "url":"http://jakebeal.com"},
+    "beal": {"name":"Jacob Beal", "html":"Beal", "url":"https://jakebeal.github.io/"},
     "roetteler": {"name":"Martin R\\\"{o}tteler", "html":"R&ouml;tteler", "url":"https://www.microsoft.com/en-us/research/people/martinro/"},
     "soule": {"name":"Nate Soule", "html":"Soule"},
     "ocean": {"name":"Michael Ocean", "html":"Ocean", "url":"https://www.endicott.edu/academics/schools/arts-sciences/faculty/m/michael-ocean"},

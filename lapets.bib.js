@@ -317,6 +317,8 @@ var bib =
 
     {"#authors": ["kong", "mandelberg", "lapets", "watro", "smith", "runkle"],
      "#topics": ["dsf"],
+     "#url": "https://lapets.io/pub/lightbulb.pdf",
+     "#pdf": "http://www.thinkmind.org/download.php?articleid=icn_2015_6_40_30158",
      "#award": "http://www.iaria.org/conferences2015/awardsICN15/icn2015_a3.pdf",
      "@inproceedings":{"KMLWSR:icn2015":{
       "author": "Derrick Kong and David Mandelberg and Andrei Lapets and Ronald Watro and Daniel Smith and Matthew Runkle",
@@ -516,6 +518,7 @@ var bib =
 
     {"#authors": ["bestavros", "kfoury", "lapets"],
      "#topics": ["dsf"],
+     "#pdf": "http://www.cs.bu.edu/techreports/pdf/2012-001-mscs-editorial.pdf",
      "#report": "BUCS-TR-2012-001",
      "@article":{"BestavrosKfouryLapets:MSCS2013":{
       "author": "Azer Bestavros and Assaf Kfoury and Andrei Lapets",

@@ -59,43 +59,43 @@ var bib =
 
   "documents":[
 
-     {"#authors": ["lapets", "dakalbab", "issa", "qin", "varia", "bestavros", "jansen"],
-      "#topics": ["mpc"],
-      "#report": "cryptoeprint:2017:803",
-      "#url": "https://lapets.io/pub/mpc-roles.pdf",
-      "@inproceedings":{"LDIQVBJ:secdev2019":{
-       "author": "Andrei Lapets and Kinan Dak Albab and Rawane Issa and Lucy Qin and Mayank Varia and Azer Bestavros and Frederick Jansen",
-       "title": "{Role-Based Ecosystem for the Design, Development, and Deployment of Secure Multi-Party Data Analytics Applications}",
-       "booktitle": "2019 IEEE Cybersecurity Development (SecDev)",
-       "address": "McLean, VA, USA",
-       "month": "September",
-       "year": "2019"
-     }}},
+    {"#authors": ["lapets", "dakalbab", "issa", "qin", "varia", "bestavros", "jansen"],
+     "#topics": ["mpc"],
+     "#report": "cryptoeprint:2017:803",
+     "#url": "https://lapets.io/pub/mpc-roles.pdf",
+     "@inproceedings":{"LDIQVBJ:secdev2019":{
+      "author": "Andrei Lapets and Kinan Dak Albab and Rawane Issa and Lucy Qin and Mayank Varia and Azer Bestavros and Frederick Jansen",
+      "title": "{Role-Based Ecosystem for the Design, Development, and Deployment of Secure Multi-Party Data Analytics Applications}",
+      "booktitle": "2019 IEEE Cybersecurity Development (SecDev)",
+      "address": "McLean, VA, USA",
+      "month": "September",
+      "year": "2019"
+    }}},
 
-     {"#authors": ["dakalbab", "issa", "lapets", "flockhart", "qin", "globus-harris"],
-      "#topics": ["mpc"],
-      "#url": "https://lapets.io/pub/mpc-jiff-tut.pdf",
-      "@inproceedings":{"DILFQG:secdev2019":{
-       "author": "Kinan Dak Albab and Rawane Issa and Andrei Lapets and Peter Flockhart and Lucy Qin and Ira Globus-Harris",
-       "title": "{Tutorial: Deploying Secure Multi-Party Computation on the Web Using JIFF}",
-       "booktitle": "2019 IEEE Cybersecurity Development (SecDev)",
-       "address": "McLean, VA, USA",
-       "month": "September",
-       "year": "2019"
-     }}},
+    {"#authors": ["dakalbab", "issa", "lapets", "flockhart", "qin", "globus-harris"],
+     "#topics": ["mpc"],
+     "#url": "https://lapets.io/pub/mpc-jiff-tut.pdf",
+     "@inproceedings":{"DILFQG:secdev2019":{
+      "author": "Kinan Dak Albab and Rawane Issa and Andrei Lapets and Peter Flockhart and Lucy Qin and Ira Globus-Harris",
+      "title": "{Tutorial: Deploying Secure Multi-Party Computation on the Web Using JIFF}",
+      "booktitle": "2019 IEEE Cybersecurity Development (SecDev)",
+      "address": "McLean, VA, USA",
+      "month": "September",
+      "year": "2019"
+    }}},
 
-     {"#authors": ["qin", "flockhart", "lapets", "jansen", "dakalbab", "varia", "roberts", "globus-harris"],
-      "#topics": ["mpc"],
-      "#report": "cryptoeprint:2019:734",
-      "#url": "https://eprint.iacr.org/2019/734.pdf",
-      "@inproceedings":{"QFLJDVRG:2019":{
-       "author": "Lucy Qin and Peter Flockhart and Andrei Lapets and Kinan Dak Albab and Mayank Varia and Shannon Roberts and Ira Globus-Harris",
-       "title": "From Usability to Secure Computing and Back Again",
-       "booktitle": "Proceedings of the 15th Symposium on Usable Privacy and Security (SOUPS)",
-       "address": "Santa Clara, CA, USA",
-       "month": "August",
-       "year": "2019"
-     }}},
+    {"#authors": ["qin", "flockhart", "lapets", "jansen", "dakalbab", "varia", "roberts", "globus-harris"],
+     "#topics": ["mpc"],
+     "#report": "cryptoeprint:2019:734",
+     "#url": "https://eprint.iacr.org/2019/734.pdf",
+     "@inproceedings":{"QFLJDVRG:2019":{
+      "author": "Lucy Qin and Peter Flockhart and Andrei Lapets and Kinan Dak Albab and Mayank Varia and Shannon Roberts and Ira Globus-Harris",
+      "title": "From Usability to Secure Computing and Back Again",
+      "booktitle": "Proceedings of the 15th Symposium on Usable Privacy and Security (SOUPS)",
+      "address": "Santa Clara, CA, USA",
+      "month": "August",
+      "year": "2019"
+    }}},
 
     {"#authors": ["qin", "flockhart", "lapets", "jansen", "dakalbab", "varia", "roberts", "globus-harris"],
      "#topics": ["mpc"],
@@ -109,58 +109,58 @@ var bib =
       "note": "Available at \\url{https://eprint.iacr.org/2019/734.pdf}"
     }}},
 
-     {"#authors": ["volgushev", "schwarzkopf", "getchell", "varia", "lapets", "bestavros"],
-      "#topics": ["mpc"],
-      "#url": "https://lapets.io/pub/conclave.pdf",
-      "@inproceedings":{"VSGVLB:eurosys2019":{
-       "author": "Nikolaj Volgushev and Malte Schwarzkopf and Ben Getchell and Mayank Varia and Andrei Lapets and Azer Bestavros",
-       "title": "{Conclave: Secure Multi-Party Computation on Big Data}",
-       "booktitle": "Proceedings of EuroSys 2019: The 12th European Conference on Computer Systems",
-       "address": "Dresden, Germany",
-       "month": "March",
-       "year": "2019"
-     }}},
+    {"#authors": ["volgushev", "schwarzkopf", "getchell", "varia", "lapets", "bestavros"],
+     "#topics": ["mpc"],
+     "#url": "https://lapets.io/pub/conclave.pdf",
+     "@inproceedings":{"VSGVLB:eurosys2019":{
+      "author": "Nikolaj Volgushev and Malte Schwarzkopf and Ben Getchell and Mayank Varia and Andrei Lapets and Azer Bestavros",
+      "title": "{Conclave: Secure Multi-Party Computation on Big Data}",
+      "booktitle": "Proceedings of EuroSys 2019: The 12th European Conference on Computer Systems",
+      "address": "Dresden, Germany",
+      "month": "March",
+      "year": "2019"
+    }}},
 
-     {"#authors": ["volgushev", "schwarzkopf", "getchell", "varia", "lapets", "bestavros"],
-      "#topics": ["mpc"],
-      "#url": "https://arxiv.org/pdf/1902.06288.pdf",
-      "@misc":{"arXiv:1902.06288":{
-       "author": "Nikolaj Volgushev and Malte Schwarzkopf and Ben Getchell and Mayank Varia and Andrei Lapets and Azer Bestavros",
-       "title": "{Conclave: secure multi-party computation on big data (extended TR)}",
-       "howpublished": "arXiv, Report 1902.06288",
-       "month": "February",
-       "year": "2019",
-       "note": "Available at \\url{https://arxiv.org/abs/1902.06288}"
-     }}},
-     
-     {"#authors": ["lapets", "jansen", "dakalbab", "issa", "qin", "varia", "bestavros"],
-      "#topics": ["mpc"],
-      "#url": "https://lapets.io/pub/mpc-ineq.pdf",
-      "@inproceedings":{"LJDIQVB:compass2018":{
-       "author": "Frederick Jansen and Kinan Dak Albab and Andrei Lapets and Mayank Varia",
-       "title": "{Accessible Privacy-Preserving Web-Based Data Analysis for Assessing and Addressing Economic Inequalities}",
-       "booktitle": "Proceedings of ACM COMPASS 2018: First Conference on Computing and Sustainable Societies",
-       "address": "San Jose, CA, USA",
-       "month": "June",
-       "year": "2018"
-     }}},
+    {"#authors": ["volgushev", "schwarzkopf", "getchell", "varia", "lapets", "bestavros"],
+     "#topics": ["mpc"],
+     "#url": "https://arxiv.org/pdf/1902.06288.pdf",
+     "@misc":{"arXiv:1902.06288":{
+      "author": "Nikolaj Volgushev and Malte Schwarzkopf and Ben Getchell and Mayank Varia and Andrei Lapets and Azer Bestavros",
+      "title": "{Conclave: secure multi-party computation on big data (extended TR)}",
+      "howpublished": "arXiv, Report 1902.06288",
+      "month": "February",
+      "year": "2019",
+      "note": "Available at \\url{https://arxiv.org/abs/1902.06288}"
+    }}},
 
-     {"#authors": ["pandit", "jansen", "lapets", "slavin"],
-      "#topics": ["digital-health"],
-      "@article":{"PJLS:VIH2018":{
-       "author": "Shreya Pandit and Frederick Jansen and Andrei Lapets and Mary D. Slavin",
-       "title": "{Web-Based Computerized Adaptive Testing Via An Open-Source Platform}",
-       "journal": "Value in Health",
-       "volume": "21",
-       "number": "",
-       "month": "May",
-       "year": "2018",
-       "pages": "S54--S54",
-       "numpages": "1",
-       "publisher": "Elsevier",
-       "doi": "10.1016/j.jval.2018.04.449",
-       "url": "https://doi.org/10.1016/j.jval.2018.04.449"
-     }}},
+    {"#authors": ["lapets", "jansen", "dakalbab", "issa", "qin", "varia", "bestavros"],
+     "#topics": ["mpc"],
+     "#url": "https://lapets.io/pub/mpc-ineq.pdf",
+     "@inproceedings":{"LJDIQVB:compass2018":{
+      "author": "Andrei Lapets and Frederick Jansen and Kinan Dak Albab and Rawane Issa and Lucy Qin and Mayank Varia and Azer Bestavros",
+      "title": "{Accessible Privacy-Preserving Web-Based Data Analysis for Assessing and Addressing Economic Inequalities}",
+      "booktitle": "Proceedings of ACM COMPASS 2018: First Conference on Computing and Sustainable Societies",
+      "address": "San Jose, CA, USA",
+      "month": "June",
+      "year": "2018"
+    }}},
+
+    {"#authors": ["pandit", "jansen", "lapets", "slavin"],
+     "#topics": ["digital-health"],
+     "@article":{"PJLS:VIH2018":{
+      "author": "Shreya Pandit and Frederick Jansen and Andrei Lapets and Mary D. Slavin",
+      "title": "{Web-Based Computerized Adaptive Testing Via An Open-Source Platform}",
+      "journal": "Value in Health",
+      "volume": "21",
+      "number": "",
+      "month": "May",
+      "year": "2018",
+      "pages": "S54--S54",
+      "numpages": "1",
+      "publisher": "Elsevier",
+      "doi": "10.1016/j.jval.2018.04.449",
+      "url": "https://doi.org/10.1016/j.jval.2018.04.449"
+    }}},
 
     {"#authors": ["jansen", "dakalbab", "lapets", "varia"],
      "#topics": ["mpc"],

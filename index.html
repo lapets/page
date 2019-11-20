@@ -13,6 +13,15 @@
     <script>
       window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-90403446-1');
     </script>
+    <script>
+      var favIcon = "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAEkSURBVHjaYnz79i0TCxMDNvDvzz9MQYAAYvnP+O/fz6///vz+9/8/kM+ILPnjwz+wFkbG/6ycPP84RYBsgABiYWZh+XPn4Ldnd3/8/A3is/yHq//7+c2ffyDLOdhY2CRVuE3jgWyAAGJ8/+k9kPr2/RsXJxfDf4Y/v/6AtLGzMOAAAAHEAlG9e/tuIMM/0P/evXuvX79GViEqKqqmqQbnAgQQ1AYo+I/mCSwAIIDQbbh1/RayDWjGAwFAAOG04d9vlDBlYoUGPUAAsfz984fxz3eswcrMzAwyBBxsf37+Y2Jh/c/CCRBA+IIVAoAGgkKWnZVLSplFwwcggLAEK54wBQKAACIQrJieBgggkoMVIIAIBCumPQABRLINAAHExEAiAAgwAMA9mQXF9ptmAAAAAElFTkSuQmCC";
+      var docHead = document.getElementsByTagName('head')[0];
+      var newLink = document.createElement('link');
+      newLink.rel = 'shortcut icon';
+      newLink.type = 'image/x-icon';
+      newLink.href = 'data:image/png;base64,'+favIcon;
+      docHead.appendChild(newLink);    
+    </script>
     <script src="lapets.bib.js"></script>
     <script>
       function insertAfter(obj,ref) { ref.parentNode.insertBefore(obj, ref.nextSibling); }

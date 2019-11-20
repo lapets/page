@@ -502,7 +502,7 @@ $schedule = array(
    <ul class="info_items">
     <li><span class="sect">lectures:</span>
      <br/>&nbsp;&nbsp; Tue. & Thu., 2 PM - 3:30 PM in GCB 207
-     <br/>&nbsp;&nbsp; <span class="lbl">lecturer:</span> <a href="http://cs-people.bu.edu/lapets">Andrei Lapets</a>  (<a href="mailto:lapets@bu.edu">lapets@bu.edu</a>, MCS 178)
+     <br/>&nbsp;&nbsp; <span class="lbl">lecturer:</span> <a href="https://lapets.io">Andrei Lapets</a>  (<a href="mailto:lapets@bu.edu">lapets@bu.edu</a>, MCS 178)
      <br/>&nbsp;&nbsp; <span style="font-size:11px;"><span class="lbl">OH:</span> Wed. 3:30-5:30 PM; Thu. 12:45-1:45 PM (<a href="http://www.bu.edu/cs/resources/laboratories/undergraduate-lab/">CS lab</a>)</span>
      <br/>
      <br/>

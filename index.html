@@ -66,7 +66,11 @@
       function links(jsons, json) {
         var l = [];
         if ('#bib' in json) l = l.concat(['<a href="' +json['#bib']+ '">bib</a>']);
-        if ('#pdf' in json) l = l.concat(['<a href="' +json['#pdf']+ '">pdf</a>']);
+        if ('#pdf' in json) {
+          l = l.concat(['<a href="' +json['#pdf']+ '">pdf</a>'])
+        } else if ('#report' in json && '#pdf' in jsons[json['#report']]) {
+          l = l.concat(['<a href="' +jsons[json['#report']]['#pdf']+ '">pdf</a>']);
+        };
         if ('#abstract' in json) l = l.concat(['<a href="' +json['#abstract']+ '">abstract</a>']);
         if ('#slides' in json) l = l.concat(['<a href="' +json['#slides']+ '">slides</a>']);
         if ('#report' in json && '#slides' in jsons[json['#report']]) l = l.concat(['<a href="' +jsons[json['#report']]['#slides']+ '">slides</a>']);

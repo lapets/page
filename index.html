@@ -54,7 +54,7 @@
           h = ' Ph.D. Thesis. ' +s(b.school)+ '. ' +s(b.month)+ ' ' +s(b.year)+ '.';
         }} else if ('@inproceedings' in json) { for (var id in json['@inproceedings']) {
           var b = json['@inproceedings'][id];
-          h = ' ' +s(b.booktitle)+ '. ' +s(b.address)+ '. ' +s(b.month)+ ' ' +s(b.year)+ '.';
+          h = ' ' +s(b.booktitle)+ '. ' +s(("location" in b) ? b.location : b.address)+ '. ' +s(b.month)+ ' ' +s(b.year)+ '.';
         }} else if ('@article' in json) { for (var id in json['@article']) {
           var b = json['@article'][id];
           h = ' <i>' +s(b.journal)+ '</i>, <b>' +s(b.volume)+ '</b>' +

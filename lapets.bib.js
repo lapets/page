@@ -62,14 +62,16 @@ var bib =
     {"#authors": ["lapets", "dakalbab", "issa", "qin", "varia", "bestavros", "jansen"],
      "#topics": ["mpc"],
      "#report": "cryptoeprint:2017:803",
-     "#url": "https://lapets.io/pub/mpc-roles.pdf",
      "@inproceedings":{"LDIQVBJ:secdev2019":{
       "author": "Andrei Lapets and Kinan Dak Albab and Rawane Issa and Lucy Qin and Mayank Varia and Azer Bestavros and Frederick Jansen",
       "title": "{Role-Based Ecosystem for the Design, Development, and Deployment of Secure Multi-Party Data Analytics Applications}",
       "booktitle": "2019 IEEE Cybersecurity Development (SecDev)",
-      "address": "McLean, VA, USA",
+      "pages": "129--140",
+      "location": "McLean, VA, USA",
       "month": "September",
-      "year": "2019"
+      "year": "2019",
+      "doi": "10.1109/SecDev.2019.00023",
+      "url": "https://doi.org/10.1109/SecDev.2019.00023"
     }}},
 
     {"#authors": ["dakalbab", "issa", "lapets", "flockhart", "qin", "globus-harris"],
@@ -79,27 +81,35 @@ var bib =
       "author": "Kinan Dak Albab and Rawane Issa and Andrei Lapets and Peter Flockhart and Lucy Qin and Ira Globus-Harris",
       "title": "{Tutorial: Deploying Secure Multi-Party Computation on the Web Using JIFF}",
       "booktitle": "2019 IEEE Cybersecurity Development (SecDev)",
-      "address": "McLean, VA, USA",
+      "pages": "3--3",
+      "location": "McLean, VA, USA",
       "month": "September",
-      "year": "2019"
+      "year": "2019",
+      "doi": "10.1109/SecDev.2019.00013",
+      "url": "https://doi.org/10.1109/SecDev.2019.00013"
     }}},
 
     {"#authors": ["qin", "flockhart", "lapets", "jansen", "dakalbab", "varia", "roberts", "globus-harris"],
      "#topics": ["mpc"],
      "#report": "cryptoeprint:2019:734",
-     "#url": "https://eprint.iacr.org/2019/734.pdf",
      "@inproceedings":{"QFLJDVRG:2019":{
       "author": "Lucy Qin and Peter Flockhart and Andrei Lapets and Kinan Dak Albab and Mayank Varia and Shannon Roberts and Ira Globus-Harris",
       "title": "From Usability to Secure Computing and Back Again",
-      "booktitle": "Proceedings of the 15th Symposium on Usable Privacy and Security (SOUPS)",
-      "address": "Santa Clara, CA, USA",
+      "booktitle": "Proceedings of the Fifteenth USENIX Conference on Usable Privacy and Security",
+      "series": "SOUPS '19",
+      "pages": "191--210",
+      "location": "Santa Clara, CA, USA",
       "month": "August",
-      "year": "2019"
+      "year": "2019",
+      "url": "https://dl.acm.org/doi/10.5555/3361476.3361490",
+      "publisher": "USENIX Association",
+      "address": "USA",
+      "isbn": "9781939133052"
     }}},
 
     {"#authors": ["qin", "flockhart", "lapets", "jansen", "dakalbab", "varia", "roberts", "globus-harris"],
      "#topics": ["mpc"],
-     "#url": "https://eprint.iacr.org/2019/734.pdf",
+     "#pdf": "https://eprint.iacr.org/2019/734.pdf",
      "@misc":{"cryptoeprint:2019:734":{
       "author": "Lucy Qin and Peter Flockhart and Andrei Lapets and Kinan Dak Albab and Mayank Varia and Shannon Roberts and Ira Globus-Harris",
       "title": "From Usability to Secure Computing and Back Again",
@@ -111,19 +121,27 @@ var bib =
 
     {"#authors": ["volgushev", "schwarzkopf", "getchell", "varia", "lapets", "bestavros"],
      "#topics": ["mpc"],
-     "#url": "https://lapets.io/pub/conclave.pdf",
+     "#pdf": "https://lapets.io/pub/conclave.pdf",
      "@inproceedings":{"VSGVLB:eurosys2019":{
       "author": "Nikolaj Volgushev and Malte Schwarzkopf and Ben Getchell and Mayank Varia and Andrei Lapets and Azer Bestavros",
       "title": "{Conclave: Secure Multi-Party Computation on Big Data}",
-      "booktitle": "Proceedings of EuroSys 2019: The 12th European Conference on Computer Systems",
-      "address": "Dresden, Germany",
+      "booktitle": "Proceedings of the Fourteenth EuroSys Conference 2019",
+      "series": "EuroSys '19",
+      "pages": "1--18",
+      "location": "Dresden, Germany",
       "month": "March",
-      "year": "2019"
+      "year": "2019",
+      "doi": "10.1145/3302424.3303982",
+      "url": "https://doi.org/10.1145/3302424.3303982",
+      "publisher": "Association for Computing Machinery",
+      "address": "New York, NY, USA",
+      "isbn": "9781450362818"
     }}},
 
     {"#authors": ["volgushev", "schwarzkopf", "getchell", "varia", "lapets", "bestavros"],
      "#topics": ["mpc"],
-     "#url": "https://arxiv.org/pdf/1902.06288.pdf",
+     "#url": "https://arxiv.org/abs/1902.06288",
+     "#pdf": "https://arxiv.org/pdf/1902.06288.pdf",
      "@misc":{"arXiv:1902.06288":{
       "author": "Nikolaj Volgushev and Malte Schwarzkopf and Ben Getchell and Mayank Varia and Andrei Lapets and Azer Bestavros",
       "title": "{Conclave: secure multi-party computation on big data (extended TR)}",
@@ -135,14 +153,22 @@ var bib =
 
     {"#authors": ["lapets", "jansen", "dakalbab", "issa", "qin", "varia", "bestavros"],
      "#topics": ["mpc"],
-     "#url": "https://lapets.io/pub/mpc-ineq.pdf",
+     "#pdf": "https://lapets.io/pub/mpc-ineq.pdf",
      "@inproceedings":{"LJDIQVB:compass2018":{
       "author": "Andrei Lapets and Frederick Jansen and Kinan Dak Albab and Rawane Issa and Lucy Qin and Mayank Varia and Azer Bestavros",
       "title": "{Accessible Privacy-Preserving Web-Based Data Analysis for Assessing and Addressing Economic Inequalities}",
-      "booktitle": "Proceedings of ACM COMPASS 2018: First Conference on Computing and Sustainable Societies",
-      "address": "San Jose, CA, USA",
+      "booktitle": "Proceedings of the 1st ACM SIGCAS Conference on Computing and Sustainable Societies",
+      "series": "COMPASS '18",
+      "pages": "1--5",
+      "location": "Menlo Park and San Jose, CA, USA",
       "month": "June",
-      "year": "2018"
+      "year": "2018",
+      "doi": "10.1145/3209811.3212701",
+      "url": "https://doi.org/10.1145/3209811.3212701",
+      "publisher": "Association for Computing Machinery",
+      "address": "New York, NY, USA",
+      "isbn": "9781450358163"
+      
     }}},
 
     {"#authors": ["pandit", "jansen", "lapets", "slavin"],
@@ -168,15 +194,21 @@ var bib =
      "@inproceedings":{"JDLV:sss2017":{
       "author": "Frederick Jansen and Kinan Dak Albab and Andrei Lapets and Mayank Varia",
       "title": "{Brief Announcement: Federated Code Auditing and Delivery for MPC}",
-      "booktitle": "Proceedings of SSS 2017: The 19th International Symposium on Stabilization, Safety, and Security of Distributed Systems",
-      "address": "Boston, MA, USA",
+      "booktitle": "The 19th International Symposium on Stabilization, Safety, and Security of Distributed Systems",
+      "series": "SSS 2017",
+      "pages": "298--302",
+      "location": "Boston, MA, USA",
       "month": "November",
-      "year": "2017"
+      "year": "2017",
+      "doi": "10.1007/978-3-319-69084-1_20",
+      "url": "https://doi.org/10.1007/978-3-319-69084-1_20",
+      "publisher": "Springer, Cham",
+      "isbn": "9783319690834"
     }}},
 
     {"#authors": ["lapets", "varia", "bestavros", "jansen"],
      "#topics": ["mpc"],
-     "#url": "https://eprint.iacr.org/2017/803.pdf",
+     "#pdf": "https://eprint.iacr.org/2017/803.pdf",
      "@misc":{"cryptoeprint:2017:803":{
       "author": "Andrei Lapets and Mayank Varia and Azer Bestavros and Frederick Jansen",
       "title": "Role-Based Ecosystem Model for Design, Development, and Deployment of Secure Multi-Party Data Analytics Applications",
@@ -188,14 +220,17 @@ var bib =
 
     {"#authors": ["dakalbab", "issa", "lapets", "bestavros", "volgushev"],
      "#topics": ["mpc"],
-     "#url": "https://lapets.io/pub/mpc-network.pdf",
+     "#pdf": "https://lapets.io/pub/mpc-network.pdf",
      "@inproceedings":{"DILBV:wtmc2017":{
       "author": "Kinan Dak Albab and Rawane Issa and Andrei Lapets and Azer Bestavros and Nikolaj Volgushev",
       "title": "{Scalable Secure Multi-Party Network Vulnerability Analysis via Symbolic Optimization}",
-      "booktitle": "Proceedings of WTMC 2017: The 2nd International Workshop on Traffic Measurements for Cybersecurity",
-      "address": "San Jose, CA, USA",
+      "booktitle": "2017 IEEE Security and Privacy Workshops (SPW)",
+      "pages": "211--216",
+      "location": "San Jose, CA, USA",
       "month": "May",
-      "year": "2017"
+      "year": "2017",
+      "doi": "10.1109/SPW.2017.21",
+      "url": "https://doi.org/10.1109/SPW.2017.21"
     }}},
 
     {"#authors": ["bestavros", "lapets", "jansen", "varia", "volgushev", "schwarzkopf"],
@@ -247,10 +282,10 @@ var bib =
       "author": "Andrei Lapets and Nikolaj Volgushev and Azer Bestavros and Frederick Jansen and Mayank Varia",
       "title": "{Secure MPC for Analytics as a Web Application}",
       "booktitle": "2016 IEEE Cybersecurity Development (SecDev)",
-      "address": "Boston, MA, USA",
+      "pages": "73--74",
+      "location": "Boston, MA, USA",
       "month": "November",
       "year": "2016",
-      "pages": "73--74",
       "doi": "10.1016/j.entcs.2012.06.004",
       "url": "https://doi.org/10.1109/SecDev.2016.027"
     }}},
@@ -271,19 +306,25 @@ var bib =
     {"#authors": ["volgushev", "schwarzkopf", "lapets", "varia", "bestavros"],
      "#topics": ["mpc"],
      "#report": "cryptoeprint:2016:883",
-     "#url": "http://eprint.iacr.org/2016/883.pdf",
      "@inproceedings":{"VSLVB:ccs2016":{
       "author": "Nikolaj Volgushev and Malte Schwarzkopf and Andrei Lapets and Mayank Varia and Azer Bestavros",
       "title": "{DEMO: Integrating MPC in Big Data Workflows}",
-      "booktitle": "Proceedings of CCS 2016: The 23rd ACM SIGSAC Conference on Computer and Communications Security",
-      "address": "Vienna, Austria",
+      "booktitle": "Proceedings of the 2016 ACM SIGSAC Conference on Computer and Communications Security",
+      "series": "CCS '16",
+      "pages": "1844–-1846",
+      "location": "Vienna, Austria",
       "month": "October",
-      "year": "2016"
+      "year": "2016",
+      "doi": "10.1145/2976749.2989034",
+      "url": "https://doi.org/10.1145/2976749.2989034",
+      "publisher": "Association for Computing Machinery",
+      "address": "New York, NY, USA",
+      "isbn": "9781450341394"
     }}},
 
     {"#authors": ["volgushev", "schwarzkopf", "lapets", "varia", "bestavros"],
      "#topics": ["mpc"],
-     "#url": "http://eprint.iacr.org/2016/883.pdf",
+     "#pdf": "http://eprint.iacr.org/2016/883.pdf",
      "@misc":{"cryptoeprint:2016:883":{
       "author": "Nikolaj Volgushev and Malte Schwarzkopf and Andrei Lapets and Mayank Varia and Azer Bestavros",
       "title": "DEMO: Integrating MPC in Big Data Workflows",
@@ -299,10 +340,13 @@ var bib =
      "@inproceedings":{"VLB:hotweb2015":{
       "author": "Nikolaj Volgushev and Andrei Lapets and Azer Bestavros",
       "title": "{Programming Support for an Integrated Multi-Party Computation and MapReduce Infrastructure}",
-      "booktitle": "Proceedings of HotWeb 2015: The Third IEEE Workshop on Hot Topics in Web Systems and Technologies",
-      "address": "Washington, D.C., USA",
+      "booktitle": "2015 Third IEEE Workshop on Hot Topics in Web Systems and Technologies (HotWeb)",
+      "pages": "60--66",
+      "location": "Washington, D.C., USA",
       "month": "November",
-      "year": "2015"
+      "year": "2015",
+      "doi": "10.1109/HotWeb.2015.21",
+      "url": "https://doi.org/10.1109/HotWeb.2015.21"
     }}},
 
     {"#authors": ["volgushev", "lapets", "bestavros"],
@@ -338,7 +382,7 @@ var bib =
       "author": "Derrick Kong and David Mandelberg and Andrei Lapets and Ronald Watro and Daniel Smith and Matthew Runkle",
       "title": "{Lightbulb: A Toolkit for Analysis of Security Policy Interactions}",
       "booktitle": "Proceedings of ICN 2015: The Fourteenth International Conference on Networks",
-      "address": "Barcelona, Spain",
+      "location": "Barcelona, Spain",
       "month": "April",
       "year": "2015",
       "url": "http://www.thinkmind.org/download.php?articleid=icn_2015_6_40_30158"
@@ -346,38 +390,55 @@ var bib =
 
     {"#authors": ["skowyra", "lapets", "bestavros", "kfoury"],
      "#topics": ["dsf"],
+     "#pdf": "https://lapets.io/pub/verificare-sdn.pdf",
      "@inproceedings":{"SLBK:ic2e2014":{
       "author": "Rick Skowyra and Andrei Lapets and Azer Bestavros and Assaf Kfoury",
       "title": "{A Verification Platform for SDN-Enabled Applications}",
-      "booktitle": "Proceedings of IC2E 2014: IEEE International Conference on Cloud Engineering",
-      "address": "Boston, MA, USA",
+      "booktitle": "2014 IEEE International Conference on Cloud Engineering",
+      "pages": "337--342",
+      "location": "Boston, MA, USA",
       "month": "March",
       "year": "2014",
-      "url": "http://www.cs.bu.edu/fac/best/res/papers/ic2e14.pdf"
+      "doi": "10.1109/IC2E.2014.72",
+      "url": "https://doi.org/10.1109/IC2E.2014.72"
     }}},
 
     {"#authors": ["lapets", "silva", "thome", "adler", "beal", "roetteler"],
      "#topics": ["dsl"],
-     "#url": "https://lapets.io/pub/quafl-lang.pdf",
+     "#pdf": "https://lapets.io/pub/quafl-lang.pdf",
      "@inproceedings":{"LSTABR:fpcdsl2013":{
       "author": "Andrei Lapets and Marcus Silva and Mike Thome and Aaron Adler and Jacob Beal and Martin R\\\"{o}tteler",
       "title": "{QuaFL: A Typed DSL for Quantum Programming}",
-      "booktitle": "Proceedings of FPCDSL 2013: The 1st Workshop on Functional Programming Concepts in DSLs",
-      "address": "Boston, MA, USA",
+      "booktitle": "Proceedings of the 1st Annual Workshop on Functional Programming Concepts in Domain-Specific Languages",
+      "series": "FPCDSL '13",
+      "pages": "19--26",
+      "location": "Boston, MA, USA",
       "month": "September",
-      "year": "2013"
+      "year": "2013",
+      "doi": "10.1145/2505351.2505357",
+      "url": "https://doi.org/10.1145/2505351.2505357",
+      "publisher": "Association for Computing Machinery",
+      "address": "New York, NY, USA",
+      "isbn": "9781450323802"
     }}},
 
     {"#authors": ["lapets", "roetteler"],
      "#topics": ["dsl"],
-     "#url": "https://lapets.io/pub/quant-rsrc.pdf",
+     "#pdf": "https://lapets.io/pub/quant-rsrc.pdf",
      "@inproceedings":{"LR:fpcdsl2013":{
       "author": "Andrei Lapets and Martin R\\\"{o}tteler",
       "title": "{Abstract Resource Cost Derivation for Logical Quantum Circuit Descriptions}",
-      "booktitle": "Proceedings of FPCDSL 2013: The 1st Workshop on Functional Programming Concepts in DSLs",
-      "address": "Boston, MA, USA",
+      "booktitle": "Proceedings of the 1st Annual Workshop on Functional Programming Concepts in Domain-Specific Languages",
+      "series": "FPCDSL '13",
+      "pages": "35--42",
+      "location": "Boston, MA, USA",
       "month": "September",
-      "year": "2013"
+      "year": "2013",
+      "doi": "10.1145/2505351.2505358",
+      "url": "https://doi.org/10.1145/2505351.2505358",
+      "publisher": "Association for Computing Machinery",
+      "address": "New York, NY, USA",
+      "isbn": "9781450323802"
     }}},
 
     {"#authors": ["lapets", "skowyra", "bestavros", "kfoury"],
@@ -386,10 +447,13 @@ var bib =
      "@inproceedings":{"LSBK:topi2013":{
       "author": "Andrei Lapets and Rick Skowyra and Azer Bestavros and Assaf Kfoury",
       "title": "{Towards Accessible Integration and Deployment of Formal Tools and Techniques}",
-      "booktitle": "Proceedings of TOPI 2013: The 3rd Workshop on Developing Tools as Plug-ins",
-      "address": "San Francisco, CA, USA",
+      "booktitle": "2013 3rd International Workshop on Developing Tools as Plug-Ins (TOPI)",
+      "pages": "19--24",
+      "location": "San Francisco, CA, USA",
       "month": "May",
-      "year": "2013"
+      "year": "2013",
+      "doi": "10.1109/TOPI.2013.6597189",
+      "url": "https://doi.org/10.1109/TOPI.2013.6597189"
     }}},
 
     {"#authors": ["volgushev", "lapets", "bestavros"],
@@ -439,10 +503,17 @@ var bib =
      "@inproceedings":{"SLBK:hicons2013":{
       "author": "Rick Skowyra and Andrei Lapets and Azer Bestavros and Assaf Kfoury",
       "title": "{Verifiably-Safe Software-Defined Networks for CPS}",
-      "booktitle": "Proceedings of HiCoNS 2013: The 2nd ACM International Conference on High Confidence Networked Systems",
-      "address": "Philadelphia, PA, USA",
+      "booktitle": "Proceedings of the 2nd ACM International Conference on High Confidence Networked Systems",
+      "series": "HiCoNS '13",
+      "pages": "101--110",
+      "location": "Philadelphia, PA, USA",
       "month": "April",
-      "year": "2013"
+      "year": "2013",
+      "doi": "10.1145/2461446.2461461",
+      "url": "https://doi.org/10.1145/2461446.2461461",
+      "publisher": "Association for Computing Machinery",
+      "address": "New York, NY, USA",
+      "isbn": "9781450319614"
     }}},
 
     {"#authors": ["skowyra", "lapets", "bestavros", "kfoury"],
@@ -506,9 +577,10 @@ var bib =
       "author": "Andrei Lapets",
       "title": "{Accessible Integrated Formal Reasoning Environments in Classroom Instruction of Mathematics}",
       "booktitle": "Proceedings of HCSS 2012: The High Confidence Software and Systems Conference",
-      "address": "Annapolis, MD, USA",
+      "location": "Annapolis, MD, USA",
       "month": "May",
-      "year": "2012"
+      "year": "2012",
+      "url": "https://cps-vo.org/node/3338"
     }}},
 
     {"#authors": ["lapets"],
@@ -593,10 +665,10 @@ var bib =
       "author": "Nate Soule and Azer Bestavros and Assaf Kfoury and Andrei Lapets",
       "title": "{Safe Compositional Equation-based Modeling of Constrained Flow Networks}",
       "booktitle": "Proceedings of EOOLT 2011: 4th International Workshop on Equation-Based Object-Oriented Modeling Languages and Tools",
-      "address": "Zurich, Switzerland",
+      "location": "Zurich, Switzerland",
       "month": "September",
       "year": "2011",
-      "url": "http://www.cs.bu.edu/techreports/pdf/2011-014-netsketch-equation-based.pdf"
+      "url": "https://ep.liu.se/en/conference-article.aspx?series=ecp&issue=56&Article_No=5"
     }}},
 
     {"#authors": ["soule", "bestavros", "kfoury", "lapets"],
@@ -615,7 +687,9 @@ var bib =
 
     {"#authors": ["erdos", "ishakian", "lapets", "terzi", "bestavros"],
      "#topics": ["theory"],
+     "#pdf": "http://vldb.org/pvldb/vol5/p418_d_oraerdos_vldb2012.pdf",
      "#conference": "ErdosIshakianLapetsTerziBestavros:VLDB2012",
+     "#report": "ErdosIshakianLapetsTerziBestavros:VLDB2012",
      "#poster": "http://www.bu.edu/hicse/2011/03/27/hariri-science-day-awards/",
      "@article":{"Erdos:2012:FPA:2140436.2140439":{
       "author": "Dora Erd\\H{o}s and Vatche Ishakian and Andrei Lapets and Evimaria Terzi and Azer Bestavros",
@@ -630,8 +704,7 @@ var bib =
       "issn": "2150-8097",
       "publisher": "VLDB Endowment",
       "doi": "10.14778/2140436.2140439",
-      "acmid": "2140439",
-      "url": "http://vldb.org/pvldb/vol5/p418_d_oraerdos_vldb2012.pdf"
+      "url": "https://doi.org/10.14778/2140436.2140439"
       }}},
 
     {"#authors": ["erdos", "ishakian", "lapets", "terzi", "bestavros"],
@@ -640,9 +713,22 @@ var bib =
       "author": "Dora Erd\\H{o}s and Vatche Ishakian and Andrei Lapets and Evimaria Terzi and Azer Bestavros",
       "title": "{The Filter-Placement Problem and its Application to Minimizing Information Multiplicity}",
       "booktitle": "Proceedings of VLDB 2012: 38th International Conference on Very Large Data Bases",
-      "address": "Istanbul, Turkey",
+      "location": "Istanbul, Turkey",
       "month": "August",
       "year": "2012"
+    }}},
+
+    {"#authors": ["volgushev", "schwarzkopf", "getchell", "varia", "lapets", "bestavros"],
+     "#topics": ["mpc"],
+     "#url": "https://arxiv.org/abs/1201.6565",
+     "#pdf": "https://arxiv.org/pdf/1201.6565.pdf",
+     "@misc":{"	arXiv:1201.6565":{
+      "author": "Dora Erd\\H{o}s and Vatche Ishakian and Andrei Lapets and Evimaria Terzi and Azer Bestavros",
+      "title": "{The Filter-Placement Problem and its Application to Minimizing Information Multiplicity}",
+      "howpublished": "arXiv, Report 1201.6565",
+      "month": "January",
+      "year": "2012",
+      "note": "Available at \\url{https://arxiv.org/abs/1201.6565}"
     }}},
 
     {"#authors": ["bestavros", "erdos", "ishakian", "lapets", "terzi"],
@@ -679,10 +765,13 @@ var bib =
      "@inproceedings":{"IshakianLapetsBestKfoury:cloudperf11":{
       "author": "Vatche Ishakian and Andrei Lapets and Azer Bestavros and Assaf Kfoury",
       "title": "{Formal Verification of SLA Transformations}",
-      "booktitle": "Proceedings of CloudPerf 2011: IEEE International Workshop on Performance Aspects of Cloud and Service Virtualization",
-      "address": "Washington, D.C., USA",
+      "booktitle": "2011 IEEE World Congress on Services",
+      "pages": "540--547",
+      "location": "Washington, D.C., USA",
       "month": "July",
-      "year": "2011"
+      "year": "2011",
+      "doi": "10.1109/SERVICES.2011.16",
+      "url": "https://doi.org/10.1109/SERVICES.2011.16"
     }}},
 
     {"#authors": ["ishakian", "lapets", "bestavros", "kfoury"],
@@ -742,7 +831,6 @@ var bib =
       "publisher": "Elsevier Science Publishers B. V.",
       "address": "Amsterdam, The Netherlands, The Netherlands",
       "doi": "10.1016/j.entcs.2012.06.004",
-      "acmid": "2953002",
       "url": "https://doi.org/10.1016/j.entcs.2012.06.004"
     }}},
 
@@ -753,7 +841,7 @@ var bib =
       "author": "Andrei Lapets and Assaf Kfoury",
       "title": "{A User-friendly Interface for a Lightweight Verification System}",
       "booktitle": "Proceedings of UITP'10: 9th International Workshop On User Interfaces for Theorem Provers",
-      "address": "Edinburgh, UK",
+      "location": "Edinburgh, UK",
       "month": "July",
       "year": "2010"
     }}},
@@ -779,7 +867,7 @@ var bib =
       "author": "Andrei Lapets",
       "title": "{User-friendly Support for Common Concepts in a Lightweight Verifier}",
       "booktitle": "Proceedings of VERIFY-2010: The 6th International Verification Workshop",
-      "address": "Edinburgh, UK",
+      "location": "Edinburgh, UK",
       "month": "July",
       "year": "2010"
     }}},
@@ -823,8 +911,7 @@ var bib =
       "issn": "0169-2968",
       "publisher": "IOS Press",
       "address": "Amsterdam, The Netherlands, The Netherlands",
-      "acmid": "1922526",
-      "url": "http://dl.acm.org/citation.cfm?id=1922521.1922526"
+      "url": "https://dl.acm.org/doi/10.5555/1922521.1922526"
     }}},
 
     {"#authors": ["donnelly", "kfoury", "lapets"],
@@ -932,11 +1019,17 @@ var bib =
      "@inproceedings":{"BestavrosKfouryLapetsOcean:hscc10":{
       "author": "Azer Bestavros and Assaf Kfoury and Andrei Lapets and Michael Ocean",
       "title": "{Safe Compositional Network Sketches: Formal Framework}",
-      "booktitle": "Proceedings of HSCC '10: The 13th ACM International Conference on Hybrid Systems: Computation and Control (in conjunction with CPSWEEK)",
-      "address": "Stockholm, Sweden",
+      "booktitle": "Proceedings of the 13th ACM International Conference on Hybrid Systems: Computation and Control",
+      "series": "HSCC '10",
+      "pages": "231--241",
+      "location": "Stockholm, Sweden",
       "month": "April",
       "year": "2010",
-      "pages": "231--241"
+      "doi": "10.1145/1755952.1755985",
+      "url": "https://dl.acm.org/doi/10.1145/1755952.1755985",
+      "publisher": "Association for Computing Machinery",
+      "address": "New York, NY, USA",
+      "isbn": "9781605589558"
     }}},
 
     {"#authors": ["bestavros", "kfoury", "lapets", "ocean"],
@@ -960,10 +1053,9 @@ var bib =
       "author": "Azer Bestavros and Assaf Kfoury and Andrei Lapets and Michael Ocean",
       "title": "{Safe Compositional Network Sketches: Tool and Use Cases}",
       "booktitle": "Proceedings of CRTS'09: The IEEE/RTSS Workshop on Compositional Theory and Technology for Real-Time Embedded Systems",
-      "address": "Washington, D.C., USA",
+      "location": "Washington, D.C., USA",
       "month": "December",
-      "year": "2009",
-      "url": "http://www.cs.bu.edu/fac/best/res/papers/crts09.pdf"
+      "year": "2009"
     }}},
 
     {"#authors": ["bestavros", "kfoury", "lapets", "ocean"],

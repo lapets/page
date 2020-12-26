@@ -76,7 +76,7 @@ var bib =
 
     {"#authors": ["dakalbab", "issa", "lapets", "flockhart", "qin", "globus-harris"],
      "#topics": ["mpc"],
-     "#url": "https://lapets.io/pub/mpc-jiff-tut.pdf",
+     "#pdf": "https://lapets.io/pub/mpc-jiff-tut.pdf",
      "@inproceedings":{"DILFQG:secdev2019":{
       "author": "Kinan Dak Albab and Rawane Issa and Andrei Lapets and Peter Flockhart and Lucy Qin and Ira Globus-Harris",
       "title": "{Tutorial: Deploying Secure Multi-Party Computation on the Web Using JIFF}",
@@ -190,7 +190,7 @@ var bib =
 
     {"#authors": ["jansen", "dakalbab", "lapets", "varia"],
      "#topics": ["mpc"],
-     "#url": "https://lapets.io/pub/mpc-fcad.pdf",
+     "#pdf": "https://lapets.io/pub/mpc-fcad.pdf",
      "@inproceedings":{"JDLV:sss2017":{
       "author": "Frederick Jansen and Kinan Dak Albab and Andrei Lapets and Mayank Varia",
       "title": "{Brief Announcement: Federated Code Auditing and Delivery for MPC}",
@@ -443,7 +443,7 @@ var bib =
 
     {"#authors": ["lapets", "skowyra", "bestavros", "kfoury"],
      "#topics": ["usability"],
-     "#url": "https://lapets.io/pub/formal-tools.pdf",
+     "#pdf": "https://lapets.io/pub/formal-tools.pdf",
      "@inproceedings":{"LSBK:topi2013":{
       "author": "Andrei Lapets and Rick Skowyra and Azer Bestavros and Assaf Kfoury",
       "title": "{Towards Accessible Integration and Deployment of Formal Tools and Techniques}",
@@ -1126,6 +1126,7 @@ var bib =
     {"#authors": ["lapets", "levin"],
      "#topics": ["dsl"],
      "#url": "https://lapets.io/pub/combauct.pdf",
+     "#pdf": "https://lapets.io/pub/combauct.pdf",
      "@misc":{"llcombauct":{
       "author": "Andrei Lapets and Alex Levin",
       "title": "{Restricted Truthful Combinatorial Auction Mechanisms}",
@@ -1137,6 +1138,7 @@ var bib =
     {"#authors": ["lapets"],
      "#topics": ["theory"],
      "#url": "https://lapets.io/pub/nlogn.pdf",
+     "#pdf": "https://lapets.io/pub/nlogn.pdf",
      "@misc":{"Lapets:InvNLogN":{
       "author": "Andrei Lapets",
       "title": "{Approximating the Inverse of [n log n]}",

@@ -31,7 +31,7 @@
       function unbrace(s) { return (s != null && s.length > 1 && s[0] == '{' && s[s.length-1] == '}') ? s.substring(1, s.length-1) : s; }
       function s(raw) { return unbrace(unbrace(raw)); }
       function author(a) { return (a in bib.authors && 'url' in bib.authors[a]) ? '<a href="' +bib.authors[a]['url']+ '">'+bib.authors[a]['html']+'</a>' : bib.authors[a]['html']; }
-      function authors(j) { var h=[]; for (var i=0; i<j['#authors'].length; i++) h.push(author(j['#authors'][i])); return h.join(', '); }
+      function authors(j) { var h=[]; for (var i=0; i<j['#authors'].length; i++) h.push(author(j['#authors'][i])); return h.join('; '); }
       function title(docs, jsons, id, json, b) {
         var h = s(b.title) + '.';
         if ('#url' in json) h = '<a href="' +s(json['#url'])+ '">' +h+ '</a>';
@@ -154,7 +154,7 @@
             </fieldset>
 
             <fieldset>
-              <legend>Member, Board of Directors<br/><a href="https://mpcalliance.org">MPC Alliance</a>
+              <legend>Member &amp; Technical Committee Chair, Board of Directors<br/><a href="https://mpcalliance.org">MPC Alliance</a>
                 <span>
                   [
                   <a href="https://github.com/mpc-alliance"><i class="fab fa-github"></i></a>

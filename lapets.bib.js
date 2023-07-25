@@ -12,16 +12,18 @@ var bib =
 
   "authors":{
     "lapets": {"name":"Andrei Lapets", "html":"Lapets"},
+    "howe": {"name":"Wyatt Howe", "html":"Howe"},
+    "braun": {"name":"Tanner Braun", "html":"Braun"},
     "roberts": {"name":"Shannon C. Roberts", "html":"Roberts", "url":"https://people.umass.edu/scroberts/"},
-    "globus-harris": {"name":"Ira Globus-Harris", "html":"Globus-Harris"},
+    "globus-harris": {"name":"Ira Globus-Harris", "html":"Globus-Harris", "url":"https://globusharris.github.io/"},
     "flockhart": {"name":"Peter Flockhart", "html":"Flockhart"},
     "getchell": {"name":"Ben Getchell", "html":"Getchell"},
     "qin": {"name":"Lucy Qin", "html":"Qin", "url":"http://lucyq.in/"},
     "pandit": {"name":"Shreya Pandit", "html":"Pandit"},
-    "slavin": {"name":"Mary Slavin", "html":"Slavin"},
-    "dakalbab": {"name":"Kinan Dak Al Bab", "html":"Dak Albab", "url":"https://cs-people.bu.edu/babman/"},
+    "slavin": {"name":"Mary Slavin", "html":"Slavin", "url":"https://www.bu.edu/sph/profile/mary-slavin/"},
+    "dakalbab": {"name":"Kinan Dak Al Bab", "html":"Dak Albab", "url":"https://www.babman.io/"},
     "issa": {"name":"Rawane Issa", "html":"Issa", "url":"https://cs-people.bu.edu/ra1issa/"},
-    "volgushev": {"name":"Nikolaj Volgushev", "html":"Volgushev", "url":"https://n1v0lg.github.io/"},
+    "volgushev": {"name":"Nikolaj Volgushev", "html":"Volgushev"},
     "bestavros": {"name":"Azer Bestavros", "html":"Bestavros", "url":"http://azer.bestavros.net/"},
     "jansen": {"name":"Frederick Jansen", "html":"Jansen"},
     "varia": {"name":"Mayank Varia", "html":"Varia", "url":"http://www.mvaria.com/"},
@@ -34,17 +36,17 @@ var bib =
     "smith": {"name":"Daniel Smith", "html":"Smith"},
     "runkle": {"name":"Matthew Runkle", "html":"Runkle"},
     "skowyra": {"name":"Richard Skowyra", "html":"Skowyra", "url":"https://www.ll.mit.edu/biographies/richard-w-skowyra"},
-    "kfoury": {"name":"Assaf Kfoury", "html":"Kfoury", "url":"https://www.cs.bu.edu/faculty/kfoury/"},
+    "kfoury": {"name":"Assaf Kfoury", "html":"Kfoury", "url":"https://www.cs.bu.edu/~kfoury/"},
     "mirzaei": {"name":"Saber Mirzaei", "html":"Mirzaei"},
-    "bassem": {"name":"Christine Bassem", "html":"Bassem", "url":"https://cbassem.wordpress.com/"},
-    "bahargam": {"name":"Sanaz Bahargam", "html":"Bahargam"},
+    "bassem": {"name":"Christine Bassem", "html":"Bassem", "url":"http://cs.wellesley.edu/~cbassem/"},
+    "bahargam": {"name":"Sanaz Bahargam", "html":"Bahargam", "url":"https://sanazbahargam.github.io/"},
     "kazdagli": {"name":"Mikhail Kazdagli", "html":"Kazdagli"},
     "lalwani": {"name":"Prakash Lalwani", "html":"Lalwani"},
     "wong": {"name":"Lily Wong", "html":"Wong"},
     "house": {"name":"David House", "html":"House"},
     "erdos": {"name":"Dora Erd\\H{o}s", "html":"Erd&odblac;s", "url":"https://cs-people.bu.edu/edori/"},
-    "ishakian": {"name":"Vatche Ishakian", "html":"Ishakian", "url":"https://cis.bentley.edu/vishakian/"},
-    "terzi": {"name":"Evimaria Terzi", "html":"Terzi", "url":"https://www.cs.bu.edu/~evimaria/"},
+    "ishakian": {"name":"Vatche Ishakian", "html":"Ishakian"},
+    "terzi": {"name":"Evimaria Terzi", "html":"Terzi", "url":"https://cs-people.bu.edu/evimaria/"},
     "donnelly": {"name":"Kevin Donnelly", "html":"Donnelly"},
     "silva": {"name":"Marcus Silva", "html":"Silva", "url":"https://marcusps.github.io/"},
     "thome": {"name":"Michael Thome", "html":"Thome"},
@@ -52,12 +54,51 @@ var bib =
     "beal": {"name":"Jacob Beal", "html":"Beal", "url":"https://jakebeal.github.io/"},
     "roetteler": {"name":"Martin R\\\"{o}tteler", "html":"R&ouml;tteler", "url":"https://www.microsoft.com/en-us/research/people/martinro/"},
     "soule": {"name":"Nate Soule", "html":"Soule"},
-    "ocean": {"name":"Michael Ocean", "html":"Ocean", "url":"https://www.endicott.edu/academics/schools/arts-sciences/faculty/m/michael-ocean"},
+    "ocean": {"name":"Michael Ocean", "html":"Ocean", "url":"https://www.endicott.edu/academics/schools/science-technology/faculty/m/michael-ocean"},
     "levin": {"name":"Alex Levin", "html":"Levin"},
-    "parkes": {"name":"David Parkes", "html":"Parkes", "url":"https://www.eecs.harvard.edu/~parkes/"}
+    "parkes": {"name":"David Parkes", "html":"Parkes", "url":"https://parkes.seas.harvard.edu/"}
   },
 
   "documents":[
+
+    {"#authors": ["howe", "lapets", "jansen", "braun", "getchell"],
+     "#topics": ["mpc"],
+     "#pdf": "https://eprint.iacr.org/2022/1778.pdf",
+     "@misc":{"cryptoeprint:2022:1778":{
+      "author": "Wyatt Howe and Andrei Lapets and Frederick Jansen and Tanner Braun and Ben Getchell",
+      "title": "Asynchronous Delegated Private Set Intersection with Hiding of Intersection Size",
+      "howpublished": "Cryptology ePrint Archive, Report 2022/1778",
+      "month": "December",
+      "year": "2022",
+      "note": "Available at \\url{https://eprint.iacr.org/2022/1778}",
+      "url": "https://eprint.iacr.org/2022/1778"
+    }}},
+
+    {"#authors": ["howe", "lapets"],
+     "#topics": ["mpc"],
+     "#pdf": "https://eprint.iacr.org/2021/006.pdf",
+     "@misc":{"cryptoeprint:2021:006":{
+      "author": "Wyatt Howe and Andrei Lapets",
+      "title": "Privacy-Preserving Privacy Profile Proposal Protocol",
+      "howpublished": "Cryptology ePrint Archive, Report 2021/006",
+      "month": "January",
+      "year": "2021",
+      "note": "Available at \\url{https://eprint.iacr.org/2021/006}",
+      "url": "https://eprint.iacr.org/2021/006"
+    }}},
+
+    {"#authors": ["lapets", "howe", "getchell", "jansen"],
+     "#topics": ["mpc"],
+     "#pdf": "https://eprint.iacr.org/2020/1604.pdf",
+     "@misc":{"cryptoeprint:2020:1604":{
+      "author": "Andrei Lapets and Wyatt Howe and Ben Getchell and Frederick Jansen",
+      "title": "An Embedded Domain-Specific Language for Logical Circuit Descriptions with Applications to Garbled Circuits",
+      "howpublished": "Cryptology ePrint Archive, Report 2020/1604",
+      "month": "December",
+      "year": "2020",
+      "note": "Available at \\url{https://eprint.iacr.org/2020/1604}",
+      "url": "https://eprint.iacr.org/2020/1604"
+    }}},
 
     {"#authors": ["lapets", "dakalbab", "issa", "qin", "varia", "bestavros", "jansen"],
      "#topics": ["mpc"],
@@ -116,7 +157,7 @@ var bib =
       "howpublished": "Cryptology ePrint Archive, Report 2019/734",
       "month": "June",
       "year": "2019",
-      "note": "Available at \\url{https://eprint.iacr.org/2019/734.pdf}"
+      "note": "Available at \\url{https://eprint.iacr.org/2019/734}"
     }}},
 
     {"#authors": ["volgushev", "schwarzkopf", "getchell", "varia", "lapets", "bestavros"],
@@ -689,7 +730,7 @@ var bib =
      "#topics": ["theory"],
      "#pdf": "http://vldb.org/pvldb/vol5/p418_d_oraerdos_vldb2012.pdf",
      "#conference": "ErdosIshakianLapetsTerziBestavros:VLDB2012",
-     "#report": "ErdosIshakianLapetsTerziBestavros:VLDB2012",
+     "#report": "arXiv:1201.6565",
      "#poster": "http://www.bu.edu/hicse/2011/03/27/hariri-science-day-awards/",
      "@article":{"Erdos:2012:FPA:2140436.2140439":{
       "author": "Dora Erd\\H{o}s and Vatche Ishakian and Andrei Lapets and Evimaria Terzi and Azer Bestavros",
@@ -718,11 +759,11 @@ var bib =
       "year": "2012"
     }}},
 
-    {"#authors": ["volgushev", "schwarzkopf", "getchell", "varia", "lapets", "bestavros"],
-     "#topics": ["mpc"],
+    {"#authors": ["erdos", "ishakian", "lapets", "terzi", "bestavros"],
+     "#topics": ["theory"],
      "#url": "https://arxiv.org/abs/1201.6565",
      "#pdf": "https://arxiv.org/pdf/1201.6565.pdf",
-     "@misc":{"	arXiv:1201.6565":{
+     "@misc":{"arXiv:1201.6565":{
       "author": "Dora Erd\\H{o}s and Vatche Ishakian and Andrei Lapets and Evimaria Terzi and Azer Bestavros",
       "title": "{The Filter-Placement Problem and its Application to Minimizing Information Multiplicity}",
       "howpublished": "arXiv, Report 1201.6565",

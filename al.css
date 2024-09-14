@@ -10,6 +10,7 @@ html, body { width:100%; height:100%; margin:0; background-color:#FFFFFF; font-s
 #container #content h3 > span > span { white-space:nowrap; font-size:1rem; }
 #container #content h3 > span > span > a { font-weight:normal; }
 #container #content h3 > span > span > span { color:#CFCFCF; }
+#container #content legend > i { display:block; margin:-2px 0px 8px 0px; height:12px; font-size:0.9rem; font-weight:normal; font-style:normal; color:#999999; }
 #container #content legend > span { white-space:nowrap; font-size:0.9rem; }
 #container #content legend > span > a { font-weight:normal; }
 #container #content legend > span > span { color:#CFCFCF; }
@@ -17,7 +18,7 @@ html, body { width:100%; height:100%; margin:0; background-color:#FFFFFF; font-s
 #container #content div > p { margin:3px 0px 0px 0px; }
 #container #content div > p:last-of-type { margin:3px 0px 25px 0px; }
 #container #content div > h2 { }
-#container #content div > h3 { display:block; margin:25px 0px 0px 0px; padding:0px 0px 3px 0px; border-bottom:1px solid #BC623A; font-size:1.15rem; line-height:1.1rem; }
+#container #content div > h3 { display:block; margin:25px 0px 0px 0px; padding:0px 0px 4px 0px; border-bottom:1px solid #BC623A; font-size:1.15rem; line-height:1.1rem; }
 #container #content div > h3 > span { display:block; margin:0px; padding:3px 0px 1px 0px; font-size:1.15rem; font-weight:normal; line-height:1.1rem; }
 #container #content div > h3 > span > a { white-space:nowrap; }
 #container #content div > h4 { display:block; margin:20px 28px 0px 28px; padding-bottom:3px; border-bottom:1px solid #CCCCCC; font-size:1rem; font-weight:bold; line-height:1rem; }
@@ -37,7 +38,7 @@ html, body { width:100%; height:100%; margin:0; background-color:#FFFFFF; font-s
 #container #content div > ol > li > p { display:inline; margin-left:5px; white-space:nowrap; }
 #container #content div > table { margin-top:5px; margin-left:23px; border-spacing:0px; border-collapse:collapse; }
 #container #content div > table tr td { padding-left:5px; padding-right:5px; }
-@media all and (max-width:675px) {
+@media all and (max-width:850px) {
   #container #content div > fieldset { width:calc(100% - 60px); }
   #container #content div > ol > li > p { display:block; margin:0px; padding:0px 0px 7px 0px; white-space:normal; }
   #container #content div > ol > li > p > a { white-space:nowrap; }

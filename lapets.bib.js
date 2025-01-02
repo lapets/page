@@ -12,6 +12,13 @@ var bib =
 
   "authors":{
     "lapets": {"name":"Andrei Lapets", "html":"Lapets"},
+    "densmore": {"name": "Douglas Densmore", "html": "Densmore", "url":"https://www.cidarlab.org/doug-densmore"},
+    "voigt": {"name": "Christopher Voigt", "html": "Voigt", "url":"https://web.mit.edu/voigtlab/"},
+    "gordon": {"name": "D. Benjamin Gordon", "html": "Gordon"},
+    "akavoor": {"name": "Vidya Akavoor", "html": "Akavoor"},
+    "gould": {"name": "Dany Gould", "html": "Gould"},
+    "roberts_": {"name": "James Roberts", "html": "Roberts"},
+    "roehner": {"name": "Nicholas Roehner", "html": "Roehner"},
     "howe": {"name":"Wyatt Howe", "html":"Howe"},
     "braun": {"name":"Tanner Braun", "html":"Braun"},
     "roberts": {"name":"Shannon C. Roberts", "html":"Roberts", "url":"https://people.umass.edu/scroberts/"},
@@ -60,6 +67,48 @@ var bib =
   },
 
   "documents":[
+    {"#authors": ["lapets"],
+     "#topics": ["mpc"],
+     "#pdf": "https://eprint.iacr.org/2024/2088.pdf",
+     "@misc":{"cryptoeprint:2024:2088":{
+      "author": "Andrei Lapets",
+      "title": "An Embedded Domain-Specific Language for Using One-Hot Vectors and Binary Matrices in Secure Computation Protocols",
+      "howpublished": "Cryptology ePrint Archive, Report 2024/2088",
+      "month": "December",
+      "year": "2024",
+      "note": "Available at \\url{https://eprint.iacr.org/2024/2088}",
+      "url": "https://eprint.iacr.org/2024/2088"
+    }}},
+
+    {"#authors": ["roehner", "roberts_", "lapets", "gould", "akavoor", "qin", "gordon", "voigt", "densmore"],
+     "#topics": ["dsl"],
+     "@article":{"RRLGAQGVD:ACSSynBio2024":{
+      "author": "Nicholas Roehner and James Roberts and Andrei Lapets and Dany Gould and Vidya Akavoor and Lucy Qin and D. Benjamin Gordon and Christopher Voigt and Douglas Densmore",
+      "title": "{GOLDBAR: A Framework for Combinatorial Biological Design}",
+      "journal": "ACS Synthetic Biology",
+      "volume": "13",
+      "number": "9",
+      "month": "August",
+      "year": "2024",
+      "pages": "2899--2911",
+      "numpages": "13",
+      "publisher": "American Chemical Society",
+      "doi": "10.1021/acssynbio.4c00296",
+      "url": "https://doi.org/10.1021/acssynbio.4c00296"
+    }}},
+
+    {"#authors": ["lapets"],
+     "#topics": ["mpc"],
+     "#pdf": "https://eprint.iacr.org/2023/1695.pdf",
+     "@misc":{"cryptoeprint:2023:1695":{
+      "author": "Andrei Lapets",
+      "title": "Implementing Arbitrary Maps over Small Finite Domains using Ring Addition and Scalar Multiplication",
+      "howpublished": "Cryptology ePrint Archive, Report 2023/1695",
+      "month": "November",
+      "year": "2023",
+      "note": "Available at \\url{https://eprint.iacr.org/2023/1695}",
+      "url": "https://eprint.iacr.org/2023/1695"
+    }}},
 
     {"#authors": ["howe", "lapets", "jansen", "braun", "getchell"],
      "#topics": ["mpc"],
